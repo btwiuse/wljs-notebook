@@ -9,7 +9,7 @@ ExtensionsStyles = With[{Path = StringJoin["/", FileNameToUURLPath[#]]},
 
 
 Iframe[OptionsPattern[]] := With[{Url = OptionValue["Doc"]["URL"]},
-    <iframe style="width:100%;height:100%;border: none;border-radius: 7px; background: transparent;-webkit-app-region: no-drag;" src="{Url}"></iframe>
+    <iframe allow="clipboard-write" style="width:100%;height:100%;border: none;border-radius: 7px; background: transparent;-webkit-app-region: no-drag;" src="{Url}"></iframe>
 ];
 
 Options[Iframe] = {"Doc"->Null};
@@ -24,7 +24,8 @@ App[request_] := Module[{client, channel, target}, With[{
         style = "height:100%"
     },
     {
-        doc = DocWindowHashMap[UId]
+        doc = DocWindowHashMap[UId],
+        MainStyle = If[isElectron, "margin-top:2rem", ""]
     },
 
     (* /* destructor */ *)
@@ -69,7 +70,7 @@ App[request_] := Module[{client, channel, target}, With[{
         <div class="h-full" style="-webkit-app-region: drag;">
           <div id="frame" class="h-full">
             <div class="h-full flex flex-col">          
-              <main class="grow flex flex-col overflow-hidden h-full p-2" style="margin-top:2rem">
+              <main class="grow flex flex-col overflow-hidden h-full p-2" style="{MainStyle}">
                 <WebUIRefresh Style={style} Event={LocalControls}><Iframe Doc={doc}/></WebUIRefresh>
                 <WebUIOnLoad Event={secret} Pattern={"Load"}/>
               </main>              
