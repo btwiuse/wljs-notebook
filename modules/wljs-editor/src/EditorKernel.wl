@@ -63,6 +63,7 @@ CellView /: MakeBoxes[e_CellView, StandardForm] := With[{o = CreateFrontEndObjec
 Options[CellView] = {"Display" -> "codemirror", "Class" -> "", "Style"->""}
 
 TeXView[expr_] := CellView[ Cell[TeXForm[expr], "Output", "katex"] ]
+TeXView[expr_String] := CellView[ Cell[expr, "Output", "katex"] ]
 
 
 End[]
