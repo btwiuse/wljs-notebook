@@ -144,6 +144,20 @@ diff[Rule[AxesOrigin, x_], Rule[AxesOrigin, y_], level_, attributes_] := {}
 
 diff[Rule["PlotRange", x_], Rule["PlotRange", y_], level_, attributes_] := {}
 
+diff[Raster[data1_List | data1_NumericArray], Raster[data2_List | data2_NumericArray], level_, attributes_] := If[Dimensions[data1] === Dimensions[data2],
+  diffObject[Raster[data1], Raster[data2], Hash[Raster[data1] ], Hash[Raster[data2] ] ] 
+,
+  failureMessage["Cannot link two Raster primitives with different data dims", {Raster[data1], Raster[data2]}];
+  $Failed
+]
+
+diff[Raster[data1_List | data1_NumericArray, pos_, rest___], Raster[data2_List | data2_NumericArray, pos_, rest___], level_, attributes_] := If[Dimensions[data1] === Dimensions[data2],
+  diffObject[Raster[data1, pos, rest ], Raster[data2, pos, rest], Hash[Raster[data1, pos, rest] ], Hash[Raster[data2, pos, rest] ] ] 
+,
+  failureMessage["Cannot link two Raster primitives with different data dims", {Raster[data1, pos, rest], Raster[data2, pos, rest]}];
+  $Failed
+]
+
 diff[Line[data1_List], Line[data2_List], level_, attributes_] := 
   If[(Lookup[attributes, "GraphicsQ", False] || Lookup[attributes, "Graphics3DQ", False] ) && !Lookup[attributes, "GraphicsComplexQ", False],
     diffObject[Line[data1], Line[data2], Hash[Line[data1]], Hash[Line[data2]]]
@@ -569,6 +583,74 @@ transpile[i1_Image, i2_Image, hash1_, hash2_] := With[{
     "Reset" -> Function[Null, symbol = NumericArray[ImageData[i2, "Byte"], "UnsignedInteger8"] ],
     "Update" -> Function[{e1, e2, h1, h2},
       symbol = NumericArray[ImageData[e2, "Byte"], "UnsignedInteger8"];
+    ],
+    "Destroy" -> Function[Null,
+      ClearAll[symbol] // Quiet;
+    ]
+  |>
+];
+
+transpile[Raster[_], Raster[data2_], hash1_, hash2_] := With[{
+  symbol = Unique["cmpled"]
+},
+  symbol = NumericArray[data2//N];
+  
+  <|
+    "Priority"->1, "Rule" -> (Raster[data2] -> Raster[Offload[symbol] ]),
+    "Reset" -> Function[Null, symbol = NumericArray[data2//N] ],
+    "Update" -> Function[{e1, e2, h1, h2},
+      symbol = NumericArray[e2[[1]]//N];
+    ],
+    "Destroy" -> Function[Null,
+      ClearAll[symbol] // Quiet;
+    ]
+  |>
+];
+
+transpile[Raster[_, _, ___], Raster[data2_, pos_, rest___], hash1_, hash2_] := With[{
+  symbol = Unique["cmpled"]
+},
+  symbol = NumericArray[data2//N];
+  
+  <|
+    "Priority"->1, "Rule" -> (Raster[data2, pos, rest] -> Raster[Offload[symbol], pos ]),
+    "Reset" -> Function[Null, symbol = NumericArray[data2//N] ],
+    "Update" -> Function[{e1, e2, h1, h2},
+      symbol = NumericArray[e2[[1]]//N];
+    ],
+    "Destroy" -> Function[Null,
+      ClearAll[symbol] // Quiet;
+    ]
+  |>
+];
+
+transpile[Raster[_], Raster[data2_NumericArray], hash1_, hash2_] := With[{
+  symbol = Unique["cmpled"]
+},
+  symbol = data2;
+  
+  <|
+    "Priority"->1, "Rule" -> (Raster[data2] -> Raster[Offload[symbol] ]),
+    "Reset" -> Function[Null, symbol = data2 ],
+    "Update" -> Function[{e1, e2, h1, h2},
+      symbol = e2[[1]];
+    ],
+    "Destroy" -> Function[Null,
+      ClearAll[symbol] // Quiet;
+    ]
+  |>
+];
+
+transpile[Raster[_, _, ___], Raster[data2_NumericArray, pos_, rest___], hash1_, hash2_] := With[{
+  symbol = Unique["cmpled"]
+},
+  symbol = data2;
+  
+  <|
+    "Priority"->1, "Rule" -> (Raster[data2, pos, rest] -> Raster[Offload[symbol], pos ]),
+    "Reset" -> Function[Null, symbol = data2 ],
+    "Update" -> Function[{e1, e2, h1, h2},
+      symbol = e2[[1]];
     ],
     "Destroy" -> Function[Null,
       ClearAll[symbol] // Quiet;

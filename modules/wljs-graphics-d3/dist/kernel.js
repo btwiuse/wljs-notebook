@@ -602,6 +602,11 @@ async function processLabel(ref0, gX, env, textFallback, nodeFallback) {
     return String(await interpretate(args[0], env));
   };
 
+  frameTicks.Row = async (args, env) => {
+    const row = await interpretate(args[0], env);
+    return row.map(String).join('');
+  };
+
   g2d.Graphics = async (args, env) => {
 
     await interpretate.shared.d3.load();
@@ -3643,7 +3648,14 @@ async function processLabel(ref0, gX, env, textFallback, nodeFallback) {
 
     if (opts.BaseStyle == "'Graphics'") {
       copy.color = 'black';
-    }
+    } /*else if (Array.isArray(opts.BaseStyle)) {
+      const baseStyle = await interpretate(opts.BaseStyle, copy);
+      if (Array.isArray(baseStyle)) {
+        if (typeof baseStyle[0] == 'number') {
+          copy.fontSize = baseStyle[0];
+        }
+      }
+    }*/
 
     let object;
     
@@ -7420,13 +7432,11 @@ g2d.EventListener.dragsignal = (uid, object, env) => {
 
   g2d.Raster = async (args, env) => {
     if (env.image) return await interpretate(args[0], env);
-    //TODO THIS SUCKS
 
     const data = await interpretate(args[0], {...env, context: g2d, nfast:true, numeric:true});
-    console.log(args);
     const height = data.length;
     const width = data[0].length;
-    const rgb = data[0][0].length;
+    const rgb = data[0][0] ? data[0][0].length : 0;
 
     const x = env.xAxis;
     const y = env.yAxis;    
@@ -7441,88 +7451,223 @@ g2d.EventListener.dragsignal = (uid, object, env) => {
     }
     if (args.length > 2) {
       await interpretate(args[2], env);
-      //not implemented
       console.warn('scaling is not implemented!');
     }
 
+    const opacity = env.opacity !== undefined ? env.opacity : 1.0;
 
+    // Calculate target rectangle in screen coordinates
+    const x0 = x(ranges[0][0]);
+    const x1 = x(ranges[0][1]);
+    const y0 = y(ranges[1][0]);
+    const y1 = y(ranges[1][1]);
 
-    const rectWidth = Math.abs((x(ranges[0][1]) - x(ranges[0][0])) / width);
-    const rectHeight = Math.abs((y(ranges[1][1]) - y(ranges[1][0])) / height);
+    const xMin = Math.min(x0, x1);
+    const xMax = Math.max(x0, x1);
+    const yMin = Math.min(y0, y1);
+    const yMax = Math.max(y0, y1);
 
-    const stepX = (ranges[0][1] - ranges[0][0]) / width;
-    const stepY = (ranges[1][1] - ranges[1][0]) / height;
+    const rectWidth = xMax - xMin;
+    const rectHeight = yMax - yMin;
 
-    const group = env.svg;
+    // Add placeholder rect
+    env.local.rect = env.svg.append('rect')
+      .attr('x', xMin)
+      .attr('y', yMin)
+      .attr('width', rectWidth)
+      .attr('height', rectHeight)
+      .attr('opacity', 0);
 
-    if (!rgb) {
-      for (let i=0; i<height; ++i) {
-        for (let j=0; j<width; ++j) {
+    // Create offscreen canvas for the raw pixel data
+    const offscreen = document.createElement('canvas');
+    offscreen.width = width;
+    offscreen.height = height;
+    const offCtx = offscreen.getContext('2d');
+    const imageData = offCtx.createImageData(width, height);
 
-          group.append('rect')
-          .attr('x', x(stepX * j + ranges[0][0]))
-          .attr('y', y(stepY * i + ranges[1][0])-rectHeight)
-          .attr('width', rectWidth)
-          .attr('height', rectHeight)
-          .attr('opacity', env.opacity)
-          .attr('fill', `rgb(${Math.floor(255*data[i][j])}, ${Math.floor(255*data[i][j])}, ${Math.floor(255*data[i][j])})`);
-          
+    // Fill pixel data
+    // In Wolfram, data[0] is the BOTTOM row, but Canvas has row 0 at TOP
+    // So we flip Y: screen row i gets data row (height - 1 - i)
+    for (let i = 0; i < height; ++i) {
+      const srcRow = height - 1 - i; // Flip Y
+      for (let j = 0; j < width; ++j) {
+        const dstIdx = (i * width + j) * 4;
+
+        if (!rgb) {
+          const v = Math.floor(255 * data[srcRow][j]);
+          imageData.data[dstIdx] = v;
+          imageData.data[dstIdx + 1] = v;
+          imageData.data[dstIdx + 2] = v;
+          imageData.data[dstIdx + 3] = 255;
+        } else if (rgb === 2) {
+          const v = Math.floor(255 * data[srcRow][j][0]);
+          imageData.data[dstIdx] = v;
+          imageData.data[dstIdx + 1] = v;
+          imageData.data[dstIdx + 2] = v;
+          imageData.data[dstIdx + 3] = Math.floor(255 * data[srcRow][j][1]);
+        } else if (rgb === 3) {
+          imageData.data[dstIdx] = Math.floor(255 * data[srcRow][j][0]);
+          imageData.data[dstIdx + 1] = Math.floor(255 * data[srcRow][j][1]);
+          imageData.data[dstIdx + 2] = Math.floor(255 * data[srcRow][j][2]);
+          imageData.data[dstIdx + 3] = 255;
+        } else if (rgb === 4) {
+          imageData.data[dstIdx] = Math.floor(255 * data[srcRow][j][0]);
+          imageData.data[dstIdx + 1] = Math.floor(255 * data[srcRow][j][1]);
+          imageData.data[dstIdx + 2] = Math.floor(255 * data[srcRow][j][2]);
+          imageData.data[dstIdx + 3] = Math.floor(255 * data[srcRow][j][3]);
         }
-      }  
-      return;
+      }
     }
+    offCtx.putImageData(imageData, 0, 0);
 
-    if (rgb === 2) {
-      for (let i=0; i<height; ++i) {
-        for (let j=0; j<width; ++j) {
+    // Convert to data URL and use SVG image element for proper positioning
+    const dataURL = offscreen.toDataURL('image/png');
+    
+    const img = env.svg.append('image')
+      .attr('x', xMin)
+      .attr('y', yMin)
+      .attr('width', rectWidth)
+      .attr('height', rectHeight)
+      .attr('href', dataURL)
+      .attr('preserveAspectRatio', 'none')
+      .style('image-rendering', 'pixelated')
+      .style('opacity', opacity);
 
-          group.append('rect')
-          .attr('x', x(stepX * j + ranges[0][0]))
-          .attr('y', y(stepY * i + ranges[1][0])-rectHeight)
-          .attr('width', rectWidth)
-          .attr('height', rectHeight)
-          .attr('opacity', data[i][j][1])
-          .attr('fill', `rgb(${Math.floor(255*data[i][j][0])}, ${Math.floor(255*data[i][j][0])}, ${Math.floor(255*data[i][j][0])})`);
-          
-        }
-      }  
-      return;
-    }    
+    env.local.img = img;
+    
+    // Store dimensions and position for updates
+    env.local.width = width;
+    env.local.height = height;
+    env.local.rgb = rgb;
+    env.local.xMin = xMin;
+    env.local.yMin = yMin;
+    env.local.rectWidth = rectWidth;
+    env.local.rectHeight = rectHeight;
+    env.local.opacity = opacity;
 
-    if (rgb === 3) {
-      for (let i=0; i<height; ++i) {
-        for (let j=0; j<width; ++j) {
-
-          group.append('rect')
-          .attr('x', x(stepX * j + ranges[0][0]))
-          .attr('y', y(stepY * i + ranges[1][0])-rectHeight)
-          .attr('width', rectWidth)
-          .attr('height', rectHeight)
-          .attr('opacity', env.opacity)
-          .attr('fill', `rgb(${Math.floor(255*data[i][j][0])}, ${Math.floor(255*data[i][j][1])}, ${Math.floor(255*data[i][j][2])})`);
-          
-        }
-      } 
-      return;
-    }
-
-    if (rgb === 4) {
-      for (let i=0; i<height; ++i) {
-        for (let j=0; j<width; ++j) {
-
-          group.append('rect')
-          .attr('x', x(stepX * j + ranges[0][0]))
-          .attr('y', y(stepY * i + ranges[1][0])-rectHeight)
-          .attr('width', rectWidth)
-          .attr('height', rectHeight)
-          .attr('opacity', data[i][j][3])
-          .attr('fill', `rgb(${Math.floor(255*data[i][j][0])}, ${Math.floor(255*data[i][j][1])}, ${Math.floor(255*data[i][j][2])})`);
-          
-        }
-      } 
-      return;
-    }    
+    return img;
   };
+
+  // Helper to fill imageData from raster data
+  function fillRasterImageData(imageData, data, width, height, rgb) {
+    const pixelData = imageData.data;
+    for (let i = 0; i < height; ++i) {
+      const srcRow = height - 1 - i; // Flip Y
+      for (let j = 0; j < width; ++j) {
+        const dstIdx = (i * width + j) * 4;
+
+        if (!rgb) {
+          const v = Math.floor(255 * data[srcRow][j]);
+          pixelData[dstIdx] = v;
+          pixelData[dstIdx + 1] = v;
+          pixelData[dstIdx + 2] = v;
+          pixelData[dstIdx + 3] = 255;
+        } else if (rgb === 2) {
+          const v = Math.floor(255 * data[srcRow][j][0]);
+          pixelData[dstIdx] = v;
+          pixelData[dstIdx + 1] = v;
+          pixelData[dstIdx + 2] = v;
+          pixelData[dstIdx + 3] = Math.floor(255 * data[srcRow][j][1]);
+        } else if (rgb === 3) {
+          pixelData[dstIdx] = Math.floor(255 * data[srcRow][j][0]);
+          pixelData[dstIdx + 1] = Math.floor(255 * data[srcRow][j][1]);
+          pixelData[dstIdx + 2] = Math.floor(255 * data[srcRow][j][2]);
+          pixelData[dstIdx + 3] = 255;
+        } else if (rgb === 4) {
+          pixelData[dstIdx] = Math.floor(255 * data[srcRow][j][0]);
+          pixelData[dstIdx + 1] = Math.floor(255 * data[srcRow][j][1]);
+          pixelData[dstIdx + 2] = Math.floor(255 * data[srcRow][j][2]);
+          pixelData[dstIdx + 3] = Math.floor(255 * data[srcRow][j][3]);
+        }
+      }
+    }
+  }
+
+  // Fast path for NumericArrayObject with UnsignedInteger8 (direct RGBA data)
+  function fillRasterImageDataNumeric(imageData, numericData, width, height) {
+    const pixelData = imageData.data;
+    const src = numericData.buffer;
+    
+    // If data is already RGBA in correct format, just flip rows
+    for (let i = 0; i < height; ++i) {
+      const srcRow = height - 1 - i;
+      const srcOffset = srcRow * width * 4;
+      const dstOffset = i * width * 4;
+      for (let j = 0; j < width * 4; ++j) {
+        pixelData[dstOffset + j] = src[srcOffset + j];
+      }
+    }
+  }
+
+  g2d.Raster.update = async (args, env) => {
+    let data = await interpretate(args[0], {...env, context: g2d, nfast:true, numeric:true});
+    
+    const width = env.local.width;
+    const height = env.local.height;
+    const rgb = env.local.rgb;
+    const opacity = env.local.opacity;
+
+    // First update: switch from static image to live canvas
+    if (!env.local.canvas) {
+      // Remove static image
+      if (env.local.img) {
+        env.local.img.remove();
+        env.local.img = null;
+      }
+
+      // Create live canvas via foreignObject
+      const fo = env.svg.append('foreignObject')
+        .attr('x', env.local.xMin)
+        .attr('y', env.local.yMin)
+        .attr('width', env.local.rectWidth)
+        .attr('height', env.local.rectHeight);
+
+      const canvas = fo.append('xhtml:canvas')
+        .attr('width', width)
+        .attr('height', height)
+        .style('width', '100%')
+        .style('height', '100%')
+        .style('image-rendering', 'pixelated')
+        .style('opacity', opacity);
+
+      env.local.foreignObject = fo;
+      env.local.canvas = canvas.node();
+      env.local.ctx = env.local.canvas.getContext('2d');
+      env.local.imageData = env.local.ctx.createImageData(width, height);
+    }
+
+    // Check for NumericArrayObject fast path
+    if (data instanceof NumericArrayObject) {
+      const dims = data.dims;
+      // Check if it's RGBA data (height x width x 4) as UnsignedInteger8
+      if (dims.length === 3 && dims[2] === 4 && data.type === 'UnsignedInteger8') {
+        fillRasterImageDataNumeric(env.local.imageData, data, width, height);
+      } else {
+        // Fall back to normal array
+        data = data.normal();
+        fillRasterImageData(env.local.imageData, data, width, height, rgb);
+      }
+    } else {
+      fillRasterImageData(env.local.imageData, data, width, height, rgb);
+    }
+
+    // Update canvas
+    env.local.ctx.putImageData(env.local.imageData, 0, 0);
+  };
+
+  g2d.Raster.destroy = (args, env) => {
+    if (env.local.img) {
+      env.local.img.remove();
+    }
+    if (env.local.foreignObject) {
+      env.local.foreignObject.remove();
+    }
+    if (env.local.rect) {
+      env.local.rect.remove();
+    }
+  };
+
+  g2d.Raster.virtual = true;
 
   //g2d.Raster.destroy = () => {}
   g2d.Magnification = () => "Magnification";
