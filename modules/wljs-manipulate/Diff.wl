@@ -151,10 +151,10 @@ diff[Raster[data1_List | data1_NumericArray], Raster[data2_List | data2_NumericA
   $Failed
 ]
 
-diff[Raster[data1_List | data1_NumericArray, pos_, rest___], Raster[data2_List | data2_NumericArray, pos_, rest___], level_, attributes_] := If[Dimensions[data1] === Dimensions[data2],
-  diffObject[Raster[data1, pos, rest ], Raster[data2, pos, rest], Hash[Raster[data1, pos, rest] ], Hash[Raster[data2, pos, rest] ] ] 
+diff[Raster[data1_List | data1_NumericArray, pos_, rest1___], Raster[data2_List | data2_NumericArray, pos_, rest___], level_, attributes_] := If[Dimensions[data1] === Dimensions[data2],
+  diffObject[Raster[data1, pos, rest1 ], Raster[data2, pos, rest], Hash[Raster[data1, pos, rest1] ], Hash[Raster[data2, pos, rest] ] ] 
 ,
-  failureMessage["Cannot link two Raster primitives with different data dims", {Raster[data1, pos, rest], Raster[data2, pos, rest]}];
+  failureMessage["Cannot link two Raster primitives with different data dims", {Raster[data1, pos, rest1], Raster[data2, pos, rest]}];
   $Failed
 ]
 
@@ -613,7 +613,7 @@ transpile[Raster[_, _, ___], Raster[data2_, pos_, rest___], hash1_, hash2_] := W
   symbol = NumericArray[data2//N];
   
   <|
-    "Priority"->1, "Rule" -> (Raster[data2, pos, rest] -> Raster[Offload[symbol], pos ]),
+    "Priority"->1, "Rule" -> (Raster[data2, pos, rest] -> Raster[Offload[symbol], pos, rest ]),
     "Reset" -> Function[Null, symbol = NumericArray[data2//N] ],
     "Update" -> Function[{e1, e2, h1, h2},
       symbol = NumericArray[e2[[1]]//N];
@@ -647,7 +647,7 @@ transpile[Raster[_, _, ___], Raster[data2_NumericArray, pos_, rest___], hash1_, 
   symbol = data2;
   
   <|
-    "Priority"->1, "Rule" -> (Raster[data2, pos, rest] -> Raster[Offload[symbol], pos ]),
+    "Priority"->1, "Rule" -> (Raster[data2, pos, rest] -> Raster[Offload[symbol], pos, rest ]),
     "Reset" -> Function[Null, symbol = data2 ],
     "Update" -> Function[{e1, e2, h1, h2},
       symbol = e2[[1]];
