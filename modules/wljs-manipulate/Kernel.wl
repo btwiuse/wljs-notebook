@@ -72,39 +72,13 @@ ClearAll[Manipulate]
 
 
 
-(* Cache was disabled since 22.Jul.2025 *)
-useCache[hash_, f_, values_] := f @ values
+
 
 SetAttributes[TempHeld, HoldAll]
 
-ListAnimate::unspr = "ListAnimate only support list of Images for now"
-ListAnimate[_, OptionsPattern[] ] := (
-  Message[ListAnimate::unspr]; $Failed
-)
-
-ListAnimate[imgs : {__Image}, opts:OptionsPattern[] ] := With[{
-  event = CreateUUID[], dims = ImageDimensions[imgs//First],
-  skip = Floor[30.0/OptionValue[RefreshRate] ] + 1
-}, Module[{
-  buffer = ImageData[imgs // First, "Byte"], trigger = 0,
-  index = 1
-},
-  EventHandler[event, Function[Null,
-    trigger = trigger + 1;
-    If[Mod[trigger, skip] == 0, 
-      index++;
-      If[index > Length[imgs], index = 1];
-      buffer = ImageData[ImageCrop[imgs[[index]], dims], "Byte"];
-    ];
-  ] ];
-
-
-  Image[buffer // Offload, "Byte", Epilog->{
-    AnimationFrameListener[trigger // Offload, "Event"->event]
-  }]
+ListAnimate[olist_List, fps_:20] := With[{list = Evaluate[olist]}, With[{len = Length[list]},
+  Animate[list[[index]], {index,1,len,1}, RefreshRate->fps] 
 ] ]
-
-Options[ListAnimate] = Join[{RefreshRate->12}, Options[Image] ]
 
 passPart[index_, Null] := Null 
 passPart[index_, expr_] := Offload[expr[[index]]]
