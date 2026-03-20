@@ -59,6 +59,7 @@ Script = With[{},
         core.UINotebook.CellState = async (args, env) => {
             const uid      = await interpretate(args[0], env);
             const state    = await interpretate(args[1], env);
+            const cell = document.getElementById(uid);
             const bar = document.getElementById('bar-'+uid);
             const info = document.getElementById('info-'+uid);
             console.log('state update '+state);
@@ -72,6 +73,7 @@ Script = With[{},
 
             if (state != 'Idle') {
                 callElectronProgress(0);
+                cell.classList.add('cursor-progress');
                 //bar.parentNode.classList.remove('opacity-0');
                 setTimeout(() => {
                     bar.parentNode.style.opacity = 1;
@@ -81,6 +83,7 @@ Script = With[{},
                 }, 100);
             } else {
                 //bar.parentNode.classList.add('opacity-0');
+                cell.classList.remove('cursor-progress');
                 bar.style.transition = "width 200ms";
                 bar.style.width = "100%";
                 callElectronProgress(1);

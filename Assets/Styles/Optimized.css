@@ -1316,6 +1316,10 @@ ol {
   cursor: vertical-text;
 }
 
+.cursor-progress {
+    cursor: progress;
+}
+
 .select-none {
   -webkit-user-select: none;
      -moz-user-select: none;
