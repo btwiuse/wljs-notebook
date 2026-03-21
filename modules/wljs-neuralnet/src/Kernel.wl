@@ -19,7 +19,7 @@ With[{file = FileNameJoin[{libPath, "src", "Kernel.wl"}]},
 If[neuralNetLoadedQ =!= True,
   Internal`AddHandler["GetFileEvent",
    If[MatchQ[#, HoldComplete["NeuralNetworks`",_,_] ] && (neuralNetLoadedQ =!= True),
-      Echo["Loading neural nets..."];
+      (* Echo["Loading neural nets..."]; *)
       Pause[1];
       neuralNetLoadedQ = True;
       Get[file];
