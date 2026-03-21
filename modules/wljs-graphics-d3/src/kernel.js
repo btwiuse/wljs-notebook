@@ -20,6 +20,8 @@
     return window.devicePixelRatio;
   }
 
+
+
   core['Graphics`CaptureImage64'] = async (args, env) => {
     const canvas = env.element;
     const p = new Deferred();
@@ -53,6 +55,10 @@
 
   let g2d = {};
   g2d.name = "WebObjects/Graphics";
+
+  g2d.LightDarkSwitched = async (args, env) => {
+    return await interpretate(args[0], env);
+  }
 
   const g2dComplex = {};
   g2dComplex.name = "GraphicsComplex 2D"
