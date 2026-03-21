@@ -1033,7 +1033,7 @@ Component[OptionsPattern[]] := With[{
                     Echo["Morphing..."];
                     cell["Type"] = "Input";
     
-                    With[{template = CellGenerator[cell, client, parameters, extensions]},
+                    With[{template = CellGenerator[cell, $Client, parameters, extensions]},
                         WebUISubmit[UINotebook["Morph", payload[[1]], template, cell`Serialize[cell, "MetaOnly"->True]], $Client];
                     ];
                 ];                
