@@ -70,7 +70,7 @@ font-family: 'Hasklig' !important;
 }
 
 .cm-tooltip-autocomplete ul li[aria-selected] {
-background: #00b5f8 !important;
+background: var(--system-accent-color) !important;
 color: white !important;
 
 border-radius: 4px !important;
