@@ -42,6 +42,13 @@ Typeset math input, syntactic sugar, multiple languages, and a fast, granular ev
 
 > The algorithms, functions, and other components of the Wolfram Language provided by the Wolfram Engine are the intellectual property of Wolfram Research, Inc.
 
+## Platforms
+- **Desktop**: Windows (x86), GNU/Linux (x86, ARM), MacOS (x86, ARM)
+- **Server**: Docker container or via WolframScript
+
+
+See how at [wljs.io](https://wljs.io/frontend/setup)
+
 ## Highlights
 
 ### Feels like Mathematica and Jupyter
