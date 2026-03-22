@@ -237,6 +237,7 @@ core['CoffeeLiqueur`Extensions`RemoteCells`Private`openNotebook'] = async (args,
 
 core.SystemOpen = async (args, env) => {
     const type = await interpretate(args[1], env);
+    if (!window.electronAPI) interpretate.alert('This feature is available only for the desktop application');
     await core.SystemOpen[type](args[0], env);
 }
 
@@ -262,6 +263,7 @@ core['CoffeeLiqueur`Extensions`System`Internal`RequestDirectory'] = async (args,
 
     if (!api) {
         console.error('Electron API not found! Feature is only available for desktop app');
+        interpretate.alert('This feature is available only for the desktop application');
         p.resolve('$Failed');
     }
     
@@ -286,6 +288,7 @@ core['CoffeeLiqueur`Extensions`System`Internal`RequestFile'] = async (args, env)
 
     if (!api) {
         console.error('Electron API not found! Feature is only available for desktop app');
+        interpretate.alert('This feature is available only for the desktop application');
         p.resolve('$Failed');
     }
 
