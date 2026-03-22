@@ -1,9 +1,10 @@
-<|"Notebook" -> <|"Controller" -> "18a10e13-26b2-4b30-a06b-75c5531b0233", 
+<|"Notebook" -> <|"Controller" -> "b56fdfab-edcc-4272-8bdf-3f99b171b0be", 
    "FocusedCell" -> CoffeeLiqueur`Notebook`Cells`CellObj[
-     CoffeeLiqueur`Notebook`Cells`CellObj`$548], "FocusedCellSelection" -> 
-    {279, 278}, "MessangerChannel" -> Messanger, 
-   "ModalsChannel" -> "51a6c4a3-390a-463f-a10b-31679121b800", 
-   "Objects" -> <||>, "Path" -> "/users/kirill/Downloads/garbage/Talk.wln", 
+     CoffeeLiqueur`Notebook`Cells`CellObj`$1247], 
+   "FocusedCellSelection" -> {345, 344}, "MessangerChannel" -> Messanger, 
+   "ModalsChannel" -> "2b0ab90c-1eda-4132-9ab5-03be26903af3", 
+   "Objects" -> <||>, "Path" -> "/users/kirill/Github/wolfram-js-frontend/mod\
+ules/wljs-demos-archive/Demos/Presentation/D - Faraday Effect Talk.wln", 
    "PublicFields" -> {"Properties"}, "Storage" -> 
     <|"unappreciated-6c1" -> "1:eJydmnk8ld+3x0+oyFhJKmQOKfOUoZN5JlNkOmYiJCLES\
 UIolClFokHlW8YSpZOhNFIyRAMS0mCIUKm7nnvvz/3ds17++fnD68X7tZ699n72Xmt91n6E3IOsvB\
@@ -11677,112 +11678,112 @@ DjKIuBPEJVbsutgTZAFnNqxcvusTGKmFlgRfb/uQQj3ld6IlnW1McvUGmB60nA0+JsHOPgYWTyjvj\
    "TOC" -> {CoffeeLiqueur`Extensions`TOC`Private`heading[1, 
       "Large Faraday rotation in Fe<sub >2</sub>Mo<sub >3</sub>O<sub \
 >8</sub>", CoffeeLiqueur`Notebook`Cells`CellObj[
-       CoffeeLiqueur`Notebook`Cells`CellObj`$917]], 
+       CoffeeLiqueur`Notebook`Cells`CellObj`$1189]], 
      CoffeeLiqueur`Extensions`TOC`Private`heading[2, "Helper tools", 
       CoffeeLiqueur`Notebook`Cells`CellObj[
-       CoffeeLiqueur`Notebook`Cells`CellObj`$900]], 
+       CoffeeLiqueur`Notebook`Cells`CellObj`$1196]], 
      CoffeeLiqueur`Extensions`TOC`Private`heading[3, "Speaker notes", 
       CoffeeLiqueur`Notebook`Cells`CellObj[
-       CoffeeLiqueur`Notebook`Cells`CellObj`$900]], 
+       CoffeeLiqueur`Notebook`Cells`CellObj`$1196]], 
      CoffeeLiqueur`Extensions`TOC`Private`heading[3, "Layout", 
       CoffeeLiqueur`Notebook`Cells`CellObj[
-       CoffeeLiqueur`Notebook`Cells`CellObj`$903]], 
+       CoffeeLiqueur`Notebook`Cells`CellObj`$1199]], 
      CoffeeLiqueur`Extensions`TOC`Private`heading[3, "Styles", 
       CoffeeLiqueur`Notebook`Cells`CellObj[
-       CoffeeLiqueur`Notebook`Cells`CellObj`$905]], 
+       CoffeeLiqueur`Notebook`Cells`CellObj`$1204]], 
      CoffeeLiqueur`Extensions`TOC`Private`heading[2, "Introduction", 
       CoffeeLiqueur`Notebook`Cells`CellObj[
-       CoffeeLiqueur`Notebook`Cells`CellObj`$896]], 
+       CoffeeLiqueur`Notebook`Cells`CellObj`$1208]], 
      CoffeeLiqueur`Extensions`TOC`Private`heading[2, "What is Faraday", 
       CoffeeLiqueur`Notebook`Cells`CellObj[
-       CoffeeLiqueur`Notebook`Cells`CellObj`$566]], 
+       CoffeeLiqueur`Notebook`Cells`CellObj`$1212]], 
      CoffeeLiqueur`Extensions`TOC`Private`heading[2, 
       "Show experimental setup", CoffeeLiqueur`Notebook`Cells`CellObj[
-       CoffeeLiqueur`Notebook`Cells`CellObj`$893]], 
+       CoffeeLiqueur`Notebook`Cells`CellObj`$1223]], 
      CoffeeLiqueur`Extensions`TOC`Private`heading[2, "How to measure", 
       CoffeeLiqueur`Notebook`Cells`CellObj[
-       CoffeeLiqueur`Notebook`Cells`CellObj`$889]], 
+       CoffeeLiqueur`Notebook`Cells`CellObj`$1243]], 
      CoffeeLiqueur`Extensions`TOC`Private`heading[2, "Results", 
       CoffeeLiqueur`Notebook`Cells`CellObj[
-       CoffeeLiqueur`Notebook`Cells`CellObj`$846]], 
+       CoffeeLiqueur`Notebook`Cells`CellObj`$1249]], 
      CoffeeLiqueur`Extensions`TOC`Private`heading[2, "Summary", 
       CoffeeLiqueur`Notebook`Cells`CellObj[
-       CoffeeLiqueur`Notebook`Cells`CellObj`$837]], 
+       CoffeeLiqueur`Notebook`Cells`CellObj`$1264]], 
      CoffeeLiqueur`Extensions`TOC`Private`heading[2, "Collaborations", 
       CoffeeLiqueur`Notebook`Cells`CellObj[
-       CoffeeLiqueur`Notebook`Cells`CellObj`$827]]}, 
+       CoffeeLiqueur`Notebook`Cells`CellObj`$1270]]}, 
    "TrashedCells" -> {".md\nCompile speaker notes", ".md\nCustom graphics \
 primitive `Squircle` for displaying data points in a more sophisticated way \
 (totally unnecessary):"}|>, 
  "Cells" -> {<|"Data" -> ".md\nDPG Talk\n<Now/>\n\n# Large Faraday rotation \
 in Fe<sub>2</sub>Mo<sub>3</sub>O<sub>8</sub>\nAltermagnetism section", 
     "Display" -> "codemirror", "Hash" -> 
-     "acc7e4aa-013c-446e-b996-28c90e9155af", "Invisible" -> False, 
+     "d447b5e4-6a1c-4e6e-9360-c3430a33ffb0", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "UID" -> Null, "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> "DPG Talk\nSun 22 Mar 2026 14:10:31\n\n# Large Faraday \
 rotation in Fe<sub >2</sub>Mo<sub >3</sub>O<sub >8</sub>\nAltermagnetism \
 section", "Display" -> "markdown", "Hash" -> 
-     "f653f169-4ca9-4b3a-8b3d-766c34b6fd7d", "Invisible" -> False, 
+     "1cd7e60e-7950-4fd5-9fbb-5a3b3f872a6e", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
-    "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> ".slides\nThank you for your attention!", 
     "Display" -> "codemirror", "Hash" -> 
-     "2b870d26-60f0-42ae-b10d-8325ac4e436c", "Invisible" -> False, 
+     "57122420-6d4a-4364-acf8-1209b514099c", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
-    "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> ".md\n1. Run initialization cells first \
 <kbd>\[CloverLeaf]/Ctrl+i</kbd>\n2. Wait until it is finished\n3. Evaluate \
 `.slides` cell above, that will combine all slides into a single \
 presentation\n4. Press <kbd>f</kbd> on a slide to go fullscreen", 
     "Display" -> "codemirror", "Hash" -> 
-     "75773765-4b8c-4fac-b06d-09776ba9c7b9", "Invisible" -> False, 
+     "170c1780-277a-48ea-b612-0632955368e5", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "UID" -> Null, "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> "1. Run initialization cells first <kbd \
 >\[CloverLeaf]/Ctrl+i</kbd>\n2. Wait until it is finished\n3. Evaluate \
 `.slides` cell above, that will combine all slides into a single \
 presentation\n4. Press <kbd >f</kbd> on a slide to go fullscreen", 
     "Display" -> "markdown", "Hash" -> 
-     "fd24beaf-2413-48f9-8ae2-532596e3edff", "Invisible" -> False, 
+     "57c1c147-a04d-4cc1-959e-51bb435cccb7", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
-    "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> ".md\n:::note\nIf you evaluate the presentation in a new \
 window (i.e. *project feature* or <kbd>\[CloverLeaf]/Ctrl+Shift+Enter</kbd>), \
 some styles may not be applied, since they are defined on the current page of \
 the notebook in `.html` cell.\n\nCopy styles from one of the cells below to \
 any slide of your presentation if you need this projection feature to \
 work.\n:::", "Display" -> "codemirror", 
-    "Hash" -> "6aed0d25-75a1-4fcb-a52f-511381163681", "Invisible" -> False, 
+    "Hash" -> "b653f410-e68f-4a52-b571-88c6139d39f6", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "UID" -> Null, "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> ":::note\nIf you evaluate the presentation in a new window \
 (i.e. *project feature* or <kbd >\[CloverLeaf]/Ctrl+Shift+Enter</kbd>), some \
 styles may not be applied, since they are defined on the current page of the \
 notebook in `.html` cell.\n\nCopy styles from one of the cells below to any \
 slide of your presentation if you need this projection feature to work.\n:::"\
-, "Display" -> "markdown", "Hash" -> "5cfec328-d7ae-4957-aaeb-f4c8dfb48471", 
+, "Display" -> "markdown", "Hash" -> "8e1a7763-a85f-4de4-b071-55ccb18d4eed", 
     "Invisible" -> False, "MetaOnly" -> False, "Props" -> <||>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Output", 
-    "UID" -> Null, "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "UID" -> Null, "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> ".md\n## Helper tools\n### Speaker notes\nRun it to compile \
 them and output to a new window:", "Display" -> "codemirror", 
-    "Hash" -> "c45439da-7461-42c6-b204-06367abd3770", "Invisible" -> False, 
+    "Hash" -> "9d569ed3-0cd2-4e3b-981f-1973cb226b4d", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "UID" -> Null, "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> "## Helper tools\n### Speaker notes\nRun it to compile them \
 and output to a new window:", "Display" -> "markdown", 
-    "Hash" -> "717b703c-0328-40b4-bcfe-23a9adef2cb2", "Invisible" -> False, 
+    "Hash" -> "e15a27d0-5100-4087-b8d0-734676f89dd8", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
-    "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> "With[\n  {text = StringRiffle[StringDrop[#, \
 StringLength[\"speaker.md\\n\"]] &/@ Select[NotebookRead[Cells[]], \
 MatchQ[Cell[_?(StringMatchQ[\"speaker.md\"~~___]), \"Input\", \
@@ -11791,29 +11792,29 @@ style=\\\"height:100vh; \
 overflow-y:scroll\\\">\\n\\n``\\n\\n</div>\"][text]},\n  \
 CreateWindow[Cell[scroll, \"Output\", \"markdown\"]]\n];", 
     "Display" -> "codemirror", "Hash" -> 
-     "30a898be-7053-4912-a3d0-170cd02ee1b8", "Invisible" -> False, 
+     "98864159-d5c3-4c29-a5c2-0b046ff330a4", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
-    "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> ".md\n### Layout\nFooter and header", 
     "Display" -> "codemirror", "Hash" -> 
-     "1a2f68e2-51d9-4a40-ae07-f95f34bcb200", "Invisible" -> False, 
+     "a0829f7f-449e-481c-84ad-8171e94c01f7", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "UID" -> Null, "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> "### Layout\nFooter and header", "Display" -> "markdown", 
-    "Hash" -> "188fee73-c56b-4d2e-9dea-4819eb78d0f5", "Invisible" -> False, 
+    "Hash" -> "404694db-379d-403b-944a-8a3d43509c1c", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
-    "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> ".wlx\n\nFooter = With[{},\n  <div class=\"w-full ml-auto \
 mr-auto absolute text-sm\" style=\"top: 690px\">\n    DPG2026: <i>Large \
 Faraday rotation in Fe<sub>2</sub>Mo<sub>3</sub>O<sub>8</sub></i>, Kirill \
 Vasin\n  </div>\n];", "Display" -> "codemirror", 
-    "Hash" -> "5f3a2fc4-c4b3-4bd4-8f82-32c9d71c706f", "Invisible" -> False, 
+    "Hash" -> "88645338-a2cd-42de-bc4a-d6dc898a8e75", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"InitGroup" -> True, "Fade" -> True|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "UID" -> Null, "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> ".wlx\n\nMakeTitle[Title__String] := \
 MakeTitle[StringJoin[Title]]\n\nMakeTitle[Title_String] :=With[{},\n<div \
 class=\"relative flex w-full text-left flex-row gap-x-4\" \
@@ -11822,72 +11823,72 @@ style=\"bottom:0;z-index:1;position: absolute;background: linear-gradient(to \
 left, #ffecc9);width: 100%;height: 0.5rem;\"></div>\n  <h2 style=\"margin: \
 0.25rem; color:#ffecc9\"><Title/></h2>\n</div>\n]", 
     "Display" -> "codemirror", "Hash" -> 
-     "01f3827b-88a7-4bde-ad2e-3941f245787e", "Invisible" -> False, 
+     "cf4180d1-3bca-49da-8109-5aa098ed2709", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"InitGroup" -> True, "Fade" -> True|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "UID" -> Null, "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> ".wlx\nColumns[Cols__, opts: OptionsPattern[]] := \
 Columns[List[Cols], opts]\nColumns[Cols_List, OptionsPattern[]] := With[{\n  \
 number = Length[Cols],\n  Layout = Table[<div><Item/></div>, {Item, Cols}],\n \
  class = ToString[Length[Cols]]\n},\n    <div class=\"columns-{class}\">\n    \
     <Layout/>\n    </div>                       \n];\n\nOptions[Columns] = \
 {\"Class\"->\"gap-4\"};", "Display" -> "codemirror", 
-    "Hash" -> "8e866e81-acd6-40fb-961d-bc8e18a5750b", "Invisible" -> False, 
+    "Hash" -> "9bf5b4b3-00a4-43fc-8e3b-b88f7d4d6d3e", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"InitGroup" -> True, "Fade" -> True|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "UID" -> Null, "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> ".md\n### Styles\nDefine dark styles and classes for slides, \
 stylize all headings by the default.", "Display" -> "codemirror", 
-    "Hash" -> "0ab8be5e-6fa7-4088-98cc-ac081e286944", "Invisible" -> False, 
+    "Hash" -> "c855ed2d-9210-4bec-a4d5-370fe9800444", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "UID" -> Null, "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> "### Styles\nDefine dark styles and classes for slides, \
 stylize all headings by the default.", "Display" -> "markdown", 
-    "Hash" -> "ebf8044d-5bb8-4d5e-b958-cc94c4ea283f", "Invisible" -> False, 
+    "Hash" -> "5d998b30-1ac8-414a-870c-298437f30be6", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
-    "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> ".html\n\n<style>\n  .slide-number {\n    color:white;\n  }\n  \
 .slides section {\n    border-radius: 0.25rem;\n  }\n\n  .dark-content {\n    \
-filter: invert(1) hue-rotate(-180deg) !important; \n  }\n\n  .slide h1 {\n    \
-color: white;\n  }  \n\n  .slide h2 {\n    color: white;\n  }  \n  \n  .slide \
-h3 {\n    color: white;\n  }\n\n  .slide-dark {\n    color: white;\n  }   \
-\n</style>", "Display" -> "codemirror", 
-    "Hash" -> "db5fa9d1-893c-462d-9843-7410f3c981fa", "Invisible" -> False, 
+filter: invert(1) hue-rotate(-180deg) !important; \n  }\n\n  .slide-dark h1 \
+{\n    color: white;\n  }  \n\n  .slide-dark h2 {\n    color: white;\n  }  \n \
+ \n  .slide-dark h3 {\n    color: white;\n  }\n\n  .slide-dark {\n    color: \
+white;\n  }   \n</style>", "Display" -> "codemirror", 
+    "Hash" -> "48444c14-e7a2-494b-80b0-cea66c76ccf1", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"Fade" -> True|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "UID" -> Null, "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> "\n<style>\n  .slide-number {\n    color:white;\n  }\n  \
 .slides section {\n    border-radius: 0.25rem;\n  }\n\n  .dark-content {\n    \
-filter: invert(1) hue-rotate(-180deg) !important; \n  }\n\n  .slide h1 {\n    \
-color: white;\n  }  \n\n  .slide h2 {\n    color: white;\n  }  \n  \n  .slide \
-h3 {\n    color: white;\n  }\n\n  .slide-dark {\n    color: white;\n  }   \
-\n</style>", "Display" -> "html", "Hash" -> 
-     "35707931-8a88-4508-a5cf-b63a27902f78", "Invisible" -> False, 
+filter: invert(1) hue-rotate(-180deg) !important; \n  }\n\n  .slide-dark h1 \
+{\n    color: white;\n  }  \n\n  .slide-dark h2 {\n    color: white;\n  }  \n \
+ \n  .slide-dark h3 {\n    color: white;\n  }\n\n  .slide-dark {\n    color: \
+white;\n  }   \n</style>", "Display" -> "html", 
+    "Hash" -> "c8c20297-d23b-47c0-8676-73d3fe3c4292", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
-    "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> ".md\n## Introduction\nShow the compound, show motivation", 
     "Display" -> "codemirror", "Hash" -> 
-     "f74b2707-ba9c-47d7-bedd-ee0987a308f5", "Invisible" -> False, 
+     "62e7d383-cebd-490d-835c-4af266e464bb", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "UID" -> Null, "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> "## Introduction\nShow the compound, show motivation", 
     "Display" -> "markdown", "Hash" -> 
-     "f1b1acfb-389d-4302-b248-494ab18a6d3d", "Invisible" -> False, 
+     "085cdd21-9f40-4373-bccb-888981e54745", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
-    "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> "speaker.md\n## Introduction\nHello everyone. I am Kirill \
 Vasin from the University of Augsburg,\nand I would love to share with you an \
 altermagnet candidate Fe2Mo3O8 that shows an unusually large Faraday \
 rotation.", "Display" -> "codemirror", 
-    "Hash" -> "fa460fa9-3745-4244-adc5-28f91e13e1ce", "Invisible" -> False, 
+    "Hash" -> "31ca296c-28b1-41b3-bf4b-d2fa8cbcf0e1", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
-    "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> ".slide\n\n<!-- .slide: class=\"slide-standard slide-dark\" \
 data-background-color=\"black\" -->\n\n<div class=\"flex flex-row h-full \
 w-full\">\n  \n<img src=\"/attachments/Night-15d.png?q=1\" height=\"600\" \
@@ -11905,10 +11906,10 @@ src=\"/attachments/unia_logo.svg\"/>\n\n    \n  </div>\n\n  <div \
 style=\"margin-left:auto;\">\n\n<img width=\"250\" height=\"250\" \
 src=\"/attachments/image-66f.png\"/>\n\n    \n  </div>\n  \n\n\n  \n</div>\n  \
 \n</div>\n\n</div>", "Display" -> "codemirror", 
-    "Hash" -> "3a52ecc2-785a-4bae-86f3-fdec72e2c180", "Invisible" -> False, 
+    "Hash" -> "a1eb4946-244c-4785-90ae-26f62db3bce6", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"Fade" -> True|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "UID" -> Null, "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> "speaker.md\n## What is Faraday\nSince the audience is quite \
 diverse, let me clarify:\n\n- Faraday Effect is a rotation of linearly \
 polarized light in a medium with broken time-inversion symmetry and it is \
@@ -11920,17 +11921,17 @@ magnetization vector. And it is not common for antiferromagnets to have it \
 since the induced magnetization is weak; however, there are \
 exceptions:\n\nFor antiferromagnets, it is mostly much, much smaller than \
 these values.", "Display" -> "codemirror", 
-    "Hash" -> "7b8ecb89-361f-4d47-850b-1b193ab98d64", "Invisible" -> False, 
+    "Hash" -> "1bed55e2-336d-4d51-9353-7405bdb775fb", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"Hidden" -> False|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "UID" -> Null, "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> "## What is Faraday\nShow tables as well:", 
     "Display" -> "markdown", "Hash" -> 
-     "4328b6f4-44b1-4e40-9512-ca2219be5b77", "Invisible" -> False, 
+     "5db4645a-8073-4ac2-a62d-655d20a2c673", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
-    "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
-   <|"Data" -> ".slide\n<!-- .slide: class=\"slide-standard-dark slide-dark\" \
+    "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
+   <|"Data" -> ".slide\n<!-- .slide: class=\"slide-standard slide-dark\" \
 data-background-color=\"black\" -->\n\n<MakeTitle>Faraday Effect and \
 Magneto-Circular Dichroism</MakeTitle>\n\n<Columns>\n\n<div>\n\n## \
 Faraday\n\n\n<img width=\"400\" class=\"text-left\" style=\"margin:0\" \
@@ -11943,10 +11944,10 @@ class=\"fragment\">\n\nConventional antiferromagnets (local records):\n\n- \
 EuTiO<sub>3</sub>$\\\\sim 2500\\~{}^\\circ/\\text{cm}$ (GHz);\n- \
 FePS<sub>3</sub>$\\\\sim 600\\~{}^\\circ/\\text{cm}$ (THz)\n  \n</div>", 
     "Display" -> "codemirror", "Hash" -> 
-     "1322c885-3cda-4606-9c2c-1244065d90ef", "Invisible" -> False, 
+     "8656942c-1fb4-4960-b4a9-c91098e6ac6c", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
-    "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> "speaker.md\n## Structure\nIt is a known layered polar \
 hexagonal antiferromagnet. It has two optically and magnetically active Fe2+ \
 ions, which also show the magnetoelectric effect: you can induce macroscopic \
@@ -11954,10 +11955,10 @@ polarization by magnetic field and vice versa.\n\nThe absence of PT element \
 in the symmetry satisfies the condition for altermagnetism. As you can see by \
 the inset plot, even with high fields the induced magnetization remains \
 zero.", "Display" -> "codemirror", "Hash" -> 
-     "fb7036e0-0e11-4343-a897-dcdde61a43b3", "Invisible" -> False, 
+     "b3db89a6-16d7-4345-b6ac-06e41ad998f3", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
-    "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> ".wlx\nInteractiveCrystalStructure := Module[{\n  rotation = \
 0.01, slideId = CreateUUID[], \n  animate = CreateUUID[],\n  crystal = \
 NotebookRead[NotebookStore[\"spay-943\"]]\n}, With[{\n  Widget = \
@@ -11977,20 +11978,20 @@ Background->Black,\n    Lighting->None,\n    \
  rotation += 0.01;\n     ]]; \n     EventFire[animate, True];\n   ]\n }];\n\n \
 <div>\n    <Widget/>\n    <SlideEventListener Id={slideId}/>\n </div>\n] ]", 
     "Display" -> "codemirror", "Hash" -> 
-     "6506ae8f-5e55-4313-9bf4-e4e922e6e44b", "Invisible" -> False, 
+     "da362110-9a06-4a2c-a567-65e88cb91fdb", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"InitGroup" -> True, "Fade" -> True|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "UID" -> Null, "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> ".md\nSlide itself:", "Display" -> "codemirror", 
-    "Hash" -> "6394bc12-8d00-45cb-ba4b-371d2d3d00cc", "Invisible" -> False, 
+    "Hash" -> "50d874ca-2028-4d53-a7df-01460019be96", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "UID" -> Null, "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> "Slide itself:", "Display" -> "markdown", 
-    "Hash" -> "bfb35a21-65b9-464c-ab90-9c5745302b69", "Invisible" -> False, 
+    "Hash" -> "3178fca4-7eff-4684-8e73-ad71eb8335ab", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
-    "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> ".slide\n\n<!-- .slide: class=\"slide-standard slide-dark\" \
 data-background-color=\"black\" -->\n\n<MakeTitle>Fe<sub>2</sub> \
 Mo<sub>3</sub> O<sub>8</sub> is</MakeTitle>\n\n<Columns>\n <div \
@@ -12007,10 +12008,10 @@ __octahedron__\n\n\n  <figure class=\"flex flex-row items-center\">\n     \n  \
 width=\"270\"/>\n\n     \n  <caption><span class=\"text-xs\">QIAN CHEN et al. \
 Phys. Rev. B 109 2024</span></caption>\n  </figure>\n \n</div> \n\n \n\n \
 \n</Columns>\n\n<Footer/>", "Display" -> "codemirror", 
-    "Hash" -> "9762d0cc-a539-4372-851b-35372eeec528", "Invisible" -> False, 
+    "Hash" -> "7730ce80-cf63-4bf1-bae6-a33b88b91fd3", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
-    "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> "speaker.md\n## Why bother?\nThe nature and optical properties \
 of low-frequency excitations are quite puzzling. Raman study shows chiral \
 phonons, Neutron scattering shows magnon-polarons: a hybrid of magnon and \
@@ -12020,15 +12021,15 @@ we can probe it with our basic optical tools. And see if we can use \
 magnetic-point group analysis, which may not be applicable in the case of \
 ideal altermagnets. This one is not ideal, of course.", 
     "Display" -> "codemirror", "Hash" -> 
-     "55bc7a7e-468f-47a6-bba5-56bb48310336", "Invisible" -> False, 
+     "2218a237-4897-4268-9a9e-e23f0821c33a", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"Hidden" -> False|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "UID" -> Null, "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> "Why bother?", "Display" -> "markdown", 
-    "Hash" -> "095740ca-4532-4891-9cb8-350cad904662", "Invisible" -> False, 
+    "Hash" -> "20569248-bab9-40e4-944b-1000cbbb7a27", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
-    "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> ".slide\n<!-- .slide: class=\"slide-standard slide-dark\" \
 data-background-color=\"black\" -->\n\n<MakeTitle><strike>Why \
 bother?</strike> Low-frequency THz modes</MakeTitle>\n\n<div style=\"\n    \
@@ -12040,24 +12041,24 @@ class=\"dark-content\">\n\n![](/attachments/Screenshot%202025-09-19%20at%2010\
 f4.png)\n\n![](/attachments/Screenshot%202025-09-19%20at%2010.48.55-228.png)\
 \n\n\n![](/attachments/Screenshot-2026-03-10-at-16.14.28-39c.png)\n\n\n</div>\
 \n\n<Footer/>", "Display" -> "codemirror", 
-    "Hash" -> "1f9bcb2b-6689-4d3b-8231-8061e3aa131e", "Invisible" -> False, 
+    "Hash" -> "1a1e74fb-e311-4072-b91d-aef5c369f832", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
-    "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> 
      ".md\n## Show experimental setup\nAnimation, plots what's in and out", 
     "Display" -> "codemirror", "Hash" -> 
-     "64444688-a226-4d53-b08d-442802ef20cc", "Invisible" -> False, 
+     "8ab16490-09bf-4c04-aa09-782664a82a65", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "UID" -> Null, "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> 
      "## Show experimental setup\nAnimation, plots what's in and out", 
     "Display" -> "markdown", "Hash" -> 
-     "48c21d6d-e674-4090-9484-61ace024de76", "Invisible" -> False, 
+     "4906484c-389a-4f16-a26d-4f2c6a0f822e", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
-    "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> "DomainPlots[\"Type\" -> \"Time\"] = ListLinePlot[\n    \
 Reverse[\n        (\n            Function[xy,\n                xy - {2850, \
 0}\n            ] /@ Import[#1, HeaderLines -> 2]&\n        ) /@ FileNameJoin \
@@ -12089,29 +12090,29 @@ domain\"\n        ,\n        FrameStyle -> Directive[FontSize -> 16]\n        \
 ImageSize -> {400, 200}\n        ,\n        FrameLabel -> {\"frequency\", \
 \"-log T\"}\n        ,\n        FrameTicks -> {Automatic, Table[i, {i, 0, \
 6}]}\n    ]\n];", "Display" -> "codemirror", 
-    "Hash" -> "ba03164a-72d0-4231-91c2-a398f6584539", "Invisible" -> False, 
+    "Hash" -> "ad80c3e3-deaa-4bf4-baa8-c7fd4ad1ccd0", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"InitGroup" -> True, "Fade" -> True|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "UID" -> Null, "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> ".md\nImported symbols from other notebook:", 
     "Display" -> "codemirror", "Hash" -> 
-     "de83a0be-1ef7-40f3-8fad-489de7841b43", "Invisible" -> False, 
+     "8a535644-6297-4144-aff9-bd86762a284a", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "UID" -> Null, "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> "Imported symbols from other notebook:", 
     "Display" -> "markdown", "Hash" -> 
-     "9482dc62-9fb1-4a9d-8876-76f9164ef651", "Invisible" -> False, 
+     "51a8ee93-9ee0-4630-9a81-5c0251b852ec", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
-    "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> "Then[Import[FileNameJoin[{\"widgets\",\"Animation.wln\"}], \
 \"WLN\"] // NotebookEvaluateAsModuleAsync, Function[evaluated,\n  \
 WidgetAnimation = evaluated;\n]];", "Display" -> "codemirror", 
-    "Hash" -> "8641bf55-0199-4ac5-9c43-492b16c5ac4f", "Invisible" -> False, 
+    "Hash" -> "0300e3cb-c672-4ea8-89a5-8ab304d47605", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"InitGroup" -> True|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "UID" -> Null, "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> "speaker.md\n## Our tool\nLet's talk about how we probe it. \
 Our tool is time-resolved spectroscopy.\nWe have a femtosecond laser that \
 generates pulses. When they hit our antenna, the latter generates THz \
@@ -12119,10 +12120,10 @@ radiation that goes through our sample and then it is captured by a detector. \
 Since it is time-resolved, we see both: phase and amplitude of the EM \
 field.\n\nBy dividing the output by the input we get our transmission \
 spectrum.", "Display" -> "codemirror", 
-    "Hash" -> "4e2d85e4-5ceb-4953-acb0-4ab393ce96a4", "Invisible" -> False, 
+    "Hash" -> "0d95c9aa-3d91-4a2b-b341-ca54d588a902", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
-    "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> ".slide\n\n<!-- .slide: class=\"slide-standard slide-dark\" \
 data-background-color=\"black\" -->\n\n<MakeTitle>Our Tool: Time-Resolved THz \
 <span style=\"letter-spacing: \
@@ -12135,20 +12136,20 @@ text-align:center\">$\\downarrow \\quad \
 \\downarrow$</div>\n\n<DomainPlots \
 Type={\"Frequency\"}/>\n\n</div>\n\n</Row>\n\n<Footer/>", 
     "Display" -> "codemirror", "Hash" -> 
-     "fd6df7df-bdfa-4803-9e9a-4cfd2d346a8c", "Invisible" -> False, 
+     "faf0cee0-1f25-4457-8ae9-f8a360c7f534", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
-    "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> ".md\nZero-field spectrum:", "Display" -> "codemirror", 
-    "Hash" -> "b2de6e24-1c7a-4890-9b2e-908ecf810e0f", "Invisible" -> False, 
+    "Hash" -> "a187307a-8930-403c-a65d-cec1d56bbc7c", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "UID" -> Null, "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> "Zero-field spectrum:", "Display" -> "markdown", 
-    "Hash" -> "fbe77b24-efd7-4e8c-b4d2-701134f5077e", "Invisible" -> False, 
+    "Hash" -> "2b4c1875-c1d2-4662-93b0-8815a9ca9b18", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
-    "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> "DownValues[dataPlot] = \
 NotebookRead[NotebookStore[\"unappreciated-6c1\"]];\nDownValues[theoryPlot] = \
 NotebookRead[NotebookStore[\"louver-27c\"]];\n\nClearAll[THzPlotDefault];\n\n\
@@ -12205,19 +12206,19 @@ Directive[Bold, FontSize->16], Text[Style[\"1\", Bold], \
 {39.64666666666666`,206.3120914409722`}], *)\n  (* Text[Style[\"2\", Bold], \
 {87.43333333333332`,0.5 248.1377509965277`}], *)\n  (* Text[Style[\"3\", \
 Bold], {110.58`,212.5859403743055`}] *)\n}];", "Display" -> "codemirror", 
-    "Hash" -> "b3e84cdd-2d3f-4bfd-b8ca-cdc0ffaf80a0", "Invisible" -> False, 
+    "Hash" -> "5ccd545f-ea1f-4b5c-8f2d-c9a05781fec8", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"InitGroup" -> True, "Fade" -> True|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "UID" -> Null, "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> "speaker.md\n## Absorption data\nThat's what we see. It is \
 published data, 3 modes:\n1. chiral phonon, so it will react to magnetic \
 field\n2,3 magneto-polarons\n\nIt is important: the eigenstates of light are \
 linearly polarized.\nWe need to apply magnetic field to see something \
 interesting.", "Display" -> "codemirror", 
-    "Hash" -> "8329e568-d40d-4822-a196-fa4876b6c8da", "Invisible" -> False, 
+    "Hash" -> "eea300fc-764f-49c8-8278-cb25e8b3b5a5", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
-    "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> ".slide\n\n<!-- .slide: class=\"slide-standard slide-dark\" \
 data-background-color=\"black\" -->\n\n<MakeTitle>THz Absorption \
 Data</MakeTitle>\n\n<div class=\"flex flex-row justify-between \
@@ -12233,10 +12234,10 @@ __Linearly polarized waves \[UpDownArrow] are the eigenstates of light inside \
 the matter__\n\n</div>\n\n  \n</div>\n\n</div>\n\n<br/><br/>\n\n<span \
 class=\"fragment\">What if we apply static magnetic field along EM wave \
 propagation?</span>\n\n<Footer/>", "Display" -> "codemirror", 
-    "Hash" -> "fff28008-a423-43a5-8d73-8831e6d90eb1", "Invisible" -> False, 
+    "Hash" -> "e0b5de63-bf7e-491e-8c68-67a8d33661df", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
-    "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> "speaker.md\n## Magnetic-point group\nMagnetic point group \
 gives at a 6-fold screw axis (rotation combined with translation and time \
 inversion). \n\nThe simplest case if we induce an external magnetic field B \
@@ -12245,10 +12246,10 @@ of the dielectric tensor, magnetic and magneto-electric responses. For B || z \
 we get non-diagonal tensor elements - antisymmetric with respect to time \
 reversal.\n\nTo fill them up, we need a response function. For that we use \
 linear response - or the Kubo formula.", "Display" -> "codemirror", 
-    "Hash" -> "3a5fca0a-8ed7-40a5-b2eb-88dc83023617", "Invisible" -> False, 
+    "Hash" -> "4867f926-24df-41d9-81ff-3eb325bee2ed", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"Hidden" -> False|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "UID" -> Null, "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> ".slide\n<!-- .slide: class=\"slide-standard slide-dark\" \
 data-background-color=\"black\" -->\n\n<MakeTitle>Neumann and Curie \
 Principle</MakeTitle>\n\n- AFM state \[LongRightArrow] \
@@ -12272,16 +12273,16 @@ class=\"fragment\">\n$$\n\\\\mathbf{P} = \
 0\\\\\\\\\n\t-\\chi_{xy}^{(A)} & \\chi_{xx}^{(S)} & 0\\\\\\\\\n\t0 & 0 & \
 \\chi_{zz}^{(S)}\\\\\\\\\n\t\\end{array}\\right)\n$$ <!-- .element: \
 class=\"fragment\" -->\n\n<Footer/>", "Display" -> "codemirror", 
-    "Hash" -> "07a45cb7-8f3b-4d59-8e86-a5c1d0e1da70", "Invisible" -> False, 
+    "Hash" -> "5ff68f66-d4d8-4b98-8071-81a332ca4043", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"Fade" -> False|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "UID" -> Null, "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> "FigModel = NotebookRead[NotebookStore[\"opus-a5f\"]];", 
     "Display" -> "codemirror", "Hash" -> 
-     "852834af-62aa-4d7d-85c1-331571193de8", "Invisible" -> False, 
+     "15204289-1d68-4a8b-97f4-d5dc1a2ab4d5", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"InitGroup" -> True|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "UID" -> Null, "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> "speaker.md\n## Linear response\nWe can say, ok. Every mode in \
 ground state is doubly degenerate, when we apply the field we should see \
 Zeeman's effect, that resolves it into two branches. Then it must be just two \
@@ -12289,10 +12290,10 @@ modes, which share the same parameters. Expect the eigen energy is offset by \
 some number - delta.\n\nAnd for each of the oscillators we can estimate the \
 magnitude using two matrix elements: electric p and magnetic m dipole \
 transition amplitudes.", "Display" -> "codemirror", 
-    "Hash" -> "dfd6b7d6-7546-448e-a819-69e82ef2e771", "Invisible" -> False, 
+    "Hash" -> "ee1050df-6050-4de5-b16b-8e24501a836d", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
-    "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> ".slide\n<!-- .slide: class=\"slide-standard slide-dark\" \
 data-background-color=\"black\" -->\n\n<MakeTitle>Zeeman \
 Effect</MakeTitle>\n\n<Columns>\n\n<FigModel/>\n\n<div>\n\n- 2 oscillators \
@@ -12301,10 +12302,10 @@ per mode\n- 3 contributions:\n  - electric $p^2 \\\\rightarrow \
 magneto-electric $p m \\\\rightarrow \\\\chi$\n\n<br/>\n<br/>\n<br/>\n\n- use \
 Kubo formula to get $\\\\varepsilon$, $\\\\mu$ and \
 $\\\\chi$\n</div>\n\n</Columns>\n\n<Footer/>", "Display" -> "codemirror", 
-    "Hash" -> "ae2f3eb7-90a2-47b9-84fd-5a400e8bcb1b", "Invisible" -> False, 
+    "Hash" -> "db019bdc-31cc-46d7-8cf8-7181902b2bb4", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
-    "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> "speaker.md\n## Solution of Maxwell's equations\nThen \
 Maxwell's equations gives 4 possible waves with 4 refractive indexes:\n\n- \
 CW, CCW, and +/- k - propagation direction\n\nIt might look horribly for you, \
@@ -12312,10 +12313,10 @@ but you can find that this only depends on 4 real-valued numbers. Basically \
 we reduced 27 complex tensor components to 4 numbers, that you can measure in \
 zero field and then you know everything about your system.", 
     "Display" -> "codemirror", "Hash" -> 
-     "94f0cede-5099-4b9c-bebb-13b8adbe5498", "Invisible" -> False, 
+     "4dd4bc02-df73-4952-8d63-d06df0cacc79", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
-    "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> ".slide\n<!-- .slide: class=\"slide-standard slide-dark\" \
 data-background-color=\"black\" -->\n\n<MakeTitle>Solution of Maxwell's \
 Equations</MakeTitle>\nFor the light propagating along the field direction \
@@ -12338,40 +12339,40 @@ n_{\\circlearrowright/\\circlearrowleft}^{(\\\\pm k)} \\omega \
 L}{c}\\Big)\n\\\\end{align*}\n$$ <!-- .element: class=\"fragment\" -->\n\n- \
 eigenstates of light are circular \:27f3\:27f3 <!-- .element: \
 class=\"fragment\" -->\n", "Display" -> "codemirror", 
-    "Hash" -> "43b3fb6d-9413-485c-ac4f-bd549ae99493", "Invisible" -> False, 
+    "Hash" -> "37b27870-882f-44ae-b465-06f2c96fc857", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
-    "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> ".md\n## How to measure\nExplain", "Display" -> "codemirror", 
-    "Hash" -> "21806c3c-7596-46ec-a9a2-9c7faa4bba3f", "Invisible" -> False, 
+    "Hash" -> "5a8fe4dc-70af-45e6-8c17-8a2e0e733529", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "UID" -> Null, "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> "## How to measure\nExplain", "Display" -> "markdown", 
-    "Hash" -> "c04a12bd-179c-4aac-9b16-a0e9a926693c", "Invisible" -> False, 
+    "Hash" -> "8d0f8988-4d6c-4de8-9f8a-25c0d729d5cb", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
-    "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> "speaker.md\n## How to measure circular polarized light?\nIt \
 is not obvious how to do that. We need two measurements with the analyzer set \
 to +/- 45 degrees from the polarizer, then we recombine the signal to get \
 circular polarized basis. And then take the ratio.\n\nTo disentangle Faraday \
 effect or MCD from other non-reciprocal effects, we enforce it has to be odd \
 in B and even in k.", "Display" -> "codemirror", 
-    "Hash" -> "d5a27e07-1c90-460e-953f-bed7fdc0c013", "Invisible" -> False, 
+    "Hash" -> "a0b373a4-1375-43fa-b8ce-66d16504b3fe", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"Hidden" -> False|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "UID" -> Null, "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> ".md\nActual slide:", "Display" -> "codemirror", 
-    "Hash" -> "bb6ec2e7-59b2-4554-9493-5d38d576ecd8", "Invisible" -> False, 
+    "Hash" -> "64045d5b-e7c7-49ba-b109-dc9ba97a7a93", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "UID" -> Null, "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> "Actual slide:", "Display" -> "markdown", 
-    "Hash" -> "dc970194-48dc-4c21-8998-4af1bd58cf15", "Invisible" -> False, 
+    "Hash" -> "ab22dde8-907e-4072-8049-dea40c80a6d4", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
-    "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> ".slide\n<!-- .slide: class=\"slide-standard slide-dark\" \
 data-background-color=\"black\" -->\n\n<MakeTitle>How to measure \:27f3 \
 polarized light?</MakeTitle>\n\n<Columns>\n\n<img class=\"dark-content\" \
@@ -12385,57 +12386,57 @@ extraction (odd in B, even in k): <!-- .element: class=\"fragment\" \
 S^{(-k,+B)}}{S^{(+k,-B)} \\cdot S^{(-k,-B)}} \\right\\\\}^{1/4}\n$$ <!-- \
 .element: class=\"fragment\" -->\n  \n</div>\n\n</Columns>\n", 
     "Display" -> "codemirror", "Hash" -> 
-     "c725916d-a6e7-4b31-bb35-7f93aa1a7643", "Invisible" -> False, 
+     "e70e6f9c-5a0d-4f19-9d54-155e9ac5becc", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
-    "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> ".md\n## Results\nShow all important results", 
     "Display" -> "codemirror", "Hash" -> 
-     "ea865d53-5bc7-4f9b-9bf8-118b21e1de15", "Invisible" -> False, 
+     "8256c353-2e43-40eb-bb25-036545c63b80", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "UID" -> Null, "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> "## Results\nShow all important results", 
     "Display" -> "markdown", "Hash" -> 
-     "1658b564-6b65-4ca6-bffe-4146553543a0", "Invisible" -> False, 
+     "4f9535af-fa30-43e0-bdbe-b984fdf252e6", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
-    "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> "speaker.md\n## Results\nIf we just take the modulus of it, we \
 see a nice V-shape splitting.\nEach branch is 100% polarized and the \
 g-factors nicely agree with the Raman study.", "Display" -> "codemirror", 
-    "Hash" -> "4c0cb9fb-c2ef-4eb7-8951-b1f260a01b36", "Invisible" -> False, 
+    "Hash" -> "ac9ebfb4-d929-40b3-acad-e823bd9bc0b0", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"Hidden" -> False|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "UID" -> Null, "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> ".md\nCompute or import finished figure:", 
     "Display" -> "codemirror", "Hash" -> 
-     "c9261eb4-2034-4ff1-9ce4-198c807457ac", "Invisible" -> False, 
+     "3ea56348-e4a2-4cad-911c-b53351bb7150", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "UID" -> Null, "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> "Compute or import finished figure:", "Display" -> "markdown", 
-    "Hash" -> "ffcc5ccb-f56c-4655-a7c5-b9bec729c824", "Invisible" -> False, 
+    "Hash" -> "f90bf136-78a6-45fe-b276-0581d413ab6f", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
-    "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> 
      "MCDFigure = NotebookRead[NotebookStore[\"deflationary-730\"]];", 
     "Display" -> "codemirror", "Hash" -> 
-     "83eaabfa-44f2-46d0-a3af-b590c7eec975", "Invisible" -> False, 
+     "9c656d4a-dc07-478c-a53f-be1bba0b5603", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"InitGroup" -> True|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "UID" -> Null, "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> ".md\nActual slide", "Display" -> "codemirror", 
-    "Hash" -> "26db3e93-d32d-43af-a01a-b5785d5c69aa", "Invisible" -> False, 
+    "Hash" -> "19d8f998-6114-44c7-9d64-ba952ce9d074", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "UID" -> Null, "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> "Actual slide", "Display" -> "markdown", 
-    "Hash" -> "b65bc87c-5f5b-4cf0-93b3-3d8f08cf6d8d", "Invisible" -> False, 
+    "Hash" -> "24792701-9f09-4502-9981-e785b91094b6", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
-    "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> ".slide\n<!-- .slide: class=\"slide-standard slide-dark\" \
 data-background-color=\"black\" -->\n\n<MakeTitle><strong>Our Data</strong>: \
 Magneto-Circular Dichroism</MakeTitle>\n\n<Columns>\n\n<div>\n  \
@@ -12445,22 +12446,22 @@ style=\"margin-top:5rem\">\n\n$$\nMCD(\\omega) = \
 splitting of antiferromagnet\n- each branch is 100% polarized\n- g-factor is \
 confirmed by Raman study <small>Nature Physics volume 19, 1868\[Dash]1875 \
 (2023)</small>\n  \n</div>\n\n</Columns>\n", "Display" -> "codemirror", 
-    "Hash" -> "79dc5a0a-fd69-4d35-ad8f-3af10bd3f4c9", "Invisible" -> False, 
+    "Hash" -> "9c07175b-71ee-4a28-976b-df8a30f8325d", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
-    "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> ".md\nInteractive figure-widget, which reacts on the second \
 fragment and shows calculated lines:", "Display" -> "codemirror", 
-    "Hash" -> "628d19cc-be92-4236-8eb6-15ee866c7fd0", "Invisible" -> False, 
+    "Hash" -> "046ca5f5-57b8-44f4-980c-1b7e4fb29544", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "UID" -> Null, "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> "Interactive figure-widget, which reacts on the second \
 fragment and shows calculated lines:", "Display" -> "markdown", 
-    "Hash" -> "c385a78d-911e-41e2-aea0-97c0ca27eef9", "Invisible" -> False, 
+    "Hash" -> "1c0c6c25-7700-48d8-ba2d-cbab203dd84d", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
-    "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> ".wlx\nFigFaraday = \
 NotebookRead[NotebookStore[\"prankster-177\"]];\n\nfaradayLines = {{}, \
 {}};\nfaradayLinesFinale = \
@@ -12470,10 +12471,10 @@ With[{event = EventObject[]}, \nEventHandler[event, {\n  \"Destroy\" | \
 \"fragment-2\" -> Function[Null,\n    faradayLines = faradayLinesFinale;\n  \
 ]\n}];\n\n<div>  \n  <FigFaraday/> \n  <SlideEventListener \
 Id={event}/>\n</div>\n]", "Display" -> "codemirror", 
-    "Hash" -> "f32a4841-97cd-4355-8de9-80f2ec96109f", "Invisible" -> False, 
+    "Hash" -> "44f7cd38-2c1d-4c7b-9207-4f8247cc7327", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"InitGroup" -> True|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "UID" -> Null, "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> "speaker.md\n### Faraday\nNow if we look at phase - take the \
 argument of it, we get Faraday rotation angle. Here it is at fixed magnetic \
 field.\n\nAnd look, if we stay between two modes, we can still have linear \
@@ -12484,15 +12485,15 @@ with experimental data. Even though we used zero-field data for oscillator \
 parameters. \n\nFor the physics: but it gives large angle: magnetic and \
 electric dipole transitions boosted by polarizability of the crystal - \
 epsilon_infty.", "Display" -> "codemirror", 
-    "Hash" -> "aa01024c-5e37-42be-ad36-b2f1af525399", "Invisible" -> False, 
+    "Hash" -> "7f2701d5-e231-4d57-aa5b-86efd8071a66", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"Hidden" -> False|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "UID" -> Null, "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> "Faraday and other effects:", "Display" -> "markdown", 
-    "Hash" -> "3e8aacc1-381c-48c7-a730-b8ec18db72c9", "Invisible" -> False, 
+    "Hash" -> "4e5c05a8-3676-4018-b32b-926e5f9481d6", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
-    "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> ".slide\n<!-- .slide: class=\"slide-standard slide-dark\" \
 data-background-color=\"black\" -->\n\n<MakeTitle><strong>Our Data</strong>: \
 Faraday Effect</MakeTitle>\n\n<Columns>\n\n<div class=\"dark-content\">\n  \
@@ -12512,22 +12513,22 @@ class=\"fragment\" -->\n\n$$ \np = 0.31, ~m = 0.22, \
 ~\\varepsilon_\\infty^{(xx)} = 22.4\n$$<!-- .element: class=\"fragment\" \
 -->\n\n- polar structure gives a boost to magnetic-dipole transitions <!-- \
 .element: class=\"fragment\" -->\n\n", "Display" -> "codemirror", 
-    "Hash" -> "362f43dc-69a4-4188-9b1e-f11b98e578e2", "Invisible" -> False, 
+    "Hash" -> "ba8b1aed-1ae9-417b-8e19-82e4c07d7d3b", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
-    "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> ".md\n## Summary\nThe end of the presentation:", 
     "Display" -> "codemirror", "Hash" -> 
-     "720a1ccf-88ee-488b-a9ae-6d037f6f25ec", "Invisible" -> False, 
+     "050fb7a0-9454-449d-b159-709d4d488e3a", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "UID" -> Null, "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> "## Summary\nThe end of the presentation:", 
     "Display" -> "markdown", "Hash" -> 
-     "28286096-bdfa-4b64-9588-baafbaae2feb", "Invisible" -> False, 
+     "e2f877e8-362d-4497-869c-a7cbd50a0043", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
-    "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> "speaker.md\n## Summary\nThere are still open questions:\n\n- \
 role of hybridization\n- in principle the framework we used does only need \
 matrix elements p and m, we can assume that the phonon wavefunction is there \
@@ -12535,20 +12536,20 @@ as well and it gives a nice boost to the effect.\n- how to use or should we \
 use spin-group analysis for that;\n- the same effect found in CMO, which is \
 again an altermagnet candidate and also shows large Faraday rotation.", 
     "Display" -> "codemirror", "Hash" -> 
-     "373b631d-7194-4f6f-ab9a-f8f73dd55fef", "Invisible" -> False, 
+     "07fb93bb-bd53-487c-86d3-b86a8a523369", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"Hidden" -> False|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "UID" -> Null, "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> ".md\nActual slide:", "Display" -> "codemirror", 
-    "Hash" -> "2c4e3f3a-000b-47f6-bff2-7a9c98c1aa95", "Invisible" -> False, 
+    "Hash" -> "31986cae-4867-4eba-8a58-3bc879334498", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "UID" -> Null, "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> "Actual slide:", "Display" -> "markdown", 
-    "Hash" -> "91d51fab-7d9f-45c5-aaf7-43b31da4f9e4", "Invisible" -> False, 
+    "Hash" -> "775e76d5-b7fc-4449-800a-4686bb8958a5", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
-    "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> ".slide\n<!-- .slide: class=\"slide-standard slide-dark\" \
 data-background-color=\"black\" -->\n\n<MakeTitle>Summary</MakeTitle>\n\n<div \
 style=\"\n    display: grid;\n    grid-template-columns: repeat(auto-fill, \
@@ -12570,22 +12571,22 @@ of magnetoelectric medium\n\n</div>\n\n\n<div class=\"fragment\">\n\n\nOpen \
 questions:\n  \n\n\n- Role of hybridization (magneto-polarons)\n- Signatures \
 of band splitting / altermagnetism at $\\Gamma$ \
 point\n\n</div>\n\n</div>\n\n<Footer/>\n", "Display" -> "codemirror", 
-    "Hash" -> "f464ae74-2ce4-473f-9f61-163f627aaef7", "Invisible" -> False, 
+    "Hash" -> "034fa9da-6ffb-4117-8dba-67aa7bebd67e", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
-    "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> ".md\n## Collaborations\nHere is a custom `Card` structure for \
 displaying all collaborators:", "Display" -> "codemirror", 
-    "Hash" -> "b8a97b8a-4012-4c7f-9abf-7dbcd637589a", "Invisible" -> False, 
+    "Hash" -> "785145d0-a7a0-4b5d-bb7d-3df37320a3cd", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "UID" -> Null, "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> "## Collaborations\nHere is a custom `Card` structure for \
 displaying all collaborators:", "Display" -> "markdown", 
-    "Hash" -> "ba465f2e-0c93-48ea-ad65-3019c32a4fef", "Invisible" -> False, 
+    "Hash" -> "90dcd181-66c9-47f1-9c1b-6be6af4d1786", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
-    "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> ".wlx\n\nClearAll[Card];\n\nCardTitle   /: \
 ToString[c_CardTitle,   WLXForm] := c\nCardCredits /: ToString[c_CardCredits, \
 WLXForm] := c\nCardImage   /: ToString[c_CardImage,   WLXForm] := \
@@ -12612,20 +12613,20 @@ CardImage[Rule[\"Width\", width_], Rule[\"Link\", url_]]] := With[{Text = \
 ToStringRiffle[{credits}]},\n  <div>\n    <img src=\"{url}\" \
 width=\"{width}\" style=\"scale:1.2\" class=\"rounded-md\"/>\n    <br/>\n    \
 <h5><Title/></h5>\n  </div>\n]", "Display" -> "codemirror", 
-    "Hash" -> "7e57959b-3dc0-48d8-a4ff-0b363d2b8503", "Invisible" -> False, 
+    "Hash" -> "df95394a-c74f-4d9b-9fc0-59f2b948c0c6", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"InitGroup" -> True, "Fade" -> True|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "UID" -> Null, "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> ".md\nCollaboration slide", "Display" -> "codemirror", 
-    "Hash" -> "19b490e0-9789-49ad-b678-d5dbc0db8662", "Invisible" -> False, 
+    "Hash" -> "409e1686-9fe6-4142-ab1e-6e6ef9f5d996", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "UID" -> Null, "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> "Collaboration slide", "Display" -> "markdown", 
-    "Hash" -> "98802f3c-26f6-4220-987f-ba21c917a9c2", "Invisible" -> False, 
+    "Hash" -> "ea87a78e-8ad5-45fe-beca-dc83e4e5d077", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
-    "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>, 
+    "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>, 
    <|"Data" -> ".slide\n<!-- .slide: class=\"slide-standard slide-dark\" \
 data-background-color=\"black\" -->\n\n<MakeTitle>Ongoing \
 collaboration</MakeTitle>\n\n<div style=\"\n    display: grid;\n    \
@@ -12682,8 +12683,8 @@ Mostovoy (Groningen)</CardTitle>\n  \
 Barts (Groningen)</CardTitle>\n  \
 <CardCredits>Theory</CardCredits>\n</Card>\n\n\n</div>\n\n\n</div>\n\n<Footer\
 />", "Display" -> "codemirror", "Hash" -> 
-     "ad73cc01-07a5-4af6-93bd-59386303d237", "Invisible" -> False, 
+     "a9c3ee7c-27d2-4094-ad44-77d402703c9b", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"Fade" -> True|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "9b786537-2266-4997-9504-4e7af73dae2b"|>}, 
+    "UID" -> Null, "Notebook" -> "9d01a796-6ef9-4d6d-bafa-4fb630c0bb77"|>}, 
  "serializer" -> "jsfn4"|>
