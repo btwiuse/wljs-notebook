@@ -1,0 +1,159 @@
+<|"Notebook" -> <|"Controller" -> "c7e71903-54c8-4af5-b192-7862c8ec5198", 
+   "FocusedCell" -> CoffeeLiqueur`Notebook`Cells`CellObj[
+     CoffeeLiqueur`Notebook`Cells`CellObj`$1136], 
+   "FocusedCellSelection" -> {29, 28}, "HaveToSaveAs" -> False, 
+   "MessangerChannel" -> Messanger, "ModalsChannel" -> 
+    "388ad77d-3b4c-4d19-9679-c5adafac4b7c", "Objects" -> <||>, 
+   "Path" -> "/users/kirill/Downloads/garbage/widgets/Animation.wln", 
+   "PublicFields" -> {"Properties"}, "Quick" -> True, "Symbols" -> <||>, 
+   "TOC" -> {CoffeeLiqueur`Extensions`TOC`Private`heading[1, 
+      "TDS Setup Animation", CoffeeLiqueur`Notebook`Cells`CellObj[
+       CoffeeLiqueur`Notebook`Cells`CellObj`$1142]]}|>, 
+ "Cells" -> {<|"Data" -> ".md\n# TDS Setup Animation\nThis notebook exports a \
+widget of animated TDS-THz setup, which can be embedded to a slide as an \
+independent component ", "Display" -> "codemirror", 
+    "Hash" -> "1fbed1f2-5f50-4bf6-aefa-ee6004f5e27d", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "c9bc0ca5-c84d-44ef-86f3-099ebe51c755"|>, 
+   <|"Data" -> "# TDS Setup Animation\nThis notebook exports a widget of \
+animated TDS-THz setup, which can be embedded to a slide as an independent \
+component ", "Display" -> "markdown", 
+    "Hash" -> "b51fec2b-d9ed-40fb-8f16-bb53bf1683d8", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "c9bc0ca5-c84d-44ef-86f3-099ebe51c755"|>, 
+   <|"Data" -> "fPulse = Compile[{{t, _Real}, {x, _Real}},  \
+(*FB[*)((1)(*,*)/(*,*)(200.0))(*]FB*) Sum[Exp[- (8-w)^2 0.02] Sin[w t - 10.0 \
+x w], {w,0,20.0,0.5}]];\n\n\n\ngrange = Table[\\[Tau], {\\[Tau], \
+-5,0,0.1}];\ngenPulse[t_, offset_, x_] := Map[4 responceFunction[-#] fPulse[t \
++ #, x + offset ]&, grange] // Total\nresponceFunction[t_] := \
+(*FB[*)((((*SpB[*)Power[E(*|*),(*|*)-(*FB[*)((5)(*,*)/(*,*)(40))(*]FB*) \
+((*SpB[*)Power[t(*|*),(*|*)2](*]SpB*))](*]SpB*)) Sin[20 \
+t])(*,*)/(*,*)((*SqB[*)Sqrt[2](*]SqB*)))(*]FB*) \n\n\nmirrorTop = \
+-0.81;\ndelta = 0.02;\ntscale = 2.0;\nySpeed = 0.1;\nxSpeed = \
+0.2;\n\nautoMode = False;\n\nsampledPoints = <||>;\nsampledPointsP = \
+{{0,0}};\n\npaths := (\n  path1Line = With[{t = tscale AbsoluteTime[]},\n    \
+Table[{x, fPulse[t, 1.5 - x]}, {x,0.75, 1.5, delta}]\n  ];\n\n  path11Line = \
+With[{t = tscale AbsoluteTime[]},\n    Table[{x, 3 fPulse[t, 1.5 - x]}, {x,0, \
+0.75, delta}]\n  ];\n\n  path2Line = With[{t = tscale AbsoluteTime[]},\n    \
+Table[{fPulse[t, 0.5 - x ySpeed] + 1, x}, {x, -1, 0, delta}]\n  ];\n\n  \
+path3Line = With[{t = tscale AbsoluteTime[]},\n    Table[{x, fPulse[t, 0.5 + \
+1 ySpeed + (1 - x) xSpeed] - 1}, {x, 0.5, 1, delta}]\n  ];\n\n  path4Line = \
+With[{t = tscale AbsoluteTime[]},\n    Table[{fPulse[t, 0.5 + 1 ySpeed + 0.5 \
+xSpeed + (x + 1)] + 0.5, x}, {x, -1, mirrorTop, delta}]\n  ];\n\n  path5Line \
+= With[{t = tscale AbsoluteTime[]},\n    Table[{x, fPulse[t, 0.5 + 1 ySpeed + \
+0.5 xSpeed + (mirrorTop + 1) + xSpeed (0.5 - x)] + mirrorTop}, {x, -0.5, 0.5, \
+delta}]\n  ];\n\n  path6Line = With[{t = tscale AbsoluteTime[]},\n    \
+Table[{fPulse[t, 0.5 + 1 ySpeed + 0.5 xSpeed + (mirrorTop + 1) + xSpeed 1 + \
+(*FB[*)((((0) - (1 + mirrorTop)))(*,*)/(*,*)((mirrorTop + 1)))(*]FB*)(x+1) + \
+(1 + mirrorTop)] - 0.5, x}, {x, -1, mirrorTop, delta}]\n  ];\n\n  path7Line = \
+With[{t = tscale AbsoluteTime[]},\n    Table[{x, fPulse[t, 0.5 + 1 ySpeed + \
+0.5 xSpeed + (mirrorTop + 1) + xSpeed 1 + (1 + mirrorTop) - (x + 0.5) xSpeed] \
+- 1}, {x, -1,-0.5, delta}]\n  ];\n\n  path8Line = With[{t = tscale \
+AbsoluteTime[]},\n    Table[{fPulse[t, 0.5 + 1 ySpeed + 0.5 xSpeed + \
+(mirrorTop + 1) + xSpeed 1 + (1 + mirrorTop) + 0.5 xSpeed + ySpeed (x + 1)] - \
+1, x}, {x, -1, 0, delta}]\n  ];\n\n  path9Line = With[{t = tscale \
+AbsoluteTime[]},\n    Table[{x, fPulse[t, 0.5 + 1 ySpeed + 0.5 xSpeed + \
+(mirrorTop + 1) + xSpeed 1 + (1 + mirrorTop) + 0.5 xSpeed + ySpeed 1 + (x + \
+1)]}, {x, -1, -0.75, delta}]\n  ];\n\n  path10Line = With[{t = tscale \
+AbsoluteTime[]},\n    Table[{x, genPulse[t, 1, -x + 0.5]}, {x, -0.75, -0.15, \
+delta}]\n  ];\n\n  persOffset = If[autoMode, Range[-0.1,0.1,0.01], \
+Range[-0.02,0.02,0.01]];\n\n  \n);\n\npaths;\n\ntrigger2 = False;\n\ntdsBlock \
+= True;\n\ntdsEvent = CreateUUID[];\n\nEventHandler[tdsEvent, \
+Function[Null,\n  If[tdsBlock, Return[]];\n  paths;\n  trigger2 = \
+True;\n]];\n\n\ngenerateGraphics := Graphics[{\n\n{\n\n    \
+Inset[Graphics3D[{Gray,Cuboid[{-1,0,-1}, {1,0.4,1}], PointLight[Red, With[{s \
+= Abs[path11Line[[1]][[2]]]}, {-1.5 s,-1.5 s,0.1}] // Offload]}, \
+ImageSize->200], {0,0}, Center]\n  },AbsoluteThickness[2],\n  \
+ColorData[97][1], \n  Line[path1Line // Offload], \n  Line[path2Line // \
+Offload], \n  Line[path3Line // Offload], \n  Line[path4Line // Offload], \n  \
+Line[path5Line // Offload], \n  Line[path6Line // Offload], \n  \
+Line[path7Line // Offload], \n  Line[path8Line // Offload], \n  \
+Line[path9Line // Offload],\n   ColorData[97][4],\n  Line[path10Line // \
+Offload],\n  Line[path11Line // Offload],\n\n  {\n    Black, \
+AbsoluteThickness[3],\n    Line[{{-1,-1}+{-0.05,0.05}, \
+{-1,-1}+{0.05,-0.05}}],\n    Line[{{1,-1}+{-0.05,-0.05}, \
+{1,-1}+{0.05,0.05}}],\n    Line[{{1-0.5,-1}+{-0.05,0.05}, \
+{1-0.5,-1}+{0.05,-0.05}}],\n    Line[{{1-0.5-1,-1}+{-0.05,-0.05}, \
+{1-0.5-1,-1}+{0.05,0.05}}],\n    Line[With[{y = mirrorTop}, \
+{{-0.5,y}+{-0.05,-0.05}, {-0.5,y}+{0.05,0.05}}] // Offload],\n    \
+Line[With[{y = mirrorTop}, {{1-0.5,y}+{-0.05,0.05}, {1-0.5,y}+{0.05,-0.05}}] \
+// Offload],\n    Line[{{-1,0}+{-0.05,-0.05}, {-1,0}+{0.05,0.05}}]\n    \n  \
+},\n\n  {\n    ColorData[97][12],\n    \
+Translate[Scale[FilledCurve[{BezierCurve[0.1{{0,1}, {-1,0}, {0,-1}}]}], 2], \
+{-0.75,0}],\n    Translate[Scale[FilledCurve[{BezierCurve[0.1{{0,1}, {1,0}, \
+{0,-1}}]}], 2], {0.75,0}]\n  },\n\n  {\n    Cyan, Opacity[0.7], \
+Translate[Scale[Polygon[0.7 \
+(*VB[*)(Uncompress[\"1:eJxTTMoPSuNkYGAoZgESPpnFJWlMyLwiBjA4sL9oJhjs3I8mv0j3eV\
+BM6K79RdzPpdIybPajy1ek7XaS19m8v2iddlrLdva96PKMEPPti2ZBzLdHk1d/dcZWpeagPVwhLv0\
+whWjyMGNx6Yc5C+5QNHmYt+AeBQDm/Vvz\"])(*,*)(*\"1:eJxTTMoPSmNkYGAoZgESHvk5KWlMI\
+B4XkPBMzs/LrEp1yq/I7GBmYIBIgJQFleakBrMCGT6JSak5wTxAllNqYm5xQU5mSUlqEQDn5BN3\"\
+*)(*]VB*)], 1], {1,0}]\n  },\n  AnimationFrameListener[trigger2 // Offload, \
+\"Event\"->tdsEvent]\n}, PlotRange->0.8{1.5{-1,1.5}, 1.2 1.2{-1,0.2}}, \
+AspectRatio->0.6, TransitionType->None, ImageSize->450, \
+ImagePadding->None];\n\n", "Display" -> "codemirror", 
+    "Hash" -> "8ff574d1-395d-49fc-a8fa-874a35951b9e", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"InitGroup" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "c9bc0ca5-c84d-44ef-86f3-099ebe51c755"|>, 
+   <|"Data" -> ".md\nDefine our component", "Display" -> "codemirror", 
+    "Hash" -> "20087ca1-fb81-455c-be08-e33698d81d37", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "c9bc0ca5-c84d-44ef-86f3-099ebe51c755"|>, 
+   <|"Data" -> "Define our component", "Display" -> "markdown", 
+    "Hash" -> "ed53b7a4-c4d9-44cd-ad12-ae94687e5d1a", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "c9bc0ca5-c84d-44ef-86f3-099ebe51c755"|>, 
+   <|"Data" -> ".wlx\n\nClearAll[WidgetTDS];\nWidgetTDS[_] := \
+With[{GraphicsPane = generateGraphics, slideEvent = CreateUUID[]},\n\n \
+EventHandler[slideEvent, {\n  \"Slide\" -> Function[Null,\n    Print[\"Unlock \
+TDS animation\"];\n    tdsBlock = False;\n    tscale = 3.0;\n    delta = \
+0.02;\n    autoMode = False;\n    mirrorTop = -0.81;\n    EventFire[tdsEvent, \
+True];\n    \n  ],\n\n  \"Left\" -> Function[Null,\n    tscale = 3.0;\n    \
+delta = 0.02;\n    mirrorTop = -0.81;\n    autoMode = False;\n    \
+Print[\"Lock TDS animation\"];\n    tdsBlock = True;\n  ],\n\n  \"Destroy\" \
+-> Function[Null,\n    tscale = 3.0;\n    mirrorTop = -0.81;\n    delta = \
+0.02;\n    autoMode = False;\n    Print[\"Lock TDS animation\"];\n    \
+tdsBlock = True;\n  ]\n }];\n\n <div>\n   <GraphicsPane/>\n   \
+<SlideEventListener Id={slideEvent}/>\n </div>\n]", 
+    "Display" -> "codemirror", "Hash" -> 
+     "f58d52f8-6cc4-46df-b34d-7710adab7f84", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"InitGroup" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "c9bc0ca5-c84d-44ef-86f3-099ebe51c755"|>, 
+   <|"Data" -> ".md\nA test of animation:", "Display" -> "codemirror", 
+    "Hash" -> "5731aff2-fd6e-4344-9e64-a22c1c311ee2", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "c9bc0ca5-c84d-44ef-86f3-099ebe51c755"|>, 
+   <|"Data" -> "A test of animation:", "Display" -> "markdown", 
+    "Hash" -> "2efc4aeb-b706-42f9-bf2b-826b05ff3643", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "c9bc0ca5-c84d-44ef-86f3-099ebe51c755"|>, 
+   <|"Data" -> ".slide\n\nGo to the next slide\n\n---\n\n\n# Time-Domain \
+Spectroscopy\n\nThe gated detection is the \
+key\n\n<WidgetTDS>Nope</WidgetTDS>", "Display" -> "codemirror", 
+    "Hash" -> "fa63318a-5fb6-4ccc-b20c-816143268c31", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
+    "Notebook" -> "c9bc0ca5-c84d-44ef-86f3-099ebe51c755"|>, 
+   <|"Data" -> ".md\nExports", "Display" -> "codemirror", 
+    "Hash" -> "ee53954e-6e27-49a7-8cf7-cbcbe4102e60", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "c9bc0ca5-c84d-44ef-86f3-099ebe51c755"|>, 
+   <|"Data" -> "Exports", "Display" -> "markdown", 
+    "Hash" -> "699a3f34-e798-47e4-8240-4ac0081e22b0", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "c9bc0ca5-c84d-44ef-86f3-099ebe51c755"|>, 
+   <|"Data" -> "WidgetTDS", "Display" -> "codemirror", 
+    "Hash" -> "17c33d48-608b-4999-994e-b345b24ad41c", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
+    "Notebook" -> "c9bc0ca5-c84d-44ef-86f3-099ebe51c755"|>}, 
+ "serializer" -> "jsfn4"|>
