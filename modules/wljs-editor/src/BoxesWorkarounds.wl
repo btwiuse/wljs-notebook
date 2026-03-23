@@ -634,7 +634,7 @@ TemplateBox[{expr_, opts__}, "Highlighted"] := StyleBox[expr, Background->Yellow
 
 (* :: Indexed Box :: *)
 
-TemplateBox[{symbol_, index__}, "IndexedDefault"] := With[{dp = ViewDecorator["Indexed"], indexSym = StringRiffle[List[index], ","]},
+TemplateBox[{symbol_, index__}, "IndexedDefault"] := With[{dp = ViewDecorator["Indexed"], indexSym = StringRiffle[ List[index] /. {RowBox -> RowBoxFlatten}, ","]},
       RowBox[{"(*TB[*)Indexed[(*|*)", symbol, "(*|*), {(*|*)", indexSym, "(*|*)}](*|*)(*", Compress[dp], "*)(*]TB*)"}]
 ]
 
