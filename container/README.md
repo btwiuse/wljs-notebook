@@ -73,6 +73,7 @@ The container is capable of following features:
 docker run -it \
   -v ~/wljs:"/home/wljs/WLJS Notebooks" \
   -v ~/wljs/Licensing:/home/wljs/.WolframEngine/Licensing \
+  -v ~/wljs/tmp:/tmp \
   -e PUID=$(id -u) \
   -e PGID=$(id -g) \
   -e WOLFRAMID_USERNAME=your@email.com \
@@ -90,6 +91,7 @@ Change the mounting directories
 docker run -it \
   -v ~/wljs:"/root/WLJS Notebooks" \
   -v ~/wljs/Licensing:/root/.WolframEngine/Licensing \
+  -v ~/wljs/tmp:/tmp \
   -e PUID=$(id -u) \
   -e PGID=$(id -g) \
   -p 8080:3000 \
