@@ -53,7 +53,7 @@ jobs:
           });
 
           const  forcedVersions  =  { 
-            "electron" :  "^38.8.0"
+            
           }; 
 
           [  'devDependencies' ] . forEach( section  => { 
@@ -118,7 +118,7 @@ jobs:
           });
 
           const  forcedVersions  =  { 
-            "electron" :  "^38.8.0"
+            
           }; 
 
           [  'devDependencies' ] . forEach( section  => { 
