@@ -22196,19 +22196,7 @@ to <i>rhs</i>. "|>, <|"label" -> "RuleCondition", "type" -> "keyword",
  <|"label" -> "RuleDelayed", "type" -> "keyword", 
   "info" -> "<i>lhs</i>:><i>rhs</i> or <i>lhs</i>\[RuleDelayed]<i>rhs</i> \
 represents a rule that transforms <i>lhs</i> to <i>rhs</i>, evaluating \
-<i>rhs</i> only after the rule is used. "|>, <|"label" -> "RulePlot", 
-  "type" -> "keyword", "info" -> "RulePlot[<i>sys</i>] generates a plot \
-representing the rule for the computational system \
-<i>sys</i>.\n\nRulePlot[<i>sys</i>,<i>init</i>,<i>t</i>] generates a plot of \
-the evolution of the system <i>sys</i> from initial condition <i>init</i> for \
-<i>t</i> steps.\n\nRulePlot[<i>sys</i>,<i>evol</i>] generates a plot of the \
-evolution <i>evol</i> assuming it is derived from a system of the form \
-<i>sys</i>."|>, <|"label" -> "RulerUnits", "type" -> "keyword", 
-  "info" -> "RulerUnits is an option for notebooks that specifies the units \
-in the ruler toolbar."|>, <|"label" -> "RulesTree", "type" -> "keyword", 
-  "info" -> "RulesTree[<i>data</i>\[Rule]{<i>rule</i><sub>1</sub>,<i>rule</i>\
-<sub>2</sub>,\[Ellipsis]}] gives a tree whose root contains <i>data</i> and \
-that has children specified by the <i>rule</i><sub><i>i</i></sub>."|>, 
+<i>rhs</i> only after the rule is used. "|>, 
  <|"label" -> "Run", "type" -> "keyword", "info" -> "Run[\"<i>command</i>\"] \
 runs <i>command</i> as an external operating system command, returning the \
 exit code obtained."|>, <|"label" -> "RunProcess", "type" -> "keyword", 
