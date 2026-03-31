@@ -1311,6 +1311,7 @@ const windows = {
                 webPreferences: {
                     preload: path.join(__dirname, 'preload_log.js'),
                     webSecurity: false,
+                    backgroundThrottling:  false,
                     contextMenu: true
                     //nodeIntegration: true
                 }
@@ -1338,6 +1339,7 @@ const windows = {
                     webPreferences: {
                         preload: path.join(__dirname, 'preload_log.js'),
                         //webSecurity: false,
+                        backgroundThrottling:  false,
                         nodeIntegration: true,
                         contextMenu: true
                     }
@@ -1367,6 +1369,7 @@ const windows = {
                         preload: path.join(__dirname, 'preload_log.js'),
                         //webSecurity: false,
                         nodeIntegration: true,
+                        backgroundThrottling:  false ,
                         contextMenu: true
                     }
                  });                
@@ -1694,7 +1697,8 @@ function create_window(opts, cbk = () => {}) {
                 show: options.show,
                 webPreferences: {
                     //scrollBounce: true,
-                    preload: path.join(__dirname, 'preload_main.js')
+                    preload: path.join(__dirname, 'preload_main.js'),
+                    backgroundThrottling:  false 
                 },
                 ...options.override
 
@@ -1739,7 +1743,8 @@ function create_window(opts, cbk = () => {}) {
 
                 show: options.show,
                 webPreferences: {
-                    preload: path.join(__dirname, 'preload_main.js')
+                    preload: path.join(__dirname, 'preload_main.js'),
+                    backgroundThrottling:  false 
                 },
                 ...options.override
 
@@ -1833,7 +1838,8 @@ function create_window(opts, cbk = () => {}) {
 
                 show: options.show,
                 webPreferences: {
-                    preload: path.join(__dirname, 'preload_main.js')
+                    preload: path.join(__dirname, 'preload_main.js'),
+                    backgroundThrottling:  false 
                 },
                 ...options.override
 
