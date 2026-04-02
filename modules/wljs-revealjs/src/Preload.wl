@@ -61,25 +61,6 @@ Internal`Kernel`RevealEvaluator = Function[t, With[{hash = CreateUUID[]},
 ] ];
 
 
-
-(*CoffeeLiqueur`WLX`Private`IdentityTransform[EventObject[assoc_]] := If[KeyExistsQ[assoc, "View"], CreateFrontEndObject[ assoc["View"]], EventObject[assoc] ]*)
-EventObject /: MakeBoxes[EventObject[assoc_], WLXForm] := If[KeyExistsQ[assoc, "View"],
-    With[{o = CreateFrontEndObject[assoc["View"] ]},
-        MakeBoxes[o, WLXForm]
-    ]
-,
-    EventObject[assoc]
-]
-
-Unprotect[PageBreakAbove]
-Unprotect[PageBreakBelow]
-
-PageBreakAbove /: MakeBoxes[PageBreakAbove, WLXForm] := "<div class=\"print:breakabove\"> </div>"
-PageBreakBelow /: MakeBoxes[PageBreakBelow, WLXForm] := "<div class=\"print:breakbelow\"> </div>"
-
-
-CoffeeLiqueur`WLX`Private`IdentityTransform[x_] := ToBoxes[x , WLXForm]
-
 End[]
 
 EndPackage[]

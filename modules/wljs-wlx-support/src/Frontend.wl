@@ -30,9 +30,7 @@ evaluator  = StandardEvaluator`StandardEvaluator["Name" -> "WLX Evaluator", "Ini
             (*With[{p = Import[FileNameJoin[{rootFolder, "Preload.wl"}], {"Package", "HeldExpressions"}]},
               Kernel`Init[k,  ReleaseHold /@ p; , "Once"->True];
             ];*)
-            With[{p = Import[FileNameJoin[{rootFolder, "Preload.wl"}], "String"]},
-                GenericKernel`Init[k,   ImportString[p, "WL"]; , "Once"->True];
-            ];
+
 
             True
         ]
