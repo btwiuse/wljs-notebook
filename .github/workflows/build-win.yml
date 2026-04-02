@@ -27,9 +27,7 @@ jobs:
           echo "SIGNED_OUT_DIR=$env:RUNNER_TEMP\signed-artifacts" >> $env:GITHUB_ENV
 
       - name: Check out repository
-        uses: actions/checkout@v2
-        with:
-          token: ${{ secrets.GH_TOKEN }}
+        uses: actions/checkout@v4
 
       - name: Patch specific dependencies from package.json
         shell: pwsh
