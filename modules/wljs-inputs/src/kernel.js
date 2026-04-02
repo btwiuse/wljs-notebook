@@ -10,6 +10,24 @@ core.CreateUUID = async () => {
   return uuidv4();
 }
 
+const winScript = async (args, env) => {
+  const uid = await interpretate(args[0], env);
+  env.local.onblur = () => server.kernel.io.fire(uid, true, 'Blur');
+  env.local.onfocus = () => server.kernel.io.fire(uid, true, 'Focus');
+  addEventListener("blur", env.local.onblur);
+  addEventListener("focus", env.local.onfocus);
+  server.kernel.io.fire(uid, true, '_Mounted');
+}
+
+winScript.destroy = (args, env) => {
+  removeEventListener("blur", env.local.onblur);
+  removeEventListener("focus", env.local.onfocus);
+  delete env.local.onblur; delete env.local.onfocus;
+}
+
+winScript.virtual = true;
+
+core['CoffeeLiqueur`Extensions`InputsOutputs`Private`winScript'] = winScript;
 
 core['HTMLView`TemplateProcessor'] = async (args, env) => {
   const obj = await interpretate(args[0], env);

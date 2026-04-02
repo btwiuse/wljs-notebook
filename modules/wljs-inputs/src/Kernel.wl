@@ -34,6 +34,8 @@ TextView::usage = "TextView[symbol_, opts] shows a dynamic text-field. A general
 HTMLView::usage = "HTMLView[string, opts] will be rendered as DOM. A dynamic component"
 TableView::usage = "TableView[data_] A generalized view to shows big chunks of data"
 
+WindowEventListener::usage = "WindowEventListener[eventObject] attaches eventObject to capture events from a window, where the element is placed\nWindowEventListener[\"Id\" -> eventObject] alternative form"
+
 Begin["`Tools`"]
 
 TemplateProcessor;
@@ -983,6 +985,25 @@ WindowObj::clone = "Clonning of WindowObj is not supported for now";
 WindowObj /: EventClone[w_WindowObj] := With[{},
 	Message[WindowObj::clone]
 ]
+
+winScript;
+
+WindowEventListener /: MakeBoxes[WindowEventListener[opts: OptionsPattern[] ], form: StandardForm | WLXForm] := With[{w = WindowEventListener[ OptionValue[WindowEventListener, opts, "Id"] ]}, MakeBoxes[ w, form ] ]
+WindowEventListener /: MakeBoxes[WindowEventListener[event_EventObject | event_String], form: StandardForm | WLXForm] := With[{Id = If[StringQ[event], event, event["Id"] ]},
+	EventHandler[Id, {"_Mounted" -> Function[Null, With[{w = CurrentWindow[]},
+		EventHandler[w, {"Closed" -> Function[Null,
+			EventFire[Id, "Closed", w];
+		]}];
+		EventFire[Id, "Mounted", w];
+	] ]}];
+
+	With[{c = CreateFrontEndObject[ winScript[Id] ]},
+		MakeBoxes[c, form]
+	]
+] 
+
+WindowEventListener;
+Options[WindowEventListener] = {"Id"->"OptionalEventId"}
 
 End[]
 EndPackage[]
