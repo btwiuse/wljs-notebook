@@ -1,6 +1,9 @@
 (* Created with the Wolfram Language : www.wolfram.com *)
 
 {
+  <|"label" -> "GPUArray", "type" -> "keyword", "info" -> "GPUArray[array] yields an array stored in GPU-accessible memory for GPU-accelerated computation.\nGPUArray[array, type] stores data with the specified numeric type.\nUse Normal[g] to retrieve the data back from the GPU."|>,
+  <|"label" -> "GPUArrayQ", "type" -> "keyword", "info" -> "GPUArrayQ[g] gives True if g is a valid GPUArray object and False otherwise."|>,
+
   <|"label" -> "CurrentNotebookImage", "type"->"keyword", "info"->"CurrentNotebookImage[] rasterizes current notebook content into an image"|>,
   <|"label" -> "Tooltip", "type" -> "keyword", "info" -> "Tooltip[expr, label] display label when the mouse is moved over expr"|>,
   <|"label" -> "PrintTemporary", "type" -> "keyword", "info"->"PrintTemporary[expr] prints expr and removes it after the evaluation is finished"|>,

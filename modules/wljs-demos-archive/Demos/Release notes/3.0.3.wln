@@ -1,0 +1,354 @@
+<|"Notebook" -> <|"Controller" -> "357410a8-af61-4063-8556-d5d017f8df87", 
+   "FocusedCell" -> CoffeeLiqueur`Notebook`Cells`CellObj[
+     CoffeeLiqueur`Notebook`Cells`CellObj`$419], "FocusedCellSelection" -> 
+    {99, 98}, "HaveToSaveAs" -> False, "MessangerChannel" -> Messanger, 
+   "ModalsChannel" -> "dbd46446-943a-482c-8a41-55d618176f0c", 
+   "Objects" -> <|"ba444fb3-7f1e-4836-9025-b54f4dee96af" -> 
+      <|"Public" -> Hold[
+         CoffeeLiqueur`Extensions`FrontendObject`Internal`Compressed["eJzdnU1\
+vW1eWRcf2z9DEk4YgfpPD6kpXuoGkEVQXahJ4oHboilCKFVByofPvW8e2xHvFe675Dvw23lmDCs5V\
++J5IKubO0c6q9fPrVxffH65///Xm3f3Fv71+9fPrV68u/np9/7A/2PHT+dXFDzf3D5+Or34u5lfzy\
+9V8P/88ry6vnufN5epp3F3u1k/z7HK+3C+e5uV2fjxs5sXh8YrF0zeYlYfl4jiv1/PjYbt7PiwuZ8\
+W8WK6Ph9XmOG+OVywvr2bFYb44zsvj5cvH73ict5vnKx5f+LY4zHfHeXl88qvLzXHcXT1fsL6clYf\
+FcSwuXl+ud8d5e/x2m8urTXGYr49z8dQ3l+vFcd7Oiit2x7dheznbHOfijdvaT/l5XpdXbI8/hN3l\
+1eI4Fz+23eWimFfz4or1tjhsl8d5d7x89vjTWe2Xz4fF49t1PC1X5WldzJtledrujofZ1aK4aDbbl\
+KfFrDgsy3vMVtvisJmVV22X5Wm3OR7mV7viHvN58bj5orxqvlyXp/KbzdfVPbbFU5zvyjsuqle2mC\
+2Lw7x8LYtF8ZYuqjdxsapO6/KB1Xu62Ja335XfeXlVPqvlbFYeyteynBcvc7ko34Hlsnx3qqe4XFX\
+3WBdv93JTXbWdVafym+3K17K6mpWH8p+I1WxRnYp/kFbVe7palHP5fFfLq+q0Kg/lS1mtluVhW161\
+nlen8qrqH4/Vpnwem/ItXdmH3vFU3X5bvZTtpjxUV+1m1an8ZvVbWj2pXfWW7qpvvdtVh+Kycrwq3\
+8PPJzu8tb+cJtPV5dVJFJUJVUZRHVFVEhUZVUVRnVFVFB0zqkyiFxFVJtGizJirMryqjKqiqMyoIo\
+rKjKqTqIqoIomqkCmS6EVGVQ8rMqqIojKj6iSqIqpMoiqiiiSqMupFFJUZVUXRqplELyKqTKIqoqo\
+kqjJqVz5sW/z7y4skqkKqjJ46osogqjPqRRDVIVUnURVSdRJVIVUGUZ1RdRDVGVUHUR1SdRJVIVUl\
+URVSdRDVGVUFUZ1RdRDVIVUnURVSVRJVIVUHUZ1RVRDVGVUHUR1SdRJVIVUnURVSVRBVGVUF0YuMq\
+oOoDqk6iaqQqqOo/Lyug6jKqCqI6oyqg+hFSNWPrGKpTqLyeVS3eJFRVRDV+VK9by9Cqn5kFVJ1El\
+WPq4KofFb1o+KxVKTRc0KVS5S/FXl7lLsUuWuUuxS5a5S7E/lrlLsUddYobyvy9ih3K/LWqM5S5Kx\
+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\
+KaouCuofEWJQU+CK6iDiuqPxOokYOfXMcalygy8ZOKGHsQ1J+SAlGQeVDUnxIDEYRZUQcWVR+KVH5\
++d744E+gh7K5k0rn7SixekgpH5LiQ0ouCuoektJDYi6K6CLiuKLyO4kaQZTMDmVzJ5Qo8iEpPqTko\
+qDuITE9JOWiiC4ijisqv5PoNG6y2aFs7IQSxj4kxYeUXBRUPiSmh6RcFFFGxJFF5ZcSNZIomR7KRj\
+eVzv4Ptf3/7m0i8iEpPqTkoqDuITE9JOWiiC4ijisqv5OokR7J7FA29X5/d3YuTd4/JCWIlGgUVD8\
+kBoikaBRRR8TRReXXEp1GUTZBlI3+soTRD0kBIiUZBbUPifkhKRlFtBFxbFH5rUSNvEnmh7LRQumt\
+ffFnOxW59OlcfuHVl2uvPl3mPGY23zwP3dt/vtlT9r3+9Eh7oD3u4q8fb/efHnbxl8P1b1/GP318u\
+Pvt+uHm3YX/yB+u/3d/e9H6fhf/ffdhX479b/m3m3f/vG/e6PQ1F7c+3tt9h5xHu0/n+8PNLz/cfN\
+jf/8/DH1++9vkpfXdz2L97uPnXvnpe3x+u//hh/68v74L9yFdPw7L/jX7cP/x690vvNT8/9nF+8/y\
+8/uvDXw53Hx7efPk7D4eP+5PXX1353f799cfbh3+/+/jhl+vDH59e19PV1U/5jJs8vtzff7159/gk\
+HvaH68e34+7D060+X1W9909fq+5ld/v7/nBfXPrpD9Pn6e1Xrvzb43f95493H+/3P93d3zxUN3m6p\
+n4On9+i58P769v7/ZfD2/O+53+8f//4k7//+jd6/vqLW9hN/vPmH7/ePv7v4U3x5eMFL29V/b2T29\
+kND48/tbs31Rfnx/nt65Pp7bDn+dPdzYepP9nvDne/39ofim/1PN8f9vv3d4ff/vzxcH93+PHul33\
+9pJ/+tL18kl+/8++31+/2v+3rt7S+7PTpvvj7jRvbrf/vzcmX/nR7++ai/NrbwXf94/Su9vH54rav\
+m3PrB/riz9zr579+9UPnp9u7h+6n1pfP2Ndv/x9TZEpV", {"ExpressionJSON", 
+           "ZLIB"}]]|>|>, "Path" -> "/Users/kirill/Github/wolfram-js-frontend\
+/modules/wljs-demos-archive/Demos/Release notes/3.0.3.wln", 
+   "PublicFields" -> {"Properties"}, "Quick" -> True, "Symbols" -> <||>, 
+   "TOC" -> {CoffeeLiqueur`Extensions`TOC`Private`heading[1, 
+      "Release notes *3.0.3*", CoffeeLiqueur`Notebook`Cells`CellObj[
+       CoffeeLiqueur`Notebook`Cells`CellObj`$379]], 
+     CoffeeLiqueur`Extensions`TOC`Private`heading[2, "Window Throttling", 
+      CoffeeLiqueur`Notebook`Cells`CellObj[
+       CoffeeLiqueur`Notebook`Cells`CellObj`$382]], 
+     CoffeeLiqueur`Extensions`TOC`Private`heading[2, 
+      "More tools for window management", 
+      CoffeeLiqueur`Notebook`Cells`CellObj[
+       CoffeeLiqueur`Notebook`Cells`CellObj`$385]], 
+     CoffeeLiqueur`Extensions`TOC`Private`heading[2, "GPUArray symbols", 
+      CoffeeLiqueur`Notebook`Cells`CellObj[
+       CoffeeLiqueur`Notebook`Cells`CellObj`$391]], 
+     CoffeeLiqueur`Extensions`TOC`Private`heading[2, 
+      "Copy cells as plain text", CoffeeLiqueur`Notebook`Cells`CellObj[
+       CoffeeLiqueur`Notebook`Cells`CellObj`$406]]}, 
+   "TrashedCells" -> {"rasterDensityPlotAnim[x Sin[y+t], {x, -5, 5}, {y, 0, \
+10}, {t, 0, 2Pi}, PlotPoints->50]", "rasterDensityPlotAnim[f_, {xs_, xmin_, \
+xmax_}, {ys_, ymin_, ymax_}, {ts_, tmin_, tmax_}, OptionsPattern[]] := \n \
+With[{\n   time = Unique[], buffer = Unique[], \n   cf = \
+With[{c=ColorData[OptionValue[ColorFunction]]}, (List@@c[#])&], \n   pts = \
+OptionValue[PlotPoints]//N,\n   dt = (tmax-tmin)/OptionValue[PlotPoints]//N\n \
+ },\n  {\n   raw := Table[\n    f /. {xs -> j, ys -> i, ts -> time} // N, {i, \
+ymin, \n     ymax, (ymax - ymin)/(pts - 1)}, {j, xmin, \n     xmax, (xmax - \
+xmin)/(pts - 1)}]\n  },\n  \n  time = tmin;\n   \n  buffer = Map[cf, raw // \
+Rescale, {2}];\n  \n  Graphics[{\n    Raster[buffer//Offload, {{xmin, xmax}, \
+{ymin, ymax}}],\n    EventHandler[AnimationFrameListener[buffer//Offload], \
+Function[Null,\n      buffer = Map[cf, raw // Rescale, {2}];\n      time = \
+If[time >= tmax, tmin, time + dt];\n    ]]\n  }, \
+Frame->True]\n]\n\nOptions[rasterDensityPlotAnim] = \
+{ColorFunction->\"AvocadoColors\", PlotPoints->100};", 
+     ".md\nHere is another example:", "Animate[ArrayPlot[\n  \
+SeedRandom[123];\n  Table[Evaluate[Sum[Sin[RandomReal[10, 2] . {x, y} + t], \
+{5}]], {x, 0, \n   5, .1}, {y, 0, 5, .1}], ImagePadding->None], {t,0,8Pi, \
+0.1}, RefreshRate->60]", ".md\nMoreover it supports `Offload`, that means you \
+can make it dynamic manually or automatically:"}|>, 
+ "Cells" -> {<|"Data" -> ".md\n# Release notes *3.0.3*\n\n<Now/>\n", 
+    "Display" -> "codemirror", "Hash" -> 
+     "c9f80480-aeb6-4465-9c92-cfd2b81854f3", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "a2f235ff-2b98-4d6b-ad96-80ac07070793"|>, 
+   <|"Data" -> "# Release notes *3.0.3*\n\nThu 2 Apr 2026 12:02:14", 
+    "Display" -> "markdown", "Hash" -> 
+     "c94948ab-108f-42be-9e12-bdac7bc69900", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "a2f235ff-2b98-4d6b-ad96-80ac07070793"|>, 
+   <|"Data" -> ".md\n## Window Throttling\nWe fixed unintended window \
+throttling on some machines, when it is not focused or hidden. This is \
+crucial for a long-living applications such as monitors (lab equipment), \
+where some data has to be updated continuously for hours or days. ", 
+    "Display" -> "codemirror", "Hash" -> 
+     "c2098bd7-4069-46a9-9243-1f5d6c4a2da2", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "a2f235ff-2b98-4d6b-ad96-80ac07070793"|>, 
+   <|"Data" -> "## Window Throttling\nWe fixed unintended window throttling \
+on some machines, when it is not focused or hidden. This is crucial for a \
+long-living applications such as monitors (lab equipment), where some data \
+has to be updated continuously for hours or days. ", "Display" -> "markdown", 
+    "Hash" -> "d12d825a-9581-4a9d-8217-f1b904c28deb", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "a2f235ff-2b98-4d6b-ad96-80ac07070793"|>, 
+   <|"Data" -> ".md\n## More tools for window management\nWe added \
+`WindowEventListener` akin to `SlideEventListener` used to capture global \
+events. For example:", "Display" -> "codemirror", 
+    "Hash" -> "1e4d4129-8fd1-4473-a3b5-92b8ffd9bd9a", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "a2f235ff-2b98-4d6b-ad96-80ac07070793"|>, 
+   <|"Data" -> "## More tools for window management\nWe added \
+`WindowEventListener` akin to `SlideEventListener` used to capture global \
+events. For example:", "Display" -> "markdown", 
+    "Hash" -> "2d456206-ee63-48ea-9d10-eb86131248f9", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "a2f235ff-2b98-4d6b-ad96-80ac07070793"|>, 
+   <|"Data" -> "ev = EventObject[];\nWindowEventListener[ev]", 
+    "Display" -> "codemirror", "Hash" -> 
+     "194dee8f-0f03-41e7-95b3-fd70034cc040", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
+    "Notebook" -> "a2f235ff-2b98-4d6b-ad96-80ac07070793"|>, 
+   <|"Data" -> "log = {};\nRefresh[log, 1]\nEventHandler[ev, {\n  ev_ :> \
+Function[Null,\n    AppendTo[log, ev];\n  ]\n}];", "Display" -> "codemirror", 
+    "Hash" -> "7a893665-b7f9-43fd-9db3-282218131ab5", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
+    "Notebook" -> "a2f235ff-2b98-4d6b-ad96-80ac07070793"|>, 
+   <|"Data" -> ".md\nIt can capture the following events from a window, where \
+it is placed:\n- `\"Mounted\"` - when the component/window has been loaded\n- \
+`\"Closed\"` - closing of a window\n- `\"Blur\"` - when a user removed focus \
+from a window\n- `\"Focus\"` - when a user has focused a window\n\nThis \
+component works in normal cells as well as on WLX. It does not occupy space \
+and renders nothing.", "Display" -> "codemirror", 
+    "Hash" -> "a78651c6-2814-4133-b8f4-7a11f6a8fc97", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "a2f235ff-2b98-4d6b-ad96-80ac07070793"|>, 
+   <|"Data" -> "It can capture the following events from a window, where it \
+is placed:\n- `\"Mounted\"` - when the component/window has been loaded\n- \
+`\"Closed\"` - closing of a window\n- `\"Blur\"` - when a user removed focus \
+from a window\n- `\"Focus\"` - when a user has focused a window\n\nThis \
+component works in normal cells as well as on WLX. It does not occupy space \
+and renders nothing.", "Display" -> "markdown", 
+    "Hash" -> "db8eb961-c4a1-42ff-97cf-70d78477f1b2", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "a2f235ff-2b98-4d6b-ad96-80ac07070793"|>, 
+   <|"Data" -> ".md\n## GPUArray symbols\nWe added a support for a recent \
+feature of WL - GPU arrays. They effectively store a reference to a data on \
+GPU, which can be used for cross-platform GPU computing (rather limited for \
+now):", "Display" -> "codemirror", "Hash" -> 
+     "bfa52046-9e22-411e-92a7-a46eb15a46b3", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "a2f235ff-2b98-4d6b-ad96-80ac07070793"|>, 
+   <|"Data" -> "## GPUArray symbols\nWe added a support for a recent feature \
+of WL - GPU arrays. They effectively store a reference to a data on GPU, \
+which can be used for cross-platform GPU computing (rather limited for now):"\
+, "Display" -> "markdown", "Hash" -> "e2514ac7-c315-49fe-b3d1-8caa622e47a6", 
+    "Invisible" -> False, "MetaOnly" -> False, "Props" -> <||>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Output", 
+    "UID" -> Null, "Notebook" -> "a2f235ff-2b98-4d6b-ad96-80ac07070793"|>, 
+   <|"Data" -> 
+     "arr = Table[BitXor[i,j]//N, {i,127}, {j,127}];\ng = GPUArray[arr]", 
+    "Display" -> "codemirror", "Hash" -> 
+     "0f862ea1-d999-4385-8ce1-48a34a5a33df", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
+    "Notebook" -> "a2f235ff-2b98-4d6b-ad96-80ac07070793"|>, 
+   <|"Data" -> "(*VB[*)BoxForm`temporalStorage$331093(*,*)(*\"1:eJxdkUmPolAAh\
+JktmcyvmOmT0p2wo0wyh4eCCig0CqidPvAWZGtkU4RfPzrHuVSqKnX66hc8u9EXiqKaH3fRcNKeaz\
+8h3Tb6RFELxwN1HfZvI9pX3+jxzxH9Qo9H9BP3mxg99jTO6ljwuoOerofF8lRhuQdKR7pYbKZhEqi\
+lwVkbiLlVgIvInGRwcxXQhwanl6SMloRxblKqFWE/1MXWNbp4qdYIF7UHfF5O3Xhf7RdTpCHhhs8W\
+cSRFstpO9zf4aAqcKS2v83VmAzMl9WoWC2xR9YHduGQHxcPVbZE7Ac4il6t15F3mftwht4bW8bZ5l\
+th5nTSYjZyDwtsKnxDRkpDkmIuZXKqemb0abNNpGZqiY2Cf+I/1zIv3dqsL3JBGHRlKftgF+ozpA4\
+aH6VyOjozuZhWMT4NjMjfQpKtTW4Jrf5jklmGCVgCKrD7jWASsfUCl+OfpwfHdV+nxe/T5gf/rXdx\
+LTrbfH4aE2C7y/l+7qy/kv83jqy3JCWpDmJPm2z3qYd6QvwvvjD8=\"*)(*]VB*)", 
+    "Display" -> "codemirror", "Hash" -> 
+     "ef03103b-89f0-4f99-83e4-3bd2037c1176", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "a2f235ff-2b98-4d6b-ad96-80ac07070793"|>, 
+   <|"Data" -> ".md\nDo math operation and plot it\n\n:::note\nNot all \
+operations are supported on GPU. It may fallback to CPU version\n:::", 
+    "Display" -> "codemirror", "Hash" -> 
+     "1f60ca3e-07ea-400b-a7df-71a9e6edeaf8", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "a2f235ff-2b98-4d6b-ad96-80ac07070793"|>, 
+   <|"Data" -> "Do math operation and plot it\n\n:::note\nNot all operations \
+are supported on GPU. It may fallback to CPU version\n:::", 
+    "Display" -> "markdown", "Hash" -> 
+     "16003381-7cf1-4c2d-8ee9-f408018a60c5", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "a2f235ff-2b98-4d6b-ad96-80ac07070793"|>, 
+   <|"Data" -> "g g - g // ArrayPlot ", "Display" -> "codemirror", 
+    "Hash" -> "ab4bb767-5db8-4afc-9ac6-3a4a6cef0600", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
+    "Notebook" -> "a2f235ff-2b98-4d6b-ad96-80ac07070793"|>, 
+   <|"Data" -> "(*VB[*)(FrontEndRef[\"ba444fb3-7f1e-4836-9025-b54f4dee96af\"]\
+)(*,*)(*\"1:eJxTTMoPSmNkYGAoZgESHvk5KRCeEJBwK8rPK3HNS3GtSE0uLUlMykkNVgEKJyWam\
+JikJRnrmqcZpuqaWBib6VoaGJnqJpmapJmkpKZamiWmAQCFYxXe\"*)(*]VB*)", 
+    "Display" -> "codemirror", "Hash" -> 
+     "bcfa852d-5ae9-4af8-abc3-0a88288d25bc", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "a2f235ff-2b98-4d6b-ad96-80ac07070793"|>, 
+   <|"Data" -> ".md\n## Copy cells as plain text\nWe added an option to copy \
+a group of cells as `InputForm`, it automatically strips off all syntax sugar \
+and marks input and output \
+cells\n\n\n![](/attachments/Screenshot-2026-04-02-at-12.53.25-01e.png)\n", 
+    "Display" -> "codemirror", "Hash" -> 
+     "93a97765-6e43-4db2-8c06-13846a9e00e0", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "a2f235ff-2b98-4d6b-ad96-80ac07070793"|>, 
+   <|"Data" -> "## Copy cells as plain text\nWe added an option to copy a \
+group of cells as `InputForm`, it automatically strips off all syntax sugar \
+and marks input and output \
+cells\n\n\n![](/attachments/Screenshot-2026-04-02-at-12.53.25-01e.png)", 
+    "Display" -> "markdown", "Hash" -> 
+     "741c8fa9-37a3-4277-b80b-c7e9723c91d4", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "a2f235ff-2b98-4d6b-ad96-80ac07070793"|>, 
+   <|"Data" -> ".md\nFor example:", "Display" -> "codemirror", 
+    "Hash" -> "531e78a5-cc77-4c81-a796-014093b14d07", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "a2f235ff-2b98-4d6b-ad96-80ac07070793"|>, 
+   <|"Data" -> "For example:", "Display" -> "markdown", 
+    "Hash" -> "8643ccf3-edad-4822-850b-fce9a28ad72f", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "a2f235ff-2b98-4d6b-ad96-80ac07070793"|>, 
+   <|"Data" -> "Series[Sin[x], {x,0,2}]", "Display" -> "codemirror", 
+    "Hash" -> "750e2e6e-0cf8-40d0-9562-e28569070b71", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
+    "Notebook" -> "a2f235ff-2b98-4d6b-ad96-80ac07070793"|>, 
+   <|"Data" -> "(*VB[*)(SeriesData[x, 0, {1}, 1, 3, \
+1])(*,*)(*\"1:eJwlT11PwjAAXIwPxl8xedrKEocERN9alX0YUdbRZiM8TCmzcaVlbLEb8X/58xy\
+YXC53l3u4u3qX0ebMMIz9ZUdPa17JknD2jX87q/sWIGgJbAuzkrP9Y1ZlS+2YrmMefhxzeMJgZVvA\
+6TqgN7hnoY7jF/mGxYwnHpSjPMAlF2m4KaZJKtTow9/Nn8ce2T6gxS2m6RfqM6qiyr9zo6zxiLyhK\
+h8nM5g2ifQbquT8GmsY7HI3bGkCJ1EQL1rdTmqFgtqbhlTAHEH9KVjvuGFFELD/D513FNUFwxdHwb\
+L167ZoTmlc1uwPHtBIXA==\"*)(*]VB*)", "Display" -> "codemirror", 
+    "Hash" -> "d50d54be-0ea1-4a39-910e-9d9c826b21bd", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "a2f235ff-2b98-4d6b-ad96-80ac07070793"|>, 
+   <|"Data" -> ".md\nCopied expression:", "Display" -> "codemirror", 
+    "Hash" -> "25f069a9-a2a9-49a7-93d0-acc22a1b2a18", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "a2f235ff-2b98-4d6b-ad96-80ac07070793"|>, 
+   <|"Data" -> "Copied expression:", "Display" -> "markdown", 
+    "Hash" -> "1fce3dba-7d4b-42b6-a719-63aff1cc796f", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "a2f235ff-2b98-4d6b-ad96-80ac07070793"|>, 
+   <|"Data" -> "(* ::: Input ::: *)\nSeries[Sin[x], {x,0,2}]\n\n(* ::: Output \
+::: *)\n(SeriesData[x, 0, {1}, 1, 3, 1])", "Display" -> "codemirror", 
+    "Hash" -> "32ddd5b3-e2e2-4684-893b-15a6f57008b6", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
+    "Notebook" -> "a2f235ff-2b98-4d6b-ad96-80ac07070793"|>}, 
+ "serializer" -> "jsfn4"|>
