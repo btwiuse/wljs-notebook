@@ -6,11 +6,12 @@ core['CoffeeLiqueur`Extensions`Rasterize`Internal`OverlayView'] = async (args, e
 
 core['CoffeeLiqueur`Extensions`Editor`Internal`InsertToClipBoard'] = async (args, env) => {
     const data = await interpretate(args[0], env);
+    const encoded = await interpretate(args[1], env);
     if (!navigator.clipboard) {
         interpretate.alert('Clipboard manipulation are forbidden in non-secured contexts. Please run an app locally or use reverse proxy with TLS.');
         throw 'Clipboard manipulation are forbidden in non-secured contexts.';
     }
-    navigator.clipboard.writeText(encodeURIComponent(data));
+    if (encoded) navigator.clipboard.writeText(decodeURIComponent(data)); else navigator.clipboard.writeText(encodeURIComponent(data));
 }
 
 core['CoffeeLiqueur`Extensions`System`Internal`opClipboard'] = async (args, env) => {

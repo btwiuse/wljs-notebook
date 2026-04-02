@@ -29,6 +29,8 @@ truncatedTemplate = truncatedTemplate["Data"->"``", "Size"->"``", "Ref"->"``"];
 AppExtensions`TemplateInjection["SettingsFooter"] = ImportComponent[ FileNameJoin[{$InputFileName // DirectoryName // ParentDirectory, "templates", "Settings.wlx"}] ];
 
 AppExtensions`TemplateInjection["CellDropdown"] = ImportComponent[ FileNameJoin[{$InputFileName // DirectoryName // ParentDirectory, "templates", "CopyDropdown.wlx"}] ];
+AppExtensions`TemplateInjection["CellDropdown"] = ImportComponent[ FileNameJoin[{$InputFileName // DirectoryName // ParentDirectory, "templates", "CopyTextDropdown.wlx"}] ];
+
 
 {saveNotebook, loadNotebook, renameNotebook, cloneNotebook}         = ImportComponent["Frontend/Loader.wl"];
 
