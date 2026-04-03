@@ -5,7 +5,7 @@ PacletObject[
     "Name" -> "CoffeeLiqueur/WLJSNotebook",
     "Description" -> "Open-source Notebook Environment for Wolfram Language",
     "Creator" -> "WLJSTeam",
-    "License" -> "GPL-3.0",
+    "License" -> "AGPL",
     "PublisherID" -> "CoffeeLiqueur",
     "Version" -> "3.0.3",
     "WolframVersion" -> "13.3+",

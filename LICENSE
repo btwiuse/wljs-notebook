@@ -1,8 +1,8 @@
 ## License overview
-WLJS Notebooks (including extensions, graphics, sound, I/O modules, frontend and backend authored in this repository) are licensed under the GNU General Public License v3.0.
+WLJS Notebooks (including extensions, graphics, sound, I/O modules, frontend and backend authored in this repository) are licensed under the GNU Affero General Public License v3.0.
 
 ## Additional Permission (Wolfram Engine Interop): 
-As an additional permission under GPLv3 §7, you may compile, link, and/or communicate with the proprietary Wolfram Engine solely to execute Wolfram Language code at runtime. This does not grant rights to copy, modify, or distribute Wolfram Engine, which remains subject to Wolfram Research’s terms.
+As an additional permission under AGPLv3 §7, you may compile, link, and/or communicate with the proprietary Wolfram Engine solely to execute Wolfram Language code at runtime. This does not grant rights to copy, modify, or distribute Wolfram Engine, which remains subject to Wolfram Research’s terms.
 
 > See the [license agreement](https://www.wolfram.com/legal/terms/wolfram-engine.html) if you use it in commerce.
 

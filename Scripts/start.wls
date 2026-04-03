@@ -3,7 +3,7 @@
 If[$Env["ElectronCode"] =!= 1,
 "WLJS Notebooks
 Copyright (c) 2026 Coffee liqueur
-Licensed under the GNU GPL v3.0. See <AppDir>/LICENSE.md.
+Licensed under the AGPLv3. See <AppDir>/LICENSE.md.
 
 This product bundles third-party FOSS. Full license texts are included in <AppDir>/licenses/.
 Wolfram Engine is proprietary and distributed separately by Wolfram Research, Inc.

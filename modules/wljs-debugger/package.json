@@ -27,7 +27,7 @@
       "url": "https://github.com/JerryI/wljs-debugger"
     },
     "author": "Kirill Vasin",
-    "license": "GPL",
+    "license": "AGPL-3.0-or-later",
     "bugs": {
       "url": "https://github.com/JerryI/wljs-debugger/issues"
     },

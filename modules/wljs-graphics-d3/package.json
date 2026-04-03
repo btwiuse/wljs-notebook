@@ -24,7 +24,7 @@
     "url": "https://github.com/JerryI/wljs-graphics-d3"
   },
   "author": "Kirill Vasin",
-  "license": "GPL",
+  "license": "AGPL-3.0-or-later",
   "bugs": {
     "url": "https://github.com/JerryI/wljs-graphics-d3/issues"
   },

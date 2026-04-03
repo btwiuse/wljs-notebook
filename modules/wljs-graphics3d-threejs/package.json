@@ -17,7 +17,7 @@
     "url": "https://github.com/JerryI/Mathematica-ThreeJS-graphics-engine"
   },
   "author": "Kirill Vasin",
-  "license": "GPL",
+  "license": "AGPL-3.0-or-later",
   "bugs": {
     "url": "https://github.com/JerryI/Mathematica-ThreeJS-graphics-engine/issues"
   },

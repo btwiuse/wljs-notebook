@@ -3059,7 +3059,7 @@ function check_wl (configuration, cbk, window) {
 
     windows.log.print(`WLJS Notebooks
 Copyright (c) 2026 Coffee liqueur
-Licensed under the GNU GPL v3.0. See /LICENSE.md.
+Licensed under the AGPLv3. See /LICENSE.md.
 
 This product bundles third-party FOSS. 
 Wolfram Engine is proprietary and distributed by Wolfram Research.

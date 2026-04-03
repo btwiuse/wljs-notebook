@@ -137,7 +137,7 @@ This program / code-base will not transfer any information to other networked sy
 
 
 ## License
-WLJS Notebooks (including all extensions, graphics and sound libraries, frontend and backend) are licensed under GPLv3. 
+WLJS Notebooks (including all extensions, graphics and sound libraries, frontend and backend) are licensed under AGPL. 
 
 The algorithms, functions, and other components of the Wolfram Language provided by the freeware distribution of Wolfram Engine are the intellectual property of Wolfram Research, Inc. 
 

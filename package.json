@@ -177,7 +177,7 @@
     "type": "git",
     "url": "git+https://github.com/JerryI/wolfram-js-frontend.git"
   },
-  "license": "GPL",
+  "license": "AGPL",
   "bugs": {
     "url": "https://github.com/JerryI/wolfram-js-frontend/issues"
   },
