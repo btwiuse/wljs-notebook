@@ -7,16 +7,8 @@ const loader = async (self) => {
     console.log('THREE shared library loader!');
   };
 
-  const loader1 = async (self) => {
-    self.Water = (await import('./Water-73e87197.js')).Water;
-  };
-
   const loader2 = async (self) => {
     self.TransformControls =  (await import('./TransformControls-3d8bddf4.js')).TransformControls;
-  };
-
-  const loader3 = async (self) => {
-    self.PointerLockControls = (await import('./PointerLockControls-a3da7dd0.js')).PointerLockControls;
   };
 
   const loader4 = async (self) => {
@@ -43,19 +35,9 @@ const loader = async (self) => {
   );
 
   new interpretate.shared(
-    "THREEWater",
-    loader1
-  );  
-
-  new interpretate.shared(
     "THREETransformControls",
     loader2
   ); 
-
-  new interpretate.shared(
-    "THREEPointerLockControls",
-    loader3
-  );
 
   new interpretate.shared(
     "THREERTX",

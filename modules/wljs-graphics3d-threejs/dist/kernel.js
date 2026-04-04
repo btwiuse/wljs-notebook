@@ -1237,48 +1237,6 @@ g3d.Sphere.destroy = async (args, env) => {
 
 g3d.Sphere.virtual = true;
 
-g3d.Sky = (args, env) => {
-  const sky = new Sky();
-  sky.scale.setScalar( 10000 );
-  env.mesh.add( sky );
-  env.sky = sky;
-  env.sun = new THREE.Vector3();
-
-  const skyUniforms = sky.material.uniforms;
-
-  skyUniforms[ 'turbidity' ].value = 10;
-  skyUniforms[ 'rayleigh' ].value = 2;
-  skyUniforms[ 'mieCoefficient' ].value = 0.005;
-  skyUniforms[ 'mieDirectionalG' ].value = 0.8;
-};
-
-g3d._Water = (args, env) => {
-  const waterGeometry = new THREE.PlaneGeometry( 10000, 10000 );
-
-  const water = new Water(
-    waterGeometry,
-    {
-      textureWidth: 512,
-      textureHeight: 512,
-      waterNormals: new THREE.TextureLoader().load( 'textures/waternormals.jpg', function ( texture ) {
-
-        texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-      } ),
-
-      sunDirection: new THREE.Vector3(),
-      sunColor: 0xffffff,
-      waterColor: 0x001e0f,
-      distortionScale: 3.7,
-      fog: true
-    }
-    );
-
-    water.rotation.x = - Math.PI / 2;
-
-    env.mesh.add( water );
-    env.water = water;
-};
-
 g3d.Cube = async (args, env) => {
   let position = new THREE.Vector3(0, 0, 0);
   let scale = new THREE.Vector3(1, 1, 1);
@@ -4406,9 +4364,6 @@ g3d.AnimationFrameListener.destroy = async (args, env) => {
 
 g3d.AnimationFrameListener.virtual = true;
 
-let Water = false;
-let Sky   = false;
-
 g3d.Camera = (args, env) => {
   console.warn('temporary disabled');
   return;
@@ -4426,15 +4381,6 @@ g3d.DefaultLighting = (args, env) => {
 
 };
 
-g3d.SkyAndWater = async (args, env) => {
-  console.warn('temporary disabled');
-  return;
-};
-
-g3d.Sky = async (args, env) => {
-  console.warn('temporary disabled');
-  return;
-};
 
 const makeEditorView = async (data, env = { global: {} }) => {
     //check by hash if there such object, if not. Ask server to create one with EditorView and store.
@@ -4473,62 +4419,6 @@ const makeEditorView = async (data, env = { global: {} }) => {
     return instance;
   };
 
-
-g3d['CoffeeLiqueur`Extensions`Graphics3D`Tools`WaterShader'] = async (args, env) => {
-  
-  
-  if (!Water) {
-    await interpretate.shared.THREEWater.load();
-    Water = interpretate.shared.THREEWater.Water;
-    //Water         = (await import('three/examples/jsm/objects/Water.js')).Water;
-  }
-
-  let options = await core._getRules(args, env);
-  console.log('options:');
-
-
-  console.log(options);
-  options.dims = options.Size || [10000, 10000];
-
-  let water;
-  // Water
-
-  const waterGeometry = new THREE.PlaneGeometry(...options.dims);
-
-  water = new Water(
-    waterGeometry,
-    {
-      textureWidth: 512,
-      textureHeight: 512,
-      waterNormals: new THREE.TextureLoader().load( 'https://cdn.statically.io/gh/JerryI/Mathematica-ThreeJS-graphics-engine/master/assets/waternormals.jpg', function ( texture ) {
-
-        texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-
-      } ),
-      sunDirection: new THREE.Vector3(1,1,1),
-      sunColor: 0xffffff,
-      waterColor: 0x001e0f,
-      distortionScale: 3.7,
-      fog: true
-    }
-  );
-
-  water.rotation.x = - Math.PI / 2;
-  
-  env.local.water = water;
-
-  env.global.scene.add( water );
-  
-  const sun = env.local.sun || (new THREE.Vector3(1,1,1));
-  water.material.uniforms[ 'sunDirection' ].value.copy( sun ).normalize();
-
-  //every frame
-  env.local.handlers.push(
-    function() {
-      env.local.water.material.uniforms[ 'time' ].value += 1.0 / 60.0;
-    }
-  );
-};  
 
 
 g3d.Large = (args, env) => {
