@@ -1121,7 +1121,8 @@ thickness: env.materialThickness,
     iridescenceThickness: env.iridescenceThickness,
     specularColor: env.specularColor,
     specularIntensity: env.specularIntensity,
-    matte: env.matte
+    matte: env.matte,
+    map: env.texture || null
   });
 
   function addSphere(cr) {
@@ -1317,7 +1318,8 @@ g3d.Cube = async (args, env) => {
     iridescenceThickness: env.iridescenceThickness,
     specularColor: env.specularColor,
     specularIntensity: env.specularIntensity,
-    matte: env.matte
+    matte: env.matte,
+    map: env.texture || null
   });
 
   const cube = new THREE.Mesh(geometry, material);
@@ -1451,7 +1453,8 @@ thickness: env.materialThickness,
     iridescenceThickness: env.iridescenceThickness,
     specularColor: env.specularColor,
     specularIntensity: env.specularIntensity,
-    matte: env.matte    
+    matte: env.matte,
+    map: env.texture || null    
     
     
     
@@ -2434,6 +2437,16 @@ g3d.GraphicsComplex = async (args, env) => {
     }
   }
 
+  if ('VertexTextureCoordinates' in options) {
+    const uvData = await interpretate(options["VertexTextureCoordinates"], env);
+
+    if (uvData instanceof NumericArrayObject) {
+      copy.vertices.uv = new THREE.BufferAttribute( new Float32Array( uvData.buffer ), 2 );
+    } else {
+      copy.vertices.uv = new THREE.BufferAttribute( new Float32Array( uvData.flat() ), 2 );
+    }
+  }
+
   const group = new THREE.Group();
   env.local.group = group;
 
@@ -2649,7 +2662,8 @@ thickness: env.materialThickness,
     iridescenceThickness: env.iridescenceThickness,
     specularColor: env.specularColor,
     specularIntensity: env.specularIntensity,
-    matte: env.matte
+    matte: env.matte,
+    map: env.texture || null
   });
 
   function addSphere(cr) {
@@ -3047,6 +3061,46 @@ g3dComplex.Polygon = async (args, env) => {
     env.local.geometry.computeVertexNormals();
   }
 
+  // Apply UV coordinates if available
+  if (env?.vertices?.uv) {
+    geometry.setAttribute('uv', env.vertices.uv);
+  } else if (env.texture) {
+    // Auto-generate UVs from vertex positions using planar projection
+    const posArray = env.vertices.position.array;
+    const count = env.vertices.position.count;
+    const uvArray = new Float32Array(count * 2);
+
+    let minX = Infinity, maxX = -Infinity;
+    let minY = Infinity, maxY = -Infinity;
+    let minZ = Infinity, maxZ = -Infinity;
+
+    for (let i = 0; i < count; i++) {
+      const x = posArray[i*3], y = posArray[i*3+1], z = posArray[i*3+2];
+      if (x < minX) minX = x; if (x > maxX) maxX = x;
+      if (y < minY) minY = y; if (y > maxY) maxY = y;
+      if (z < minZ) minZ = z; if (z > maxZ) maxZ = z;
+    }
+
+    // Pick the two axes with the largest spread
+    const spanX = maxX - minX, spanY = maxY - minY, spanZ = maxZ - minZ;
+    let uAxis, vAxis, uMin, vMin, uSpan, vSpan;
+
+    if (spanX <= spanY && spanX <= spanZ) {
+      uAxis = 1; vAxis = 2; uMin = minY; vMin = minZ; uSpan = spanY; vSpan = spanZ;
+    } else if (spanY <= spanX && spanY <= spanZ) {
+      uAxis = 0; vAxis = 2; uMin = minX; vMin = minZ; uSpan = spanX; vSpan = spanZ;
+    } else {
+      uAxis = 0; vAxis = 1; uMin = minX; vMin = minY; uSpan = spanX; vSpan = spanY;
+    }
+
+    for (let i = 0; i < count; i++) {
+      uvArray[i*2]   = uSpan > 0 ? (posArray[i*3 + uAxis] - uMin) / uSpan : 0;
+      uvArray[i*2+1] = vSpan > 0 ? (posArray[i*3 + vAxis] - vMin) / vSpan : 0;
+    }
+
+    geometry.setAttribute('uv', new THREE.BufferAttribute(uvArray, 2));
+  }
+
   //check if colored (Material BUG) !!!
   if (env?.vertices?.colored) {
     //geometry.setAttribute()
@@ -3076,6 +3130,7 @@ thickness: env.materialThickness,
       specularColor: env.specularColor,
       specularIntensity: env.specularIntensity,
       matte: env.matte,
+      map: env.texture || null,
       side: THREE.DoubleSide                     
     });
   } else {
@@ -3103,6 +3158,7 @@ thickness: env.materialThickness,
       specularColor: env.specularColor,
       specularIntensity: env.specularIntensity,
       matte: env.matte,
+      map: env.texture || null,
       side: THREE.DoubleSide   
     });         
   }
@@ -3483,6 +3539,34 @@ g3dComplex.Polygon.destroy = (args, env) => {
 }
 
 g3dComplex.Polygon.virtual = true;
+
+
+/**** Texture for 3D graphics ****/
+
+g3d.Texture = async (args, env) => {
+  const image = await interpretate(args[0], {...env, offscreen: true});
+
+  const img = await createImageBitmap(image, { imageOrientation: 'flipY' });
+  image.remove();
+
+  const texture = new THREE.Texture(img);
+  texture.colorSpace = THREE.SRGBColorSpace;
+  texture.flipY = true;
+  texture.needsUpdate = true;
+
+  env.local.texture = texture;
+  env.local.img = img;
+  env.exposed.texture = texture;
+}
+
+g3d.Texture.destroy = (args, env) => {
+  if (env.local.texture) env.local.texture.dispose();
+  if (env.local.img) env.local.img.close();
+}
+
+g3d.Texture.virtual = true
+
+/********************************/
 
 g3d.Polygon = async (args, env) => {
   const vertices = await interpretate(args[0], env);

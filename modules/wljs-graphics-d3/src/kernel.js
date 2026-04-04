@@ -2791,7 +2791,7 @@ async function processLabel(ref0, gX, env, textFallback, nodeFallback) {
     const image = await interpretate(args[0], {...env, offscreen: true});
     console.log('got it!');
 
-    const img = await createImageBitmap(image);
+    const img = await createImageBitmap(image, { imageOrientation: 'flipY' });
     image.remove();
 
 
