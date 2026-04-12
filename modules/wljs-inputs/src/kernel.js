@@ -658,6 +658,37 @@ const parseBasicAtoms = (d) => {
   return false;
 }
 
+const sortCellValue = (cell) => {
+  if (cell === undefined || cell === null) return null;
+  if (typeof cell === 'number') return cell;
+  if (typeof cell === 'boolean') return cell ? 1 : 0;
+  if (typeof cell === 'string') {
+    const basic = parseBasicAtoms(cell);
+    if (typeof basic === 'number') return basic;
+    if (typeof basic === 'string') return basic.toLowerCase();
+    return cell.toLowerCase();
+  }
+  if (Array.isArray(cell) && cell[0] === 'DateObject' && Array.isArray(cell[1])) {
+    let parts = cell[1];
+    if (parts[0] === 'List') parts = parts.slice(1);
+    const [y = 0, m = 1, d = 1, h = 0, min = 0, s = 0] = parts;
+    return new Date(y, m - 1, d, h, min, s).getTime();
+  }
+  if (Array.isArray(cell) && cell[0] === 'Quantity') {
+    const val = parseBasicAtoms(cell[1]);
+    if (typeof val === 'number') return val;
+  }
+  return null;
+}
+
+const compareCells = (a, b) => {
+  if (a === null && b === null) return 0;
+  if (a === null) return 1;
+  if (b === null) return -1;
+  if (typeof a === 'number' && typeof b === 'number') return a - b;
+  return String(a).localeCompare(String(b));
+}
+
 const renderCell = async (row, col, ocell, env, td, store, hashFunction) => {
   let cell = ocell;
 
@@ -1041,10 +1072,60 @@ core.Dataset = async (args, env) => {
       tr.appendChild(th);
     }
 
-    headerCols.forEach((c) => {
+    let sortCol = -1;
+    let sortDir = 0; // 0=none, 1=asc, -1=desc
+    const thElements = [];
+
+    headerCols.forEach((c, colIndex) => {
       const th = document.createElement('th');
-      th.classList.add(...("px-2 py-1 text-start text-xs font-medium text-gray-500 uppercase".split(' '))); 
-      th.innerText = c;
+      th.classList.add(...("px-2 py-1 text-start text-xs font-medium text-gray-500 uppercase cursor-pointer select-none".split(' '))); 
+      th.style.userSelect = 'none';
+      const label = document.createElement('span');
+      label.innerText = c;
+      const arrow = document.createElement('span');
+      arrow.style.marginLeft = '4px';
+      arrow.innerText = '';
+      th.appendChild(label);
+      th.appendChild(arrow);
+      th.addEventListener('click', () => {
+        if (sortCol === colIndex) {
+          sortDir = sortDir === 1 ? -1 : sortDir === -1 ? 0 : 1;
+        } else {
+          sortCol = colIndex;
+          sortDir = 1;
+        }
+        thElements.forEach((h, idx) => {
+          h.arrow.innerText = idx === sortCol && sortDir !== 0 ? (sortDir === 1 ? ' ▲' : ' ▼') : '';
+        });
+        if (totalParts > 1) {
+          env.local.callback = async (data) => {
+            rows = await rowsReprocess(data);
+            rows.forEach((r, i) => { r._origIdx = i; });
+            pagination = Math.ceil(rows.length / pageSize);
+            currentPart = 0;
+            totalOffset = 0;
+            page = 0;
+            offset = 0;
+            viewPort.rebuild(rows, windowSize);
+            table.scrollTop = 0;
+          };
+          console.log('sorting call');
+          console.log(env.local.event)
+          server.kernel.io.fire(env.local.event, [colIndex + 1, sortDir], 'Sort');
+          return;
+        } else {
+          if (sortDir === 0) {
+            rows.sort((a, b) => a._origIdx - b._origIdx);
+          } else {
+            rows.sort((a, b) => sortDir * compareCells(sortCellValue(a[colIndex]), sortCellValue(b[colIndex])));
+          }
+        }
+        page = 0;
+        offset = 0;
+        viewPort.rebuild(rows, windowSize);
+        table.scrollTop = 0;
+      });
+      thElements.push({th, arrow});
       tr.appendChild(th);
     });
   }
@@ -1144,6 +1225,7 @@ core.Dataset = async (args, env) => {
   }
 
   offset = 0;
+  rows.forEach((r, i) => { r._origIdx = i; });
   viewPort.rebuild(rows, windowSize);
 
   container_1.appendChild(container_2);
@@ -1210,6 +1292,7 @@ core.Dataset = async (args, env) => {
 
       core[env.options.RequestCallback] = async (args) => {
         //console.error(args);
+        console.log('callback from server');
         const t = await interpretate(args[0], {...env, hold:true});
         env.local.callback(t);
       }
@@ -1253,6 +1336,7 @@ core.Dataset = async (args, env) => {
         env.local.callback = async (data) => {
           //console.error(data);
           rows = await rowsReprocess(data);
+          rows.forEach((r, i) => { r._origIdx = i; });
           pagination = Math.ceil(rows.length / pageSize);
 
           viewPort.rebuild(rows, windowSize);
@@ -1264,7 +1348,7 @@ core.Dataset = async (args, env) => {
         //request new page
         block = true;
         //console.log();
-        server.kernel.emitt(env.local.event, currentPart + 1);
+        server.kernel.io.fire(env.local.event, currentPart + 1, 'Part');
 
         return;
       }
@@ -1291,6 +1375,7 @@ core.Dataset = async (args, env) => {
         env.local.callback = async (data) => {
           //console.error(data);
           rows = await rowsReprocess(data);
+          rows.forEach((r, i) => { r._origIdx = i; });
           pagination = Math.ceil(rows.length / pageSize);
 
           viewPort.rebuild(rows, windowSize);
@@ -1302,7 +1387,7 @@ core.Dataset = async (args, env) => {
         //request new page
         block = true;
         //console.log();
-        server.kernel.emitt(env.local.event, currentPart + 1);
+        server.kernel.io.fire(env.local.event, currentPart + 1, 'Part');
 
         return;
       }
@@ -1428,10 +1513,58 @@ const tbView = async (args, env) => {
     tr.appendChild(th);    
   }
 
-  heading.forEach((c) => {
+  let sortCol = -1;
+  let sortDir = 0; // 0=none, 1=asc, -1=desc
+  const thElements = [];
+
+  heading.forEach((c, colIndex) => {
     const th = document.createElement('th');
-    th.classList.add(...("px-2 py-1 text-start text-xs font-medium text-gray-500 uppercase".split(' '))); 
-    th.innerText = c;
+    th.classList.add(...("px-2 py-1 text-start text-xs font-medium text-gray-500 uppercase cursor-pointer select-none".split(' '))); 
+    th.style.userSelect = 'none';
+    const label = document.createElement('span');
+    label.innerText = c;
+    const arrow = document.createElement('span');
+    arrow.style.marginLeft = '4px';
+    arrow.innerText = '';
+    th.appendChild(label);
+    th.appendChild(arrow);
+    th.addEventListener('click', () => {
+      if (sortCol === colIndex) {
+        sortDir = sortDir === 1 ? -1 : sortDir === -1 ? 0 : 1;
+      } else {
+        sortCol = colIndex;
+        sortDir = 1;
+      }
+      thElements.forEach((h, idx) => {
+        h.arrow.innerText = idx === sortCol && sortDir !== 0 ? (sortDir === 1 ? ' ▲' : ' ▼') : '';
+      });
+      if (totalParts > 1) {
+        env.local.callback = async (data) => {
+          rows = await rowsReprocess(data);
+          rows.forEach((r, i) => { r._origIdx = i; });
+          pagination = Math.ceil(rows.length / pageSize);
+          currentPart = 0;
+          totalOffset = 0;
+          page = 0;
+          offset = 0;
+          viewPort.rebuild(rows, windowSize);
+          table.scrollTop = 0;
+        };
+        server.kernel.io.fire(env.local.event, [colIndex + 1, sortDir], 'Sort');
+        return;
+      } else {
+        if (sortDir === 0) {
+          rows.sort((a, b) => a._origIdx - b._origIdx);
+        } else {
+          rows.sort((a, b) => sortDir * compareCells(sortCellValue(a[colIndex]), sortCellValue(b[colIndex])));
+        }
+      }
+      page = 0;
+      offset = 0;
+      viewPort.rebuild(rows, windowSize);
+      table.scrollTop = 0;
+    });
+    thElements.push({th, arrow});
     tr.appendChild(th);
   });
 
@@ -1536,6 +1669,7 @@ const tbView = async (args, env) => {
   }
 
   offset = 0;
+  rows.forEach((r, i) => { r._origIdx = i; });
   viewPort.rebuild(rows, windowSize);
 
 
@@ -1617,6 +1751,24 @@ const tbView = async (args, env) => {
     
     toStart.addEventListener('click', ()=>{
       if (block) return;
+      if (currentPart !== 0) {
+        block = true;
+        env.local.callback = async (data) => {
+          rows = await rowsReprocess(data);
+          rows.forEach((r, i) => { r._origIdx = i; });
+          pagination = Math.ceil(rows.length / pageSize);
+          currentPart = 0;
+          totalOffset = 0;
+          page = 0;
+          offset = 0;
+          viewPort.rebuild(rows, windowSize);
+          updateField(page);
+          table.scrollTop = 0;
+          block = false;
+        };
+        server.kernel.io.fire(env.local.event, 1, 'Part');
+        return;
+      }
       page = 0;
       offset = 0;
       viewPort.rebuild(rows, windowSize);
@@ -1626,6 +1778,24 @@ const tbView = async (args, env) => {
 
     toEnd.addEventListener('click', ()=>{
       if (block) return;
+      if (currentPart !== totalParts - 1) {
+        block = true;
+        env.local.callback = async (data) => {
+          rows = await rowsReprocess(data);
+          rows.forEach((r, i) => { r._origIdx = i; });
+          pagination = Math.ceil(rows.length / pageSize);
+          currentPart = totalParts - 1;
+          totalOffset = totalLength - rows.length;
+          page = pagination - 1;
+          offset = 0;
+          viewPort.rebuild(rows, windowSize);
+          updateField(page);
+          table.scrollTop = table.scrollHeight - table.clientHeight - 10;
+          block = false;
+        };
+        server.kernel.io.fire(env.local.event, totalParts, 'Part');
+        return;
+      }
       page = pagination - 1;
       offset = 0;
       viewPort.rebuild(rows, windowSize);
@@ -1648,6 +1818,7 @@ const tbView = async (args, env) => {
         env.local.callback = async (data) => {
           //console.error(data);
           rows = await rowsReprocess(data);
+          rows.forEach((r, i) => { r._origIdx = i; });
           pagination = Math.ceil(rows.length / pageSize);
 
           viewPort.rebuild(rows, windowSize);
@@ -1659,7 +1830,7 @@ const tbView = async (args, env) => {
         //request new page
         block = true;
         //console.log();
-        server.kernel.io.fire(env.local.event, currentPart + 1);
+        server.kernel.io.fire(env.local.event, currentPart + 1, 'Part');
 
         return;
       }
@@ -1686,6 +1857,7 @@ const tbView = async (args, env) => {
         env.local.callback = async (data) => {
           //console.error(data);
           rows = await rowsReprocess(data);
+          rows.forEach((r, i) => { r._origIdx = i; });
           pagination = Math.ceil(rows.length / pageSize);
 
           viewPort.rebuild(rows, windowSize);
@@ -1697,7 +1869,7 @@ const tbView = async (args, env) => {
         //request new page
         block = true;
         //console.log();
-        server.kernel.io.fire(env.local.event, currentPart + 1);
+        server.kernel.io.fire(env.local.event, currentPart + 1, 'Part');
 
         return;
       }

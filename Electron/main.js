@@ -756,6 +756,7 @@ buildMenu = (opts) => {
                 },
                 {
                     label: 'Evaluate All Cells',
+                    accelerator: shortcut('evaluate_all'),
                     click: async(ev) => {
                         console.log(ev);
                         windows.focused.call('evaluateall', true);
@@ -1594,7 +1595,8 @@ function create_window(opts, cbk = () => {}) {
             width: 1024,
             height: 640,
             linuxMenuBar: true,
-            override: {}
+            override: {},
+            offscreen: false
         };
 
 
@@ -1678,8 +1680,14 @@ function create_window(opts, cbk = () => {}) {
 
         if (options.features) {
             options.features = parseWindowFeatures(options.features);
+            console.log(options.features);
             options.width = options.features.width || options.width;
             options.height = options.features.height || options.height;
+            if (options.width == 1 && options.height == 1) {
+                options.offscreen = true;
+                options.width = 1920;
+                options.height = 1280;
+            }
         }
 
         if (isMac) {
@@ -1698,7 +1706,8 @@ function create_window(opts, cbk = () => {}) {
                 webPreferences: {
                     //scrollBounce: true,
                     preload: path.join(__dirname, 'preload_main.js'),
-                    backgroundThrottling:  false 
+                    backgroundThrottling:  false,
+                    offscreen: options.offscreen 
                 },
                 ...options.override
 
@@ -1744,7 +1753,8 @@ function create_window(opts, cbk = () => {}) {
                 show: options.show,
                 webPreferences: {
                     preload: path.join(__dirname, 'preload_main.js'),
-                    backgroundThrottling:  false 
+                    backgroundThrottling:  false ,
+                    offscreen: options.offscreen
                 },
                 ...options.override
 
@@ -1839,7 +1849,8 @@ function create_window(opts, cbk = () => {}) {
                 show: options.show,
                 webPreferences: {
                     preload: path.join(__dirname, 'preload_main.js'),
-                    backgroundThrottling:  false 
+                    backgroundThrottling:  false ,
+                    offscreen: options.offscreen
                 },
                 ...options.override
 
@@ -2215,7 +2226,7 @@ else {
             const parsedCommndLine = parseArgs(argv);
             console.log(parsedCommndLine);
 
-            if (parsedCommndLine.c) {
+            if (parsedCommndLine.a) {
               console.log('Parsed command line parameters');
               console.log(parsedCommndLine);
 
@@ -2227,9 +2238,7 @@ else {
               }
 
 
-            
-                return;
-            } 
+            }
 
 
             const protocol = new RegExp('wljs-url-message:\/\/(.*)').exec(argv[argv.length - 1]);
@@ -2896,7 +2905,7 @@ function create_first_window() {
     
 
     const parsedCommndLine = parseArgs(process.argv);
-    const commandOnly = parsedCommndLine.c;
+    const commandOnly = parsedCommndLine.a;
 
     if (commandOnly) net.fetch(server.url.default('local') + `/cmdapi/` + encodeURIComponent(JSON.stringify(parsedCommndLine)))
    

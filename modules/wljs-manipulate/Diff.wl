@@ -125,6 +125,8 @@ processDiffsStateless[table_, originalExpr_, expr2_, diffs_List, forceUpdate_, r
 
 
 diff[exp_, exp_, _, _] := {}
+diff[_Texture, _Texture, _, _] := (failureMessage["Textures are not supported", {None, None}]; $Failed)
+diff[_Image3D, _Image3D, _, _] := (failureMessage["Image3D are not supported", {None, None}]; $Failed)
 diff[exp1_, exp2_, _, _] := (failureMessage["Cannot link two expressions with available diff patterns", {exp1, exp2}]; $Failed)
 
 diff[Rule[PlotRange, x_], Rule[PlotRange, y_], level_, attributes_] := {}
@@ -771,8 +773,16 @@ Do[With[{a=a},
   |>
 ];*)
 
+textureLessQ[expr_] := MatchQ[
+  expr,
+  GraphicsComplex[_, _] |
+  GraphicsComplex[_, _, Rule[VertexColors, _] ] |
+  GraphicsComplex[_, _, Rule[VertexNormals, _] ] |
+  GraphicsComplex[_, _, Rule[VertexColors, _], Rule[VertexNormals, _] |
+  GraphicsComplex[_, _, Rule[VertexNormals, _], Rule[VertexColors, _] ]
+] ];
 
-diff[GraphicsComplex[args1__], GraphicsComplex[args2__], level_, attributes_] := With[{list1 = {args1}, list2 = {args2}}, 
+diff[g: GraphicsComplex[args1__], GraphicsComplex[args2__], level_, attributes_] := If[textureLessQ[g], With[{list1 = {args1}, list2 = {args2}}, 
   If[Length[list1] == Length[list2],
     If[Lookup[attributes, "GraphicsQ", False],
       MapThread[Function[{a,b},
@@ -789,6 +799,9 @@ diff[GraphicsComplex[args1__], GraphicsComplex[args2__], level_, attributes_] :=
    failureMessage["GraphicsComplex objects differs in args length", {list1, list2}];
    $Failed
  ]
+],
+   failureMessage["GraphicsComplex with textures are not supported", {None, None}];
+   $Failed  
 ]
 
 diff[Annotation[args1_, _], Annotation[args2_, _], level_, attributes_] := With[{}, 

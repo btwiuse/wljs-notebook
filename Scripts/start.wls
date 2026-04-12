@@ -11,6 +11,8 @@ Wolfram Engine is proprietary and distributed separately by Wolfram Research, In
 
 "This project is not affiliated with, endorsed by, or sponsored by Wolfram Research, Inc. Wolfram and Wolfram Language are trademarks of Wolfram Research, Inc." // Print;
 
+(* $AllowDataUpdates = False; *)
+
 PacletDirectoryUnload /@ PacletDirectoryLoad[]; (* FIXME WL autoloads some crap *)
 
 ParentDirectory[DirectoryName[$InputFileName]] // SetDirectory;
@@ -20,6 +22,7 @@ Get[FileNameJoin[{Directory[], "Common", "LPM", "LPM.wl"}] ];
 
 Off[General::shdw]; (* avoid warning messages from ContextAliases *)
 Off[Part::partd]; (* avoid warning messages from WLX *)
+Off[OptionValue::optnf]
 
 (* WLJS Package manager *)
 Needs["CoffeeLiqueur`ExtensionManager`" -> "WLJSPackages`"];
@@ -201,11 +204,11 @@ Echo["\n\n"];
 
 (* check if there is internet or connection to WR servers *)
 (* NetworkConnected is not robust enough *)
-Internal`$NoWRServices = !StringQ[RandomWord[]];
+Internal`$NoWRServices = !StringQ[TimeConstrained[RandomWord[], 10, $Failed] ];
 
 If[TrueQ @ Internal`$NoWRServices, 
   Echo["No WR servers are reachable, we will apply patches to some system symbols..."];
-  Get[FileNameJoin[{Directory[], "Common", "Patches", "NoWR.wl"}]]
+  Get[FileNameJoin[{Directory[], "Common", "Patches", "NoWR.wl"}] ]
 ];
 
 WLJSPackages`Includes["js"];

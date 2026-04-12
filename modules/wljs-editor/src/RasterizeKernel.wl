@@ -105,30 +105,50 @@ CoffeeLiqueur`Extensions`Rasterize`Internal`GetPDF;
 
 Rasterize::frontget = "Could not get the rasterized data from the frontend";
 Rasterize::needraster = "Not supported directly. Please, apply Rasterize before exporting as an image"
+Rasterize::nowindow = "Creating offscreen window for rasterizing"
+
+(* [TODO] Use runAsyncInTemporalWindow if CurrentWindow is none or Failed *)
 
 Rasterize[any_, ___, OptionsPattern[] ] := (
   Message[Rasterize::noelectron];
   $Failed
 ) /; !TrueQ[Internal`Kernel`ElectronQ]
 
-Rasterize[any_, ___, OptionsPattern[] ] := With[{p = Promise[], channel = CreateUUID[], window = OptionValue["Window"], exposure = OptionValue["ExposureTime"], oversampling = OptionValue["ImageUpscaling"]},
-  EventHandler[channel, Function[Null,
-    Then[FrontFetchAsync[OverlayView["Capture", 1 ], "Window" -> window], Function[base,
-      EventFire[p, Resolve, ImportString[StringDrop[base, StringLength["data:image/png;base64,"] ], "Base64"] ];
-      FrontSubmit[OverlayView["Dispose"], "Window" -> window];
-    ] ]
-  ] ];
+Rasterize[any_, ___, opts: OptionsPattern[] ] := With[{window = OptionValue["Window"], p = Promise[], channel = CreateUUID[], exposure = OptionValue["ExposureTime"], oversampling = OptionValue["ImageUpscaling"]},
 
-  FrontSubmit[OverlayView["Create", EditorView[ToString[any, StandardForm] ], channel, exposure, If[NumberQ[oversampling], oversampling, 1] ], "Window" -> window];
+  If[FailureQ[FrontSubmit[1+1, "Window"->window] ],
+    EventFire[p, Resolve, True];
 
-  With[{r = WaitAll[p, 45 + exposure]},
-    If[FailureQ[r],
-      Message[Rasterize::frontget];
-    ];
+    With[{r = WaitAll[runAsyncInTemporalWindow[Function[a, 
+      RasterizeAsync[any, "Window"->a, opts]
+    ] ], 45 + exposure]},
 
-    r
+      If[FailureQ[r],
+        Message[Rasterize::frontget];
+      ];
+
+      r
+    ]
+  ,
+    EventHandler[channel, Function[Null,
+      Then[FrontFetchAsync[OverlayView["Capture", 1 ], "Window" -> window], Function[base,
+        EventFire[p, Resolve, ImportString[StringDrop[base, StringLength["data:image/png;base64,"] ], "Base64"] ];
+        FrontSubmit[OverlayView["Dispose"], "Window" -> window];
+      ] ]
+    ] ];
+
+    FrontSubmit[OverlayView["Create", EditorView[ToString[any, StandardForm] ], channel, exposure, If[NumberQ[oversampling], oversampling, 1] ], "Window" -> window];
+
+    With[{r = WaitAll[p, 45 + exposure]},
+      If[FailureQ[r],
+        Message[Rasterize::frontget];
+      ];
+
+      r
+    ]
+
   ]
-]
+] 
 
 
 RasterizeAsync[any_, ___, OptionsPattern[] ] := (
@@ -136,17 +156,27 @@ RasterizeAsync[any_, ___, OptionsPattern[] ] := (
   $Failed
 ) /; !TrueQ[Internal`Kernel`ElectronQ]
 
-RasterizeAsync[any_, ___, OptionsPattern[] ] := With[{p = Promise[], channel = CreateUUID[], window = OptionValue["Window"], exposure = OptionValue["ExposureTime"], oversampling = OptionValue["ImageUpscaling"]},
-  EventHandler[channel, Function[Null,
-    Then[FrontFetchAsync[OverlayView["Capture", 1 ], "Window" -> window], Function[base,
-      EventFire[p, Resolve, ImportString[StringDrop[base, StringLength["data:image/png;base64,"] ], "Base64"] ];
-      FrontSubmit[OverlayView["Dispose"], "Window" -> window];
+RasterizeAsync[any_, ___, opts: OptionsPattern[] ] := With[{p = Promise[], channel = CreateUUID[], window = OptionValue["Window"], exposure = OptionValue["ExposureTime"], oversampling = OptionValue["ImageUpscaling"]},
+  
+  If[FailureQ[FrontSubmit[1+1, "Window"->window] ],
+    EventFire[p, Resolve, True];
+    Message[Rasterize::nowindow ];
+
+    runAsyncInTemporalWindow[Function[a, 
+      RasterizeAsync[any, "Window"->a, opts]
     ] ]
-  ] ];
+  ,
+    EventHandler[channel, Function[Null,
+      Then[FrontFetchAsync[OverlayView["Capture", 1 ], "Window" -> window], Function[base,
+        EventFire[p, Resolve, ImportString[StringDrop[base, StringLength["data:image/png;base64,"] ], "Base64"] ];
+        FrontSubmit[OverlayView["Dispose"], "Window" -> window];
+      ] ]
+    ] ];
 
-  FrontSubmit[OverlayView["Create", EditorView[ToString[any, StandardForm] ], channel, exposure, If[NumberQ[oversampling], oversampling, 1] ], "Window" -> window];
+    FrontSubmit[OverlayView["Create", EditorView[ToString[any, StandardForm] ], channel, exposure, If[NumberQ[oversampling], oversampling, 1] ], "Window" -> window];
 
-  p
+    p
+  ]
 ]
 
 Options[Rasterize] = {"Window" :> CurrentWindow[], "ExposureTime" -> 1.75, "ImageUpscaling"->1}
@@ -161,17 +191,25 @@ producePDF[any_, OptionsPattern[] ] := (
   $Failed
 ) /; !TrueQ[Internal`Kernel`ElectronQ]
 
-producePDF[any_, OptionsPattern[] ] := With[{p = Promise[], channel = CreateUUID[], window = OptionValue["Window"], exposure = OptionValue["ExposureTime"], oversampling = OptionValue["ImageUpscaling"], landscape = OptionValue["Landscape"], crop = OptionValue["Crop"]},
-  EventHandler[channel, Function[Null,
-    Then[FrontFetchAsync[GetPDF["crop"->crop, "printBackground"->True, "preferCSSPageSize"->True, "scale"->1, "margins"-><|"right"->0, "left"->0, "top"->0, "bottom"->0|>], "Window" -> window], Function[payload,
-      EventFire[p, Resolve,  ByteArray[payload] ];
-      FrontSubmit[OverlayView["Dispose"], "Window" -> window];
+producePDF[any_, opts: OptionsPattern[] ] := With[{p = Promise[], channel = CreateUUID[], window = OptionValue["Window"], exposure = OptionValue["ExposureTime"], oversampling = OptionValue["ImageUpscaling"], landscape = OptionValue["Landscape"], crop = OptionValue["Crop"]},
+  If[FailureQ[FrontSubmit[1+1, "Window"->window] ],
+    Message[Rasterize::nowindow ];
+    EventFire[p, Resolve, True];
+    runAsyncInTemporalWindow[Function[a, 
+      producePDF[any, "Window"->a, opts]
     ] ]
-  ] ];
+  ,
+    EventHandler[channel, Function[Null,
+      Then[FrontFetchAsync[GetPDF["crop"->crop, "printBackground"->True, "preferCSSPageSize"->True, "scale"->1, "margins"-><|"right"->0, "left"->0, "top"->0, "bottom"->0|>], "Window" -> window], Function[payload,
+        EventFire[p, Resolve,  ByteArray[payload] ];
+        FrontSubmit[OverlayView["Dispose"], "Window" -> window];
+      ] ]
+    ] ];
 
-  FrontSubmit[OverlayView["Create", EditorView[ToString[any, StandardForm] ], channel, exposure, If[NumberQ[oversampling], oversampling, 1] ], "Window" -> window];
+    FrontSubmit[OverlayView["Create", EditorView[ToString[any, StandardForm] ], channel, exposure, If[NumberQ[oversampling], oversampling, 1] ], "Window" -> window];
 
-  p
+    p
+  ]
 ]
 
 
@@ -205,6 +243,16 @@ exportPDF[filename_, data_, opts___] :=
   Close[strm]
 ]
 
+
+runAsyncInTemporalWindow[asyncfunctionGenerator_] := With[{win = CreateWindow[Cell["", "Output", "HTML"], "Offscreen"->True, WindowSize->{1920, 1280} ], p = Promise[]},
+EventHandler[win, {
+  "Ready" -> Function[winowObject,
+    Then[asyncfunctionGenerator[winowObject], Function[result,
+      EventFire[p, Resolve, result];
+      NotebookClose[win];
+    ] ]
+  ]
+}]; p]
 
 End[]
 EndPackage[]

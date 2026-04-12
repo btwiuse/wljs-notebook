@@ -8,6 +8,7 @@ PGID=${PGID:-1000}
 groupmod -o -g "$PGID" wljs
 usermod -o -u "$PUID" wljs
 
+
 if [ "$(getent passwd wljs | cut -d: -f6)" != "/home/wljs" ]; then
   mkdir -p /home/wljs
   usermod -d /home/wljs -m wljs
@@ -29,15 +30,17 @@ mkdir -p $LICENSE_DIR
 
 chmod -R 777 $WL_DIR
 
-
+chown -R wljs:wljs /wljs
+chown -R wljs:wljs /home/wljs
 
 function activate_wolframscript {
+  local rc=0
   if [ -z ${WOLFRAMID_USERNAME+x} -o -z ${WOLFRAMID_PASSWORD+x} ]; then
     # Manual activation
-    su - wljs -c "wolframscript -activate"
+    su - wljs -c "wolframscript -activate" || rc=$?
     
-    if [ $? -ne 0 ]; then
-      echo "ERROR: Activation failed, exiting."
+    if [ $rc -ne 0 ]; then
+      echo "ERROR: Activation failed (exit code $rc)."
       echo "Giving a user an interactive shell"
       exec bash
     fi
@@ -51,29 +54,32 @@ function activate_wolframscript {
     lassign [wait] pid spawnpid os_error_flag value
     
     exit \$value
-    EOF"
+    EOF" || rc=$?
 
-    if [ $? -ne 0 ]; then
-      echo "ERROR: Activation with provided credentials failed."
+    if [ $rc -ne 0 ]; then
+      echo "ERROR: Activation with provided credentials failed (exit code $rc)."
       echo "Giving a user an interactive shell"
       exec bash
     fi
   fi
 
-  if [ -f $LICENSE_DIR/mathpass ]; then
-    # Activation success. 
+  # WolframEngine base image activates as 'ubuntu', so mathpass may land there
+  FOUND_MATHPASS=$(find /home /root -name mathpass 2>/dev/null | head -1)
+
+  if [ -f "$LICENSE_DIR/mathpass" ]; then
+    echo "Success!"
+  elif [ -n "$FOUND_MATHPASS" ]; then
+    echo "Found mathpass at: $FOUND_MATHPASS — copying to $LICENSE_DIR..."
+    mkdir -p "$LICENSE_DIR"
+    cp "$FOUND_MATHPASS" "$LICENSE_DIR/mathpass"
     echo "Success!"
   else
-    echo "ERROR: License file missing after activation."
-    echo "Giving a user an interactive shell"
+    echo "ERROR: mathpass not found after activation."
     exec bash
   fi
 }
 
-# Check if license exists else continue
-if [ ! -f $LICENSE_DIR/mathpass ]; then
-  activate_wolframscript
-fi
+activate_wolframscript
 
 chown -R wljs:wljs /wljs
 chown -R wljs:wljs /home/wljs
