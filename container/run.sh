@@ -79,7 +79,11 @@ function activate_wolframscript {
   fi
 }
 
-activate_wolframscript
+if [ -f "$LICENSE_DIR/mathpass" ]; then
+  echo "Found existing mathpass, skipping activation."
+else
+  activate_wolframscript
+fi
 
 chown -R wljs:wljs /wljs
 chown -R wljs:wljs /home/wljs
