@@ -85,6 +85,21 @@ else
   activate_wolframscript
 fi
 
+# WolframEngine resolves the license path by UID, not by $HOME.
+# The base image has an 'ubuntu' user at UID 1000; after we remap wljs to
+# the same UID, the kernel may look in /home/ubuntu instead of /home/wljs.
+# Propagate mathpass to every home directory that shares the effective UID.
+for OTHER_HOME in $(awk -F: -v uid="$PUID" '$3==uid {print $6}' /etc/passwd); do
+  if [ "$OTHER_HOME" != "$LICENSE_DIR/.." ]; then
+    DEST="$OTHER_HOME/.WolframEngine/Licensing"
+    if [ ! -f "$DEST/mathpass" ]; then
+      mkdir -p "$DEST"
+      cp "$LICENSE_DIR/mathpass" "$DEST/mathpass"
+      echo "Propagated mathpass to $DEST"
+    fi
+  fi
+done
+
 chown -R wljs:wljs /wljs
 chown -R wljs:wljs /home/wljs
 
