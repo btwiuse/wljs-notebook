@@ -23,13 +23,14 @@ A docker container for the [WLJS Notebook](https://github.com/JerryI/wolfram-js-
 ```bash
 docker run -it \
   -v ~/wljs:"/home/wljs/WLJS Notebooks" \
+  -v ~/wljs/tmp:/tmp \
   -v ~/wljs/Licensing:/home/wljs/.WolframEngine/Licensing \
-  -e PUID=$(id -u) \
-  -e PGID=$(id -g) \
   -p 8080:3000 \
   --name wljs \
   ghcr.io/wljsteam/wljs-notebook:main
 ```
+
+    Note: you need to mount `tmp` folder to keep automatic notebook backups after the restart of the container. **make sure that `~wljs/tmp` and entire `~wljs/~ has enough permissions**
 
     You will now be prompted for your Wolfram login information, enter it and wait for the message `Open your browser at http://...`. You can now safely detach from the container using <kbd>Ctrl</kbd>+<kbd>p</kbd> <kbd>Ctrl</kbd>+<kbd>q</kbd> and close your terminal.
 
@@ -74,26 +75,8 @@ docker run -it \
   -v ~/wljs:"/home/wljs/WLJS Notebooks" \
   -v ~/wljs/Licensing:/home/wljs/.WolframEngine/Licensing \
   -v ~/wljs/tmp:/tmp \
-  -e PUID=$(id -u) \
-  -e PGID=$(id -g) \
   -e WOLFRAMID_USERNAME=your@email.com \
   -e WOLFRAMID_PASSWORD=password \
-  -p 8080:3000 \
-  --name wljs \
-  ghcr.io/wljsteam/wljs-notebook:main
-```
-
-## Running as root
-*Not recommended*
-Change the mounting directories
-
-```bash
-docker run -it \
-  -v ~/wljs:"/root/WLJS Notebooks" \
-  -v ~/wljs/Licensing:/root/.WolframEngine/Licensing \
-  -v ~/wljs/tmp:/tmp \
-  -e PUID=$(id -u) \
-  -e PGID=$(id -g) \
   -p 8080:3000 \
   --name wljs \
   ghcr.io/wljsteam/wljs-notebook:main
@@ -232,8 +215,6 @@ Restart nginx.
 docker run -it \
   -v ~/wljs:"/home/wljs/WLJS Notebooks" \
   -v ~/wljs/Licensing:/home/wljs/.WolframEngine/Licensing \
-  -e PUID=$(id -u) \
-  -e PGID=$(id -g) \
   -p "127.0.0.1:3000:3000" \
   --name wljs \
   ghcr.io/wljsteam/wljs-notebook:main
