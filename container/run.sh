@@ -17,6 +17,13 @@ fi
 # a bug, no idea why
 usermod -d /home/wljs wljs
 
+# WolframEngine resolves $UserDocumentsDirectory by UID lookup in /etc/passwd,
+# not from $HOME. The base image 'ubuntu' user shares UID 1000 with 'wljs',
+# so the engine lands on /home/ubuntu. Point it at /home/wljs instead.
+if id ubuntu &>/dev/null; then
+  usermod -d /home/wljs ubuntu
+fi
+
 # Check if the script is running as root and set LICENSE_DIR accordingly
 if [ "$PGID" -eq 0 ]; then
   LICENSE_DIR=/root/.WolframEngine/Licensing
@@ -102,6 +109,8 @@ done
 
 chown -R wljs:wljs /wljs
 chown -R wljs:wljs /home/wljs
+# bind mount contents aren't affected by chown on parent; fix directly
+chmod -R u+rwX "/home/wljs/WLJS Notebooks" 2>/dev/null || true
 
 nginx
 su - wljs -c "wolframscript -f /wljs/Scripts/start.wls host 0.0.0.0 http 4000 ws 4001 ws2 4002 wsprefix ws ws2prefix ws2 store_config_in_docs true"
