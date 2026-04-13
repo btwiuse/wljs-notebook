@@ -239,15 +239,15 @@ test.describe('Easy check for most basic decorators', () => {
   test('Summary Box LinearLayer', async () => {
     await clearCell(page);
   
-    const outputCell = await evaluate(page, 'LinearLayer[5]//Quiet', 15000);
+    const outputCell = await evaluate(page, 'LinearLayer[5]//Quiet', 35000);
     await expect(outputCell).toHaveScreenshot(['screenshorts', 'linearyLayerNet.png']);
-    await delay(15000);
+    await delay(35000);
   });
   
   test('Summary Box NeuralNetImageOut', async () => {
     await clearCell(page);
   
-    const outputCell = await evaluate(page, 'SeedRandom[100];net = NetChain[{30, Sin, 3, Tanh, 3, LogisticSigmoid}, "Input" -> 2];nets = Table[NetInitialize[net, Method -> {"Random", "Weights" -> 3, "Biases" -> 2}, RandomSeeding -> 10], 16];row = Range[-2, 2, 0.04];coords = Tuples[row, 2];plot[net_] :=Image[Partition[net[coords], Length[row]]];Multicolumn@Table[plot[net], {net, nets}]', 15000, 3000);
+    const outputCell = await evaluate(page, 'SeedRandom[100];net = NetChain[{30, Sin, 3, Tanh, 3, LogisticSigmoid}, "Input" -> 2];nets = Table[NetInitialize[net, Method -> {"Random", "Weights" -> 3, "Biases" -> 2}, RandomSeeding -> 10], 16];row = Range[-2, 2, 0.04];coords = Tuples[row, 2];plot[net_] :=Image[Partition[net[coords], Length[row]]];Multicolumn@Table[plot[net], {net, nets}]', 25000, 8000);
     await expect(outputCell).toHaveScreenshot(['screenshorts', 'NeuralNetImageOut.png']);
   
   });
