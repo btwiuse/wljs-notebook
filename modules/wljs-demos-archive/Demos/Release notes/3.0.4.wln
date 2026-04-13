@@ -1,0 +1,639 @@
+<|"Notebook" -> <|"Controller" -> "f066c8d9-28e6-4731-8703-8085d322f752", 
+   "FocusedCell" -> CoffeeLiqueur`Notebook`Cells`CellObj[
+     CoffeeLiqueur`Notebook`Cells`CellObj`$558], "FocusedCellSelection" -> 
+    {1, 0}, "HaveToSaveAs" -> False, "MessangerChannel" -> Messanger, 
+   "ModalsChannel" -> "276d14cf-87cc-4e7f-b6a0-e117ef8e18d3", 
+   "Objects" -> <|"64e824d4-b57c-4d75-a660-15e91d96d777" -> 
+      <|"Public" -> Hold[Dataset[{Association["class" -> "1st", "age" -> 29, 
+            "sex" -> "female", "survived" -> True], Association[
+            "class" -> "1st", "age" -> 1, "sex" -> "male", 
+            "survived" -> True], Association["class" -> "1st", "age" -> 2, 
+            "sex" -> "female", "survived" -> False], Association[
+            "class" -> "1st", "age" -> 30, "sex" -> "male", 
+            "survived" -> False], Association["class" -> "1st", "age" -> 25, 
+            "sex" -> "female", "survived" -> False], Association[
+            "class" -> "1st", "age" -> 48, "sex" -> "male", 
+            "survived" -> True], Association["class" -> "1st", "age" -> 63, 
+            "sex" -> "female", "survived" -> True], Association[
+            "class" -> "1st", "age" -> 39, "sex" -> "male", 
+            "survived" -> False], Association["class" -> "1st", "age" -> 53, 
+            "sex" -> "female", "survived" -> True], Association[
+            "class" -> "1st", "age" -> 71, "sex" -> "male", 
+            "survived" -> False], Association["class" -> "1st", "age" -> 47, 
+            "sex" -> "male", "survived" -> False], Association[
+            "class" -> "1st", "age" -> 18, "sex" -> "female", 
+            "survived" -> True], Association["class" -> "1st", "age" -> 24, 
+            "sex" -> "female", "survived" -> True], Association[
+            "class" -> "1st", "age" -> 26, "sex" -> "female", 
+            "survived" -> True], Association["class" -> "1st", "age" -> 80, 
+            "sex" -> "male", "survived" -> True], Association[
+            "class" -> "1st", "age" -> Missing[], "sex" -> "male", 
+            "survived" -> False], Association["class" -> "1st", "age" -> 24, 
+            "sex" -> "male", "survived" -> False], Association[
+            "class" -> "1st", "age" -> 50, "sex" -> "female", 
+            "survived" -> True], Association["class" -> "1st", "age" -> 32, 
+            "sex" -> "female", "survived" -> True], Association[
+            "class" -> "1st", "age" -> 36, "sex" -> "male", 
+            "survived" -> False], Association["class" -> "1st", "age" -> 37, 
+            "sex" -> "male", "survived" -> True], Association[
+            "class" -> "1st", "age" -> 47, "sex" -> "female", 
+            "survived" -> True], Association["class" -> "1st", "age" -> 26, 
+            "sex" -> "male", "survived" -> True], Association[
+            "class" -> "1st", "age" -> 42, "sex" -> "female", 
+            "survived" -> True], Association["class" -> "1st", "age" -> 29, 
+            "sex" -> "female", "survived" -> True], Association[
+            "class" -> "1st", "age" -> 25, "sex" -> "male", 
+            "survived" -> False], Association["class" -> "1st", "age" -> 25, 
+            "sex" -> "male", "survived" -> True], Association[
+            "class" -> "1st", "age" -> 19, "sex" -> "female", 
+            "survived" -> True], Association["class" -> "1st", "age" -> 35, 
+            "sex" -> "female", "survived" -> True], Association[
+            "class" -> "1st", "age" -> 28, "sex" -> "male", 
+            "survived" -> True], Association["class" -> "1st", "age" -> 45, 
+            "sex" -> "male", "survived" -> False], Association[
+            "class" -> "1st", "age" -> 40, "sex" -> "male", 
+            "survived" -> True], Association["class" -> "1st", "age" -> 30, 
+            "sex" -> "female", "survived" -> True], Association[
+            "class" -> "1st", "age" -> 58, "sex" -> "female", 
+            "survived" -> True], Association["class" -> "1st", "age" -> 42, 
+            "sex" -> "male", "survived" -> False], Association[
+            "class" -> "1st", "age" -> 45, "sex" -> "female", 
+            "survived" -> True], Association["class" -> "1st", "age" -> 22, 
+            "sex" -> "female", "survived" -> True], Association[
+            "class" -> "1st", "age" -> Missing[], "sex" -> "male", 
+            "survived" -> True], Association["class" -> "1st", "age" -> 41, 
+            "sex" -> "male", "survived" -> False], Association[
+            "class" -> "1st", "age" -> 48, "sex" -> "male", 
+            "survived" -> False], Association["class" -> "1st", 
+            "age" -> Missing[], "sex" -> "male", "survived" -> False], 
+           Association["class" -> "1st", "age" -> 44, "sex" -> "female", 
+            "survived" -> True], Association["class" -> "1st", "age" -> 59, 
+            "sex" -> "female", "survived" -> True], Association[
+            "class" -> "1st", "age" -> 60, "sex" -> "female", 
+            "survived" -> True], Association["class" -> "1st", "age" -> 41, 
+            "sex" -> "female", "survived" -> True], Association[
+            "class" -> "1st", "age" -> 45, "sex" -> "male", 
+            "survived" -> False], Association["class" -> "1st", 
+            "age" -> Missing[], "sex" -> "male", "survived" -> False], 
+           Association["class" -> "1st", "age" -> 42, "sex" -> "male", 
+            "survived" -> True], Association["class" -> "1st", "age" -> 53, 
+            "sex" -> "female", "survived" -> True], Association[
+            "class" -> "1st", "age" -> 36, "sex" -> "male", 
+            "survived" -> True], Association["class" -> "1st", "age" -> 58, 
+            "sex" -> "female", "survived" -> True], Association[
+            "class" -> "1st", "age" -> 33, "sex" -> "male", 
+            "survived" -> False], Association["class" -> "1st", "age" -> 28, 
+            "sex" -> "male", "survived" -> False], Association[
+            "class" -> "1st", "age" -> 17, "sex" -> "male", 
+            "survived" -> False], Association["class" -> "1st", "age" -> 11, 
+            "sex" -> "male", "survived" -> True], Association[
+            "class" -> "1st", "age" -> 14, "sex" -> "female", 
+            "survived" -> True], Association["class" -> "1st", "age" -> 36, 
+            "sex" -> "male", "survived" -> True], Association[
+            "class" -> "1st", "age" -> 36, "sex" -> "female", 
+            "survived" -> True], Association["class" -> "1st", "age" -> 49, 
+            "sex" -> "male", "survived" -> False], Association[
+            "class" -> "1st", "age" -> Missing[], "sex" -> "female", 
+            "survived" -> True], Association["class" -> "1st", "age" -> 36, 
+            "sex" -> "male", "survived" -> False], Association[
+            "class" -> "1st", "age" -> 76, "sex" -> "female", 
+            "survived" -> True], Association["class" -> "1st", "age" -> 46, 
+            "sex" -> "male", "survived" -> False], Association[
+            "class" -> "1st", "age" -> 47, "sex" -> "female", 
+            "survived" -> True], Association["class" -> "1st", "age" -> 27, 
+            "sex" -> "male", "survived" -> True], Association[
+            "class" -> "1st", "age" -> 33, "sex" -> "female", 
+            "survived" -> True], Association["class" -> "1st", "age" -> 36, 
+            "sex" -> "female", "survived" -> True], Association[
+            "class" -> "1st", "age" -> 30, "sex" -> "female", 
+            "survived" -> True], Association["class" -> "1st", "age" -> 45, 
+            "sex" -> "male", "survived" -> True], Association[
+            "class" -> "1st", "age" -> Missing[], "sex" -> "female", 
+            "survived" -> True], Association["class" -> "1st", 
+            "age" -> Missing[], "sex" -> "male", "survived" -> False], 
+           Association["class" -> "1st", "age" -> 27, "sex" -> "male", 
+            "survived" -> False], Association["class" -> "1st", "age" -> 26, 
+            "sex" -> "female", "survived" -> True], Association[
+            "class" -> "1st", "age" -> 22, "sex" -> "female", 
+            "survived" -> True], Association["class" -> "1st", 
+            "age" -> Missing[], "sex" -> "male", "survived" -> False], 
+           Association["class" -> "1st", "age" -> 47, "sex" -> "male", 
+            "survived" -> False], Association["class" -> "1st", "age" -> 39, 
+            "sex" -> "female", "survived" -> True], Association[
+            "class" -> "1st", "age" -> 37, "sex" -> "male", 
+            "survived" -> False], Association["class" -> "1st", "age" -> 64, 
+            "sex" -> "female", "survived" -> True], Association[
+            "class" -> "1st", "age" -> 55, "sex" -> "female", 
+            "survived" -> True], Association["class" -> "1st", 
+            "age" -> Missing[], "sex" -> "male", "survived" -> False], 
+           Association["class" -> "1st", "age" -> 70, "sex" -> "male", 
+            "survived" -> False], Association["class" -> "1st", "age" -> 36, 
+            "sex" -> "female", "survived" -> True], Association[
+            "class" -> "1st", "age" -> 64, "sex" -> "female", 
+            "survived" -> True], Association["class" -> "1st", "age" -> 39, 
+            "sex" -> "male", "survived" -> False], Association[
+            "class" -> "1st", "age" -> 38, "sex" -> "female", 
+            "survived" -> True], Association["class" -> "1st", "age" -> 51, 
+            "sex" -> "male", "survived" -> True], Association[
+            "class" -> "1st", "age" -> 27, "sex" -> "male", 
+            "survived" -> True], Association["class" -> "1st", "age" -> 33, 
+            "sex" -> "female", "survived" -> True], Association[
+            "class" -> "1st", "age" -> 31, "sex" -> "male", 
+            "survived" -> False], Association["class" -> "1st", "age" -> 27, 
+            "sex" -> "female", "survived" -> True], Association[
+            "class" -> "1st", "age" -> 31, "sex" -> "male", 
+            "survived" -> True], Association["class" -> "1st", "age" -> 17, 
+            "sex" -> "female", "survived" -> True], Association[
+            "class" -> "1st", "age" -> 53, "sex" -> "male", 
+            "survived" -> True], Association["class" -> "1st", "age" -> 4, 
+            "sex" -> "male", "survived" -> True], Association[
+            "class" -> "1st", "age" -> 54, "sex" -> "female", 
+            "survived" -> True], Association["class" -> "1st", "age" -> 50, 
+            "sex" -> "male", "survived" -> False], Association[
+            "class" -> "1st", "age" -> 27, "sex" -> "female", 
+            "survived" -> True], Association["class" -> "1st", "age" -> 48, 
+            "sex" -> "female", "survived" -> True], Association[
+            "class" -> "1st", "age" -> 48, "sex" -> "female", 
+            "survived" -> True]}, TypeSystem`Vector[TypeSystem`Struct[
+            {"class", "age", "sex", "survived"}, {TypeSystem`Atom[
+              TypeSystem`Enumeration["1st"]], TypeSystem`Atom[Integer], 
+             TypeSystem`Atom[TypeSystem`Enumeration["female", "male"]], 
+             TypeSystem`Atom[TypeSystem`Boolean]}], 100], Association[]]]|>, 
+     "ff7d4d3e-2c4f-4490-be78-127d451a45d6" -> 
+      <|"Public" -> Hold[HTMLView["<div class=\"rounded-md border-0 py-1 px-1 \
+pr-10 text-gray-900 ring-1 ring-inset ring-gray-300\"><div \
+style=\"width:500px; height:200px; font-size:small\" \
+id=\"#instanceId\"></div><script type=\"module\"> /*credits: \
+https://github.com/mkrl/ttty */\n            var ttty = (function (f) {\n     \
+           \"use strict\";\n                const c = (t, n, e) => {\n        \
+                const o = document.createElement(t);\n                        \
+return n && (o.className = n), e && (o.innerHTML = e), o;\n                   \
+ },\n                    N = (t, n = !1) => {\n                        \
+(t.input.readOnly = !n), (t.inputContainer.style.opacity = n ? \"\" : \
+\"0\");\n                    },\n                    C = (t, n) => {\n        \
+                t.className = \"terminal\";\n                        const e \
+= c(\"div\", \"terminal-container\"),\n                            o = \
+c(\"div\", \"terminal-type\"),\n                            s = c(\"span\", \
+void 0, n),\n                            r = c(\"input\");\n                  \
+      return (\n                            r.setAttribute(\"type\", \
+\"text\"),\n                            o.append(s),\n                        \
+    o.append(r),\n                            t.append(e),\n                  \
+          t.append(o),\n                            \
+t.addEventListener(\"click\", () => { if (!window.getSelection().toString()) \
+r.focus(); }),\n                            { commandContainer: e, input: r, \
+inputContainer: o }\n                        );\n                    },\n     \
+               // Detect whether the terminal is scrolled to (or very near) \
+the bottom\n                    isNearBottom = (el, threshold = 8) =>\n       \
+                 el.scrollHeight - el.scrollTop - el.clientHeight <= \
+threshold,\n                \n                    // Print a line. Supports \
+command echo + error styling.\n                    T = (t, n, e, o, s, r, \
+aErr = !1) => {\n                        const a = c(\"p\");\n                \
+    \n                        if (n) {\n                            // \
+Command echo line\n                            a.innerText = r.prompt;\n      \
+                      const i = c(\"span\", \"terminal-command\", t);\n       \
+                     a.append(i);\n                        } else {\n         \
+                   // Output line\n                            if (aErr) {\n  \
+                              const i = c(\"span\", \"terminal-error\", t);\n \
+                               a.append(i);\n                            } \
+else {\n                                a.innerText = t;\n                    \
+        }\n                        }\n                    \n                  \
+      o.append(a);\n                        while (o.children.length > 1000) \
+o.removeChild(o.firstChild);\n                    };\n                \n      \
+          var p = ((t) => (\n                    // Fired when user submits \
+ANY input (raw string)\n                    (t.ON_COMMAND = \"onCommand\"),\n \
+                   (t.ON_PROCESS_START = \"onProcessStart\"),\n               \
+     (t.ON_PROCESS_END = \"onProcessStop\"),\n                    \
+(t.ON_PROCESS_INTERRUPT = \"onProcessInterrupt\"),\n                    // \
+Ctrl+C signal that does NOT automatically interrupt\n                    \
+(t.ON_CTRL_C = \"onCtrlC\"),\n                    (t.ON_INIT = \"onInit\"),\n \
+                   t\n                ))(p || {});\n            \n            \
+    const m = (t, n, e) => {\n                        const o = new \
+CustomEvent(t, { detail: e });\n                        n.dispatchEvent(o);\n \
+                   },\n                \n                    // NEW: no \
+command lookup, no help, no 404.\n                    // Just emit the raw \
+input.\n                    v = (t, n) => {\n                        \
+m(p.ON_COMMAND, n.settings.host, t);\n                    },\n                \
+\n                    _ = (t) => {\n                        const {\n         \
+                   settings: { host: n },\n                        } = t;\n   \
+                     N(t), (t.isProcessRunning = !0), m(p.ON_PROCESS_START, \
+n);\n                    },\n                    y = (t) => {\n               \
+         const {\n                            input: n,\n                     \
+       settings: { host: e },\n                        } = t;\n               \
+         N(t, !0), (t.isProcessRunning = !1), n.focus(), m(p.ON_PROCESS_END, \
+e);\n                    },\n                \n                    // Typing \
+animation with sticky autoscroll support\n                    R = (t, n, e, \
+o) =>\n                        new Promise((s) => {\n                         \
+   _(e);\n                            const r = c(\"p\", void 0, o ? \
+e.settings.prompt : \"\"),\n                                a = c(\"span\", \
+\"terminal-command\", \"\");\n                            o && r.append(a), \
+e.commandContainer.append(r);\n                            let i = 0;\n       \
+                     const u = o ? a : r,\n                                g \
+= () => {\n                                    if (i < t.length && \
+e.isProcessRunning) {\n                                        u.innerText += \
+t.charAt(i);\n                                        i++;\n                  \
+                  \n                                        if (e.autoScroll) \
+{\n                                            const host = \
+e.settings.host;\n                                            host.scrollTop \
+= host.scrollHeight;\n                                        }\n             \
+                       \n                                        \
+setTimeout(g, n);\n                                    } else {\n             \
+                           y(e), s(i === t.length);\n                         \
+           }\n                                };\n                            \
+setTimeout(g, n);\n                        }),\n                    \n        \
+            I = (t) => {\n                        const {\n                   \
+         input: { value: n },\n                            history: e,\n      \
+                      settings: { historyLength: o },\n                       \
+ } = t;\n                        if (n !== e[0]) {\n                          \
+  if (e.length >= o) {\n                                t.history = [n, \
+...e.slice(0, -1)];\n                                return;\n                \
+            }\n                            (t.history = [n, ...e]), \
+(t.lastHistoryIndex = 0);\n                        }\n                    \
+},\n                    P = (t, n) => {\n                        const { \
+history: e, lastHistoryIndex: o } = t,\n                            s = \
+e.length - 1;\n                        let r;\n                        (n && \
+o === 0) ||\n                            (!n && o === e.length) ||\n          \
+                  s < 0 ||\n                            (n\n                  \
+              ? ((r = o - 1), (t.input.value = r - 1 >= 0 ? e[r - 1] : \
+\"\"))\n                                : ((r = o + 1), (t.input.value = \
+e[o])),\n                            (t.lastHistoryIndex = r));\n             \
+       },\n                    b = (t, n) => {\n                        const \
+{ input: e, printstdout: o } = n;\n                        \
+t.addEventListener(\"keyup\", ({ key: s, ctrlKey: r }) => {\n                 \
+           // Ctrl+C always emits a dedicated signal event.\n                 \
+           // It no longer automatically stops/interrupts a running \
+process.\n                            if (r && s === \"c\") {\n               \
+                 if (n.isProcessRunning) {\n                                  \
+  // Optional echo like a real terminal\n                                    \
+o(\"^C\");\n                                }\n                               \
+ m(p.ON_CTRL_C, t, { isProcessRunning: n.isProcessRunning });\n               \
+                 return;\n                            }\n                     \
+   \n                            if (n.isProcessRunning) return;\n            \
+            \n                            if (s === \"Enter\") {\n            \
+                    n.lastHistoryIndex = 0;\n                            \n   \
+                             if (e.value.length > 0) {\n                      \
+              // Echo the command\n                                    \
+o(e.value, !0);\n                                \n                           \
+         // Save history\n                                    I(n);\n         \
+                       \n                                    // Emit raw \
+input to host\n                                    v(e.value, n);\n           \
+                     } else {\n                                    o(\" \", \
+!0);\n                                }\n                            \n       \
+                         e.value = \"\";\n                                \
+return;\n                            }\n                        \n            \
+                if (s === \"ArrowUp\") {\n                                \
+P(n);\n                                return;\n                            \
+}\n                            s === \"ArrowDown\" && P(n, !0);\n             \
+           });\n                    },\n                    A =\n             \
+           \
+'.terminal{border-radius:0.375rem;overflow-y:auto;overflow-x:hidden;backgroun\
+d-color:var(--terminal-bg-color,#fff);padding:15px;box-sizing:border-box}.ter\
+minal \
+*{color:var(--terminal-fg-color,#1a1a1a);font-family:var(--terminal-font,\"Ha\
+sklig-Regular\",monospace)}.terminal::-webkit-scrollbar{width:6px}.terminal::\
+-webkit-scrollbar-track{background:var(--terminal-bg-color,#fff)}.terminal::-\
+webkit-scrollbar-thumb{background:var(--terminal-accent-color,#2563eb);border\
+-radius:3px}.terminal::-webkit-scrollbar-thumb:hover{background:var(--termina\
+l-fg-color,#1a1a1a)}.terminal-type{width:100%;display:inline-block}.terminal-\
+type>span{padding-right:0}.terminal-type>input{width:calc(100% - \
+1rem);background:transparent;border:0;font-size:inherit;padding:0;line-height\
+:normal}.terminal-type>input:focus{border-radius:0.25rem;box-shadow:none;bord\
+er:none;outline:none}.terminal-container>p{margin:0;user-select:text}.termina\
+l-container>p \
+*::selection,.terminal-container>p::selection{background-color:var(--terminal\
+-selection-color,#bfdbfe);color:#1a1a1a}span.terminal-command{color:var(--ter\
+minal-accent-color,#2563eb)}span.terminal-error{color:var(--terminal-error-co\
+lor,#cc1010)}',\n                    M = () => {\n                        if \
+(document.head.querySelectorAll('style[data-type=\"terminal\"]').length === \
+0) {\n                            const t = c(\"style\", void 0, A);\n        \
+                    t.setAttribute(\"data-type\", \"terminal\"), \
+t.setAttribute(\"type\", \"text/css\"), document.head.append(t);\n            \
+            }\n                    },\n                    w = (t, n, e) => \
+{\n                        e.prompt = t;\n                        const o = \
+n.querySelector(\"span\");\n                        o.innerText = t;\n        \
+            },\n                    H = ({\n                        host: \
+t,\n                        welcomeMessage: n,\n                        \
+prompt: e = \"$: \",\n                        historyLength: o = 50,\n        \
+                history: s = [],\n                        // commands + \
+enableHelp kept for backwards shape, but no longer used\n                     \
+   enableHelp: r = !0,\n                        commands: a = {},\n           \
+         }) => {\n                        const i = { host: t, \
+welcomeMessage: n, prompt: e, historyLength: o, enableHelp: r, commands: a \
+};\n                        M();\n                        const { \
+commandContainer: u, input: g, inputContainer: S } = C(t, e),\n               \
+             l = {\n                                history: s,\n             \
+                   lastHistoryIndex: 0,\n                                \
+isProcessRunning: !1,\n                                settings: i,\n         \
+                       commandContainer: u,\n                                \
+inputContainer: S,\n                                input: g,\n               \
+             \n                                // Backwards-compatible print \
+(stdout)\n                                print: (d, h = !1, O = !0) => {\n   \
+                                 T(d, h, O, u, g, i, !1);\n                   \
+                 if (l.autoScroll) {\n                                        \
+t.scrollTop = t.scrollHeight;\n                                    }\n        \
+                        },\n                            \n                    \
+            // New stdout printer (alias of print)\n                          \
+      printstdout: (d, h = !1, O = !0) => {\n                                 \
+   T(d, h, O, u, g, i, !1);\n                                    if \
+(l.autoScroll) {\n                                        t.scrollTop = \
+t.scrollHeight;\n                                    }\n                      \
+          },\n                            \n                                \
+// New stderr printer (red)\n                                printstderror: \
+(d, h = !1, O = !0) => {\n                                    T(d, h, O, u, \
+g, i, !0);\n                                    if (l.autoScroll) {\n         \
+                               t.scrollTop = t.scrollHeight;\n                \
+                    }\n                                },\n                   \
+         \n                                // Emit raw input\n                \
+                run: (d) => v(d, l),\n                            \n          \
+                      start: () => _(l),\n                                \
+stop: () => y(l),\n                                type: (d, h = 60, O) => \
+R(d, h, l, O),\n                                setPrompt: (d) => w(d, S, \
+i),\n                            };\n                        \n               \
+         // Sticky autoscroll state\n                        l.autoScroll = \
+!0;\n                        \n                        const updateAutoScroll \
+= () => {\n                            l.autoScroll = isNearBottom(t);\n      \
+                  };\n                    \n                        // Track \
+user scroll to toggle autoscroll\n                        \
+t.addEventListener(\"scroll\", updateAutoScroll);\n                        \
+updateAutoScroll();\n                    \n                        b(t, l);\n \
+                       m(p.ON_INIT, t);\n                        n && \
+l.printstdout(n);\n                        return l;\n                    \
+};\n                \n                return (\n                    \
+(f.TerminalEvent = p),\n                    (f.initTerminal = H),\n           \
+         Object.defineProperties(f, { __esModule: { value: !0 }, \
+[Symbol.toStringTag]: { value: \"Module\" } }),\n                    f\n      \
+          );\n            })({});\n\n            const dom = \
+document.getElementById('#instanceId');\n            const term = \
+ttty.initTerminal({host: dom, prompt: \"> \", commands:{}});\n            \
+dom.addEventListener('onCommand', e => {\n                \
+server.kernel.io.fire('4c451660-9ff8-4ba0-bfb4-f2ee28941db4', e.detail, \
+'Command');\n            });\n            dom.addEventListener('onCtrlC', e \
+=> {\n                \
+server.kernel.io.fire('4c451660-9ff8-4ba0-bfb4-f2ee28941db4', true, \
+'Interrupt');\n            });\n            core['tinyXtermControl34'] = \
+async (args, env) => {\n                const type = await \
+interpretate(args[0], env);\n                const text = await \
+interpretate(args[1], env);\n                if (type == 'error') {\n         \
+           if (Array.isArray(text)) \
+text.forEach((t)=>{term.printstderror(t)}); else term.printstderror(text);\n  \
+              } else {\n                    if (Array.isArray(text)) \
+text.forEach((t)=>{term.printstdout(t)}); else term.printstdout(text);\n      \
+          }\n            }\n            \
+server.kernel.io.fire('4c451660-9ff8-4ba0-bfb4-f2ee28941db4', true, \
+'Mount');</script></div>", Prolog -> 
+           CoffeeLiqueur`Extensions`InputsOutputs`Tools`TemplateProcessor[
+            Association["instanceId" -> CreateUUID[]]]]]|>, 
+     "0c10b84e-566c-48fd-9530-3f9c547323db" -> 
+      <|"Public" -> Hold[HTMLView["<button style=\"text-transform: uppercase; \
+letter-spacing: 0.04em; color: #6b7280;\" class=\"sm-controls rounded \
+bg-white px-2 py-1 text-xs text-gray-900 ring-1 ring-inset ring-gray-300 \" \
+type=\"button\" id=\"#instanceId\">Click me</button>\n<script \
+type=\"module\"> const el = document.getElementById('#instanceId');\n         \
+   el.addEventListener('mousedown', (event)=>{el.style.boxShadow = 'inset 0px \
+0px 3px 2px rgba(15, 15, 15, 0.2)'});\n            \
+el.addEventListener('mouseup', (event)=>{el.style.boxShadow = ''});\n         \
+   el.addEventListener('mouseleave', (event)=>{el.style.boxShadow = ''});\n   \
+         el.addEventListener('click', (event)=>{\n                \
+server.kernel.io.fire('47f6a519-9832-447d-9afc-13ab73dcc936', true, \
+'Default');     \n            });</script>", Prolog -> 
+           CoffeeLiqueur`Extensions`InputsOutputs`Tools`TemplateProcessor[
+            Association["instanceId" -> CreateUUID[]]]]]|>, 
+     "0d6ce436-f0ef-4a71-871a-9874a68f589f" -> 
+      <|"Public" -> Hold[HTMLView["<div class=\"relative shrink-0 gap-y-3 \
+pb-2 flex flex-col sm-controls\"><div class=\"flex gap-x-5 \
+sm-controls\"><label class=\"block mb-2 text-sm font-medium text-gray-900 \" \
+style=\"\" for=\"default-range\"></label><input class=\"ml-auto h-2 grow \
+max-w-60 block p-2.5 text-xs text-gray-900 bg-gray-50 rounded-md \
+border-2-gray-50 border border-gray-300 focus:ring-blue-500 \
+focus:border-blue-500 \" style=\"font-size:larger; padding:1rem\" min=\"0\" \
+max=\"1\" step=\"0.1\" value=\"0.5\" id=\"n-#instanceId\" \
+type=\"number\"></input></div><input min=\"0\" max=\"1\" step=\"0.1\" \
+value=\"0.5\" class=\"sm-controls native \" style=\"width:50vw; accent-color: \
+red \" id=\"r-#instanceId\" type=\"range\"></input></div>\n<script \
+type=\"module\"> const num = document.getElementById('n-#instanceId');\n      \
+  const ran = document.getElementById('r-#instanceId');\n\n        let \
+harpticQ = true;\n\n        function isNumber(value) { return typeof value \
+=== 'number'}\n\n        num.addEventListener('input', (event)=> {\n          \
+  if (isNaN(num.value)) return;\n            ran.value = num.value;\n         \
+   server.kernel.io.fire('eecc7fa5-b3fb-4e5d-9c57-249f5f761556', \
+Number(num.value), 'Default');      \n        });\n\n        \
+ran.addEventListener('input', (event)=> {\n            if (isNaN(ran.value)) \
+return;\n            num.value = ran.value;\n            \
+server.kernel.io.fire('eecc7fa5-b3fb-4e5d-9c57-249f5f761556', \
+Number(ran.value), 'Default');   \n            if (harpticQ) {\n              \
+  if (!window.electronAPI) {harpticQ = false; return}\n                if \
+(!window.electronAPI.harptic) {harpticQ = false; return}\n                \
+window.electronAPI.harptic();\n            }               \n        \
+});</script>", Prolog -> 
+           CoffeeLiqueur`Extensions`InputsOutputs`Tools`TemplateProcessor[
+            Association["instanceId" -> CreateUUID[]]]]]|>|>, 
+   "Path" -> "/Users/kirill/Github/wolfram-js-frontend/modules/wljs-demos-arc\
+hive/Demos/Release notes/3.0.4.wln", "PublicFields" -> {"Properties"}, 
+   "Quick" -> True, "Symbols" -> <||>, 
+   "TOC" -> {CoffeeLiqueur`Extensions`TOC`Private`heading[1, 
+      "Release notes *3.0.4*", CoffeeLiqueur`Notebook`Cells`CellObj[
+       CoffeeLiqueur`Notebook`Cells`CellObj`$480]], 
+     CoffeeLiqueur`Extensions`TOC`Private`heading[2, 
+      "Sorting feature for Dataset and Tabular", 
+      CoffeeLiqueur`Notebook`Cells`CellObj[
+       CoffeeLiqueur`Notebook`Cells`CellObj`$499]], 
+     CoffeeLiqueur`Extensions`TOC`Private`heading[2, 
+      "Improved input elements", CoffeeLiqueur`Notebook`Cells`CellObj[
+       CoffeeLiqueur`Notebook`Cells`CellObj`$541]], 
+     CoffeeLiqueur`Extensions`TOC`Private`heading[3, "More styling options", 
+      CoffeeLiqueur`Notebook`Cells`CellObj[
+       CoffeeLiqueur`Notebook`Cells`CellObj`$557]], 
+     CoffeeLiqueur`Extensions`TOC`Private`heading[2, "Shortcuts", 
+      CoffeeLiqueur`Notebook`Cells`CellObj[
+       CoffeeLiqueur`Notebook`Cells`CellObj`$530]], 
+     CoffeeLiqueur`Extensions`TOC`Private`heading[2, "Misc", 
+      CoffeeLiqueur`Notebook`Cells`CellObj[
+       CoffeeLiqueur`Notebook`Cells`CellObj`$524]]}, 
+   "TrashedCells" -> {"(* ::: Input ::: *)\nSeries[Sin[x], {x,0,2}]\n\n(* ::: \
+Output ::: *)\n(SeriesData[x, 0, {1}, 1, 3, 1])", ".md\nCopied expression:", 
+     "Series[Sin[x], {x,0,2}]", ".md\nFor example:", ".md\n## Copy cells as \
+plain text\nWe added an option to copy a group of cells as `InputForm`, it \
+automatically strips off all syntax sugar and marks input and output \
+cells\n\n\n![](/attachments/Screenshot-2026-04-02-at-12.53.25-01e.png)\n"}|>, 
+ "Cells" -> {<|"Data" -> ".md\n# Release notes *3.0.4*\n\n<Now/>\n", 
+    "Display" -> "codemirror", "Hash" -> 
+     "b5cc7aef-73f3-4409-93d2-a531ddf13c5b", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "e8cfaf8a-977d-4d19-8b78-c84a2ad5b917"|>, 
+   <|"Data" -> "# Release notes *3.0.4*\n\nMon 13 Apr 2026 10:11:07", 
+    "Display" -> "markdown", "Hash" -> 
+     "8c472425-31d7-4444-8229-e6a112721d71", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "e8cfaf8a-977d-4d19-8b78-c84a2ad5b917"|>, 
+   <|"Data" -> ".md\n## Sorting feature for Dataset and Tabular\nWe added \
+both Kernel- and frontend-side sorting for `Dataset` and `Tabular`. Just \
+click on one of the headers:", "Display" -> "codemirror", 
+    "Hash" -> "faefbc71-5f76-4c89-8d82-3f737231de32", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "e8cfaf8a-977d-4d19-8b78-c84a2ad5b917"|>, 
+   <|"Data" -> "## Sorting feature for Dataset and Tabular\nWe added both \
+Kernel- and frontend-side sorting for `Dataset` and `Tabular`. Just click on \
+one of the headers:", "Display" -> "markdown", 
+    "Hash" -> "247cb092-1cd0-4d12-89a5-ca5bfc8c5ccd", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "e8cfaf8a-977d-4d19-8b78-c84a2ad5b917"|>, 
+   <|"Data" -> "Take[ExampleData[{\"Dataset\",\"Titanic\"}],100]", 
+    "Display" -> "codemirror", "Hash" -> 
+     "910d1a16-f2f4-4315-ad62-4a4120640194", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
+    "Notebook" -> "e8cfaf8a-977d-4d19-8b78-c84a2ad5b917"|>, 
+   <|"Data" -> "(*VB[*)(FrontEndRef[\"64e824d4-b57c-4d75-a660-15e91d96d777\"]\
+)(*,*)(*\"1:eJxTTMoPSmNkYGAoZgESHvk5KRCeEJBwK8rPK3HNS3GtSE0uLUlMykkNVgEKm5mkW\
+hiZpJjoJpmaJ+uapJib6iaamRnoGpqmWhqmWJqlmJubAwB9ExUr\"*)(*]VB*)", 
+    "Display" -> "codemirror", "Hash" -> 
+     "1fd1821a-1814-41be-885b-91a51907d588", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "e8cfaf8a-977d-4d19-8b78-c84a2ad5b917"|>, 
+   <|"Data" -> ".md\nOr course, if you export a notebook to an HTML file \
+sorting may not work for large datasets, which are partially stored on the \
+kernel.", "Display" -> "codemirror", 
+    "Hash" -> "19964088-44cd-4146-ba43-1f08aa70bceb", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "e8cfaf8a-977d-4d19-8b78-c84a2ad5b917"|>, 
+   <|"Data" -> "Or course, if you export a notebook to an HTML file sorting \
+may not work for large datasets, which are partially stored on the kernel.", 
+    "Display" -> "markdown", "Hash" -> 
+     "3d8a2c6f-fdeb-46c4-aa2f-87ba8df327b5", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "e8cfaf8a-977d-4d19-8b78-c84a2ad5b917"|>, 
+   <|"Data" -> ".md\n## Improved input elements\nWe fixed `InputTerminal`, \
+now it is selectable and can hold up to 1000 entries", 
+    "Display" -> "codemirror", "Hash" -> 
+     "61ff313d-bc64-4240-92d6-4032456f7994", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "e8cfaf8a-977d-4d19-8b78-c84a2ad5b917"|>, 
+   <|"Data" -> "## Improved input elements\nWe fixed `InputTerminal`, now it \
+is selectable and can hold up to 1000 entries", "Display" -> "markdown", 
+    "Hash" -> "40aec8ea-232e-4338-a256-13ee8dc48136", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "e8cfaf8a-977d-4d19-8b78-c84a2ad5b917"|>, 
+   <|"Data" -> "t = InputTerminal[]", "Display" -> "codemirror", 
+    "Hash" -> "500ba53e-1123-40d5-b73d-48f9046221a2", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
+    "Notebook" -> "e8cfaf8a-977d-4d19-8b78-c84a2ad5b917"|>, 
+   <|"Data" -> "(*VB[*)(EventObject[<|\"StandardOutput\" -> \
+OutputStream[\"/private/var/folders/fs/ch7ddlhn7jz5vyg5k8bbrxyh0000gn/T/m0000\
+50359951\", 5], \"StandardError\" -> \
+OutputStream[\"/private/var/folders/fs/ch7ddlhn7jz5vyg5k8bbrxyh0000gn/T/m0000\
+51359951\", 6], \"Id\" -> \"0c5af463-5623-4beb-98dd-d6aaa3cdd78e\", \"View\" \
+-> \
+\"ff7d4d3e-2c4f-4490-be78-127d451a45d6\"|>])(*,*)(*\"1:eJxTTMoPSmNkYGAoZgESHv\
+k5KRCeEJBwK8rPK3HNS3GtSE0uLUlMykkNVgEKp6WZp5ikGKfqGiWbpOmamFga6CalmlvoGhoBxU0\
+NE01MU8wAjakVrA==\"*)(*]VB*)", "Display" -> "codemirror", 
+    "Hash" -> "d6012cad-3340-4091-85b2-3cc06d724396", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "e8cfaf8a-977d-4d19-8b78-c84a2ad5b917"|>, 
+   <|"Data" -> "WriteString[t[\"StandardOutput\"], \"Hey\"];", 
+    "Display" -> "codemirror", "Hash" -> 
+     "e45def8e-bfb9-44a1-87bf-28f6c50746c6", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
+    "Notebook" -> "e8cfaf8a-977d-4d19-8b78-c84a2ad5b917"|>, 
+   <|"Data" -> ".md\n### More styling options\nWe provide many styling \
+options for `InputButton`, `InputRange` and others. Now you can directly \
+assign classes or styles for labels or controls", "Display" -> "codemirror", 
+    "Hash" -> "fa3a6c42-2961-4798-b8f1-42e6d4b7edbc", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "e8cfaf8a-977d-4d19-8b78-c84a2ad5b917"|>, 
+   <|"Data" -> "### More styling options\nWe provide many styling options for \
+`InputButton`, `InputRange` and others. Now you can directly assign classes \
+or styles for labels or controls", "Display" -> "markdown", 
+    "Hash" -> "77949936-f4db-4a5b-a607-8284d862fc47", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "e8cfaf8a-977d-4d19-8b78-c84a2ad5b917"|>, 
+   <|"Data" -> "InputButton[\"Click me\", \"Style\"->\"text-transform: \
+uppercase; letter-spacing: 0.04em; color: #6b7280;\"]", 
+    "Display" -> "codemirror", "Hash" -> 
+     "1d9d42d0-b42e-4138-8069-512efb4c719f", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
+    "Notebook" -> "e8cfaf8a-977d-4d19-8b78-c84a2ad5b917"|>, 
+   <|"Data" -> "(*VB[*)(EventObject[<|\"Id\" -> \
+\"47f6a519-9832-447d-9afc-13ab73dcc936\", \"Initial\" -> False, \"View\" -> \
+\"0c10b84e-566c-48fd-9530-3f9c547323db\"|>])(*,*)(*\"1:eJxTTMoPSmNkYGAoZgESHv\
+k5KRCeEJBwK8rPK3HNS3GtSE0uLUlMykkNVgEKGyQbGiRZmKTqmpqZJeuaWKSl6FqaGhvoGqdZJpu\
+amBsbGackAQB9ZhVI\"*)(*]VB*)", "Display" -> "codemirror", 
+    "Hash" -> "e4262257-383b-44e4-8be8-46f94d5efcbe", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "e8cfaf8a-977d-4d19-8b78-c84a2ad5b917"|>, 
+   <|"Data" -> ".md\nFor sliders you have many options", 
+    "Display" -> "codemirror", "Hash" -> 
+     "027245ad-6195-4fac-a2da-a2767df03574", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "e8cfaf8a-977d-4d19-8b78-c84a2ad5b917"|>, 
+   <|"Data" -> "For sliders you have many options", "Display" -> "markdown", 
+    "Hash" -> "782426e6-88ec-4110-8484-dc6ecabc72ba", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "e8cfaf8a-977d-4d19-8b78-c84a2ad5b917"|>, 
+   <|"Data" -> "InputRange[0,1,0.1, \"SliderStyle\"->\"width:50vw; \
+accent-color: red \", \"CounterStyle\"->\"font-size:larger; padding:1rem\"]", 
+    "Display" -> "codemirror", "Hash" -> 
+     "f245e3c2-8f0f-4725-84ba-1370e840af3e", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
+    "Notebook" -> "e8cfaf8a-977d-4d19-8b78-c84a2ad5b917"|>, 
+   <|"Data" -> "(*VB[*)(EventObject[<|\"Id\" -> \
+\"eecc7fa5-b3fb-4e5d-9c57-249f5f761556\", \"Initial\" -> 0.5, \"View\" -> \
+\"0d6ce436-f0ef-4a71-871a-9874a68f589f\"|>])(*,*)(*\"1:eJxTTMoPSmNkYGAoZgESHv\
+k5KRCeEJBwK8rPK3HNS3GtSE0uLUlMykkNVgEKG6SYJaeaGJvpphmkpumaJJob6lqYGybqWlqYmyS\
+aWaSZWlimAQCF/RWO\"*)(*]VB*)", "Display" -> "codemirror", 
+    "Hash" -> "62373c16-f49e-4de9-8c29-04ac62f1eeb5", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "e8cfaf8a-977d-4d19-8b78-c84a2ad5b917"|>, 
+   <|"Data" -> ".md\n## Shortcuts\n- Added a shortcut for evaluating the \
+whole notebook <kbd>Alt-j</kbd> or <kbd>Cmd-j</kbd>\n- New command palette \
+item: *Optimize memory*, which effectively runs a major garbage collector on \
+the kernel and server using `Share` method.", "Display" -> "codemirror", 
+    "Hash" -> "9f8432c9-30bc-46f4-9906-207d653fff84", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "e8cfaf8a-977d-4d19-8b78-c84a2ad5b917"|>, 
+   <|"Data" -> "## Shortcuts\n- Added a shortcut for evaluating the whole \
+notebook <kbd >Alt-j</kbd> or <kbd >Cmd-j</kbd>\n- New command palette item: \
+*Optimize memory*, which effectively runs a major garbage collector on the \
+kernel and server using `Share` method.", "Display" -> "markdown", 
+    "Hash" -> "7fb8f1a7-e4a3-48a6-9294-10569a6feb79", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "e8cfaf8a-977d-4d19-8b78-c84a2ad5b917"|>, 
+   <|"Data" -> ".md\n## Misc\n- Fixed major issues with license activation on \
+docker image\n- `Ready` event for `CreateWindow` now returns a `WindowObj`\n- \
+Offscreen rasterization support if window is not provided\n- Minor issues \
+with `Manipulate`\n- Fixed pale 2D plots (`ParametricPlot` and others)", 
+    "Display" -> "codemirror", "Hash" -> 
+     "382a7315-57d9-4a31-a43b-b0e8877a71fa", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "e8cfaf8a-977d-4d19-8b78-c84a2ad5b917"|>, 
+   <|"Data" -> "## Misc\n- Fixed major issues with license activation on \
+docker image\n- `Ready` event for `CreateWindow` now returns a `WindowObj`\n- \
+Offscreen rasterization support if window is not provided\n- Minor issues \
+with `Manipulate`\n- Fixed pale 2D plots (`ParametricPlot` and others)", 
+    "Display" -> "markdown", "Hash" -> 
+     "0eaa7dda-a328-468e-b641-d9befffc6d30", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "e8cfaf8a-977d-4d19-8b78-c84a2ad5b917"|>}, 
+ "serializer" -> "jsfn4"|>
