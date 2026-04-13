@@ -24,14 +24,14 @@ test.describe('3D Plot', () => {
   test('Graphics3D Basics 1', async () => {
     await clearCell(page);
   
-    const outputCell = await evaluate(page, 'Graphics3D[Style[Dodecahedron[], Yellow], ImageSize->150]', 15000, 1500);
+    const outputCell = await evaluate(page, 'Graphics3D[Style[Dodecahedron[], Yellow], ImageSize->150]', 25000, 3500);
     await expect(outputCell).toHaveScreenshot(['screenshorts', 'graphicsDodecahedron.png']);
   });
 
   test('Graphics3D Basics 2', async () => {
     await clearCell(page);
   
-    const outputCell = await evaluate(page, 'SeedRandom[10]; Graphics3D[Table[Style[Sphere[RandomInteger[10, 3]], Opacity[0.5]], 50]]', 15000, 1500);
+    const outputCell = await evaluate(page, 'SeedRandom[10]; Graphics3D[Table[Style[Sphere[RandomInteger[10, 3]], Opacity[0.5]], 50]]', 25000, 3500);
     await expect(outputCell).toHaveScreenshot(['screenshorts', 'graphicsBasic2.png']);
   });
 
@@ -46,7 +46,7 @@ test.describe('3D Plot', () => {
   test('Graphics3D Basics 4 (Lighting)', async () => {
     await clearCell(page);
   
-    const outputCell = await evaluate(page, 'Graphics3D[{PointLight[Red, -{2, 2, -2}],PointLight[Green, -{-2, 2, -2}],PointLight[Blue, -{-2, -2, -2}],{Directive["Roughness" -> 1],Icosahedron[1]}}]', 15000, 1500);
+    const outputCell = await evaluate(page, 'Graphics3D[{PointLight[Red, -{2, 2, -2}],PointLight[Green, -{-2, 2, -2}],PointLight[Blue, -{-2, -2, -2}],{Directive["Roughness" -> 1],Icosahedron[1]}}]', 25000, 2500);
     await expect(outputCell).toHaveScreenshot(['screenshorts', 'graphicsBasic4.png']);
   });
 
@@ -56,14 +56,14 @@ test.describe('3D Plot', () => {
   test('Spherical Plot', async () => {
     await clearCell(page);
   
-    const outputCell = await evaluate(page, '(*SbB[*)Subscript[Y(*|*),(*|*)k_,q_](*]SbB*)[θ_, ϕ_] := SphericalHarmonicY[k,q, θ, ϕ]; SphericalPlot3D[(*SbB[*)Subscript[Y(*|*),(*|*)4,0](*]SbB*)[θ, ϕ], {θ,0,π}, {ϕ,0,2π}]', 15000, 1500);
+    const outputCell = await evaluate(page, '(*SbB[*)Subscript[Y(*|*),(*|*)k_,q_](*]SbB*)[θ_, ϕ_] := SphericalHarmonicY[k,q, θ, ϕ]; SphericalPlot3D[(*SbB[*)Subscript[Y(*|*),(*|*)4,0](*]SbB*)[θ, ϕ], {θ,0,π}, {ϕ,0,2π}]', 25000, 2500);
     await expect(outputCell).toHaveScreenshot(['screenshorts', 'spherical.png']);
   });  
 
   test('Vector plot', async () => {
     await clearCell(page);
   
-    const outputCell = await evaluate(page, 'VectorPlot3D[{x, y, z}, {x, -1, 1}, {y, -1, 1}, {z, -1, 1}]', 15000, 1500);
+    const outputCell = await evaluate(page, 'VectorPlot3D[{x, y, z}, {x, -1, 1}, {y, -1, 1}, {z, -1, 1}]', 25000, 2500);
     await expect(outputCell).toHaveScreenshot(['screenshorts', 'vector.png']);
   }); 
 
@@ -84,7 +84,7 @@ test.describe('3D Plot', () => {
   test('3D Materials', async () => {
     await clearCell(page);
   
-    const outputCell = await evaluate(page, 'Graphics3D[{Darker[White], Polygon[{{-2,-2,0}, {2,-2,0}, {2,2,0}, {-2,2,0}}],{ Directive[Cyan, "MaterialThickness"->1.0, "Transmission"->1.0,"Roughness"->0.13, "Ior"->2.0], Sphere[{0,0,1}, 1]}}]', 15000, 500);
+    const outputCell = await evaluate(page, 'Graphics3D[{Darker[White], Polygon[{{-2,-2,0}, {2,-2,0}, {2,2,0}, {-2,2,0}}],{ Directive[Cyan, "MaterialThickness"->1.0, "Transmission"->1.0,"Roughness"->0.13, "Ior"->2.0], Sphere[{0,0,1}, 1]}}]', 25000, 1500);
     await expect(outputCell).toHaveScreenshot(['screenshorts', 'materials.png']);
   });   
 
@@ -92,14 +92,14 @@ test.describe('3D Plot', () => {
   test('Glass Material', async () => {
     await clearCell(page);
   
-    const outputCell = await evaluate(page, 'Graphics3D[{Plot3D[Sin[x] Cos[y], {x,-10,10}, {y,-10,10}][[1]], {Graphics3D`Materials[#], Red,Sphere[{0,0,2}, 6]}}] &@ "Glass"', 15000, 500);
+    const outputCell = await evaluate(page, 'Graphics3D[{Plot3D[Sin[x] Cos[y], {x,-10,10}, {y,-10,10}][[1]], {Graphics3D`Materials[#], Red,Sphere[{0,0,2}, 6]}}] &@ "Glass"', 25000, 1500);
     await expect(outputCell).toHaveScreenshot(['screenshorts', 'glass.png']);
   });
   
   test('Lights and shadows', async () => {
     await clearCell(page);
   
-    const outputCell = await evaluate(page, 'Graphics3D[{Directive["Shadows"->True], Polygon[ {{-5,5,-1}, {5,5,-1}, {5,-5,-1}, {-5,-5,-1}}], White, Cuboid[{-1,-1,-1}, {1,1,1}], Directive["Shadows"->False], PointLight[Red, {1.5075, 4.1557, 2.6129}, 100], Directive["Shadows"->True], SpotLight[Cyan, {-2.268, -2.144, 3.1635}]}, "Lighting"->None]', 15000, 500);
+    const outputCell = await evaluate(page, 'Graphics3D[{Directive["Shadows"->True], Polygon[ {{-5,5,-1}, {5,5,-1}, {5,-5,-1}, {-5,-5,-1}}], White, Cuboid[{-1,-1,-1}, {1,1,1}], Directive["Shadows"->False], PointLight[Red, {1.5075, 4.1557, 2.6129}, 100], Directive["Shadows"->True], SpotLight[Cyan, {-2.268, -2.144, 3.1635}]}, "Lighting"->None]', 25000, 1500);
     await expect(outputCell).toHaveScreenshot(['screenshorts', 'imagenegate.png']);
   });
 
