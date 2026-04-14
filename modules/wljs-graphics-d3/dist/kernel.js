@@ -2288,7 +2288,7 @@ async function processLabel(ref0, gX, env, textFallback, nodeFallback) {
 
     env.thickness = copy.thickness;
     env.width = copy.width;
-    //env.opacity = copy.opacity;
+    //env.opacity = copy.opacity; (* pale 2D plots *)
     env.color = copy.color;
 
   };
@@ -2830,7 +2830,10 @@ async function processLabel(ref0, gX, env, textFallback, nodeFallback) {
 
  //[FIXME] curves are not supported!
  g2dComplex.BezierCurve = async (args, env) => {
-  const data  = await interpretate(args[0], env);
+  let data  = await interpretate(args[0], env);
+      if (data instanceof NumericArrayObject) { // convert back automatically
+      data = data.normal();
+    }
   return data.filter((el) => !Array.isArray(el));
  };
 
@@ -2840,6 +2843,9 @@ async function processLabel(ref0, gX, env, textFallback, nodeFallback) {
   if (!arrow1) arrow1 = (await interpretate.shared.d3['d3-arrow']).arrow1;
 
   let data = await interpretate(args[0], env);
+      if (data instanceof NumericArrayObject) { // convert back automatically
+      data = data.normal();
+    }
 
 
   if (!Array.isArray(data)) {
@@ -2881,7 +2887,19 @@ async function processLabel(ref0, gX, env, textFallback, nodeFallback) {
       .attr("d", d3.line()
         .x(function(d) { return d[0] })
         .y(function(d) { return d[1] })
-        ).attr("marker-end", "url(#"+uid+")"); 
+        ).attr("marker-end", "url(#"+uid+")");
+
+      env.local.data = data;
+      env.local.object = object;
+      if (env.vertices) {
+        const myLocal = env.local;
+        env.vertices.drawFns.push(() => {
+          if (myLocal.destroyed) return;
+          myLocal.object
+            .datum(myLocal.data.map(i => env.wgl.fallbackVertices[i - 1]))
+            .attr("d", d3.line().x(d => d[0]).y(d => d[1]));
+        });
+      }
 
       return object;
     } else {
@@ -2902,19 +2920,83 @@ async function processLabel(ref0, gX, env, textFallback, nodeFallback) {
       .attr("stroke", "none").scale([env.arrowHead]);
       env.svg.call(arrow);  
 
+      const paths = [];
       data.forEach((dt) => {
-              
-        gr.append("path")
+        const object = gr.append("path")
         .datum(dt.map((index) => env.wgl.fallbackVertices[index-1]))
         .attr("vector-effect", "non-scaling-stroke")
         .attr("d", d3.line()
           .x(function(d) { return d[0] })
           .y(function(d) { return d[1] })
-          ).attr("marker-end", "url(#"+uid+")");      });
+          ).attr("marker-end", "url(#"+uid+")");
+        paths.push(object);
+      });
+
+      env.local.group = gr;
+      env.local.multiData = data.slice();
+      env.local.paths = paths;
+      if (env.vertices) {
+        const myLocal = env.local;
+        env.vertices.drawFns.push(() => {
+          if (myLocal.destroyed) return;
+          myLocal.paths.forEach((path, i) => {
+            path.datum(myLocal.multiData[i].map(idx => env.wgl.fallbackVertices[idx - 1]))
+              .attr("d", d3.line().x(d => d[0]).y(d => d[1]));
+          });
+        });
+      }
 
       return gr;
     }
  };
+
+ g2dComplex.Arrow.update = async (args, env) => {
+   if (env.fence) await env.fence();
+
+   let data = await interpretate(args[0], env);
+   if (data instanceof NumericArrayObject) data = data.normal();
+
+   if (env.local.object) {
+     // single path (flat index array) — length changes are fine for SVG path
+     env.local.data = data;
+     env.local.object
+       .datum(data.map(i => env.wgl.fallbackVertices[i - 1]))
+       .attr("d", d3.line().x(d => d[0]).y(d => d[1]));
+   } else if (env.local.paths) {
+     // multiple paths — handle count changes
+     const paths = env.local.paths;
+     const oldLen = paths.length;
+     const newLen = data.length;
+
+     for (let i = 0; i < Math.min(oldLen, newLen); i++) {
+       paths[i]
+         .datum(data[i].map(idx => env.wgl.fallbackVertices[idx - 1]))
+         .attr("d", d3.line().x(d => d[0]).y(d => d[1]));
+     }
+     for (let i = oldLen; i < newLen; i++) {
+       const p = env.local.group.append("path")
+         .attr("vector-effect", "non-scaling-stroke")
+         .datum(data[i].map(idx => env.wgl.fallbackVertices[idx - 1]))
+         .attr("d", d3.line().x(d => d[0]).y(d => d[1]));
+       paths.push(p);
+     }
+     for (let i = newLen; i < oldLen; i++) {
+       paths[i].remove();
+     }
+     paths.length = newLen;
+
+     env.local.multiData = data.slice();
+   }
+   if (env.render) env.render();
+ };
+
+ g2dComplex.Arrow.destroy = (args, env) => {
+   env.local.destroyed = true;
+   if (env.local.object) { env.local.object.remove(); env.local.object = null; }
+   if (env.local.group) { env.local.group.remove(); env.local.group = null; }
+ };
+
+ g2dComplex.Arrow.virtual = true;
 
     
 
@@ -4019,6 +4101,42 @@ async function processLabel(ref0, gX, env, textFallback, nodeFallback) {
     }
   }
 
+  function updateGLBuffer(gl, buffer, newData, currentSize) {
+    gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+    if (newData.byteLength <= currentSize) {
+      gl.bufferSubData(gl.ARRAY_BUFFER, 0, newData);
+      return currentSize;
+    } else {
+      const alloc = newData.byteLength * 2;
+      console.warn('GraphicsComplex: vertex buffer reallocation', currentSize, '->', alloc, 'bytes');
+      // Allocate 2x to amortize future growth; pad with zeros beyond the live data.
+      const padded = new newData.constructor(alloc / newData.BYTES_PER_ELEMENT);
+      padded.set(newData);
+      gl.bufferData(gl.ARRAY_BUFFER, padded, gl.DYNAMIC_DRAW);
+      return alloc;
+    }
+  }
+
+  // Reuse an existing ELEMENT_ARRAY_BUFFER, growing 2x when needed.
+  // Updates bufferInfo.numElements in-place; no new GL object is created.
+  function updateIndexBuffer(gl, bufferInfo, indices, use32bit) {
+    const typed = use32bit ? new Uint32Array(indices) : new Uint16Array(indices);
+    const needed = typed.byteLength;
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, bufferInfo.indices);
+    if (needed <= (bufferInfo._indexByteSize || 0)) {
+      gl.bufferSubData(gl.ELEMENT_ARRAY_BUFFER, 0, typed);
+    } else {
+      // Allocate 2x to amortize future reallocations.
+      const alloc = needed * 2;
+      console.warn('GraphicsComplex: index buffer reallocation', (bufferInfo._indexByteSize || 0), '->', alloc, 'bytes');
+      const padded = use32bit ? new Uint32Array(alloc / 4) : new Uint16Array(alloc / 2);
+      padded.set(typed);
+      gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, padded, gl.DYNAMIC_DRAW);
+      bufferInfo._indexByteSize = alloc;
+    }
+    bufferInfo.numElements = indices.length;
+  }
+
   const vs = `
     attribute vec2 position;
     uniform vec2 u_resolution;
@@ -4054,16 +4172,19 @@ async function processLabel(ref0, gX, env, textFallback, nodeFallback) {
 
     void main() {
         if (u_vertexColor) {
-          gl_FragColor = v_color;
+          // premultiply for correct compositing
+          gl_FragColor = vec4(v_color.rgb * v_color.a, v_color.a);
           return;
         }
 
         if (u_vertexTexture) {
-          gl_FragColor = texture2D(u_texture, v_texcoord);
+          vec4 tc = texture2D(u_texture, v_texcoord);
+          gl_FragColor = vec4(tc.rgb * tc.a, tc.a);
           return;
         }    
         
-        gl_FragColor = u_color;
+        // premultiply for correct compositing
+        gl_FragColor = vec4(u_color.rgb * u_color.a, u_color.a);
     }
   `;
 
@@ -4074,7 +4195,9 @@ async function processLabel(ref0, gX, env, textFallback, nodeFallback) {
 
     const dpi = 1.0; ///window.devicePixelRatio; (*no idea how to handle upscalling *)
 
-    const vertices = (await interpretate(args[0], env)).map((p) => {
+    let rawVertices = await interpretate(args[0], env);
+    if (rawVertices instanceof NumericArrayObject) rawVertices = rawVertices.normal(); // convert back automatically
+    const vertices = rawVertices.map((p) => {
       return [env.xAxis(p[0]), env.yAxis(p[1])]; //[TODO] move to GPU!!!!!
     });
 
@@ -4105,10 +4228,11 @@ async function processLabel(ref0, gX, env, textFallback, nodeFallback) {
     
 
 
-    const canvas = env.svg.append('foreignObject').attr('width', env.clipWidth).attr('height', env.clipHeight).append('xhtml:canvas');
+    env.local.foreignObject = env.svg.append('foreignObject').attr('width', env.clipWidth).attr('height', env.clipHeight);
+    const canvas = env.local.foreignObject.append('xhtml:canvas');
     canvas.attr('width', Math.round(env.clipWidth*dpi)).attr('height', Math.round(env.clipHeight*dpi));
     const gl = canvas.node().getContext('webgl', {
-      premultipliedAlpha: false
+      premultipliedAlpha: true
       // Other configurations
     });
 
@@ -4124,37 +4248,63 @@ async function processLabel(ref0, gX, env, textFallback, nodeFallback) {
 
     copy.wgl.fallbackVertices = vertices;
 
+    // Shared vertex state (mirrors g3d.GraphicsComplex): children register their
+    // redraw/SVG-update fns here so vertex and index updates can be decoupled.
+    copy.vertices = env.local.vertices = {
+      drawFns:  [],  // per-child fn that re-issues its GL draw or SVG attribute update
+      handlers: [],  // post-vertex-update callbacks (e.g. recompute derived data)
+    };
+
+    // Fence mechanism — resolves once vertex data has been freshly written.
+    // Children that update their own indices call env.fence() to wait for the
+    // next vertex update before rendering (mirrors g3d.GraphicsComplex).
+    let fences = [];
+    env.local.fence = () => {
+      for (const p of fences) p.resolve();
+      fences = [];
+    };
+    if ('VertexFence' in opts) {
+      copy.fence = () => {
+        const d = new Deferred();
+        fences.push(d);
+        return d.promise;
+      };
+    }
+
     const opacity = env.opacity;
 
+    const positionDataArray = vertices.flat(Infinity).map((e) => e*dpi);
     const linearBuffers = {
-      position: { numComponents: 2, data: vertices.flat(Infinity).map((e) => e*dpi) },
+      position: { numComponents: 2, data: positionDataArray },
     };
 
 
     if (opts.VertexColors) {
       let vertexColors = [];
+      let vc = opts.VertexColors;
+      if (vc instanceof NumericArrayObject) vc = vc.normal(); // convert back automatically
 
       copy.wgl.vertexColors = true;
-      copy.wgl.fallbackColors = opts.VertexColors;
+      copy.wgl.fallbackColors = vc;
 
-      switch(opts.VertexColors[0].length) {
+      switch(vc[0].length) {
         case 3:
-          for (let i=0; i<opts.VertexColors.length; ++i) { //[TODO] move to GPU!!!!!
-            const c = opts.VertexColors[i];
+          for (let i=0; i<vc.length; ++i) { //[TODO] move to GPU!!!!!
+            const c = vc[i];
             vertexColors.push(...c, opacity);
           }
         break;
 
         case 4:
-          vertexColors = opts.VertexColors.flat(Infinity);
+          vertexColors = vc.flat(Infinity);
         break;
 
         default:
-          if (typeof opts.VertexColors[0] == 'string') { //[TODO] move to GPU!!!!!
+          if (typeof vc[0] == 'string') { //[TODO] move to GPU!!!!!
             console.warn('FIXME: This is the worst case');
             
-            for (let i=0; i<opts.VertexColors.length; ++i) {
-              const c = d3.color(opts.VertexColors[i]);
+            for (let i=0; i<vc.length; ++i) {
+              const c = d3.color(vc[i]);
               vertexColors.push(c.r/255.0, c.g/255.0, c.b/255.0, opacity);
             }            
           }
@@ -4189,22 +4339,53 @@ async function processLabel(ref0, gX, env, textFallback, nodeFallback) {
     gl.useProgram(programInfo.program);
 
     gl.enable(gl.BLEND);
+    gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
 
     twgl.setBuffersAndAttributes(gl, programInfo, sharedBufferInfo);
 
-    
-
-
-    
+    // Render fn: clears the WebGL canvas and re-runs all registered child draw fns.
+    // Called by parent on vertex update and by children on index update (analogous
+    // to env.wake(true) in the 3D implementation).
+    env.local.render = () => {
+      gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
+      gl.clearColor(0, 0, 0, 0);
+      gl.clear(gl.COLOR_BUFFER_BIT);
+      gl.useProgram(programInfo.program);
+      gl.enable(gl.BLEND);
+      gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+      twgl.setBuffersAndAttributes(gl, programInfo, sharedBufferInfo);
+      for (const fn of env.local.vertices.drawFns) fn();
+    };
+    // Children call env.render() on index updates.  Wrap so that if this fires
+    // before GraphicsComplex.update ever ran (canvas still in image-snapshot
+    // mode) we also promote the live GL canvas into the DOM right away.
+    copy.render = () => {
+      env.local.render();
+      if (!env.local.canvasMode && env.local.img) {
+        console.warn('GraphicsComplex: deoptimizing — promoting live canvas to DOM (child update fired before vertex update)');
+        const canvasNode = gl.canvas;
+        canvasNode.style.padding = '0';
+        canvasNode.style.opacity = env.opacity;
+        env.local.img.replaceWith(canvasNode);
+        env.local.canvasMode = true;
+      }
+    };
 
     await interpretate(args[1], copy);
 
     const img = replaceCanvasWithImage(gl);
-    cleanupWebGL(gl);
+    // Keep WebGL context alive for updates (don't call cleanupWebGL)
 
     img.style.opacity = env.opacity;
 
     env.local.img = img;
+    env.local.gl = gl;
+    env.local.programInfo = programInfo;
+    env.local.sharedBufferInfo = sharedBufferInfo;
+    env.local.dpi = dpi;
+    env.local.wgl = copy.wgl;
+    env.local.positionBufferSize = positionDataArray.length * 4;
+    env.local.colorBufferSize = linearBuffers.color ? linearBuffers.color.data.length * 4 : 0;
 
     if (env.opacityRefs) {
         env.opacityRefs[env.root.uid] = env.root;
@@ -4213,12 +4394,158 @@ async function processLabel(ref0, gX, env, textFallback, nodeFallback) {
     return img;
   };
 
-  g2d.GraphicsComplex.update = () => {
-    throw('Updates of GraphicsComplex are not supported!');
+  g2d.GraphicsComplex.update = async (args, env) => {
+    if (!twgl) twgl = (await import('./twgl.module-829cd4fc.js'));
+
+    // Guard: bail out if the initial create hasn't finished yet
+    // (can happen when a streaming update arrives before first render completes).
+    if (!env.local.gl || !env.local.wgl) {
+      console.warn('GraphicsComplex.update: skipping — not yet initialized');
+      return;
+    }
+
+    const gl = env.local.gl;
+    const dpi = env.local.dpi;
+    const programInfo = env.local.programInfo;
+    const sharedBufferInfo = env.local.sharedBufferInfo;
+    const wgl = env.local.wgl;
+
+    // Re-interpret vertices
+    let rawVertices = await interpretate(args[0], env);
+    if (rawVertices instanceof NumericArrayObject) rawVertices = rawVertices.normal(); // convert back automatically
+    const vertices = rawVertices.map((p) => {
+      return [env.xAxis(p[0]), env.yAxis(p[1])];
+    });
+
+    // Update bounding box rect
+    let minX = Infinity, minY = Infinity;
+    let maxX = -Infinity, maxY = -Infinity;
+    for (const [x, y] of vertices) {
+      if (x < minX) minX = x;
+      if (y < minY) minY = y;
+      if (x > maxX) maxX = x;
+      if (y > maxY) maxY = y;
+    }
+    env.local.rect
+      .attr('x', minX).attr('y', minY)
+      .attr('width', maxX - minX).attr('height', maxY - minY);
+
+    // Get options (VertexColors)
+    const opts = await core._getRules(args, env);
+
+    // Update wgl state
+    wgl.fallbackVertices = vertices;
+
+    const opacity = env.opacity;
+
+    // Update position buffer (reuse existing, resize only if larger)
+    const posData = new Float32Array(vertices.flat(Infinity).map((e) => e * dpi));
+    env.local.positionBufferSize = updateGLBuffer(
+      gl, sharedBufferInfo.attribs.position.buffer,
+      posData, env.local.positionBufferSize
+    );
+    sharedBufferInfo.numElements = vertices.length;
+
+    // Update vertex colors if present
+    if (opts.VertexColors) {
+      let vertexColors = [];
+      let vc = opts.VertexColors;
+      if (vc instanceof NumericArrayObject) vc = vc.normal(); // convert back automatically
+      wgl.vertexColors = true;
+      wgl.fallbackColors = vc;
+
+      switch(vc[0].length) {
+        case 3:
+          for (let i = 0; i < vc.length; ++i) {
+            const c = vc[i];
+            vertexColors.push(...c, opacity);
+          }
+          break;
+        case 4:
+          vertexColors = vc.flat(Infinity);
+          break;
+        default:
+          if (typeof vc[0] == 'string') {
+            for (let i = 0; i < vc.length; ++i) {
+              const c = d3.color(vc[i]);
+              vertexColors.push(c.r / 255.0, c.g / 255.0, c.b / 255.0, opacity);
+            }
+          }
+      }
+
+      const colorData = new Float32Array(vertexColors);
+
+      if (sharedBufferInfo.attribs.color) {
+        // Reuse existing color buffer
+        env.local.colorBufferSize = updateGLBuffer(
+          gl, sharedBufferInfo.attribs.color.buffer,
+          colorData, env.local.colorBufferSize
+        );
+      } else {
+        // Create new color buffer
+        const buffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+        gl.bufferData(gl.ARRAY_BUFFER, colorData, gl.DYNAMIC_DRAW);
+        env.local.colorBufferSize = colorData.byteLength;
+
+        sharedBufferInfo.attribs.color = {
+          buffer: buffer,
+          numComponents: 4,
+          type: gl.FLOAT,
+          normalize: false,
+          stride: 0,
+          offset: 0
+        };
+      }
+    } else {
+      wgl.vertexColors = false;
+    }
+
+    // Call any post-vertex-update handlers (mirrors g3d.GraphicsComplex.update)
+    for (let i = 0; i < env.local.vertices.handlers.length; ++i) {
+      env.local.vertices.handlers[i]();
+    }
+
+    // Render: re-runs registered child draw fns using the updated vertex buffer.
+    // Falls back to full re-evaluation when no children have registered yet
+    // (e.g. first call before children had a chance to register, or legacy content).
+    if (env.local.vertices.drawFns.length > 0) {
+      env.local.render();
+    } else {
+      gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
+      gl.clearColor(0, 0, 0, 0);
+      gl.clear(gl.COLOR_BUFFER_BIT);
+      gl.useProgram(programInfo.program);
+      gl.enable(gl.BLEND);
+      gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+      twgl.setBuffersAndAttributes(gl, programInfo, sharedBufferInfo);
+      const copy = {...env, context: [g2dComplex, g2d], wgl: wgl};
+      await interpretate(args[1], copy);
+    }
+
+    // Release fence: children that are awaiting a vertex update (e.g. Polygon
+    // whose indices also changed) can now proceed and call env.render() again.
+    env.local.fence();
+
+    // On first update, promote the live canvas to the DOM (eliminates toDataURL overhead).
+    if (!env.local.canvasMode) {
+      console.warn('GraphicsComplex: optimizing — promoting live canvas to DOM on first vertex update');
+      const canvasNode = gl.canvas;
+      canvasNode.style.padding = '0';
+      canvasNode.style.opacity = env.opacity;
+      env.local.img.replaceWith(canvasNode);
+      env.local.canvasMode = true;
+    } else {
+      gl.canvas.style.opacity = env.opacity;
+    }
   };
 
   g2d.GraphicsComplex.updateOpacity = (args, env) => {
-    env.local.img.style.opacity = env.opacity;
+    if (env.local.canvasMode) {
+      env.local.gl.canvas.style.opacity = env.opacity;
+    } else {
+      env.local.img.style.opacity = env.opacity;
+    }
   }; 
 
   g2d.GraphicsComplex.destroy = (args, env) => {
@@ -4226,7 +4553,17 @@ async function processLabel(ref0, gX, env, textFallback, nodeFallback) {
       delete env.opacityRefs[env.root.uid];
     }
 
-    env.local.img.remove();
+    // Cleanup WebGL context
+    if (env.local.gl) {
+      cleanupWebGL(env.local.gl);
+      env.local.gl = null;
+    }
+
+    if (env.local.foreignObject) {
+      env.local.foreignObject.remove();
+    } else if (env.local.img) {
+      env.local.img.remove();
+    }
     env.local.rect.remove();
   };
 
@@ -4560,6 +4897,7 @@ async function processLabel(ref0, gX, env, textFallback, nodeFallback) {
   //not an instance. Just a plain object. Symbols must be bounded to GraphicsComplex
   g2dComplex.Polygon = async (args, env) => {
     let points = await interpretate(args[0], env);
+    if (points instanceof NumericArrayObject) points = points.normal();
     //console.log(points);
     //if (!env.vertices) throw('No vertices provided!');
 
@@ -4661,47 +4999,142 @@ async function processLabel(ref0, gX, env, textFallback, nodeFallback) {
         bufferInfo = twgl.createBufferInfoFromArrays(gl, { 
           indices: localIndices.flat()
         });
+
+        // Save points (1-indexed) for handler recomputation when vertices update.
+        env.local.currentEarcutPoints = points;
     }
     
-    twgl.setBuffersAndAttributes(gl, programInfo, bufferInfo);
-
-    if (env.wgl.vertexTexture) {
-
-      if (!env.texture) throw 'Texture is not provided!';
-
-
-      const texture = env.texture.get(gl);
-
-      twgl.setUniforms(programInfo, {
-        u_resolution: [gl.canvas.width, gl.canvas.height],
-        u_texture: texture,
-        u_vertexTexture: true
-      });      
-
-      if (env.wgl.fallbackVertices.length > 65535) {
-        gl.drawElements(gl.TRIANGLES, bufferInfo.numElements, gl.UNSIGNED_INT, 0);
+    // Extract draw call into a reusable closure so both parent vertex updates
+    // and child index updates can trigger a re-render without re-evaluating WL.
+    // env.local.state holds the current bufferInfo so Polygon.update can swap it.
+    const myLocal = env.local;
+    myLocal.state = { bufferInfo };
+    myLocal.gl = gl;
+    const draw = () => {
+      if (myLocal.destroyed) return;
+      const { bufferInfo: buf } = myLocal.state;
+      const wgl = env.wgl;
+      twgl.setBuffersAndAttributes(wgl.gl, wgl.programInfo, buf);
+      if (wgl.vertexTexture) {
+        if (!env.texture) throw 'Texture is not provided!';
+        const texture = env.texture.get(wgl.gl);
+        twgl.setUniforms(wgl.programInfo, {
+          u_resolution: [wgl.gl.canvas.width, wgl.gl.canvas.height],
+          u_texture: texture,
+          u_vertexTexture: true
+        });
       } else {
-        gl.drawElements(gl.TRIANGLES, bufferInfo.numElements, gl.UNSIGNED_SHORT, 0);
+        twgl.setUniforms(wgl.programInfo, {
+          u_resolution: [wgl.gl.canvas.width, wgl.gl.canvas.height],
+          u_color: color,
+          u_vertexColor: Boolean(wgl.vertexColors)
+        });
       }
-      return;
+      if (wgl.fallbackVertices.length > 65535) {
+        wgl.gl.drawElements(wgl.gl.TRIANGLES, buf.numElements, wgl.gl.UNSIGNED_INT, 0);
+      } else {
+        wgl.gl.drawElements(wgl.gl.TRIANGLES, buf.numElements, wgl.gl.UNSIGNED_SHORT, 0);
+      }
+    };
+    // Register for parent-triggered re-renders (vertex updates via GraphicsComplex.update)
+    if (env.vertices) env.vertices.drawFns.push(draw);
+
+    // For arbitrary (earcut) polygons, register a vertex-update handler so that
+    // when GraphicsComplex.update fires AFTER Polygon.update (i.e. indices arrived
+    // first), the triangulation is recomputed with the freshly-written vertex
+    // positions before the shared render call happens.
+    if (myLocal.currentEarcutPoints && env.vertices) {
+      env.vertices.handlers.push(() => {
+        if (myLocal.destroyed || !myLocal.currentEarcutPoints) return;
+        const freshVertices = env.wgl.fallbackVertices;
+        const indices = [];
+        for (let poly of myLocal.currentEarcutPoints) {
+          const idx = poly.map(i => i - 1);
+          indices.push(earcut(idx.flatMap(i => freshVertices[i])).map(i => idx[i]));
+        }
+        const flatIdx = indices.flat();
+        updateIndexBuffer(gl, myLocal.state.bufferInfo, flatIdx, env.wgl.fallbackVertices.length > 65535);
+      });
     }
 
-   
-
-    twgl.setUniforms(programInfo, {
-      u_resolution: [gl.canvas.width, gl.canvas.height],
-      u_color: color,
-      u_vertexColor: Boolean(env.wgl.vertexColors)
-    });
-
-    if (env.wgl.fallbackVertices.length > 65535) {
-      gl.drawElements(gl.TRIANGLES, bufferInfo.numElements, gl.UNSIGNED_INT, 0);
-    } else {
-      gl.drawElements(gl.TRIANGLES, bufferInfo.numElements, gl.UNSIGNED_SHORT, 0);
-    }
-
-    return;
+    draw(); // initial draw during create
   };
+
+  g2dComplex.Polygon.destroy = (args, env) => {
+    env.local.destroyed = true;
+    const buf = env.local.state && env.local.state.bufferInfo;
+    if (buf && buf.indices && env.local.gl) {
+      env.local.gl.deleteBuffer(buf.indices);
+    }
+    env.local.state = null;
+  };
+
+  g2dComplex.Polygon.update = async (args, env) => {
+    // Wait for the parent vertex update to land before using fresh positions.
+    // This mirrors g3dComplex.Polygon.update and handles the race where indices
+    // change at the same time as vertices (VertexFence option).
+    if (env.fence) await env.fence();
+
+    if (!twgl) twgl = (await import('./twgl.module-829cd4fc.js'));
+
+    let points = await interpretate(args[0], env);
+    if (points instanceof NumericArrayObject) points = points.normal();
+    if (!points[0][0]) points = [points];
+
+    const {gl} = env.wgl;
+    const use32bit = env.wgl.fallbackVertices.length > 65535;
+    let flatIndices;
+
+    switch (points[0].length) {
+      case 3:
+        flatIndices = points.flat(Infinity).map(i => i - 1);
+        break;
+      case 4: {
+        const tb = [];
+        for (const p of points) tb.push(p[0]-1, p[1]-1, p[2]-1, p[0]-1, p[2]-1, p[3]-1);
+        flatIndices = tb;
+        break;
+      }
+      case 5: {
+        const tb = [];
+        for (const p of points) tb.push(
+          p[0]-1, p[1]-1, p[2]-1,
+          p[0]-1, p[2]-1, p[3]-1,
+          p[0]-1, p[3]-1, p[4]-1
+        );
+        flatIndices = tb;
+        break;
+      }
+      case 6: {
+        const tb = [];
+        for (const p of points) tb.push(
+          p[0]-1, p[1]-1, p[2]-1,
+          p[0]-1, p[2]-1, p[3]-1,
+          p[0]-1, p[3]-1, p[4]-1,
+          p[0]-1, p[4]-1, p[5]-1
+        );
+        flatIndices = tb;
+        break;
+      }
+      default: {
+        const fallback = env.wgl.fallbackVertices;
+        if (!earcut) earcut = (await import('./earcut-09a28c82.js')).default;
+        const localIndices = [];
+        for (let poly of points) {
+          poly = poly.map(i => i - 1);
+          localIndices.push(earcut(poly.flatMap(i => fallback[i])).map(i => poly[i]));
+        }
+        flatIndices = localIndices.flat();
+        // Keep the vertex-update handler in sync with the latest index set.
+        env.local.currentEarcutPoints = points;
+      }
+    }
+
+    updateIndexBuffer(gl, env.local.state.bufferInfo, flatIndices, use32bit);
+    if (env.render) env.render();
+  };
+
+  g2dComplex.Polygon.virtual = true;
 
   g2d.Deploy =  (args, env) => {
     return interpretate(args[0], env)
@@ -4915,7 +5348,8 @@ async function processLabel(ref0, gX, env, textFallback, nodeFallback) {
   g2dComplex.Line = async (args, env) => {
     //[TODO] fallback
 
-    const data = await interpretate(args[0], env);
+    let data = await interpretate(args[0], env);
+    if (data instanceof NumericArrayObject) data = data.normal();
         //difference case for verices
     if (!data[0][0]) {
 
@@ -4933,7 +5367,21 @@ async function processLabel(ref0, gX, env, textFallback, nodeFallback) {
         
         if (env.dasharray) {
           object.attr('stroke-dasharray', env.dasharray.join());
-        } 
+        }
+
+      // Store for update access and register a drawFn so parent vertex updates
+      // redraw this SVG path in place (avoids accumulating duplicate elements).
+      env.local.data   = data;
+      env.local.object = object;
+      if (env.vertices) {
+        const myLocal = env.local;
+        env.vertices.drawFns.push(() => {
+          if (myLocal.destroyed) return;
+          myLocal.object
+            .datum(myLocal.data.map(i => env.wgl.fallbackVertices[i - 1]))
+            .attr("d", d3.line().x(d => d[0]).y(d => d[1]));
+        });
+      }
   
       return object;
     } else {
@@ -4942,48 +5390,97 @@ async function processLabel(ref0, gX, env, textFallback, nodeFallback) {
       .attr('opacity', env.opacity)
       .attr("stroke", env.color)
       .attr("stroke-width", env.strokeWidth);
-  
+
+      const paths = [];
       data.forEach((dt) => {
-        gr.append("path")
-        .datum(dt.map((index) => env.vertices[index-1]))
+        const object = gr.append("path")
+        .datum(dt.map((index) => env.wgl.fallbackVertices[index-1]))
         .attr("vector-effect", "non-scaling-stroke")
         .attr("d", d3.line()
           .x(function(d) { return d[0] })
           .y(function(d) { return d[1] })
-          ); 
+          );
+        paths.push(object);
       });
-  
+
+      env.local.group = gr;
+      env.local.multiData = data.slice();
+      env.local.paths = paths;
+
+      if (env.vertices) {
+        const myLocal = env.local;
+        env.vertices.drawFns.push(() => {
+          if (myLocal.destroyed) return;
+          myLocal.paths.forEach((p, i) => {
+            p.datum(myLocal.multiData[i].map(idx => env.wgl.fallbackVertices[idx - 1]))
+             .attr("d", d3.line().x(d => d[0]).y(d => d[1]));
+          });
+        });
+      }
+
       return gr;
     }
-
-    /*let points = await interpretate(args[0], env);
-    //console.log(points);
-    //if (!env.vertices) throw('No vertices provided!');
-
-    let color = d3.color(env.color);
-      color = [color.r/255.0, color.g/255.0, color.b/255.0, env.opacity];
-
-    //if this is a single line segment
-    if (points[0][0]) return;
-
-
-    const {gl, programInfo} = env.wgl;
-    let bufferInfo; 
-    
-    bufferInfo = twgl.createBufferInfoFromArrays(gl, { indices:  points.flat(Infinity).map((index) => index-1)});
-    
-    twgl.setBuffersAndAttributes(gl, programInfo, bufferInfo);
-
-    twgl.setUniforms(programInfo, {
-      u_resolution: [gl.canvas.width, gl.canvas.height],
-      u_color: color,
-      u_vertexColor: Boolean(env.wgl.vertexColors)
-    });
-
-    gl.lineWidth(env.strokeWidth);
-
-    gl.drawElements(gl.LINE_STRIP, bufferInfo.numElements, gl.UNSIGNED_SHORT, 0);*/
   };
+
+  g2dComplex.Line.destroy = (args, env) => {
+    env.local.destroyed = true;
+    if (env.local.object) {
+      env.local.object.remove();
+      env.local.object = null;
+    }
+    if (env.local.group) {
+      env.local.group.remove();
+      env.local.group = null;
+    }
+  };
+
+  g2dComplex.Line.update = async (args, env) => {
+    // Wait for the parent vertex update before re-drawing the path.
+    if (env.fence) await env.fence();
+
+    let data = await interpretate(args[0], env);
+    if (data instanceof NumericArrayObject) { // convert back automatically
+      data = data.normal();
+    }
+
+    if (!data[0][0]) {
+      // single path: flat array of vertex indices
+      env.local.data = data;
+      env.local.object
+        .datum(data.map(i => env.wgl.fallbackVertices[i - 1]))
+        .attr("d", d3.line().x(d => d[0]).y(d => d[1]));
+    } else if (env.local.paths) {
+      // multi-path: array of index arrays — handle count changes
+      const paths = env.local.paths;
+      const oldLen = paths.length;
+      const newLen = data.length;
+
+      // update existing
+      for (let i = 0; i < Math.min(oldLen, newLen); i++) {
+        paths[i]
+          .datum(data[i].map(idx => env.wgl.fallbackVertices[idx - 1]))
+          .attr("d", d3.line().x(d => d[0]).y(d => d[1]));
+      }
+      // grow — append new paths
+      for (let i = oldLen; i < newLen; i++) {
+        const p = env.local.group.append("path")
+          .attr("vector-effect", "non-scaling-stroke")
+          .datum(data[i].map(idx => env.wgl.fallbackVertices[idx - 1]))
+          .attr("d", d3.line().x(d => d[0]).y(d => d[1]));
+        paths.push(p);
+      }
+      // shrink — remove excess paths
+      for (let i = newLen; i < oldLen; i++) {
+        paths[i].remove();
+      }
+      paths.length = newLen;
+
+      env.local.multiData = data.slice();
+    }
+    if (env.render) env.render();
+  };
+
+  g2dComplex.Line.virtual = true;
 
   g2d.SplineKnots = () => "SplineKnots";
   g2d.SplineDegree = () => "SplineDegree";
@@ -5755,6 +6252,7 @@ return object;
     }
 
     let data = await interpretate(args[0], env);
+    if (data instanceof NumericArrayObject) data = data.normal();
     let radius = 1; 
 
     if (args.length > 1) {
@@ -5766,6 +6264,7 @@ return object;
 
     const x = env.xAxis;
     env.yAxis;
+    const myLocal = env.local;
 
     if (!data[0]) {
       //single vertice
@@ -5783,6 +6282,17 @@ return object;
         .style("fill", env.color)
         .style("opacity", env.opacity);
 
+      myLocal.object = object;
+
+      // Register update fn so parent vertex updates move the circle in place
+      myLocal.singleData = data;
+      if (env.vertices) {
+        env.vertices.drawFns.push(() => {
+          if (myLocal.destroyed) return;
+          const v = env.wgl.fallbackVertices[myLocal.singleData - 1];
+          myLocal.object.attr("cx", v[0]).attr("cy", v[1]);
+        });
+      }
   
       return object;
 
@@ -5802,10 +6312,97 @@ return object;
           .style("opacity", env.opacity));
       });
 
+      myLocal.objects = object;
+
+      // Register update fn so parent vertex updates move all circles in place
+      myLocal.arrayData = data.slice();
+      if (env.vertices) {
+        env.vertices.drawFns.push(() => {
+          if (myLocal.destroyed) return;
+          myLocal.objects.forEach((obj, i) => {
+            const v = env.wgl.fallbackVertices[myLocal.arrayData[i] - 1];
+            obj.attr("cx", v[0]).attr("cy", v[1]);
+          });
+        });
+      }
+
       return object;
     }
 
   };
+
+  g2dComplex.Disk.destroy = (args, env) => {
+    env.local.destroyed = true;
+    if (env.local.object) {
+      env.local.object.remove();
+      env.local.object = null;
+    }
+    if (env.local.objects) {
+      env.local.objects.forEach(obj => obj.remove());
+      env.local.objects = null;
+    }
+  };
+
+  g2dComplex.Disk.update = async (args, env) => {
+    if (env.fence) await env.fence();
+
+    let data = await interpretate(args[0], env);
+    if (data instanceof NumericArrayObject) data = data.normal();
+
+    let radius = env.local.r || 1;
+    if (args.length > 1) {
+      radius = await interpretate(args[1], env);
+      if (Array.isArray(radius)) radius = (radius[0] + radius[1]) / 2.0;
+    }
+    const r = env.xAxis(radius) - env.xAxis(0);
+
+    const myLocal = env.local;
+    if (!data[0]) {
+      // single vertex index
+      myLocal.singleData = data;
+      const v = env.wgl.fallbackVertices[data - 1];
+      myLocal.object.attr("cx", v[0]).attr("cy", v[1]);
+    } else {
+      // multiple vertex indices — handle count changes
+      // Guard: if create ran as single-vertex path, myLocal.objects won't exist yet.
+      if (!myLocal.objects) {
+        console.warn('Disk.update: objects array not initialised, skipping multi update');
+        if (env.render) env.render();
+        return;
+      }
+      const objs = myLocal.objects;
+      const oldLen = objs.length;
+      const newLen = data.length;
+
+      // update existing
+      for (let i = 0; i < Math.min(oldLen, newLen); i++) {
+        const v = env.wgl.fallbackVertices[data[i] - 1];
+        objs[i].attr("cx", v[0]).attr("cy", v[1]);
+      }
+      // grow — append new circles
+      for (let i = oldLen; i < newLen; i++) {
+        const v = env.wgl.fallbackVertices[data[i] - 1];
+        const obj = env.svg.append("circle")
+          .attr("vector-effect", "non-scaling-stroke")
+          .attr("cx", v[0]).attr("cy", v[1])
+          .attr("r", r)
+          .style("stroke", "none")
+          .style("fill", env.color)
+          .style("opacity", env.opacity);
+        objs.push(obj);
+      }
+      // shrink — remove excess circles
+      for (let i = newLen; i < oldLen; i++) {
+        objs[i].remove();
+      }
+      objs.length = newLen;
+
+      myLocal.arrayData = data.slice();
+    }
+    if (env.render) env.render();
+  };
+
+  g2dComplex.Disk.virtual = true;
 
 
   g2d.Disk = async (args, env) => {
@@ -5918,6 +6515,7 @@ return object;
   
   g2dComplex.Point = async (args, env) => {
     let points = await interpretate(args[0], env);
+    if (points instanceof NumericArrayObject) points = points.normal();
     //console.log(points);
     //if (!env.vertices) throw('No vertices provided!');
 
@@ -5928,9 +6526,6 @@ return object;
     if (points[0][0]) {
       return;
     }
-
-    
-
 
     const {gl, programInfo} = env.wgl;
     let bufferInfo;
@@ -5948,22 +6543,57 @@ return object;
       });
     }
 
-    twgl.setBuffersAndAttributes(gl, programInfo, bufferInfo);
-
-    twgl.setUniforms(programInfo, {
-      u_resolution: [gl.canvas.width, gl.canvas.height],
-      u_color: color,
-      u_pointSize: env.pointSize * window.devicePixelRatio * 100.0 * 2.0,
-      u_vertexColor: Boolean(env.wgl.vertexColors)
-    });
-
-    if (env.wgl.fallbackVertices.length > 65535) {
-      gl.drawElements(gl.POINTS, bufferInfo.numElements, gl.UNSIGNED_INT, 0);
-    } else {
-      gl.drawElements(gl.POINTS, bufferInfo.numElements, gl.UNSIGNED_SHORT, 0);
-    } 
-
+    const myLocal = env.local;
+    myLocal.state = { bufferInfo };
+    myLocal.gl = gl;
+    const capturedPointSize = env.pointSize;
+    const draw = () => {
+      if (myLocal.destroyed) return;
+      const { bufferInfo: buf } = myLocal.state;
+      const wgl = env.wgl;
+      twgl.setBuffersAndAttributes(wgl.gl, wgl.programInfo, buf);
+      twgl.setUniforms(wgl.programInfo, {
+        u_resolution: [wgl.gl.canvas.width, wgl.gl.canvas.height],
+        u_color: color,
+        u_pointSize: capturedPointSize * window.devicePixelRatio * 100.0 * 2.0,
+        u_vertexColor: Boolean(wgl.vertexColors)
+      });
+      if (wgl.fallbackVertices.length > 65535) {
+        wgl.gl.drawElements(wgl.gl.POINTS, buf.numElements, wgl.gl.UNSIGNED_INT, 0);
+      } else {
+        wgl.gl.drawElements(wgl.gl.POINTS, buf.numElements, wgl.gl.UNSIGNED_SHORT, 0);
+      }
+    };
+    if (env.vertices) env.vertices.drawFns.push(draw);
+    draw();
   };
+
+  g2dComplex.Point.destroy = (args, env) => {
+    env.local.destroyed = true;
+    const buf = env.local.state && env.local.state.bufferInfo;
+    if (buf && buf.indices && env.local.gl) {
+      env.local.gl.deleteBuffer(buf.indices);
+    }
+    env.local.state = null;
+  };
+
+  g2dComplex.Point.update = async (args, env) => {
+    if (env.fence) await env.fence();
+
+    if (!twgl) twgl = (await import('./twgl.module-829cd4fc.js'));
+
+    let points = await interpretate(args[0], env);
+    if (points instanceof NumericArrayObject) points = points.normal();
+
+    if (!points[0][0]) {
+      const {gl} = env.wgl;
+      const indices = points.flat(Infinity).map(i => i - 1);
+      updateIndexBuffer(gl, env.local.state.bufferInfo, indices, env.wgl.fallbackVertices.length > 65535);
+    }
+    if (env.render) env.render();
+  };
+
+  g2dComplex.Point.virtual = true;
 
   g2d.Point = async (args, env) => {
     let data = await interpretate(args[0], env);
