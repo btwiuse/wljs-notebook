@@ -22,7 +22,7 @@ Get[FileNameJoin[{Directory[], "Common", "LPM", "LPM.wl"}] ];
 
 Off[General::shdw]; (* avoid warning messages from ContextAliases *)
 Off[Part::partd]; (* avoid warning messages from WLX *)
-Off[OptionValue::optnf]
+Off[OptionValue::nodef]
 
 (* WLJS Package manager *)
 Needs["CoffeeLiqueur`ExtensionManager`" -> "WLJSPackages`"];
@@ -253,12 +253,14 @@ With[{now = Now},
 Echo["Loading packages: FRONTEND"];
 
 If[FailureQ[
+    Echo[FileNameTake[#] <> ""];
     Get[
       UniversalPathConverter[#],
       Path->{FileNameJoin[{Directory[], "modules"}], AppExtensions`ExtensionsDir}
     ] 
   ],
   Echo["Failed to load some of the packages (see logs)"];
+  Pause[2];
   Exit[0]
 ] &/@ WLJSPackages`Includes["frontend"]; 
 

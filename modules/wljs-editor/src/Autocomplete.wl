@@ -33,12 +33,10 @@ testEndpoint[path_] := TimeConstrained[With[{test = Find[str = OpenRead[path], "
   test === "# Map"
 ], 6, False];
 
-endpoint = SelectFirst[{
+endpoint := endpoint = SelectFirst[{
     "https://wljs.io/llms-full.txt",
     FileNameJoin[{rootDir, "dist", "llm.txt"}]
 }, testEndpoint];
-
-Echo["Using endpoint for llm text: "<>endpoint];
 
 EventHandler[AppExtensions`AppEvents// EventClone, {
     "Autocomplete:llm.txt" -> Function[Null,
