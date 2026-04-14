@@ -151,7 +151,7 @@ async function processLabel(ref0, gX, env, textFallback, nodeFallback) {
   interpretate.contextExpand(g2d);
 
  //polyfill for symbols
- ["FaceForm", "ImageSizeAction", "ImageSizeRaw", "Selectable", "ViewMatrix", "CurrentValue", "FontColor", "Tiny", "VertexColors", "Antialiasing","Small", "Plot", "ListCurvePathPlot",  "ListLinePlot", "ListPlot", "Automatic", "Controls","All","TickLabels","FrameTicksStyle", "AlignmentPoint","AspectRatio","Axes","AxesLabel","AxesOrigin","AxesStyle","Background","BaselinePosition","BaseStyle","ColorOutput","ContentSelectable","CoordinatesToolOptions","DisplayFunction","Epilog","FormatType","Frame","FrameLabel","FrameStyle","FrameTicks","FrameTicksStyle","GridLines","GridLinesStyle","ImageMargins","ImagePadding","ImageSize","Full","LabelStyle","Method","PlotLabel","PlotRange","PlotRangeClipping","PlotRangePadding","PlotRegion","PreserveImageOptions","Prolog","RotateLabel","Ticks","TicksStyle", "TransitionDuration"].map((name)=>{
+ ["FaceForm", "ImageSizeAction", "ImageSizeRaw", "Selectable", "ViewMatrix", "CurrentValue", "FontColor", "Tiny", "VertexColors", "Antialiasing","Small", "Plot", "ListCurvePathPlot",  "ListLinePlot", "ListPlot", "Automatic", "Controls","All","TickLabels","FrameTicksStyle", "AlignmentPoint","AspectRatio","Axes","AxesLabel","AxesOrigin","AxesStyle","Background","BaselinePosition","BaseStyle","ColorOutput","ContentSelectable","CoordinatesToolOptions","DisplayFunction","Epilog","FormatType","Frame","FrameLabel","FrameStyle","FrameTicks","FrameTicksStyle","GridLines","GridLinesStyle","ImageMargins","ImagePadding","ImageSize","Full","LabelStyle","Method","PlotLabel","PlotRange","PlotRangeClipping","PlotRangePadding","PlotRegion","PreserveImageOptions","Prolog","RotateLabel","Ticks","TicksStyle", "TransitionDuration", "VertexTextureCoordinates"].map((name)=>{
   g2d[name] = () => name;
   //g2d[name].destroy = () => name;
   g2d[name].update = () => name;
@@ -2450,9 +2450,7 @@ async function processLabel(ref0, gX, env, textFallback, nodeFallback) {
     if (args.length - oLength > 1) pos = (await interpretate(args[1], env));
     let opos;
 
-    if (pos instanceof NumericArrayObject) { // convert back automatically
-      pos = pos.normal();
-    }
+    if (pos instanceof NumericArrayObject) pos = pos.buffer;
 
     if (args.length - oLength > 2) opos = await interpretate(args[2], env);
     //if (args.length - oLength > 3) size = await interpretate(args[3], env);
@@ -2640,9 +2638,7 @@ async function processLabel(ref0, gX, env, textFallback, nodeFallback) {
   g2d.Inset.update = async (args, env) => {
     let pos = await interpretate(args[1], env);
 
-    if (pos instanceof NumericArrayObject) { // convert back automatically
-      pos = pos.normal();
-    }
+    if (pos instanceof NumericArrayObject) pos = pos.buffer;
 
     const opos = env.local.opos;
     const f = env.local.foreignObject;
@@ -3781,9 +3777,7 @@ async function processLabel(ref0, gX, env, textFallback, nodeFallback) {
 
     const opts = await core._getRules(args, {...env, hold: true});
 
-    if (coords instanceof NumericArrayObject) { // convert back automatically
-      coords = coords.normal();
-    }
+    if (coords instanceof NumericArrayObject) coords = coords.buffer;
 
     let globalOffset = {x: 0, y: 0};
 
@@ -4374,9 +4368,21 @@ async function processLabel(ref0, gX, env, textFallback, nodeFallback) {
 
 
     if (opts.VertexTextureCoordinates) {
-      const uv = opts.VertexTextureCoordinates.flat(Infinity);
+      const rawVt = opts.VertexTextureCoordinates;
+      const uv = rawVt instanceof NumericArrayObject ? new Float32Array(rawVt.buffer) : new Float32Array(rawVt.flat(Infinity));
       linearBuffers.texcoord = { numComponents: 2, data: uv};
 
+      copy.wgl.vertexTexture = true;
+    } else if (copy.texture) {
+      // Auto-generate UVs by normalizing vertex positions to [0,1] within the bounding box
+      const rangeX = maxX - minX || 1;
+      const rangeY = maxY - minY || 1;
+      const autoUV = new Float32Array(vertices.length * 2);
+      for (let i = 0; i < vertices.length; i++) {
+        autoUV[i * 2]     = (vertices[i][0] - minX) / rangeX;
+        autoUV[i * 2 + 1] = (vertices[i][1] - minY) / rangeY;
+      }
+      linearBuffers.texcoord = { numComponents: 2, data: autoUV };
       copy.wgl.vertexTexture = true;
     }
 
@@ -4441,6 +4447,7 @@ async function processLabel(ref0, gX, env, textFallback, nodeFallback) {
     env.local.wgl = copy.wgl;
     env.local.positionBufferSize = positionDataArray.length * 4;
     env.local.colorBufferSize = linearBuffers.color ? linearBuffers.color.data.length * 4 : 0;
+    env.local.texcoordBufferSize = linearBuffers.texcoord ? linearBuffers.texcoord.data.length * 4 : 0;
 
     if (env.opacityRefs) {
         env.opacityRefs[env.root.uid] = env.root;
@@ -4554,6 +4561,70 @@ async function processLabel(ref0, gX, env, textFallback, nodeFallback) {
       }
     } else {
       wgl.vertexColors = false;
+    }
+
+    // Update texture coordinates if present
+    if (opts.VertexTextureCoordinates) {
+      const vt = opts.VertexTextureCoordinates;
+      const uvData = vt instanceof NumericArrayObject
+        ? new Float32Array(vt.buffer)
+        : new Float32Array(vt.flat(Infinity));
+      wgl.vertexTexture = true;
+
+      if (sharedBufferInfo.attribs.texcoord) {
+        // Reuse existing texcoord buffer
+        env.local.texcoordBufferSize = updateGLBuffer(
+          gl, sharedBufferInfo.attribs.texcoord.buffer,
+          uvData, env.local.texcoordBufferSize
+        );
+      } else {
+        // Create new texcoord buffer
+        const buffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+        gl.bufferData(gl.ARRAY_BUFFER, uvData, gl.DYNAMIC_DRAW);
+        env.local.texcoordBufferSize = uvData.byteLength;
+
+        sharedBufferInfo.attribs.texcoord = {
+          buffer: buffer,
+          numComponents: 2,
+          type: gl.FLOAT,
+          normalize: false,
+          stride: 0,
+          offset: 0
+        };
+      }
+    } else if (env.texture) {
+      // Auto-generate UVs from bounding-box-normalized vertex positions
+      const rangeX = maxX - minX || 1;
+      const rangeY = maxY - minY || 1;
+      const autoUV = new Float32Array(vertices.length * 2);
+      for (let i = 0; i < vertices.length; i++) {
+        autoUV[i * 2]     = (vertices[i][0] - minX) / rangeX;
+        autoUV[i * 2 + 1] = (vertices[i][1] - minY) / rangeY;
+      }
+      wgl.vertexTexture = true;
+
+      if (sharedBufferInfo.attribs.texcoord) {
+        env.local.texcoordBufferSize = updateGLBuffer(
+          gl, sharedBufferInfo.attribs.texcoord.buffer,
+          autoUV, env.local.texcoordBufferSize
+        );
+      } else {
+        const buffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+        gl.bufferData(gl.ARRAY_BUFFER, autoUV, gl.DYNAMIC_DRAW);
+        env.local.texcoordBufferSize = autoUV.byteLength;
+        sharedBufferInfo.attribs.texcoord = {
+          buffer: buffer,
+          numComponents: 2,
+          type: gl.FLOAT,
+          normalize: false,
+          stride: 0,
+          offset: 0
+        };
+      }
+    } else {
+      wgl.vertexTexture = false;
     }
 
     // Call any post-vertex-update handlers (mirrors g3d.GraphicsComplex.update)
@@ -4835,9 +4906,7 @@ async function processLabel(ref0, gX, env, textFallback, nodeFallback) {
 
     } else {
       let a = await interpretate(args[0], env);
-      if (a instanceof NumericArrayObject) { // convert back automatically
-        a = a.normal();
-       }
+      if (a instanceof NumericArrayObject) a = a.buffer;
       colorCss = "rgb(";
       colorCss += String(Math.floor(255 * a[0])) + ",";
       colorCss += String(Math.floor(255 * a[1])) + ",";
@@ -4871,9 +4940,7 @@ async function processLabel(ref0, gX, env, textFallback, nodeFallback) {
 
     } else {
       let a = await interpretate(args[0], env);
-      if (a instanceof NumericArrayObject) { // convert back automatically
-        a = a.normal();
-       }
+      if (a instanceof NumericArrayObject) a = a.buffer;
       colorCss = "rgb(";
       colorCss += String(Math.floor(255 * a[0])) + ",";
       colorCss += String(Math.floor(255 * a[1])) + ",";
@@ -5992,9 +6059,7 @@ g2d.BezierCurve = async (args, env) => {
     }
 
     let data = await interpretate(args[0], env);
-    if (data instanceof NumericArrayObject) { // convert back automatically
-      data = data.normal();
-    }
+    if (data instanceof NumericArrayObject) data = data.buffer;
 
     let radius = [1, 1]; 
 
@@ -6051,9 +6116,7 @@ g2d.BezierCurve = async (args, env) => {
   g2d.Circle.update = async (args, env) => {
     let data = await interpretate(args[0], env);
 
-    if (data instanceof NumericArrayObject) { // convert back automatically
-      data = data.normal();
-    }
+    if (data instanceof NumericArrayObject) data = data.buffer;
 
     let radius = 1; 
 
@@ -6329,7 +6392,7 @@ return object;
     }
 
     let data = await interpretate(args[0], env);
-    if (data instanceof NumericArrayObject) data = data.normal();
+    if (data instanceof NumericArrayObject) data = data.buffer;
     let radius = 1; 
 
     if (args.length > 1) {
@@ -6424,7 +6487,7 @@ return object;
     if (env.fence) await env.fence();
 
     let data = await interpretate(args[0], env);
-    if (data instanceof NumericArrayObject) data = data.normal();
+    if (data instanceof NumericArrayObject) data = data.buffer;
 
     let radius = env.local.r || 1;
     if (args.length > 1) {
@@ -6489,9 +6552,7 @@ return object;
 
     let data = await interpretate(args[0], env);
 
-    if (data instanceof NumericArrayObject) { // convert back automatically
-      data = data.normal();
-    }    
+    if (data instanceof NumericArrayObject) data = data.buffer;
     
     let radius = [1, 1]; 
 
@@ -6535,9 +6596,7 @@ return object;
   g2d.Disk.update = async (args, env) => {
     let data = await interpretate(args[0], env);
 
-    if (data instanceof NumericArrayObject) { // convert back automatically
-      data = data.normal();
-    }
+    if (data instanceof NumericArrayObject) data = data.buffer;
 
     //console.log(data);
     let radius = env.local.r; 
