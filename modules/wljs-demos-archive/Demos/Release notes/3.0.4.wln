@@ -1,8 +1,8 @@
-<|"Notebook" -> <|"Controller" -> "967d5ae7-65f2-4e5d-a0e5-75140c656428", 
+<|"Notebook" -> <|"Controller" -> "bfad0d84-7d8a-4aae-8da2-504ddd86ec8d", 
    "FocusedCell" -> CoffeeLiqueur`Notebook`Cells`CellObj[
-     CoffeeLiqueur`Notebook`Cells`CellObj`$527], "FocusedCellSelection" -> 
-    {955, 954}, "HaveToSaveAs" -> False, "MessangerChannel" -> Messanger, 
-   "ModalsChannel" -> "5d58ea61-fdf3-46df-8241-fbb196c2d2b0", 
+     CoffeeLiqueur`Notebook`Cells`CellObj`$413], "FocusedCellSelection" -> 
+    {165, 164}, "HaveToSaveAs" -> False, "MessangerChannel" -> Messanger, 
+   "ModalsChannel" -> "b46a3be0-a3ec-4637-84d6-33548450d222", 
    "Objects" -> <|"64e824d4-b57c-4d75-a660-15e91d96d777" -> 
       <|"Public" -> Hold[Dataset[{Association["class" -> "1st", "age" -> 29, 
             "sex" -> "female", "survived" -> True], Association[
@@ -6319,33 +6319,36 @@ frontend/modules/wljs-demos-archive/Demos/Release notes/3.0.4.wln",
    "PublicFields" -> {"Properties"}, "Quick" -> True, "Symbols" -> <||>, 
    "TOC" -> {CoffeeLiqueur`Extensions`TOC`Private`heading[1, 
       "Release notes *3.0.4*", CoffeeLiqueur`Notebook`Cells`CellObj[
-       CoffeeLiqueur`Notebook`Cells`CellObj`$501]], 
+       CoffeeLiqueur`Notebook`Cells`CellObj`$360]], 
      CoffeeLiqueur`Extensions`TOC`Private`heading[2, 
       "Sorting feature for Dataset and Tabular", 
       CoffeeLiqueur`Notebook`Cells`CellObj[
-       CoffeeLiqueur`Notebook`Cells`CellObj`$503]], 
+       CoffeeLiqueur`Notebook`Cells`CellObj`$362]], 
      CoffeeLiqueur`Extensions`TOC`Private`heading[2, 
       "Improved input elements", CoffeeLiqueur`Notebook`Cells`CellObj[
-       CoffeeLiqueur`Notebook`Cells`CellObj`$509]], 
+       CoffeeLiqueur`Notebook`Cells`CellObj`$370]], 
      CoffeeLiqueur`Extensions`TOC`Private`heading[3, "More styling options", 
       CoffeeLiqueur`Notebook`Cells`CellObj[
-       CoffeeLiqueur`Notebook`Cells`CellObj`$514]], 
+       CoffeeLiqueur`Notebook`Cells`CellObj`$375]], 
      CoffeeLiqueur`Extensions`TOC`Private`heading[2, 
       "Better texture support", CoffeeLiqueur`Notebook`Cells`CellObj[
-       CoffeeLiqueur`Notebook`Cells`CellObj`$522]], 
+       CoffeeLiqueur`Notebook`Cells`CellObj`$385]], 
      CoffeeLiqueur`Extensions`TOC`Private`heading[2, 
       "Added update support for `GraphicsComplex` (2D)", 
       CoffeeLiqueur`Notebook`Cells`CellObj[
-       CoffeeLiqueur`Notebook`Cells`CellObj`$526]], 
+       CoffeeLiqueur`Notebook`Cells`CellObj`$389]], 
      CoffeeLiqueur`Extensions`TOC`Private`heading[3, 
       "Performance comparison", CoffeeLiqueur`Notebook`Cells`CellObj[
-       CoffeeLiqueur`Notebook`Cells`CellObj`$532]], 
+       CoffeeLiqueur`Notebook`Cells`CellObj`$395]], 
+     CoffeeLiqueur`Extensions`TOC`Private`heading[2, 
+      "Drop files to a sidebar", CoffeeLiqueur`Notebook`Cells`CellObj[
+       CoffeeLiqueur`Notebook`Cells`CellObj`$420]], 
      CoffeeLiqueur`Extensions`TOC`Private`heading[2, "Shortcuts", 
       CoffeeLiqueur`Notebook`Cells`CellObj[
-       CoffeeLiqueur`Notebook`Cells`CellObj`$543]], 
+       CoffeeLiqueur`Notebook`Cells`CellObj`$410]], 
      CoffeeLiqueur`Extensions`TOC`Private`heading[2, "Misc", 
       CoffeeLiqueur`Notebook`Cells`CellObj[
-       CoffeeLiqueur`Notebook`Cells`CellObj`$545]]}, 
+       CoffeeLiqueur`Notebook`Cells`CellObj`$412]]}, 
    "TrashedCells" -> {"(* ::: Input ::: *)\nSeries[Sin[x], {x,0,2}]\n\n(* ::: \
 Output ::: *)\n(SeriesData[x, 0, {1}, 1, 3, 1])", ".md\nCopied expression:", 
      "Series[Sin[x], {x,0,2}]", ".md\nFor example:", ".md\n## Copy cells as \
@@ -6354,76 +6357,76 @@ automatically strips off all syntax sugar and marks input and output \
 cells\n\n\n![](/attachments/Screenshot-2026-04-02-at-12.53.25-01e.png)\n"}|>, 
  "Cells" -> {<|"Data" -> ".md\n# Release notes *3.0.4*\n\n<Now/>\n", 
     "Display" -> "codemirror", "Hash" -> 
-     "0af33e96-3b7d-43c2-8015-0e88d696b806", "Invisible" -> False, 
+     "64b4023e-34d0-4cb2-8b79-a77d74bb789d", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "d21c0116-ecbf-4efc-9aae-a0921959c035"|>, 
+    "UID" -> Null, "Notebook" -> "688a7a3a-cfee-43e4-9d1d-22eb3db1c0da"|>, 
    <|"Data" -> "# Release notes *3.0.4*\n\nTue 14 Apr 2026 21:19:04", 
     "Display" -> "markdown", "Hash" -> 
-     "3535b142-d9a1-45e7-b55e-6d9add35b440", "Invisible" -> False, 
+     "3b70ae57-d3a7-4827-aecc-ba94c2cf5ffa", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
-    "Notebook" -> "d21c0116-ecbf-4efc-9aae-a0921959c035"|>, 
+    "Notebook" -> "688a7a3a-cfee-43e4-9d1d-22eb3db1c0da"|>, 
    <|"Data" -> ".md\n## Sorting feature for Dataset and Tabular\nWe added \
 both Kernel- and frontend-side sorting for `Dataset` and `Tabular`. Just \
 click on one of the headers:", "Display" -> "codemirror", 
-    "Hash" -> "1931bdbd-f35f-47f8-af10-0e2d92eb3bb6", "Invisible" -> False, 
+    "Hash" -> "8a4322de-dd1b-4b49-be1f-102d915a67de", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "d21c0116-ecbf-4efc-9aae-a0921959c035"|>, 
+    "UID" -> Null, "Notebook" -> "688a7a3a-cfee-43e4-9d1d-22eb3db1c0da"|>, 
    <|"Data" -> "## Sorting feature for Dataset and Tabular\nWe added both \
 Kernel- and frontend-side sorting for `Dataset` and `Tabular`. Just click on \
 one of the headers:", "Display" -> "markdown", 
-    "Hash" -> "a7bcdb5d-b86d-4521-9082-a37b91b7d9a7", "Invisible" -> False, 
+    "Hash" -> "98f8f135-5c01-404b-9d2e-7ef4d109586a", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
-    "Notebook" -> "d21c0116-ecbf-4efc-9aae-a0921959c035"|>, 
+    "Notebook" -> "688a7a3a-cfee-43e4-9d1d-22eb3db1c0da"|>, 
    <|"Data" -> "Take[ExampleData[{\"Dataset\",\"Titanic\"}],100]", 
     "Display" -> "codemirror", "Hash" -> 
-     "be86f1d8-4d06-4a1a-8c27-ec234804aafd", "Invisible" -> False, 
+     "a298ac47-cf55-45af-a4f5-a83d54bc243f", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
-    "Notebook" -> "d21c0116-ecbf-4efc-9aae-a0921959c035"|>, 
+    "Notebook" -> "688a7a3a-cfee-43e4-9d1d-22eb3db1c0da"|>, 
    <|"Data" -> "(*VB[*)(FrontEndRef[\"64e824d4-b57c-4d75-a660-15e91d96d777\"]\
 )(*,*)(*\"1:eJxTTMoPSmNkYGAoZgESHvk5KRCeEJBwK8rPK3HNS3GtSE0uLUlMykkNVgEKm5mkW\
 hiZpJjoJpmaJ+uapJib6iaamRnoGpqmWhqmWJqlmJubAwB9ExUr\"*)(*]VB*)", 
     "Display" -> "codemirror", "Hash" -> 
-     "0eb4dcbf-7265-4f97-89aa-9fdd93bb9b31", "Invisible" -> False, 
+     "dc3cfe91-0d60-4ca7-b65b-63d7717ce1e0", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
-    "Notebook" -> "d21c0116-ecbf-4efc-9aae-a0921959c035"|>, 
+    "Notebook" -> "688a7a3a-cfee-43e4-9d1d-22eb3db1c0da"|>, 
    <|"Data" -> ".md\nOr course, if you export a notebook to an HTML file \
 sorting may not work for large datasets, which are partially stored on the \
 kernel.", "Display" -> "codemirror", 
-    "Hash" -> "545148ab-9c09-4c12-9e21-227c088d4686", "Invisible" -> False, 
+    "Hash" -> "02df7f59-1571-4351-9856-a06d0d034218", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "d21c0116-ecbf-4efc-9aae-a0921959c035"|>, 
+    "UID" -> Null, "Notebook" -> "688a7a3a-cfee-43e4-9d1d-22eb3db1c0da"|>, 
    <|"Data" -> "Or course, if you export a notebook to an HTML file sorting \
 may not work for large datasets, which are partially stored on the kernel.", 
     "Display" -> "markdown", "Hash" -> 
-     "9af47c31-a6d0-4f69-8118-6a605484edba", "Invisible" -> False, 
+     "7fc1c3d7-29e2-4685-8777-a0ea1d105aff", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
-    "Notebook" -> "d21c0116-ecbf-4efc-9aae-a0921959c035"|>, 
+    "Notebook" -> "688a7a3a-cfee-43e4-9d1d-22eb3db1c0da"|>, 
    <|"Data" -> ".md\n## Improved input elements\nWe fixed `InputTerminal`, \
 now it is selectable and can hold up to 1000 entries", 
     "Display" -> "codemirror", "Hash" -> 
-     "ff275852-b2d6-4cc2-bfb2-bbbffbe9c117", "Invisible" -> False, 
+     "ce737d39-3de9-4e0d-9abd-2566fa3c4ff5", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "d21c0116-ecbf-4efc-9aae-a0921959c035"|>, 
+    "UID" -> Null, "Notebook" -> "688a7a3a-cfee-43e4-9d1d-22eb3db1c0da"|>, 
    <|"Data" -> "## Improved input elements\nWe fixed `InputTerminal`, now it \
 is selectable and can hold up to 1000 entries", "Display" -> "markdown", 
-    "Hash" -> "c5474b4a-592e-4714-bad2-359d842877b1", "Invisible" -> False, 
+    "Hash" -> "d9d9f873-ff52-4c4b-ac0b-9b3dce3b6da8", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
-    "Notebook" -> "d21c0116-ecbf-4efc-9aae-a0921959c035"|>, 
+    "Notebook" -> "688a7a3a-cfee-43e4-9d1d-22eb3db1c0da"|>, 
    <|"Data" -> "t = InputTerminal[]", "Display" -> "codemirror", 
-    "Hash" -> "dc3ba4e6-cd4c-43ab-86fe-062936abfe51", "Invisible" -> False, 
+    "Hash" -> "6d11d18c-769c-429c-81d0-7c8229a0837e", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
-    "Notebook" -> "d21c0116-ecbf-4efc-9aae-a0921959c035"|>, 
+    "Notebook" -> "688a7a3a-cfee-43e4-9d1d-22eb3db1c0da"|>, 
    <|"Data" -> "(*VB[*)(EventObject[<|\"StandardOutput\" -> \
 OutputStream[\"/private/var/folders/fs/ch7ddlhn7jz5vyg5k8bbrxyh0000gn/T/m0000\
 50359951\", 5], \"StandardError\" -> \
@@ -6433,102 +6436,102 @@ OutputStream[\"/private/var/folders/fs/ch7ddlhn7jz5vyg5k8bbrxyh0000gn/T/m0000\
 \"ff7d4d3e-2c4f-4490-be78-127d451a45d6\"|>])(*,*)(*\"1:eJxTTMoPSmNkYGAoZgESHv\
 k5KRCeEJBwK8rPK3HNS3GtSE0uLUlMykkNVgEKp6WZp5ikGKfqGiWbpOmamFga6CalmlvoGhoBxU0\
 NE01MU8wAjakVrA==\"*)(*]VB*)", "Display" -> "codemirror", 
-    "Hash" -> "18c46863-556a-459b-8bcb-209c6d9df8ad", "Invisible" -> False, 
+    "Hash" -> "5aecb1d8-6085-4106-be6c-8a822999415e", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
-    "Notebook" -> "d21c0116-ecbf-4efc-9aae-a0921959c035"|>, 
+    "Notebook" -> "688a7a3a-cfee-43e4-9d1d-22eb3db1c0da"|>, 
    <|"Data" -> "WriteString[t[\"StandardOutput\"], \"Hey\"];", 
     "Display" -> "codemirror", "Hash" -> 
-     "0eddd86e-41a3-4246-a69a-ba719df013b9", "Invisible" -> False, 
+     "5f986988-6a31-4daa-9995-76daea26906d", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
-    "Notebook" -> "d21c0116-ecbf-4efc-9aae-a0921959c035"|>, 
+    "Notebook" -> "688a7a3a-cfee-43e4-9d1d-22eb3db1c0da"|>, 
    <|"Data" -> ".md\n### More styling options\nWe provide many styling \
 options for `InputButton`, `InputRange` and others. Now you can directly \
 assign classes or styles for labels or controls", "Display" -> "codemirror", 
-    "Hash" -> "c32f8be8-f320-4c62-ba69-0e2b39b6a292", "Invisible" -> False, 
+    "Hash" -> "bdd20ba3-1340-49ed-bd1b-a0900ed086e8", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "d21c0116-ecbf-4efc-9aae-a0921959c035"|>, 
+    "UID" -> Null, "Notebook" -> "688a7a3a-cfee-43e4-9d1d-22eb3db1c0da"|>, 
    <|"Data" -> "### More styling options\nWe provide many styling options for \
 `InputButton`, `InputRange` and others. Now you can directly assign classes \
 or styles for labels or controls", "Display" -> "markdown", 
-    "Hash" -> "ed4527af-131e-44c2-a560-b43fb6dab82c", "Invisible" -> False, 
+    "Hash" -> "5b1381b4-9ce8-4e31-a326-6a69476c0cba", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
-    "Notebook" -> "d21c0116-ecbf-4efc-9aae-a0921959c035"|>, 
+    "Notebook" -> "688a7a3a-cfee-43e4-9d1d-22eb3db1c0da"|>, 
    <|"Data" -> "InputButton[\"Click me\", \"Style\"->\"text-transform: \
 uppercase; letter-spacing: 0.04em; color: #6b7280;\"]", 
     "Display" -> "codemirror", "Hash" -> 
-     "d8a6a556-b154-4994-8373-38d89e88558f", "Invisible" -> False, 
+     "5d8c2a8d-704d-4bee-999e-69ab624d7c46", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
-    "Notebook" -> "d21c0116-ecbf-4efc-9aae-a0921959c035"|>, 
+    "Notebook" -> "688a7a3a-cfee-43e4-9d1d-22eb3db1c0da"|>, 
    <|"Data" -> "(*VB[*)(EventObject[<|\"Id\" -> \
 \"47f6a519-9832-447d-9afc-13ab73dcc936\", \"Initial\" -> False, \"View\" -> \
 \"0c10b84e-566c-48fd-9530-3f9c547323db\"|>])(*,*)(*\"1:eJxTTMoPSmNkYGAoZgESHv\
 k5KRCeEJBwK8rPK3HNS3GtSE0uLUlMykkNVgEKGyQbGiRZmKTqmpqZJeuaWKSl6FqaGhvoGqdZJpu\
 amBsbGackAQB9ZhVI\"*)(*]VB*)", "Display" -> "codemirror", 
-    "Hash" -> "de75d79c-edd8-4f89-8e54-0f336a4b5f69", "Invisible" -> False, 
+    "Hash" -> "bdcef12b-31b7-4b34-b7b6-269b5411a48f", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
-    "Notebook" -> "d21c0116-ecbf-4efc-9aae-a0921959c035"|>, 
+    "Notebook" -> "688a7a3a-cfee-43e4-9d1d-22eb3db1c0da"|>, 
    <|"Data" -> ".md\nFor sliders you have many options", 
     "Display" -> "codemirror", "Hash" -> 
-     "60cdfa83-72ee-4a3a-a6f2-d700541f7e62", "Invisible" -> False, 
+     "9997f78c-4b66-477b-8260-7e8bbb3c269a", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "d21c0116-ecbf-4efc-9aae-a0921959c035"|>, 
+    "UID" -> Null, "Notebook" -> "688a7a3a-cfee-43e4-9d1d-22eb3db1c0da"|>, 
    <|"Data" -> "For sliders you have many options", "Display" -> "markdown", 
-    "Hash" -> "fb0246b4-6a59-48a4-bda7-a9daa0157baa", "Invisible" -> False, 
+    "Hash" -> "8edb7dd1-e92f-45d3-8bff-1c78f749b292", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
-    "Notebook" -> "d21c0116-ecbf-4efc-9aae-a0921959c035"|>, 
+    "Notebook" -> "688a7a3a-cfee-43e4-9d1d-22eb3db1c0da"|>, 
    <|"Data" -> "InputRange[0,1,0.1, \"SliderStyle\"->\"width:50vw; \
 accent-color: red \", \"CounterStyle\"->\"font-size:larger; padding:1rem\"]", 
     "Display" -> "codemirror", "Hash" -> 
-     "1691f656-a762-4a34-8a6b-1d7e7c5f776a", "Invisible" -> False, 
+     "aa642cc0-7f4c-4782-a1bc-f8e5627a45ee", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
-    "Notebook" -> "d21c0116-ecbf-4efc-9aae-a0921959c035"|>, 
+    "Notebook" -> "688a7a3a-cfee-43e4-9d1d-22eb3db1c0da"|>, 
    <|"Data" -> "(*VB[*)(EventObject[<|\"Id\" -> \
 \"eecc7fa5-b3fb-4e5d-9c57-249f5f761556\", \"Initial\" -> 0.5, \"View\" -> \
 \"0d6ce436-f0ef-4a71-871a-9874a68f589f\"|>])(*,*)(*\"1:eJxTTMoPSmNkYGAoZgESHv\
 k5KRCeEJBwK8rPK3HNS3GtSE0uLUlMykkNVgEKG6SYJaeaGJvpphmkpumaJJob6lqYGybqWlqYmyS\
 aWaSZWlimAQCF/RWO\"*)(*]VB*)", "Display" -> "codemirror", 
-    "Hash" -> "6f5b3252-bb47-4bbf-942b-4d44bb0f2d86", "Invisible" -> False, 
+    "Hash" -> "95a08576-410d-4b52-90b7-7a3ec60bdca6", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
-    "Notebook" -> "d21c0116-ecbf-4efc-9aae-a0921959c035"|>, 
+    "Notebook" -> "688a7a3a-cfee-43e4-9d1d-22eb3db1c0da"|>, 
    <|"Data" -> ".md\n## Better texture support\nWe improved `Texture` support \
 in 2D graphics. Now it no longer requires `TextureVertexCoordinates` (only \
 optional)", "Display" -> "codemirror", 
-    "Hash" -> "5bfdf9c8-f88b-4164-9d25-88edf18ca76e", "Invisible" -> False, 
+    "Hash" -> "82aa7f8f-4720-4b96-a28f-e834f3b30bfd", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "d21c0116-ecbf-4efc-9aae-a0921959c035"|>, 
+    "UID" -> Null, "Notebook" -> "688a7a3a-cfee-43e4-9d1d-22eb3db1c0da"|>, 
    <|"Data" -> "## Better texture support\nWe improved `Texture` support in \
 2D graphics. Now it no longer requires `TextureVertexCoordinates` (only \
 optional)", "Display" -> "markdown", 
-    "Hash" -> "f14268cf-db0e-45ea-b4d0-3859018bc704", "Invisible" -> False, 
+    "Hash" -> "84e326a5-6b3b-4769-9451-d1d88cb71dd6", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
-    "Notebook" -> "d21c0116-ecbf-4efc-9aae-a0921959c035"|>, 
+    "Notebook" -> "688a7a3a-cfee-43e4-9d1d-22eb3db1c0da"|>, 
    <|"Data" -> "Graphics[{\n  Texture[Array[BitXor, \
 {128,128}]//Rescale//Image],\n  GraphicsComplex[RandomReal[{-1,1}, {3,2}], \
 Polygon[{1,2,3}]]\n}, Axes->True]", "Display" -> "codemirror", 
-    "Hash" -> "e2bebddd-ae12-4c0d-8b6e-ea4dca464c8b", "Invisible" -> False, 
+    "Hash" -> "f0b95187-233c-4f0c-a438-02b0b94a4e96", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
-    "Notebook" -> "d21c0116-ecbf-4efc-9aae-a0921959c035"|>, 
+    "Notebook" -> "688a7a3a-cfee-43e4-9d1d-22eb3db1c0da"|>, 
    <|"Data" -> "(*VB[*)(FrontEndRef[\"05a4f084-a14e-442b-b07a-271c10fe54c1\"]\
 )(*,*)(*\"1:eJxTTMoPSmNkYGAoZgESHvk5KRCeEJBwK8rPK3HNS3GtSE0uLUlMykkNVgEKG5gmm\
 qQZWJjoJhqapOqamBgl6SYZmCfqGpkbJhsapKWamiQbAgB8rxVW\"*)(*]VB*)", 
     "Display" -> "codemirror", "Hash" -> 
-     "b8dd5d86-b2b3-4b32-b5be-5678d28bfb6d", "Invisible" -> False, 
+     "20c9485c-5278-4c4b-b67d-543684326329", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
-    "Notebook" -> "d21c0116-ecbf-4efc-9aae-a0921959c035"|>, 
+    "Notebook" -> "688a7a3a-cfee-43e4-9d1d-22eb3db1c0da"|>, 
    <|"Data" -> ".md\n## Added update support for `GraphicsComplex` \
 (2D)\n\n`GraphicsComplex` was already supported, but it did not automatically \
 react to data changes. With this update, lines and points now update \
@@ -6538,10 +6541,10 @@ numbers of primitives, usually polygons such as triangles. It is widely used \
 in `ContourPlot` and `Plot3D`. In the context of `Graphics3D`, updating it is \
 relatively straightforward: we render the 3D scene with WebGL and then update \
 or resize GPU buffers as new data arrives", "Display" -> "codemirror", 
-    "Hash" -> "0c2f6a84-6523-4c45-bf54-3b46eab63de1", "Invisible" -> False, 
+    "Hash" -> "5e16f80a-3c66-46d5-b83d-d563ca29f0ee", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "d21c0116-ecbf-4efc-9aae-a0921959c035"|>, 
+    "UID" -> Null, "Notebook" -> "688a7a3a-cfee-43e4-9d1d-22eb3db1c0da"|>, 
    <|"Data" -> "## Added update support for `GraphicsComplex` \
 (2D)\n\n`GraphicsComplex` was already supported, but it did not automatically \
 react to data changes. With this update, lines and points now update \
@@ -6551,10 +6554,10 @@ numbers of primitives, usually polygons such as triangles. It is widely used \
 in `ContourPlot` and `Plot3D`. In the context of `Graphics3D`, updating it is \
 relatively straightforward: we render the 3D scene with WebGL and then update \
 or resize GPU buffers as new data arrives", "Display" -> "markdown", 
-    "Hash" -> "95cac0c2-d988-4b30-b4bb-57147adcc62b", "Invisible" -> False, 
+    "Hash" -> "51febcc2-6246-49e3-8ec5-4985d249832a", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
-    "Notebook" -> "d21c0116-ecbf-4efc-9aae-a0921959c035"|>, 
+    "Notebook" -> "688a7a3a-cfee-43e4-9d1d-22eb3db1c0da"|>, 
    <|"Data" -> "vert3 = (*VB[*)(Uncompress@Get[FileNameJoin[{\"\", \"Users\", \
 \"kirill\", \"Github\", \"wolfram-js-frontend\", \"modules\", \
 \"wljs-demos-archive\", \"Demos\", \"Release notes\", \".iconized\", \
@@ -6572,10 +6575,10 @@ aug==\"*)(*]VB*)]],\n  EventHandler[AnimationFrameListener[vert3//Offload], \
 AbsoluteTime[]},\n      # + 0.2 n (\n        Sin[10 (n.{1, 0, 0}) - 4 t] +\n  \
       0.6 Sin[14 (n.{0, 1, 1}/Sqrt[2]) - 6 t]\n      )\n    ] &, vert3];\n  \
 ]]\n}]", "Display" -> "codemirror", 
-    "Hash" -> "b36e9f6d-b8ed-46c7-a94c-913e75f4a50a", "Invisible" -> False, 
+    "Hash" -> "a472a511-17c7-41f2-a6d4-469aeefc8922", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
-    "Notebook" -> "d21c0116-ecbf-4efc-9aae-a0921959c035"|>, 
+    "Notebook" -> "688a7a3a-cfee-43e4-9d1d-22eb3db1c0da"|>, 
    <|"Data" -> ".md\nDoing the same in `Graphics` is much more difficult. \
 Internally, we still use WebGL vertex and fragment shaders to render \
 `DensityPlot` from hundreds or thousands of triangles, and then bake the \
@@ -6589,10 +6592,10 @@ WebGL-rasterized canvas and blends them together. As a result, primitives in \
 `GraphicsComplex` that can still be represented as SVG paths, such as lines, \
 are often much easier to update through SVG than through WebGL. **In any \
 case, now we have it!**", "Display" -> "codemirror", 
-    "Hash" -> "e8ba64bd-1759-4547-bc23-f8c7f45b208f", "Invisible" -> False, 
+    "Hash" -> "f142b9e1-0be4-47a9-80f2-5a9547cdae41", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "d21c0116-ecbf-4efc-9aae-a0921959c035"|>, 
+    "UID" -> Null, "Notebook" -> "688a7a3a-cfee-43e4-9d1d-22eb3db1c0da"|>, 
    <|"Data" -> "Doing the same in `Graphics` is much more difficult. \
 Internally, we still use WebGL vertex and fragment shaders to render \
 `DensityPlot` from hundreds or thousands of triangles, and then bake the \
@@ -6606,10 +6609,10 @@ WebGL-rasterized canvas and blends them together. As a result, primitives in \
 `GraphicsComplex` that can still be represented as SVG paths, such as lines, \
 are often much easier to update through SVG than through WebGL. **In any \
 case, now we have it!**", "Display" -> "markdown", 
-    "Hash" -> "6759dfcf-5971-4afa-858c-3be4af3e0ca9", "Invisible" -> False, 
+    "Hash" -> "6dacee09-fc9c-455d-9708-88ff144ae52f", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
-    "Notebook" -> "d21c0116-ecbf-4efc-9aae-a0921959c035"|>, 
+    "Notebook" -> "688a7a3a-cfee-43e4-9d1d-22eb3db1c0da"|>, 
    <|"Data" -> "vert2 = CirclePoints[0.7, 50]//N;\nf = \
 (*VB[*)(Uncompress[\"1:eJxTTMoPSmNkYGAo5gASbqV5ySWZ+XlpTCARFiARnlmSgeD5ZBaXQH\
 jMQCI4taQYpLUAYgBIQXBOfkkmiIepqiSNASTEAyQck4rzc0pLUkMyc1MRhgfklBZDzUOxMJMBbh4\
@@ -6621,24 +6624,24 @@ LightBlue, Polygon[Range[1,50]], Red, Point[Range[1,50]]\n  }],\n  \
 EventHandler[AnimationFrameListener[vert2//Offload], \n    Function[Null, \
 vert2 = f /@ vert2]\n  ]\n}, PlotRange->{{-1,1}, {-1,1}}]", 
     "Display" -> "codemirror", "Hash" -> 
-     "2ed91cee-49fc-4f05-a9a6-6718a004eda7", "Invisible" -> False, 
+     "3b722ab3-04de-4ca8-b7ca-208abc8341a2", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
-    "Notebook" -> "d21c0116-ecbf-4efc-9aae-a0921959c035"|>, 
+    "Notebook" -> "688a7a3a-cfee-43e4-9d1d-22eb3db1c0da"|>, 
    <|"Data" -> ".md\n\n### Performance comparison\n\nIt makes things fast \
 especially for `Polygon` and `Point` using hardware acceleration. Compare \
 these two with GC and without:", "Display" -> "codemirror", 
-    "Hash" -> "399eb0ec-7b1c-4ded-8a91-0e090ed88d46", "Invisible" -> False, 
+    "Hash" -> "0e60b5f2-85cc-4171-a50b-029bf802f0f9", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "d21c0116-ecbf-4efc-9aae-a0921959c035"|>, 
+    "UID" -> Null, "Notebook" -> "688a7a3a-cfee-43e4-9d1d-22eb3db1c0da"|>, 
    <|"Data" -> "\n### Performance comparison\n\nIt makes things fast \
 especially for `Polygon` and `Point` using hardware acceleration. Compare \
 these two with GC and without:", "Display" -> "markdown", 
-    "Hash" -> "8c5b5436-16c3-4539-9ace-666f2e0b3128", "Invisible" -> False, 
+    "Hash" -> "346c40ab-5ecd-49dc-a167-051abfb8fd11", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
-    "Notebook" -> "d21c0116-ecbf-4efc-9aae-a0921959c035"|>, 
+    "Notebook" -> "688a7a3a-cfee-43e4-9d1d-22eb3db1c0da"|>, 
    <|"Data" -> "ClearAll[handler, n, r, f, s, x, p , q]\n\nn = 10000; \
 (*BB[*)(*WARNING!*)(*,*)(*\"1:eJxTTMoPSmNhYGAo5gcSAUX5ZZkpqSn+BSWZ+XnFaYwgCS4\
 g4Zyfm5uaV+KUXxEMUqxsbm6exgSSBPGCSnNSg9mAjOCSosy8dLBYSFFpKpoKkDkeqYkpEFXBILO1\
@@ -6646,95 +6649,109 @@ sCgJSczMQVYCAOFrJEU=\"*)(*]BB*)\nr := RandomInteger[{1, n}];\nf := (#/(.01 + \
 Sqrt[#.#])) & /@ (x[[#]] - x) &;\ns := With[{r1 = r}, p[[r1]] = r; q[[r1]] = \
 r];\nx = RandomReal[{-1, 1}, {n, 2}];\n{p, q} = RandomInteger[{1, n}, {2, \
 n}];", "Display" -> "codemirror", "Hash" -> 
-     "20de5d1c-2ae0-4dea-8adc-375850a88be0", "Invisible" -> False, 
+     "4baec3c3-2a59-4c49-9ae7-d1961239c179", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
-    "Notebook" -> "d21c0116-ecbf-4efc-9aae-a0921959c035"|>, 
+    "Notebook" -> "688a7a3a-cfee-43e4-9d1d-22eb3db1c0da"|>, 
    <|"Data" -> ".md\n__Plain Point primitives (SVG)__", 
     "Display" -> "codemirror", "Hash" -> 
-     "7a1308cc-19d9-4d5d-adf1-81bcdbf18b40", "Invisible" -> False, 
+     "2c9315b3-6d65-4e54-8e6d-d067a06ac576", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "d21c0116-ecbf-4efc-9aae-a0921959c035"|>, 
+    "UID" -> Null, "Notebook" -> "688a7a3a-cfee-43e4-9d1d-22eb3db1c0da"|>, 
    <|"Data" -> "__Plain Point primitives (SVG)__", "Display" -> "markdown", 
-    "Hash" -> "f654602e-caeb-4661-8d05-3ab341fdf89f", "Invisible" -> False, 
+    "Hash" -> "16f457e6-abbc-495a-b819-202a3fa68d68", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
-    "Notebook" -> "d21c0116-ecbf-4efc-9aae-a0921959c035"|>, 
+    "Notebook" -> "688a7a3a-cfee-43e4-9d1d-22eb3db1c0da"|>, 
    <|"Data" -> "Graphics[{\n  PointSize[0.007], Point[x // Offload],\n  \
 EventHandler[AnimationFrameListener[x // Offload], With[{},\n    x = 0.995 x \
 + 0.02 f[p] - 0.01 f[q];\n    If[r < 100, s];\n  ]&],\n}, PlotRange -> \
 {{-2,2}, {-2,2}}, TransitionType->None]  ", "Display" -> "codemirror", 
-    "Hash" -> "4f275c65-c900-4a09-9b77-5ac687488675", "Invisible" -> False, 
+    "Hash" -> "8cb24866-a6d1-4cc1-b1e5-05a816480036", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
-    "Notebook" -> "d21c0116-ecbf-4efc-9aae-a0921959c035"|>, 
+    "Notebook" -> "688a7a3a-cfee-43e4-9d1d-22eb3db1c0da"|>, 
    <|"Data" -> ".md\n__Using GraphicsComplex (WebGL)__", 
     "Display" -> "codemirror", "Hash" -> 
-     "82ce60b4-ad5b-49ad-8849-f26e69da9d92", "Invisible" -> False, 
+     "dc0fdfbf-f792-4da3-b97e-f4121199f61e", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "d21c0116-ecbf-4efc-9aae-a0921959c035"|>, 
+    "UID" -> Null, "Notebook" -> "688a7a3a-cfee-43e4-9d1d-22eb3db1c0da"|>, 
    <|"Data" -> "__Using GraphicsComplex (WebGL)__", "Display" -> "markdown", 
-    "Hash" -> "6054f081-a90c-4efd-adac-8dfe209d8742", "Invisible" -> False, 
+    "Hash" -> "8eff08df-52a5-46b0-b891-d10e6ab3047a", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
-    "Notebook" -> "d21c0116-ecbf-4efc-9aae-a0921959c035"|>, 
+    "Notebook" -> "688a7a3a-cfee-43e4-9d1d-22eb3db1c0da"|>, 
    <|"Data" -> "Graphics[{\n  PointSize[0.007], GraphicsComplex[x//Offload, \
 Point[Range[n]]],\n  EventHandler[AnimationFrameListener[x // Offload], \
 With[{},\n    x = 0.995 x + 0.02 f[p] - 0.01 f[q];\n    If[r < 100, s];\n  \
 ]&],\n}, PlotRange -> {{-2,2}, {-2,2}}, TransitionType->None]  ", 
     "Display" -> "codemirror", "Hash" -> 
-     "2952345a-fd9d-4a94-9402-e1c570b314e5", "Invisible" -> False, 
+     "e2fd5809-ba76-47bf-971d-c66017edc24a", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
-    "Notebook" -> "d21c0116-ecbf-4efc-9aae-a0921959c035"|>, 
+    "Notebook" -> "688a7a3a-cfee-43e4-9d1d-22eb3db1c0da"|>, 
    <|"Data" -> ".md\nWith increasing `n` the difference gets even more \
 prominent and at some point Wolfram Kernel becomes the bottleneck.\n", 
     "Display" -> "codemirror", "Hash" -> 
-     "d54f6673-bb2f-4412-847e-bea79ff1d604", "Invisible" -> False, 
+     "472a269c-e173-445c-a66a-b5efd84dde55", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "d21c0116-ecbf-4efc-9aae-a0921959c035"|>, 
+    "UID" -> Null, "Notebook" -> "688a7a3a-cfee-43e4-9d1d-22eb3db1c0da"|>, 
    <|"Data" -> "With increasing `n` the difference gets even more prominent \
 and at some point Wolfram Kernel becomes the bottleneck.\n", 
     "Display" -> "markdown", "Hash" -> 
-     "57ec4902-81af-4b05-b1a9-b6332abe30a6", "Invisible" -> False, 
+     "ab2980b5-8866-4865-9934-bf00f0300aef", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
-    "Notebook" -> "d21c0116-ecbf-4efc-9aae-a0921959c035"|>, 
+    "Notebook" -> "688a7a3a-cfee-43e4-9d1d-22eb3db1c0da"|>, 
+   <|"Data" -> ".md\n## Drop files to a sidebar\nWe added support on both: \
+desktop and server variants of WLJS Notebook for files uploading to a working \
+directory by dropping them on a sidebar.", "Display" -> "codemirror", 
+    "Hash" -> "d1897097-e83e-474f-adea-0902f207caa2", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "688a7a3a-cfee-43e4-9d1d-22eb3db1c0da"|>, 
+   <|"Data" -> "## Drop files to a sidebar\nWe added support on both: desktop \
+and server variants of WLJS Notebook for files uploading to a working \
+directory by dropping them on a sidebar.", "Display" -> "markdown", 
+    "Hash" -> "fee421d1-4eae-4d6a-885e-624970591a90", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "688a7a3a-cfee-43e4-9d1d-22eb3db1c0da"|>, 
    <|"Data" -> ".md\n## Shortcuts\n- Added a shortcut for evaluating the \
 whole notebook <kbd>Alt-j</kbd> or <kbd>Cmd-j</kbd>\n- New command palette \
 item: *Optimize memory*, which effectively runs a major garbage collector on \
 the kernel and server using `Share` method.", "Display" -> "codemirror", 
-    "Hash" -> "6915b80d-a40d-4eb4-937f-e51c35236e9f", "Invisible" -> False, 
+    "Hash" -> "79c3c999-88d7-4fc2-b9c4-da332376edb8", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "d21c0116-ecbf-4efc-9aae-a0921959c035"|>, 
+    "UID" -> Null, "Notebook" -> "688a7a3a-cfee-43e4-9d1d-22eb3db1c0da"|>, 
    <|"Data" -> "## Shortcuts\n- Added a shortcut for evaluating the whole \
 notebook <kbd >Alt-j</kbd> or <kbd >Cmd-j</kbd>\n- New command palette item: \
 *Optimize memory*, which effectively runs a major garbage collector on the \
 kernel and server using `Share` method.", "Display" -> "markdown", 
-    "Hash" -> "16f8c82a-ada9-495e-89e2-642524390688", "Invisible" -> False, 
+    "Hash" -> "f6e6b6fb-c3d4-4d62-8681-79a2cf444751", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
-    "Notebook" -> "d21c0116-ecbf-4efc-9aae-a0921959c035"|>, 
+    "Notebook" -> "688a7a3a-cfee-43e4-9d1d-22eb3db1c0da"|>, 
    <|"Data" -> ".md\n## Misc\n- Fixed major issues with license activation on \
 docker image\n- `Ready` event for `CreateWindow` now returns a `WindowObj`\n- \
 Offscreen rasterization support if window is not provided\n- Minor issues \
 with `Manipulate`\n- Fixed pale 2D plots (`ParametricPlot` and others)", 
     "Display" -> "codemirror", "Hash" -> 
-     "357be3d0-e04e-49a4-a4f6-80ade6e9873f", "Invisible" -> False, 
+     "aac8751d-d878-4885-9a24-ebdfc0a7d40c", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "d21c0116-ecbf-4efc-9aae-a0921959c035"|>, 
+    "UID" -> Null, "Notebook" -> "688a7a3a-cfee-43e4-9d1d-22eb3db1c0da"|>, 
    <|"Data" -> "## Misc\n- Fixed major issues with license activation on \
 docker image\n- `Ready` event for `CreateWindow` now returns a `WindowObj`\n- \
 Offscreen rasterization support if window is not provided\n- Minor issues \
 with `Manipulate`\n- Fixed pale 2D plots (`ParametricPlot` and others)", 
     "Display" -> "markdown", "Hash" -> 
-     "2767dd0c-0f3c-4f6d-b5be-1347acb74b78", "Invisible" -> False, 
+     "026a94fa-c197-4e4f-9f57-a871417e7d3d", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
-    "Notebook" -> "d21c0116-ecbf-4efc-9aae-a0921959c035"|>}, 
+    "Notebook" -> "688a7a3a-cfee-43e4-9d1d-22eb3db1c0da"|>}, 
  "serializer" -> "jsfn4"|>
