@@ -356,7 +356,7 @@ InputFile[opts: OptionsPattern[] ] := With[{id = OptionValue["Event"], internal 
 		"Transaction" -> (EventFire[id, "Transaction", #]&), (* forward to the main event *)
 		"File" -> (EventFire[id, "File", #]&), (* forward to the main event *)
 
-		"Chunk" -> Function[payload, With[{hash = StringJoin[payload["Name"], payload["Transaction"] ], chunk = payload["Chunk"] },
+		"Chunk" -> Function[payload, With[{hash = StringJoin[payload["Name"], "|", payload["Transaction"] ], chunk = payload["Chunk"] },
 
 			If[!KeyExistsQ[filechunks, hash ], filechunks[hash] = <||>];
 			filechunks[hash] = Join[filechunks[hash], <|chunk -> payload["Data"]|>];
