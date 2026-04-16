@@ -1,13 +1,32 @@
 Sidebar = ImportComponent["Body.wlx"];
 ElectronMenuComponent = ImportComponent["Components/ElectronMenuComponent.wlx"];
 
-Controller["Delete", sidebarId_, __, Secret_] := Function[name,
-  With[{p = URLDecode[name]},
-    If[DirectoryQ[p], DeleteDirectory[p, DeleteContents->True], DeleteFile[p]];
-  ];
-  EventFire[sidebarId, "Refresh", <|"Client"->$Client|>];
-  EventFire[Secret, "Change", <|"Client"->$Client|>];
-];
+UploadId = CreateUUID[];
+
+EventHandler[UploadId, Function[payload,
+    With[{base64 = payload[[1]], uploadDir = URLDecode[payload[[2]]], filename = payload[[3]]},
+      With[{stream = OpenWrite[FileNameJoin[{uploadDir, filename}], BinaryFormat->True]},
+        BinaryWrite[stream, Normal[BaseDecode[Last[StringSplit[base64, ","] ] ] ] ];  
+        Close[stream];
+      ];
+    ];
+] ];
+
+Controller["Delete", sidebarId_, modal_, __, Secret_] := Function[name, With[{requestPromise = Promise[]},
+  EventFire[modal, "MessageBox", <|"Promise" -> requestPromise, "type" -> "question",
+  "title" -> "Delete",
+  "message" -> StringJoin["Please confirm the operation for ", FileNameTake[URLDecode[name] ] ],
+  "buttons" -> {"Yes", "No"},
+  "cancelId" -> 1|>];
+
+  Then[requestPromise, Function[result,
+    If[result["response"] === 0 || TrueQ[result],
+      With[{p = URLDecode[name]},
+        If[DirectoryQ[p], DeleteDirectory[p, DeleteContents->True], DeleteFile[p] ];
+      ];  
+    ]
+  ] ];
+] ];
 
 Controller["Duplicate", sidebarId_, __, Secret_] := Function[name,
   With[{decoded = URLDecode[name]},
@@ -92,7 +111,11 @@ With[{
     ExtensionTemplates = OptionValue["ExtensionTemplates"],
     Button1Id = CreateUUID[],
     Button2Id = CreateUUID[],
+    DropZone = CreateUUID[],
     dir = If[DirectoryQ[OptionValue["Path"]], OptionValue["Path"], DirectoryName[OptionValue["Path"]]]
+  },
+  {
+    DirEncoded = URLEncode[dir]
   },
 
   timer = AbsoluteTime[];
@@ -172,10 +195,9 @@ With[{
   ,
     <WebUIEventListener Type={"click"} Id={Button2Id} Event={Button2Id} />
   ,
-    <WebUIRefresh Event={SidebarId} Class={"flex grow flex-col gap-y-5 overflow-y-auto px-4 sc-b"}>
+    <WebUIRefresh Event={SidebarId} UId={DropZone} Class={"flex grow flex-col gap-y-5 overflow-y-auto px-4 sc-b"}>
       <Sidebar Id={navId} ElectronQ={electronQ} Port={Secret} RawPath={RawPath} Icons={Icons} Parameters={Parameters} Secret={"blackhole"} Path={Path} />
     </WebUIRefresh>
-
   ,
     <ExtensionTemplates Template={"AppSidebarBottom"} Path={Path} Controls={Controls} Modals={modals} AppEvents={AppEvent} MessagePort={Messanger}/> 
   ,  
@@ -215,6 +237,30 @@ With[{
       setInterval(() => {
         server.emitt('<Secret/>', 'True', 'CheckFiles');
       }, 3000);
+      const dropZone = document.getElementById('<DropZone/>');
+      const dir = '<DirEncoded/>';
+      dropZone.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        dropZone.style.opacity = '0.6';
+      });
+      dropZone.addEventListener("dragleave", () => {
+        dropZone.style.opacity = '';
+      });
+      dropZone.addEventListener("drop", (e) => {
+        e.preventDefault();
+        dropZone.style.opacity = '';
+        const files = [...e.dataTransfer.items]
+          .filter(item => item.kind === "file")
+          .map(item => item.getAsFile());
+        files.forEach(file => {
+          const reader = new FileReader();
+          reader.onload = (evt) => {
+            server.io.fire('<UploadId/>', [evt.target.result, dir, file.name]);
+          };
+          reader.readAsDataURL(file);
+        });
+      });
+
     </script>
   } // Flatten // StringRiffle
 ] ]
