@@ -1054,6 +1054,7 @@ core.Dataset = async (args, env) => {
   }
 
   let thead;
+  let updateField = () => {};
 
   if (headerCols) {
     thead = document.createElement('thead');
@@ -1102,6 +1103,7 @@ core.Dataset = async (args, env) => {
             page = 0;
             offset = 0;
             viewPort.rebuild(rows, windowSize);
+            updateField(page);
             table.scrollTop = 0;
           };
           console.log('sorting call');
@@ -1115,9 +1117,12 @@ core.Dataset = async (args, env) => {
             rows.sort((a, b) => sortDir * compareCells(sortCellValue(a[colIndex]), sortCellValue(b[colIndex])));
           }
         }
+        currentPart = 0;
+        totalOffset = 0;
         page = 0;
         offset = 0;
         viewPort.rebuild(rows, windowSize);
+        updateField(page);
         table.scrollTop = 0;
       });
       thElements.push({th, arrow});
@@ -1258,7 +1263,7 @@ core.Dataset = async (args, env) => {
     totalLength = rows.length;
     totalOffset = 0;
 
-    const updateField = (page) => {
+    updateField = (page) => {
       const current = Math.min((page + 1) * pageSize + totalOffset, totalLength);
       progress.innerText = `${current}/${totalLength}`;
     };
@@ -1269,6 +1274,9 @@ core.Dataset = async (args, env) => {
     paginator.appendChild(nextButton);
     paginator.appendChild(prevButton);
     paginator.appendChild(toStart);
+
+    toStart.classList.add('hidden');
+    toEnd.classList.add('hidden');
 
     paginator.appendChild(progress);
 

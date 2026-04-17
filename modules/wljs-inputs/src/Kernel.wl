@@ -678,9 +678,8 @@ DatasetWrapperBox[ l: List[__List], form_ ] := With[{
 						WLJSTransportSend[req[store[[part]]], Global`$Client ] 
 					],
 					"Sort"->Function[spec,
-						Echo[spec];
 						With[{col = spec[[1]], dir = spec[[2]]},
-							With[{sorted = If[dir === 0, l, SortBy[l, #[[col]]&, If[dir === -1, ReverseOrder, Order] ] ]},
+							With[{sorted = Which[dir === 0, l, dir === 1, SortBy[l, #[[col]]& ], True, Reverse @ SortBy[l, #[[col]]& ] ]},
 								store = splitDataset[sorted];
 								WLJSTransportSend[req[store[[1]]], Global`$Client ]
 							]
@@ -712,7 +711,7 @@ DatasetWrapperBox[ l: List[__List], StandardForm] := With[{
 			],
 			"Sort"->Function[spec,
 				With[{col = spec[[1]], dir = spec[[2]]},
-					With[{sorted = If[dir === 0, l, SortBy[l, #[[col]]&, If[dir === -1, ReverseOrder, Order] ] ]},
+					With[{sorted = Which[dir === 0, l, dir === 1, SortBy[l, #[[col]]& ], True, Reverse @ SortBy[l, #[[col]]& ] ]},
 						store = splitDataset[sorted];
 						WLJSTransportSend[req[store[[1]]], Global`$Client ]
 					]
@@ -746,7 +745,7 @@ DatasetWrapperBox[ l_List , form_ ] := With[{
 			],
 			"Sort"->Function[spec,
 				With[{col = spec[[1]], dir = spec[[2]]},
-					With[{sorted = If[dir === 0, l, SortBy[l, #[[col]]&, If[dir === -1, ReverseOrder, Order] ] ]},
+					With[{sorted = Which[dir === 0, l, dir === 1, SortBy[l, #[[col]]& ], True, Reverse @ SortBy[l, #[[col]]& ] ]},
 						store = splitDataset[sorted];
 						WLJSTransportSend[req[store[[1]]], Global`$Client ]
 					]
@@ -780,7 +779,7 @@ DatasetWrapperBox[ l_List , StandardForm] := With[{
 			],
 			"Sort"->Function[spec,
 				With[{col = spec[[1]], dir = spec[[2]]},
-					With[{sorted = If[dir === 0, l, SortBy[l, #[[col]]&, If[dir === -1, ReverseOrder, Order] ] ]},
+					With[{sorted = Which[dir === 0, l, dir === 1, SortBy[l, #[[col]]& ], True, Reverse @ SortBy[l, #[[col]]& ] ]},
 						store = splitDataset[sorted];
 						WLJSTransportSend[req[store[[1]]], Global`$Client ]
 					]
@@ -827,7 +826,7 @@ DatasetWrapperBox[ l : List[__Association] , form_] := With[{
 			],
 			"Sort"->Function[spec,
 				With[{col = spec[[1]], dir = spec[[2]]},
-					With[{sorted = If[dir === 0, l, SortBy[l, #[assocKeys[[col]] ]&, If[dir === -1, ReverseOrder, Order] ] ]},
+					With[{sorted = Which[dir === 0, l, dir === 1, SortBy[l, #[assocKeys[[col]] ]& ], True, Reverse @ SortBy[l, #[assocKeys[[col]] ]& ] ]},
 						store = splitDataset[sorted];
 						WLJSTransportSend[req[store[[1]]], Global`$Client ]
 					]
@@ -955,7 +954,7 @@ DatasetWrapperBox[ l : List[__Association] ,  StandardForm] := With[{
 			],
 			"Sort"->Function[spec,
 				With[{col = spec[[1]], dir = spec[[2]]},
-					With[{sorted = If[dir === 0, l, SortBy[l, #[assocKeys[[col]] ]&, If[dir === -1, ReverseOrder, Order] ] ]},
+					With[{sorted = Which[dir === 0, l, dir === 1, SortBy[l, #[assocKeys[[col]] ]& ], True, Reverse @ SortBy[l, #[assocKeys[[col]] ]& ] ]},
 						store = splitDataset[sorted];
 						WLJSTransportSend[req[store[[1]]], Global`$Client ]
 					]
