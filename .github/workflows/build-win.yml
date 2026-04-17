@@ -50,7 +50,7 @@ jobs:
           }
           
           $forcedVersions = @{
-            "electron" = "^38.8.0"
+            
           }
           
           # ensure devDependencies exists if you truly want to force versions there
