@@ -36,7 +36,7 @@ Component[OptionsPattern[]] := With[{
 
   <script type="module">
     core['<TemporalHandler/>'] = async (args, env) => {
-      env.element.classList.add(...(("sm-controls cursor-default rounded-md 0 py-1 px-2 bg-gray-100 text-left text-gray-500 ring-1 ring-inset ring-gray-400 gap-y-1").split(" ")));
+      env.element.classList.add(...(("sm-controls cursor-default rounded-md 0 py-1 px-2 bg-gray-50 text-left text-gray-500 ring-1 ring-inset ring-gray-400 gap-y-1").split(" ")));
       env.element.style.flexDirection = "column-reverse";
       
       const sizeElement = document.getElementById("#instanceId-sizeRange");

@@ -42,7 +42,7 @@ makeScript[_, Event_String, {TopicChange_String, TopicBlur_String}] := (
 Component[value_String:"", OptionsPattern[]] := With[{
     event = OptionValue["Event"], size = OptionValue[ImageSize], Label = OptionValue["Label"], Descp = OptionValue["Description"], Placeholder = OptionValue["Placeholder"], topic = OptionValue["Topic"],
     ClassName = If[OptionValue[Appearance] === Automatic, 
-        "relative cursor-default rounded-md 0 h-6 pl-3 pr-2 text-left text-gray-900  focus:outline-none sm:text-xs sm:leading-6 bg-gray-100",
+        "relative cursor-default rounded-md 0 h-6 pl-3 pr-2 text-left text-gray-900  focus:outline-none sm:text-xs sm:leading-6 bg-gray-50",
         "relative cursor-default rounded-md 0 h-6 pl-3 pr-2 text-left focus:outline-none border-0 sm:text-xs sm:leading-6"
     ],
     CSSStyle = StringJoin[OptionValue["CSS"], " ", OptionValue["Style"]],
