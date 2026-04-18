@@ -222,6 +222,91 @@ AudioWrapperBox[a_Audio, StandardForm] := With[{
     ]
 ]
 
+AudioWrapperBox[a_Audio, WLXForm] := With[{
+    options = <|SampleRate -> QuantityMagnitude[ Information[a]["SampleRate"] ] |>,
+    data = extractChannelTyped[a, "SignedInteger16"],
+    uid = CreateUUID[]
+},
+
+    If[ByteCount[data] > Internal`Kernel`$FrontEndObjectSizeLimit 1024 1024 / 8.0,
+        LeakyModule[{
+            bigBuffer, index = 1, buffer, paused = False
+        },
+            AppendTo[garbage, Hold[buffer] ];
+            AppendTo[garbage, Hold[bigBuffer] ];
+
+            bigBuffer = NumericArray[data, "SignedInteger16"];
+
+            ClearAttributes[bigBuffer, Temporary];
+            ClearAttributes[buffer, Temporary];
+            
+            buffer = {};
+
+            EventHandler[uid, {
+                
+                "More" -> Function[Null, 
+                    If[paused, Return[] ];
+                
+                    With[{
+                        newIndex = Min[index + 3 1024, Length[bigBuffer] ],
+                        from = index,
+                        to = Min[Length[bigBuffer], index + 3 1024 - 1]
+                    },
+                        buffer = bigBuffer[[from ;; to]];
+                        If[index == newIndex, 
+                            paused = True;
+                            index = 1;
+                            Return[];
+                        ];
+                        index = newIndex;
+                    ]
+                ],
+            
+                "Stop" -> Function[Null,
+                    index = 1;
+                    paused = True;
+                ],
+
+                "Pause" -> Function[Null,
+                    paused = True;
+                ],
+
+                "Resume" -> Function[Null,
+                    paused = False;
+                    EventFire[uid, "More", True];
+                ],                
+
+                "Set" -> Function[position,
+                    index = Max[1, Floor[Length[bigBuffer] position ] ];
+                ]
+            }];
+
+
+            With[{o = PCMPlayer[buffer // Offload, {}, "SignedInteger16", "AutoPlay"->False, "DataOnKernel"->True, "Event"->uid, "FullLength"->Length[bigBuffer], SampleRate -> options[SampleRate] ]},
+                MakeBoxes[o, WLXForm]
+            ]
+        ]
+    ,
+
+        With[{},
+            Module[{},
+
+                        With[{virtualBuffer = CreateFrontEndObject[data] },
+                            With[{result = With[{o = CreateFrontEndObject[PCMPlayer[virtualBuffer, "SignedInteger16", "AutoPlay"->False, SampleRate -> options[SampleRate] ] ]},
+                                o
+                            ] },
+
+                                
+                                MakeBoxes[result, WLXForm]
+                            ]    
+                        ]                
+                ]
+        
+        ]
+
+
+    ]
+]
 
 (* WL14 with no reason reloads the definitons of some symbols *)
 (* It breaks ANY FormatValues *)
