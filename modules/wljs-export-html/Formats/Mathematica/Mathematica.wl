@@ -522,13 +522,13 @@ With[{
                       #, notebook, data
                     } &/@ nb[[1]], Function[Null,
       
-                      If[Length[notebook["Cells"] ] > 110, 
+                      If[Length[notebook["Cells"] ] > 170, 
                         Echo["Notebook is too long!"];
                         With[{cellList = Unique[], promiseList = Unique[], pathList = Unique[] },
                           cellList = notebook["Cells"];
                           promiseList = {}; pathList = {};
 
-                          While[Length[cellList] > 0,
+                          Module[{prtCount = 1}, While[Length[cellList] > 0,
                                 subnotebook = nb`NotebookObj[];
                                 With[{n = subnotebook, taken = Take[cellList, Min[65, Length[cellList] ] ]},
                                     cellList = Drop[cellList, Length[taken] ];
@@ -536,13 +536,13 @@ With[{
                                     n["Quick"] = True;
                                     n["HaveToSaveAs"] = True;    
                                     n["WorkingDirectory"] = DirectoryName[path];
-                                    n["Path"] = FileNameJoin[{dir, name<>"-"<>StringTake[CreateUUID[], 3]<>".wln"}];
+                                    n["Path"] = FileNameJoin[{dir, name<>"-"<>ToString[prtCount]<>".wln"}];
                                     n["Evaluator"] = data["Container"];
                                     EventFire[n, "AquairedKernel", True];
                                     n["AutoconnectKernel"] = data["Hash"];
 
                                     If[taken[[1]]["Type"] === "Output",
-                                      cell`CellObj["Notebook" -> n, "Type" -> "Input", "Data" -> "(* content from the previous part *)"]
+                                      cell`CellObj["Notebook" -> n, "Type" -> "Input", "Data" -> "(* content from the part "<>ToString[prtCount-1]<>" *)"]
                                     ];
 
                                     Map[
@@ -560,8 +560,8 @@ With[{
                                     Delete[n];
                                 ];
 
-         
-                          ];
+                                prtCount++;
+                          ] ];
 
                                 Delete /@ notebook["Cells"];
                                 Delete[notebook];
