@@ -12,6 +12,7 @@ BeginPackage["CoffeeLiqueur`Extensions`InputsOutputs`", {
 
 InputRange::usage = "InputRange[min, max, step:1, initial:(max+min)/2, \"Label\"->\"\", \"Topic\"->\"Default\"] _EventObject."
 InputCheckbox::usage = "InputCheckbox[state_Bool, \"Label\"->, \"Description\"->, , \"Topic\"->\"Default\"] _EventObject. A standard checkbox"
+InputColor::usage = "InputColor[initialColor, \"Label\"->\"Color\", \"ShowAlpha\"->False] _EventObject. A color picker that accepts {r,g,b}, RGBColor[r,g,b], or Hue[h] and returns {r,g,b} or {r,g,b,a}"
 InputButton::usage = "InputButton[label_String, \"Topic\"->\"Default\"] _EventObject. A standard button"
 
 InputRaster::usage = "InputRaster[opts] _EventObject. A raster input. InputRaster[img_Image, opts] "
@@ -308,6 +309,51 @@ InputCheckbox[EventObject[a_Association], rest__] := InputCheckbox[rest, "Event"
 InputCheckbox[EventObject[a_Association] ] := InputCheckbox["Event" -> a["Id"] ]
 
 Options[InputCheckbox] = {"Label"->"", "Description"->"", "Style"->"", "Class"->"", "LabelClass"->"", "LabelStyle"->"", "Topic"->"Default", "Event":>CreateUUID[]}
+
+ColorX = ImportComponent[FileNameJoin[{$troot, "Color.wlx"}] ];
+
+(* Helper function to normalize any color format to {r,g,b} or {r,g,b,a} *)
+ColorToRGB[RGBColor[r_?NumberQ, g_?NumberQ, b_?NumberQ]] := {r, g, b}
+ColorToRGB[RGBColor[r_?NumberQ, g_?NumberQ, b_?NumberQ, a_?NumberQ]] := {r, g, b, a}
+ColorToRGB[Hue[h_?NumberQ]] := Module[{rgb},
+	rgb = RGBColor[Hue[h]] // List;
+	Take[rgb, 3]
+]
+ColorToRGB[Hue[h_?NumberQ, s_?NumberQ, b_?NumberQ]] := Module[{rgb},
+	rgb = RGBColor[Hue[h, s, b]] // List;
+	Take[rgb, 3]
+]
+ColorToRGB[Hue[h_?NumberQ, s_?NumberQ, b_?NumberQ, a_?NumberQ]] := Module[{rgb},
+	rgb = RGBColor[Hue[h, s, b]] // List;
+	Join[Take[rgb, 3], {a}]
+]
+ColorToRGB[color_] := color
+
+InputColor[initialColor: (RGBColor[__] | Hue[__]), opts: OptionsPattern[] ] := InputColor[ColorToRGB[initialColor], opts]
+
+InputColor[initialColor_:{1,1,1}, opts: OptionsPattern[] ] := With[{id = OptionValue["Event"], showAlpha = OptionValue["ShowAlpha"]},
+	With[{hexColor = Module[{r,g,b,a},
+		If[Length[initialColor] >= 3,
+			{r,g,b} = Take[initialColor, 3];
+			a = If[Length[initialColor] === 4, initialColor[[4]], 1.0];
+			StringJoin["#", IntegerString[Round[r*255], 16, 2], IntegerString[Round[g*255], 16, 2], IntegerString[Round[b*255], 16, 2]]
+		,
+			"#FFFFFF"
+		]
+	],
+	initialAlpha = If[Length[initialColor] === 4, ToString[initialColor[[4]]], "1"]
+	},
+		EventObject[<|"Id"->id, "Initial"->initialColor, "View"->HTMLView[ColorX["InitialColor"->hexColor, "InitialAlpha"->initialAlpha, "ShowAlpha"->showAlpha, "Event"->id, opts], Prolog->htmlTool`TemplateProcessor[<|"instanceId" -> CreateUUID[]|>] ]|>]
+	]
+]
+
+InputColor[opts: OptionsPattern[] ] := InputColor[{1,1,1}, opts]
+
+InputColor[EventObject[a_Association], rest_]  := InputColor[rest, "Event" -> a["Id"] ]
+InputColor[EventObject[a_Association], rest__] := InputColor[rest, "Event" -> a["Id"] ]
+InputColor[EventObject[a_Association] ] := InputColor["Event" -> a["Id"] ]
+
+Options[InputColor] = {"Label"->"Color", "Description"->"", "Style"->"", "Class"->"", "LabelClass"->"", "LabelStyle"->"", "ShowAlpha"->False, "Topic"->"Default", "Event":>CreateUUID[]}
 
 TextX = ImportComponent[FileNameJoin[{$troot, "Text.wlx"}] ];
 
