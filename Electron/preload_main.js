@@ -20,6 +20,8 @@ contextBridge.exposeInMainWorld('electronAPI', {
     return path
   },
 
+  onReloadFrame: (callback) => ipcRenderer.on('reload_iframe', callback),
+
   onfocus: (callback) =>  ipcRenderer.on('focus', callback),
   onblur: (callback) => ipcRenderer.on('blur', callback),
 

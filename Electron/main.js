@@ -2033,6 +2033,8 @@ function create_window(opts, cbk = () => {}) {
             if (u.hostname === (new URL(server.url.default())).hostname) {
                 create_window({url: url, show: true, parent: win, features:features});
 
+            } else if (u.hostname === "reference.wolfram.com") {
+                contents.send('reload_iframe', url);
             } else {
                 //open in the default user's browser
                 shell.openExternal(url);
