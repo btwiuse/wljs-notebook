@@ -1169,7 +1169,15 @@ With[{ unsupported = {GraphicsRow, WordCloud, GraphicsColumn, ClockGauge, GeoLis
   ], {i, unsupported}]
 ];
 
-
+GraphicsRow /: MakeBoxes[GraphicsRow[list_, ___], any_] := With[{b = Row[list]},
+  MakeBoxes[b, any]
+]
+GraphicsColumn /: MakeBoxes[GraphicsColumn[list_, ___], any_ ] := With[{b = Column[list]},
+  MakeBoxes[b, any]
+]
+GraphicsGrid /: MakeBoxes[GraphicsGrid[list_, ___], any_] := With[{b = Grid[list]},
+  MakeBoxes[b, any]
+]
 
 
 HorizontalGauge[all__] := (
