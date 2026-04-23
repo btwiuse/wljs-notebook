@@ -132,17 +132,27 @@ attachListeners[notebook_nb`NotebookObj] := With[{},
             If[MemberQ[notebook["Properties"], "Objects"],
                 Echo["FrontendObject`Sync >> restored!"];
                 CoffeeLiqueur`Extensions`FrontendObject`Internal`Objects = Join[CoffeeLiqueur`Extensions`FrontendObject`Internal`Objects, notebook["Objects"] ];
-                If[MemberQ[notebook["Properties"], "Symbols"],
-                    
-                    CoffeeLiqueur`Extensions`FrontendObject`Internal`Symbols = Join[CoffeeLiqueur`Extensions`FrontendObject`Internal`Symbols, notebook["Symbols"] ];
-                    Echo["FrontendObject`Sync`Symbols >> restored!"];
-                ]
             ,
                 Echo["FrontendObject`Sync >> nothing to restore "];
-            ]
+            ];
+            If[MemberQ[notebook["Properties"], "Symbols"],
+                CoffeeLiqueur`Extensions`FrontendObject`Internal`Symbols = Join[CoffeeLiqueur`Extensions`FrontendObject`Internal`Symbols, notebook["Symbols"] ];
+                Echo["FrontendObject`Sync`Symbols >> restored!"];
+            ,
+                Echo["FrontendObject`Sync >> nothing to restore "];
+            ];
         ],
         "OnBeforeSave" -> Function[opts,
             Echo["OnBefore Save!!!!!!!!"];
+
+            If[!MemberQ[notebook["Properties"], "Objects"], 
+                notebook["Objects"] = <||>;
+                notebook["ObjectFields"] = Join[notebook["ObjectFields"], {"Objects"}] // DeleteDuplicates;
+            ];
+            If[!MemberQ[notebook["Properties"], "Symbols"], 
+                notebook["Symbols"] = <||>;
+                notebook["ObjectFields"] = Join[notebook["ObjectFields"], {"Symbols"}] // DeleteDuplicates;
+            ];            
 
             With[{promise = Promise[]},
                 Then[WebUIFetch[CoffeeLiqueur`Extensions`FrontendObject`Tools`UIObjects["GetAllUids"] , opts["Client"] , "Format"->"ExpressionJSON"],

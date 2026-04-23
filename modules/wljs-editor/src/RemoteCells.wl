@@ -57,15 +57,12 @@ exportNotebook[notebook_, savingPath_, ext: ("md" | "mdx" | "html" | "nb")] := W
     |>];
 ]
 
-exportNotebook[notebook_, savingPath_, "wln"] := With[{},
+exportNotebook[notebook_, savingPath_, "wln"] := With[{stream = OpenWrite[savingPath, BinaryFormat->True]},
     notebook["Path"] = savingPath;
     notebook["Directory"] = DirectoryName[savingPath];
 
-    Put[<| 
-        "Notebook" -> Join[nb`Serialize[notebook], <|"Evaluator" -> notebook["Evaluator"]|>], 
-        "Cells" -> ( cell`Serialize /@ notebook["Cells"]), 
-        "serializer" -> "jsfn4" 
-    |>, savingPath ]
+    nb`SerializeToStream[stream, notebook];
+    Close[stream];
 ]
 
 saveNotebook[path_, uid_] := With[{
@@ -75,7 +72,7 @@ saveNotebook[path_, uid_] := With[{
     savingPath = If[path === Null,
             If[StringQ[notebook["Path"] ], 
                 notebook["Path"], 
-                FileNameJoin[{$TemporaryDirectory, (RandomWord[]<>RandomWord[])<>".wln"}]
+                FileNameJoin[{$TemporaryDirectory, ((Internal`NoWR`RandomWord[])<>(Internal`NoWR`RandomWord[]))<>".wln"}]
             ]
         ,
             path
@@ -86,10 +83,8 @@ saveNotebook[path_, uid_] := With[{
 ]
 
 importNotebook[content_, path_, fullpath_, uid_] := With[{
-    notebook = nb`NotebookObj["Hash" -> uid]
+    notebook = nb`LoadFromString[content, "Hash" -> uid]
 },
-    nb`Deserialize[content["serializer"], content, notebook];
-
     notebook["Path"] = fullpath;
     notebook["Directory"] = path;
     notebook["Hash"]
@@ -352,7 +347,7 @@ EventHandler[NotebookEditorChannel // EventClone,
         ],
 
         "ImportNotebook" -> Function[assoc,
-           With[{ kernel = GenericKernel`HashMap[ assoc["Kernel"] ], uid = assoc["Hash"], path = assoc["Path"], fullpath = assoc["FullPath"], content = ImportString[assoc["Data"], "WL"]},
+           With[{ kernel = GenericKernel`HashMap[ assoc["Kernel"] ], uid = assoc["Hash"], path = assoc["Path"], fullpath = assoc["FullPath"], content = assoc["Data"]},
             Echo["Importing notebook..."];
                 With[{},
                         importNotebook[content, path, fullpath, uid];

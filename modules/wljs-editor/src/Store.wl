@@ -20,6 +20,7 @@ EventHandler[NotebookEditorChannel // EventClone,
            With[{promise = data["Promise"], notebook = nb`HashMap[ data["Ref"] ], kernel = GenericKernel`HashMap[ data["Kernel"] ]},
                 If[!MemberQ[notebook["Properties"], "Storage"],
                     notebook["Storage"] = <||>;
+                    notebook["ObjectFields"] = Join[notebook["ObjectFields"], {"Storage"}] // DeleteDuplicates;
                 ];
 
                 With[{keys = notebook["Storage"] // Keys},
@@ -40,6 +41,7 @@ EventHandler[NotebookEditorChannel // EventClone,
            With[{promise = data["Promise"], payload = data["Data"], notebook = nb`HashMap[ data["Ref"] ], kernel = GenericKernel`HashMap[ data["Kernel"] ]},
                 If[!MemberQ[notebook["Properties"], "Storage"],
                     notebook["Storage"] = <||>;
+                    notebook["ObjectFields"] = Join[notebook["ObjectFields"], {"Storage"}] // DeleteDuplicates;
                 ];
 
                 notebook["Storage"] = Join[notebook["Storage"], <|data["Key"] -> payload|>];
@@ -54,6 +56,7 @@ EventHandler[NotebookEditorChannel // EventClone,
            With[{promise = data["Promise"], key = data["Key"], notebook = nb`HashMap[ data["Ref"] ], kernel = GenericKernel`HashMap[ data["Kernel"] ]},
                 If[!MemberQ[notebook["Properties"], "Storage"],
                     notebook["Storage"] = <||>;
+                    notebook["ObjectFields"] = Join[notebook["ObjectFields"], {"Storage"}] // DeleteDuplicates;
                 ];
 
                 notebook["Storage"] = KeyDrop[notebook["Storage"], key];

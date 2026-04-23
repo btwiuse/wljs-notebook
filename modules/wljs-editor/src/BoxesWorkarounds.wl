@@ -670,7 +670,7 @@ Iconize[expr_, opts: OptionsPattern[] ] := With[{
 
 Iconize[expr_, title_String, opts: OptionsPattern[] ] := Iconize[expr, "Label" -> title, opts]
 
-Options[Iconize] = {"Label":>StringReplace[RandomWord[], {"-"->"_"}], GeneratedAssetLocation :> FileNameJoin[{Directory[], ".iconized"}]}
+Options[Iconize] = {"Label":>StringReplace[(Internal`NoWR`RandomWord[]), {"-"->"_"}], GeneratedAssetLocation :> FileNameJoin[{".iconized"}]}
 
 
 (* :: Pane Boxes :: *)

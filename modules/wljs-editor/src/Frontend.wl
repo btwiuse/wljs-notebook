@@ -348,6 +348,7 @@ StandardEvaluator`EvaluateTransaction[frontendDev, k_, t_] := Module[{list},
             If[MatchQ[refCell, _cell`CellObj],
                 With[{notebook = refCell["Notebook"]},
                     notebook["AutorunScript"] = t["Data"];
+                    notebook["PublicFields"] = Join[notebook["PublicFields"], {"AutorunScript"}] // DeleteDuplicates;
                     ToExpression[t["Data"], InputForm ];   
 
                     EventFire[t, "Result", <|"Data" -> " ", "Meta" -> Sequence["Display"->"shell"] |> ];

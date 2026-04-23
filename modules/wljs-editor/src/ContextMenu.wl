@@ -103,7 +103,7 @@ processSelected[text_, notebook_, controls_, logs_, cli_, "Speak"] := With[{},
     ];
 ]
 
-processSelected[text_, notebook_, controls_, logs_, cli_, "Store"] := With[{uid = RandomWord[]<>"-"<>StringTake[CreateUUID[], 3]},
+processSelected[text_, notebook_, controls_, logs_, cli_, "Store"] := With[{uid = (Internal`NoWR`RandomWord[])<>"-"<>StringTake[CreateUUID[], 3]},
     Echo["Evaluate in PLACE!!!!"];
     If[!checkLink[notebook, logs], Return[] ];
     Then[WebUIFetch[FrontEditorSelected["Get"], cli, "Format"->"JSON"],

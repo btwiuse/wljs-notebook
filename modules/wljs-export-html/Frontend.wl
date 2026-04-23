@@ -229,75 +229,7 @@ EventHandler[AppExtensions`AppProtocol, {
                 ] ];
             ];
         ];
-    ],
-
-    "cmd_share" -> Function[assoc, Module[{settings = <||>}, 
-        loadSettings[settings];
-
-        Echo[">> Handling cmd share ! >>"];
-        Echo[">> default type: static html"];
-        With[{
-            input = Lookup[assoc, "input", assoc["i"] ] // URLDecode,
-            output = If[# === Null, Null, # // URLDecode] &@ Lookup[assoc, "output", Lookup[assoc, "o", Null] ]
-        },
-        
-            If[!FileExistsQ[input],
-                Return["Input file "<>ToString[input]<>" does not exist"];
-            ];
-
-            If[FileExtension[input] =!= "wln",
-                Return["Input file must be .wln"];
-            ];
-
-            With[{
-                notebook = nb`Deserialize[ Import[input, "WL"] ]
-            },
-                If[!MatchQ[notebook, _nb`NotebookObj],
-                    Return["Failed to import notebook"];                
-                ];
-
-                notebook["Path"] = input;
-
-                With[{
-                    path = DirectoryName[ notebook["Path"] ],
-                    name = FileBaseName[ notebook["Path"] ],
-                    ext  = AppExtensions`Templates
-                },  
-
-                    If[KeyExistsQ[assoc, "cdn"],
-                        settings["ExportHTMLUseCDN"] = True;
-                    ];
-
-                    With[{result = Switch[Lookup[assoc, "type", Lookup[assoc, "t", "html"] ],
-                        "html",
-                        html`Static`export[output, notebook, path, name, ext, settings, <||>],
-
-                        "md",
-                        markdown`export[output, notebook, path, name, ext, settings, <||>],
-
-                        "mdx",
-                        mdx`Static`export[output, notebook, path, name, ext, settings, <||>],
-
-                        "nb",
-                        mathematica`export[output, notebook, path, name, ext, settings, <||>],
-   
-                        _,
-                        html`Static`export[output, notebook, path, name, ext, settings, <||>]
-                    ]},
-                    
-
-                        Delete /@ notebook["Cells"];
-                        notebook["Cells"] = .;
-                        Delete[notebook];
-
-                        result
-                    ]
-
-                ]
-                
-            ]
-        ]
-    ] ]
+    ]
 }]
 
 universalStaticExport[as_Association] := universalStaticExport[as["Notebook"], as["Path"], as["Type"] ]

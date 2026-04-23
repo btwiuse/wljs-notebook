@@ -76,11 +76,11 @@ With[{
     name = FileBaseName[path],
     promise = Promise[],
     
-    notebook = nb`Deserialize[ Import[path, "WL"] ],
+    notebook = nb`LoadFromFile[ path ],
 
     spinner = Notifications`Spinner["Topic"->"Initializing an App", "Body"->"Please, wait"](*`*),
     msg = OptionValue["Messager"],
-    generated = StringReplace[RandomWord[]<>StringTake[CreateUUID[], 3]<>"w`", {"-"->""}]
+    generated = StringReplace[(Internal`NoWR`RandomWord[])<>StringTake[CreateUUID[], 3]<>"w`", {"-"->""}]
 }, 
 
     windowTitle = "Application";

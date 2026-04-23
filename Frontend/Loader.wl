@@ -47,7 +47,7 @@ BeginPackage["CoffeeLiqueur`Notebook`Loader`", {
     
     save[path_String, notebook_nb`NotebookObj, opts: OptionsPattern[] ] := With[{modals = OptionValue["Modals"], promise = Promise[], client = OptionValue["Client"]}, Module[{dir = path},
         If[DirectoryQ[dir],
-            dir = FileNameJoin[{dir, RandomWord[]<>".wln"}];
+            dir = FileNameJoin[{dir,(Internal`NoWR`RandomWord[])<>".wln"}];
         ];
 
         If[!TrueQ[OptionValue["NoCache"] ],
@@ -67,12 +67,15 @@ BeginPackage["CoffeeLiqueur`Notebook`Loader`", {
         Print["end"];
 
         If[OptionValue["Temporal"],
-            With[{r = Put[<| 
-                "Notebook" -> nb`Serialize[notebook], 
-                "Cells" -> ( cell`Serialize /@ notebook["Cells"]), 
-                "serializer" -> "jsfn4" 
-            |>, makeHashPath[dir] ]},
-                If[!StringQ[r] && (r =!= Null), Echo["Loader >> Put >> error"]; Echo[r]; EventFire[promise, Reject, r],
+            Module[{r, stream},
+
+                stream = OpenWrite[makeHashPath[dir], BinaryFormat->True];
+                nb`SerializeToStream[stream, notebook];
+                r = Close[stream];
+
+                If[!StringQ[r] && (r =!= Null), 
+                    Echo["Loader >> Put >> error"]; Echo[r]; EventFire[promise, Reject, r]
+                ,
                     EventFire[promise, Resolve, notebook];
                 ];
             ];
@@ -81,20 +84,17 @@ BeginPackage["CoffeeLiqueur`Notebook`Loader`", {
         ,
             With[{h = checkbackups[notebook]}, If[h =!= False, moveBackupSomewhere[h] ] ];
 
-            saveByPath := (
-                With[{r = Put[<| 
-                    "Notebook" -> nb`Serialize[notebook], 
-                    "Cells" -> ( cell`Serialize /@ notebook["Cells"]), 
-                    "serializer" -> "jsfn4" 
-                |>, dir] },
-                    If[!StringQ[r] && (r =!= Null), Echo["Loader >> Put >> error"]; Echo[r]; EventFire[promise, Reject, r],
-                        EventFire[promise, Resolve, notebook];
-                    ];
+            Module[{r, stream},
+                stream = OpenWrite[dir, BinaryFormat->True];
+                nb`SerializeToStream[stream, notebook];
+                r = Close[stream];
+                If[!StringQ[r] && (r =!= Null), 
+                    Echo["Loader >> Put >> error"]; Echo[r]; 
+                    EventFire[promise, Reject, r]
+                ,
+                    EventFire[promise, Resolve, notebook];
                 ];
-                
-            );
-
-            saveByPath; 
+            ];
         ];
 
         
@@ -214,21 +214,22 @@ BeginPackage["CoffeeLiqueur`Notebook`Loader`", {
     Options[save] = {"Events"->"Blackhole", "NoCache"->False, "Temporal"->False, "Modals"->"Nulll", "Props"->Null}
     Options[loadToCache] = {"Events"->"Blackhole", "Temporal"->False, "Modals"->"Nulll"}
 
-    loadToCache[path_String, pathcache_String, pathnotebook_String, OptionsPattern[] ] := Module[{data = Get[path]},
+    loadToCache[path_String, pathcache_String, pathnotebook_String, OptionsPattern[] ] := Module[{notebook},
         Echo["Loading to cache..."];
-        
-        With[{notebook = nb`Deserialize[ data ]},
-            If[!MatchQ[notebook, _nb`NotebookObj], Return[notebook] ];
+    
+        notebook = nb`LoadFromFile[path];
+        If[!MatchQ[notebook, _nb`NotebookObj],
+            Echo["Loading failed!"];
+            Return[$Failed];
+        ];
 
-            
-            notebook["Path"] = pathnotebook;
-            cache[pathcache] = notebook;
+        With[{n = notebook}, n["Path"] = pathnotebook ];
+        cache[pathcache] = notebook;
 
-            Echo["Loader >> Done!"];
-            EventFire[OptionValue["Events"], "Loader:LoadNotebook", notebook];
+        Echo["Loader >> Done!"];
+        EventFire[OptionValue["Events"], "Loader:LoadNotebook", notebook];
 
-            notebook
-        ]    
+        notebook 
     ]
 
     End[];

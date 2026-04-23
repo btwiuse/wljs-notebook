@@ -35,7 +35,7 @@ findCell[nb_, tag_String] := SelectFirst[nb["Cells"], ((StringSplit[#["Data"], "
 
 
 
-Parse[a_Association, path_] := With[{notebook = nb`Deserialize[ a ]}, With[{icon = findCell[notebook, "icon.wlx"]},
+Parse[a_Association, path_] := With[{notebook = nb`LoadFromFile[ path ]}, With[{icon = findCell[notebook, "icon.wlx"]},
     Echo["Snippets >> Deserialize notebook >> "<>path];
 
     notebook["Path"] = path;
@@ -101,7 +101,7 @@ bookOpen[tag_String][assoc_] := Module[{},
   ]
 ]
 
-With[{book = Parse[Import[#, "WL"], #]},
+With[{book = Parse[<||>, #]},
   With[{temp = ("RawTemplate" /. book)},
    
     With[{

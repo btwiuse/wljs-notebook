@@ -1,1 +1,0 @@
-This is a a sketch for a new notebook format as a replacement for *.WLN

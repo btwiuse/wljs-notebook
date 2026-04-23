@@ -291,9 +291,7 @@ start[k_LocalKernelObject] := Module[{link},
         LinkWrite[link, Unevaluated[ PacletDirectoryLoad[Directory[] ] ] ];
         LinkWrite[link, Unevaluated[ PacletDirectoryLoad[FileNameJoin[{Directory[], "Packages"}] ] ] ];
 
-        If[TrueQ @ Internal`$NoWRServices, 
-             LinkWrite[link, Unevaluated[ Get[FileNameJoin[{Directory[], "Common", "Patches", "NoWR.wl"}] ] ] ];
-        ];
+        LinkWrite[link, Unevaluated[ Get[FileNameJoin[{Directory[], "Common", "Patches", "NoWR.wl"}] ] ] ];
 
         LinkWrite[link, EnterTextPacket["<<CoffeeLiqueur`CSockets`"] ];
         LinkWrite[link, EnterTextPacket["<<CoffeeLiqueur`Objects`"] ];

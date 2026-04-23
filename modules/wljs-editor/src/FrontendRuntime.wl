@@ -208,6 +208,8 @@ EventHandler[NotebookEditorChannel // EventClone,
                                                             Join[{"Modules"}, #] -> keyA[frontEndRuntime]
                                                         ]
                                                     ] &/@ DeleteDuplicates[Keys[frontEndRuntime][[All,2;;]]] ];
+                                                    
+                        notebook["ObjectFields"] = Join[notebook["ObjectFields"], {"RuntimeCache"}] // DeleteDuplicates;
                     ]; 
                 ], 
                 If[MatchQ[candidate, _nb`NotebookObj], {candidate}, Select[Values[nb`HashMap], (Complement[{"Opened", "Path", "Hash"}, #["Properties"] ] === {}) &] ]
