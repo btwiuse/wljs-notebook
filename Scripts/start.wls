@@ -389,6 +389,8 @@ ExtendedApp["HTTPUHandler"->http, "Middleware"->middleware, "AppEvent"->AppExten
 IframeApp["HTTPUHandler"->http, "Middleware"->middleware, "AppEvent"->AppExtensions`AppEvents, "ExtensionTemplates"->AppExtensions`Templates, "ExtensionSidebarIcons"->AppExtensions`SidebarIcons, "Env"->$Env];
 App["HTTPUHandler"->http, "Middleware"->middleware, "AppEvent"->AppExtensions`AppEvents, "ExtensionTemplates"->AppExtensions`Templates, "ExtensionSidebarIcons"->AppExtensions`SidebarIcons, "Env"->$Env];
 
+Needs["CoffeeLiqueur`Notebook`KernelAutolaunch`"->"kaf`", FileNameJoin[{Directory[], "Frontend", "Autolaunch.wl"}] ];
+kaf`autostart[LocalKernel`LocalKernel[ "Name"->RandomWord[] ], Hold[AppExtensions`KernelList], kernelUtils`initializeKernel[<|"env" -> $Env|>], kernelUtils`deinitializeKernel];
 
 SetTimeout[
   StringTemplate["Open http://``:`` in your browser"][$Env["host"], $Env["http"]] // Print;
