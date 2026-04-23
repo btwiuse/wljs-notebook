@@ -25,8 +25,9 @@ rootFolder = folder // ParentDirectory // ParentDirectory;
 
 Needs["CoffeeLiqueur`Extensions`ExportImport`WidgetAPI`" -> "wapi`", FileNameJoin[{rootFolder, "DynamicsTools", "ESP.wl"}] ];
 
+Needs["CoffeeLiqueur`Notebook`Loader`" -> "loader`"];
 
-{saveNotebook, loadNotebook, renameNotebook, cloneNotebook}         = ImportComponent["Frontend/Loader.wl"];
+{saveNotebook, loadNotebook, renameNotebook, cloneNotebook}         = {loader`save, loader`load, loader`rename, loader`clone};
 
 Begin["`Static`"]
 

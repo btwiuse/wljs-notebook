@@ -7,7 +7,7 @@ PacletObject[
     "Creator" -> "WLJSTeam",
     "License" -> "AGPL",
     "PublisherID" -> "CoffeeLiqueur",
-    "Version" -> "3.0.4",
+    "Version" -> "3.0.5",
     "WolframVersion" -> "13.3+",
     "Extensions" -> {
       {
@@ -16,6 +16,7 @@ PacletObject[
         "Context" -> {
           {"CoffeeLiqueur`Notebook`", "Notebook.wl"},
           {"CoffeeLiqueur`Notebook`FileFormat`", "FileFormat.wl"},
+          {"CoffeeLiqueur`Notebook`Loader`", "Loader.wl"},
           {"CoffeeLiqueur`Notebook`Cells`", "Cells.wl"},
           {"CoffeeLiqueur`Notebook`Transactions`", "Transactions.wl"},
           {"CoffeeLiqueur`Notebook`Evaluator`", "Evaluator.wl"},

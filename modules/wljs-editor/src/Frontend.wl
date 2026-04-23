@@ -22,6 +22,10 @@ Needs["CoffeeLiqueur`Notebook`Kernel`" -> "GenericKernel`"];
 Needs["CoffeeLiqueur`Notebook`AppExtensions`" -> "AppExtensions`"];
 Needs["CoffeeLiqueur`Notebook`Evaluator`" -> "StandardEvaluator`"];
 
+Needs["CoffeeLiqueur`Notebook`Loader`" -> "loader`"];
+
+{saveNotebook, loadNotebook, renameNotebook, cloneNotebook}         = {loader`save, loader`load, loader`rename, loader`clone};
+
 
 truncatedTemplate = ImportComponent[ FileNameJoin[{$InputFileName // DirectoryName // ParentDirectory, "templates", "truncated.wlx"}] ];
 truncatedTemplate = truncatedTemplate["Data"->"``", "Size"->"``", "Ref"->"``"];
@@ -32,16 +36,15 @@ AppExtensions`TemplateInjection["CellDropdown"] = ImportComponent[ FileNameJoin[
 AppExtensions`TemplateInjection["CellDropdown"] = ImportComponent[ FileNameJoin[{$InputFileName // DirectoryName // ParentDirectory, "templates", "CopyTextDropdown.wlx"}] ];
 
 
-{saveNotebook, loadNotebook, renameNotebook, cloneNotebook}         = ImportComponent["Frontend/Loader.wl"];
-
 With[{
     t = ImportComponent[ FileNameJoin[{$InputFileName // DirectoryName // ParentDirectory, "templates", "SplitNotebook.wlx"}] ][<|"saveNotebook" -> saveNotebook|>]
 },
     AppExtensions`TemplateInjection["CellDropdown"] = t;
 ];
 
+Needs["CoffeeLiqueur`Notebook`SettingsUtils`"->"settings`", FileNameJoin[{"Frontend", "Settings.wl"}] ];
+{loadSettings, storeSettings}        = {settings`initialize, settings`storeConfiguration};
 
-{loadSettings, storeSettings}        = ImportComponent["Frontend/Settings.wl"];
 settings = <||>;
 
 NotebookEditorChannel = CreateUUID[];

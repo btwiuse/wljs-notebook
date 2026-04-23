@@ -90,6 +90,10 @@ Needs["CoffeeLiqueur`WLX`WebUI`"]
 Needs["CodeParser`"]
 
 
+(* Frontend Helper Tools *)
+Needs["CoffeeLiqueur`Notebook`Loader`" -> "loader`"];
+
+
 (* env parameters *)
 System`$Env;
 
@@ -197,7 +201,8 @@ Echo[">> Root: "<> Directory[] ];
 (* load users extensions *)
 WLJSPackages`Load[ AppExtensions`ExtensionsDir ];
 
-{loadSettings, storeSettings}        = Get[FileNameJoin[{"Frontend", "Settings.wl"}] ];
+Needs["CoffeeLiqueur`Notebook`SettingsUtils`"->"settings`", FileNameJoin[{"Frontend", "Settings.wl"}] ];
+
 
 Echo["\n\nWe are looking for funding ❤️  https://wljs.io/frontend/Support\n\n"];
 Echo["\n\n"];
@@ -361,6 +366,7 @@ Map[Function[key,
 
 
 (* reseved keyword for WLJS interpreter *)
+(* What a heck does it do here?! *)
 SetAttributes[Offload, HoldFirst];
 
 middleware[app_][request_] := app[request]
@@ -368,6 +374,7 @@ middleware[app_][request_] := app[request]
 
 
 (* hook all routes handlers *)
+
 AutoTest["HTTPUHandler"->http];
 Downloader["HTTPUHandler"->http];
 Protocol["HTTPUHandler"->http, "AppProtocol" -> AppExtensions`AppProtocol, "Middleware"->Identity, "AppEvent"->AppExtensions`AppEvents, "ExtensionTemplates"->AppExtensions`Templates, "ExtensionSidebarIcons"->AppExtensions`SidebarIcons, "Env"->$Env];
@@ -400,7 +407,7 @@ SetTimeout[
 ];
 
 SetTimeout[
-  StringTemplate["Open http://``:`` in your browser"][$Env["host"], $Env["http"]] // Print;
+  StringTemplate["Open http://``:`` in your browser"][$Env["host"], $Env["http"] ] // Print;
 , 1000
 ];
 

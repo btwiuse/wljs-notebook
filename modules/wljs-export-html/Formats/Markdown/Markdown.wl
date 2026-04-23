@@ -24,7 +24,10 @@ rootFolder = folder // ParentDirectory // ParentDirectory;
 
 localRoot = DirectoryName[$InputFileName];
 
-{saveNotebook, loadNotebook, renameNotebook, cloneNotebook}         = ImportComponent["Frontend/Loader.wl"];
+Needs["CoffeeLiqueur`Notebook`Loader`" -> "loader`"];
+
+{saveNotebook, loadNotebook, renameNotebook, cloneNotebook}         = {loader`save, loader`load, loader`rename, loader`clone};
+
 
 generateMarkdown = ImportComponent[FileNameJoin[{localRoot, "Markdown.wlx"}] ];
 

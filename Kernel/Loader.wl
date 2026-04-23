@@ -4,11 +4,16 @@ BeginPackage["CoffeeLiqueur`Notebook`Loader`", {
     "CoffeeLiqueur`WLX`WebUI`"
 }];
 
+    save;
+    load;
+    rename;
+    clone;
+    
+    Begin["`Internal`"];
+
     Needs["CoffeeLiqueur`Notebook`Cells`" -> "cell`"];
     Needs["CoffeeLiqueur`Notebook`" -> "nb`"];
     Needs["CoffeeLiqueur`Notebook`AppExtensions`" -> "AppExtensions`"];
-    
-    Begin["`Internal`"];
 
     scache = <||>;
 
@@ -223,7 +228,11 @@ BeginPackage["CoffeeLiqueur`Notebook`Loader`", {
             Return[$Failed];
         ];
 
-        With[{n = notebook}, n["Path"] = pathnotebook ];
+        With[{n = notebook}, 
+            n["Path"] = pathnotebook;
+            n["FileHash"] = FileHash[pathnotebook];
+        ];
+
         cache[pathcache] = notebook;
 
         Echo["Loader >> Done!"];
@@ -235,5 +244,3 @@ BeginPackage["CoffeeLiqueur`Notebook`Loader`", {
     End[];
     
 EndPackage[];
-
-{CoffeeLiqueur`Notebook`Loader`Internal`save, CoffeeLiqueur`Notebook`Loader`Internal`load, CoffeeLiqueur`Notebook`Loader`Internal`rename, CoffeeLiqueur`Notebook`Loader`Internal`clone}

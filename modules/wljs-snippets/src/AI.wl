@@ -66,7 +66,8 @@ AIChatRenderer = "";
 
 chatWindow = ImportComponent[FileNameJoin[{$rootDir, "template", "Chat.wlx"}] ];
 
-{loadSettings, storeSettings}        = ImportComponent["Frontend/Settings.wl"];
+Needs["CoffeeLiqueur`Notebook`SettingsUtils`"->"settings`", FileNameJoin[{"Frontend", "Settings.wl"}] ];
+{loadSettings, storeSettings}        = {settings`initialize, settings`storeConfiguration};
 
 settings = <||>;
 loadSettings[settings];

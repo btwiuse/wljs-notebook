@@ -19,7 +19,9 @@ Needs["CoffeeLiqueur`Notebook`" -> "nb`"];
 
 Echo["Autocomplete AI loaded!"];
 
-{loadSettings, storeSettings}        = ImportComponent["Frontend/Settings.wl"];
+
+Needs["CoffeeLiqueur`Notebook`SettingsUtils`"->"settings`", FileNameJoin[{"Frontend", "Settings.wl"}] ];
+{loadSettings, storeSettings}        = {settings`initialize, settings`storeConfiguration};
 
 settings = <||>;
 loadSettings[settings];

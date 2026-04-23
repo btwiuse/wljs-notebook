@@ -8,6 +8,7 @@ BeginPackage["CoffeeLiqueur`Notebook`KernelAutolaunch`", {
   "CoffeeLiqueur`Misc`WLJS`Transport`"
 }];
 
+autostart;
 
 Begin["`Internal`"];
 
@@ -33,5 +34,3 @@ autostart[kernel_, KernelList_, initKernel_, deinitKernel_] := Module[{},
 
 End[]
 EndPackage[]
-
-CoffeeLiqueur`Notebook`KernelAutolaunch`Internal`autostart

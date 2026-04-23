@@ -28,12 +28,12 @@ BrowserMenu            = ImportComponent["Components/FakeMenuBrowser.wlx"];
 
 FakeMenu            = ImportComponent["Components/FakeMenu.wlx"];
 
-{saveNotebook, loadNotebook, renameNotebook, cloneNotebook}         = ImportComponent["Loader.wl"];
+{saveNotebook, loadNotebook, renameNotebook, cloneNotebook}         = {loader`save, loader`load, loader`rename, loader`clone};
+
 {deinitKernel, initKernel}           = ImportComponent["KernelUtils.wl"];
 
-{loadSettings, storeSettings}        = ImportComponent["Settings.wl"];
+{loadSettings, storeSettings}        = {settings`initialize, settings`storeConfiguration};
 
-autolaunch                           = ImportComponent["Autolaunch.wl"];
 
 serverParams = <|"env" -> env|>;
 settings = <||>;
@@ -515,17 +515,5 @@ Script[Rule["Secret", Secret_]] := With[{},
 http["MessageHandler", "Folder"] = AssocUMatchQ[<|"Method" -> "GET", "Path" -> "/folder/" ~~ ___|>] -> middleware[App];
 http["MessageHandler", "Index"] = AssocUMatchQ[<|"Method" -> "GET", "Path" -> "/"|>] -> middleware[App];
 
-
-
-(*/* TODO: Move it to Script.wls */*)
 Print["App Loaded!"];
-
-If[settings["Autostart"] && !TrueQ[$Env["noautolaunch"]],
-  Print["Autolaunch!"];
-  autolaunch[LocalKernel`LocalKernel["Name"->"Auto"], Hold[AppExtensions`KernelList], initKernel[serverParams], deinitKernel];
-];
-
-Print["Done?"];
-
-
 
