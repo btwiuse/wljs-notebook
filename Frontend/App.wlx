@@ -27,7 +27,7 @@ BrowserMenu            = ImportComponent["Components/FakeMenuBrowser.wlx"];
 FakeMenu            = ImportComponent["Components/FakeMenu.wlx"];
 
 {saveNotebook, loadNotebook, renameNotebook, cloneNotebook}         = {loader`save, loader`load, loader`rename, loader`clone};
-{deinitKernel, initKernel}           = ImportComponent["KernelUtils.wl"];
+{deinitKernel, initKernel}           = {kernelUtils`deinitializeKernel, kernelUtils`initializeKernel};
 
 {loadSettings, storeSettings}        = {settings`initialize, settings`storeConfiguration};
 

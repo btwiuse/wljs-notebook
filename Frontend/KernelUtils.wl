@@ -9,6 +9,8 @@ BeginPackage["CoffeeLiqueur`Notebook`KernelUtils`", {
   "CoffeeLiqueur`Misc`WLJS`Transport`"
 }];
 
+deinitializeKernel; 
+initializeKernel;
 
 
 Begin["`Internal`"];
@@ -114,4 +116,3 @@ End[];
 
 EndPackage[];
 
-{CoffeeLiqueur`Notebook`KernelUtils`Internal`deinitializeKernel, CoffeeLiqueur`Notebook`KernelUtils`Internal`initializeKernel}

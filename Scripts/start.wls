@@ -93,6 +93,8 @@ Needs["CodeParser`"]
 (* Frontend Helper Tools *)
 Needs["CoffeeLiqueur`Notebook`Loader`" -> "loader`"];
 
+Needs["CoffeeLiqueur`Notebook`KernelUtils`"->"kernelUtils`", FileNameJoin[{ Directory[], "Frontend", "KernelUtils.wl"}] ];
+
 
 (* env parameters *)
 System`$Env;
@@ -277,7 +279,9 @@ App         := ImportComponent["Frontend/App.wlx"];
 PromptWindow         := ImportComponent["Frontend/PromptWindow.wlx"];
 Window      := ImportComponent["Frontend/Window.wlx"];
 Settings    := ImportComponent["Frontend/Settings.wlx"];
-Downloader   = ImportComponent["Frontend/Downloader.wl"];
+
+Needs["CoffeeLiqueur`Notebook`HTTPDownLoader`" -> "downloader`", FileNameJoin[{Directory[], "Frontend", "Downloader.wl"}] ];
+Downloader   = downloader`module;
 
 (* Global variables *)
 
