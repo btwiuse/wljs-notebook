@@ -21,6 +21,7 @@ SetAttributes[appendHeld, HoldFirst];
 SetAttributes[removeHeld, HoldFirst];
 
 autostart[kernel_, KernelList_, initKernel_, deinitKernel_] := Module[{},
+  Echo["Kernel autolaunch >> autostart"];
   appendHeld[KernelList, kernel];
 
   EventHandler[EventClone[kernel], {
@@ -30,6 +31,7 @@ autostart[kernel_, KernelList_, initKernel_, deinitKernel_] := Module[{},
 
 
   kernel // GenericKernel`Start;
+  Echo["Kernel autolaunch >> started"];
 ];
 
 End[]

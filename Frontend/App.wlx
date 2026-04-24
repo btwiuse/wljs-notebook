@@ -26,7 +26,7 @@ BrowserMenu            = ImportComponent["Components/FakeMenuBrowser.wlx"];
 
 FakeMenu            = ImportComponent["Components/FakeMenu.wlx"];
 
-{saveNotebook, loadNotebook, renameNotebook, cloneNotebook}         = {loader`save, loader`load, loader`rename, loader`clone};
+{saveNotebook, loadNotebook, renameNotebook, cloneNotebook, reloadNotebook}         = {loader`save, loader`load, loader`rename, loader`clone, loader`reload};
 {deinitKernel, initKernel}           = {kernelUtils`deinitializeKernel, kernelUtils`initializeKernel};
 
 {loadSettings, storeSettings}        = {settings`initialize, settings`storeConfiguration};
@@ -72,6 +72,28 @@ createNotebook[props_Association, assoc_Association, GlobalMessanger_, ModalCont
     EventFire[GlobalMessanger, "Error", "Failed to create a new notebook! Check if the working directory is writable"];
   ]]
 ]
+
+dumpHashCheckUpdate[notebook_nb`NotebookObj, GlobalMessanger_, client_] := Module[{},
+  If[!TrueQ[FileExistsQ[notebook["Path"]] || !NumberQ[notebook["FileHash"]]], 
+    Echo["File or notebook hash does not exists. Skipping"];
+    Return[];
+  ];
+
+  With[{hash = FileHash[notebook["Path"]]},
+   If[notebook["FileHash"] =!= hash,
+     notebook["FileHash"] = hash;
+     "HashMismatchFound"
+   ,
+     "It's okay"
+   ]
+  ]
+]
+
+dumpReloadNotebook[notebook_nb`NotebookObj, GlobalMessanger_, client_] := Module[{},
+  Then[reloadNotebook[notebook, "Events"->AppEvent], Function[Null,
+    Echo["Reloaded"];
+  ]];
+];
 
 backupNotebook[notebook_nb`NotebookObj, GlobalMessanger_, client_] := With[{},
   If[!TrueQ[notebook["ReadOnly?"]], 
@@ -385,6 +407,8 @@ App[request_] := With[{
       "DumpSave" -> (dumpNotebook[#, GlobalMessanger, ModalController, $Client]&),
       "DumpSaveAs" -> (dumpNotebookAs[#, GlobalMessanger, ModalController, $Client]&),
       "DumpSaveTemporal" -> (backupNotebook[#, GlobalMessanger, $Client]&),
+      "DumpHashCheck" -> (dumpHashCheckUpdate[#, GlobalMessanger, $Client]&),
+      "DumpReloadCells" -> (dumpReloadNotebook[#, GlobalMessanger, $Client]&),
       "ReopenAsQuick" -> (reopenNotebookAsQuick[#, GlobalMessanger, ModalController, $Client]&),
       "PrintPDF" -> (printPDF[$Client, ModalController, GlobalMessanger]&)
     }];

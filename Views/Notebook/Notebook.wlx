@@ -95,6 +95,7 @@ addListeners[notebook_nb`NotebookObj, secret_String, client_, parameters_, exten
     (* /* don't clone Notebook event, must be one ! */ *)
     EventHandler[clonedEvent, {
         "New Cell" -> Function[cell,
+            Echo["New cell"];
             With[{list = #["Hash"] &/@ (cell["Notebook","Cells"])},
                 WebUISubmit[UINotebook["NewCell", CellGenerator[cell, client, parameters, extensions], cell`Serialize[cell] , list, secret], client]
             ];
@@ -668,7 +669,35 @@ destructor[notebook_, secret_, __] := With[{},
     (* /* make sure that WebSocketQ flag is removed */ *)
     notebook["WebSocketQ"] = False;
     notebook["Opened"] = False;
+    notebook["AskedForReload"] = False;
+    notebook["HashCheckInProgress"] = False;
+    notebook["SavingInProgress"] = False;
 ];
+
+askForReload[notebook_, controller_, modals_, client_] := Module[{}, With[{promise = Promise[]},
+    If[TrueQ[notebook["AskedForReload"]], Return[]];
+
+    notebook["AskedForReload"] = True;
+    Then[promise, Function[result,
+        Echo[result];
+        If[TrueQ[result] || result["response"] === 0,
+                Echo["Restoring"];
+                Delete /@ (notebook["Cells"]//Reverse);
+                EventFire[controller, "DumpReloadCells", notebook];
+                notebook["AskedForReload"] = False;
+        ,
+            Echo["Cancelled"];
+                notebook["AskedForReload"] = False;
+        ];
+    ]];
+
+    EventFire[modals, "MessageBox", <|
+        "Promise"->promise, "message"->"File was changed outside", 
+        "type"->"question",
+        "buttons"->{"Reload", "Cancel"},
+        "title"->"File hash mismatch"
+    |>]; 
+] ]
 
 (* /*  Exstension API */  *)
 (* /*  Prolog, Epilog, Mesis, EventHandler */  *)
@@ -702,6 +731,7 @@ Component[OptionsPattern[]] := With[{
     EventHandler[controller // EventClone, {
         "Save" -> Function[Null,
             If[TrueQ[notebook["_suspendBackups"]], notebook["_suspendBackups"] = .];
+            notebook["SavingInProgress"] = True;
             EventFire[log, "Notebook:Sync:Started", True];
 
             With[{tt = EventFire[notebook, "OnBeforeSave", <|"Client" -> $Client, "Log"->log|>]},
@@ -711,6 +741,7 @@ Component[OptionsPattern[]] := With[{
                     
                     Then[EventFire[controller, "DumpSave", notebook], Function[Null, 
                         EventFire[log, "Saved", ""];
+                        notebook["SavingInProgress"] = False;
                     ]];
                     
                 ]];
@@ -719,14 +750,17 @@ Component[OptionsPattern[]] := With[{
 
         "SaveAs" -> Function[path,
             If[TrueQ[notebook["_suspendBackups"]], notebook["_suspendBackups"] = .];
+            notebook["SavingInProgress"] = True;
             EventFire[log, "Notebook:Sync:Started", True];
+            
+
             With[{tt = EventFire[notebook, "OnBeforeSave", <|"Client" -> $Client, "Log"->log|>], client = $Client},
 
                 Then[tt, Function[Null,
                     Echo["SAVEDAS!!!!!!!!!!!!!!!!!!!!!!!!!!!!"];
                     EventFire[log, "Notebook:Sync:Finished", True];
                     Then[EventFire[controller, "DumpSaveAs", <|"Notebook" -> notebook, "Client"-> client, "Path" -> URLDecode[path]|>], Function[Null, 
-                        1+1
+                        notebook["SavingInProgress"] = False;
                     ]];
                 ]];
             ];
@@ -736,8 +770,21 @@ Component[OptionsPattern[]] := With[{
             EventFire[controller, "ReopenAsQuick", <|"Notebook" -> notebook, "Client"-> client, "Path" -> notebook["Path"]|>];
         ],
 
+        "CheckFileHash" -> Function[data, Module[{}, 
+            If[!TrueQ[notebook["ProbablyLoaded"]] || TrueQ[notebook["HashCheckInProgress"]] || TrueQ[notebook["SavingInProgress"]], Return[]];
+            Echo["Checking file hash"];
+            notebook["HashCheckInProgress"] = True;
+            Then[EventFire[controller, "DumpHashCheck", notebook], Function[results,
+                If[Length[Cases[results, "HashMismatchFound"]] > 0,
+                    Echo["Reloading is needed!"];
+                    askForReload[notebook, controller, modals, client];
+                ];
+                notebook["HashCheckInProgress"] = False;
+            ] ];
+        ] ],
+
         "Backup" -> Function[data, Module[{}, With[{timer = AbsoluteTime[]},
-            If[TrueQ[notebook["_suspendBackups"]], Return[Null, Module]];
+            If[TrueQ[notebook["_suspendBackups"]] || TrueQ[notebook["HashCheckInProgress"]] , Return[Null, Module]];
 
             EventFire[log, "Notebook:Sync:Started", True];
 
@@ -926,6 +973,7 @@ Component[OptionsPattern[]] := With[{
                 (*/* finish */*)
                 EventFire[event, "Loaded", notebook];
                 EventFire[controller, "NotebookShown", <|"Client"->$Client, "Notebook"->notebook|>];
+                notebook["ProbablyLoaded"] = True;
 
                 If[MemberQ[notebook["Properties"], "AutoconnectKernel"],
                     Echo["Autoconnecting provided kernel"];

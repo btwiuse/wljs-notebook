@@ -8,6 +8,7 @@ BeginPackage["CoffeeLiqueur`Notebook`Loader`", {
     load;
     rename;
     clone;
+    reload;
     
     Begin["`Internal`"];
 
@@ -34,6 +35,7 @@ BeginPackage["CoffeeLiqueur`Notebook`Loader`", {
         notebook["Path"] = new;
         cache[old] = .;
         Echo["Loader >> renamed."];
+        notebook["FileHash"] = FileHash[new];
     ];
 
     rename[notebook_nb`NotebookObj, new_String] := With[{path = notebook["Path"]},
@@ -41,6 +43,7 @@ BeginPackage["CoffeeLiqueur`Notebook`Loader`", {
         notebook["Path"] = new;
         cache[new] = notebook;
         Echo["Loader >> renamed."];
+        notebook["FileHash"] = FileHash[new];
     ];    
 
     clone[notebook_nb`NotebookObj, newPath_String, opts: OptionsPattern[] ] := With[{oldPath = notebook["Path"]},
@@ -93,6 +96,8 @@ BeginPackage["CoffeeLiqueur`Notebook`Loader`", {
                 stream = OpenWrite[dir, BinaryFormat->True];
                 nb`SerializeToStream[stream, notebook];
                 r = Close[stream];
+                notebook["FileHash"] = FileHash[dir];
+
                 If[!StringQ[r] && (r =!= Null), 
                     Echo["Loader >> Put >> error"]; Echo[r]; 
                     EventFire[promise, Reject, r]
@@ -144,6 +149,20 @@ BeginPackage["CoffeeLiqueur`Notebook`Loader`", {
         cell`CellObj["Notebook" -> notebook, "Data" -> ""];
         save[path, notebook, opts]
     ];
+
+    reload[notebook_nb`NotebookObj, opts: OptionsPattern[] ] := Module[{cells}, With[{p = Promise[]},
+        If[ !StringQ[notebook["Path"] ],
+            EventFire[p, Resolve, $Failed];
+            Return[p];
+        ];
+
+        nb`LoadCellFromFile[notebook["Path"], notebook];
+        EventFire[p, Resolve, True];
+
+        p
+    ] ];
+
+    Options[reload] = {"Event"->Null}
 
     load[path_String, opts: OptionsPattern[] ] := Module[{},
         If[!FileExistsQ[path], 

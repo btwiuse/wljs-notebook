@@ -16,6 +16,8 @@ DeserializeFromStream;
 LoadFromFile;
 LoadFromString;
 
+LoadCellFromFile;
+
 Begin["`Private`"]
 
 HashMap = <||>;
@@ -39,7 +41,7 @@ NotebookObj /: EventRemove[n_NotebookObj, opts__] := EventRemove[n["Hash"], opts
 
 
 SerializeToStream[stream_OutputStream, n_NotebookObj] := writeNotebook[stream, n]
-DeserializeFromStream[stream_InputStream, opts: OptionsPattern[] ] := With[{a = readNotebook[stream, n]},
+DeserializeFromStream[stream_InputStream, opts: OptionsPattern[] ] := With[{a = readNotebook[stream, 10]},
     If[FailureQ[a], $Failed,
         With[{n = NotebookObj[opts]},
             n[#] = a[#]; &/@ Complement[Keys[a], {"PublicFields", "Cells"}];
@@ -53,7 +55,43 @@ DeserializeFromStream[stream_InputStream, opts: OptionsPattern[] ] := With[{a = 
 
 Options[DeserializeFromStream] = {"Hash" :> CreateUUID[]}
 
-LoadFromFile[path_String | File[path_], opts: OptionsPattern[] ] := Module[{stream, notebook},
+LoadCellFromFile[path_, notebook_] := Module[{stream, result, legacyQ},
+    If[!FileExistsQ[path],
+        Return[$Failed];
+    ];
+
+    Echo["Loading cells from file"];
+
+    stream = OpenRead[path, BinaryFormat->True];
+    result = readNotebook[stream, 10];
+    Close[stream];
+
+    If[!FailureQ[result],
+        Echo["Succesfully parsed."];
+        notebook["Cells"] = CoffeeLiqueur`Notebook`Cells`DeserializeLive[#, "Notebook"->notebook] &/@ result["Cells"];
+        Echo["Cells were replaced"];
+    ,
+        Echo["Loading failed. Retrying with a legacy .wln parser..."];
+        
+        stream = OpenRead[path, BinaryFormat->True];
+        legacyQ = StringMatchQ[ReadLine[stream, TimeConstraint->10], ___~~"<|"~~__];
+        Close[stream];
+
+
+        If[legacyQ,
+            Echo["Legacy format did work. Importing..."];
+            With[{a = Get[path]},
+                Deserialize[a["serializer"], "cells", a, notebook]
+            ];
+            Echo["Cells were replaced"];
+        ,
+            Return[$Failed];
+        ];
+    ];
+    notebook  
+]
+
+LoadFromFile[path_String | File[path_], opts: OptionsPattern[] ] := Module[{stream, notebook, legacyQ},
     If[!FileExistsQ[path],
         Return[$Failed];
     ];
@@ -94,7 +132,7 @@ LoadFromFile[path_String | File[path_], opts: OptionsPattern[] ] := Module[{stre
 
 Options[LoadFromFile] = {"Hash" :> CreateUUID[]}
 
-LoadFromString[string_String, opts: OptionsPattern[] ] := Module[{stream, notebook},
+LoadFromString[string_String, opts: OptionsPattern[] ] := Module[{stream, notebook, legacyQ},
     Echo["Loading from string"];
     stream = StringToStream[string];
     notebook = DeserializeFromStream[stream, opts];
@@ -162,6 +200,10 @@ Deserialize["jsfn4", n_Association, notebook_NotebookObj] := With[{pf = notebook
     notebook["ObjectFields"] = {"Objects", "Symbols", "Storage", "ExcalidrawImages", "RuntimeCache"};
 
     notebook
+]
+
+Deserialize["jsfn4", "cells", n_Association, notebook_NotebookObj] := With[{},
+    notebook["Cells"] = CoffeeLiqueur`Notebook`Cells`DeserializeLive[#, "Notebook"->notebook] &/@ n["Cells"];
 ]
 
 
