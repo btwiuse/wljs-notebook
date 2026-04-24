@@ -23,6 +23,7 @@ const {powerMonitor } = require('electron')
 const { net } = require('electron')
 const fs = require('fs');
 const fse = require('fs-extra');
+const https = require('https');
 
 const { powerSaveBlocker } = require('electron')
 
@@ -1294,6 +1295,29 @@ const windows = {
             this.win.webContents.send('version', data);
         },
 
+        news (items) {
+            if (!this.readyQ || !this.aliveQ) return;
+            this.win.webContents.send('news-items', items);
+        },
+
+        async fetchNews() {
+            try {
+                const items = await getLatestNews();
+                this.news(items);
+                console.log(items);
+            } catch (error) {
+                console.error('Failed to load WLJS news:', error);
+                this.news([{
+                    source: 'WLJS news',
+                    title: 'Unable to load latest news',
+                    url: 'https://wljs.io',
+                    summary: error.message,
+                    date: new Date(),
+                    dateText: ''
+                }]);
+            }
+        },
+
         construct(cbk = (...any) => {}) {
             let win;
 
@@ -1304,7 +1328,7 @@ const windows = {
                 
                 titleBarStyle: 'hiddenInset',
                 width: 600,
-                height: 400,
+                height: 660,
                 resizable: false,
                 title: 'Launcher',
                 contextMenu: true,
@@ -1332,7 +1356,7 @@ const windows = {
                     },
                     autoHideMenuBar: true,
                     width: 600,
-                    height: 400,
+                    height: 660,
                     resizable: false,
                     title: 'Launcher',
                     maximizable: false,
@@ -1361,7 +1385,7 @@ const windows = {
                     },
                     autoHideMenuBar: true,
                     width: 600,
-                    height: 400,
+                    height: 660,
                     resizable: false,
                     title: 'Launcher',
                     maximizable: false,
@@ -1428,6 +1452,7 @@ const windows = {
             win.once('ready-to-show', () => {
                 self.readyQ = true;
                 cbk(win);
+                self.fetchNews();
             });
 
             win.on('close', () => {
@@ -1493,6 +1518,86 @@ function ensureDirectoryExistence(filePath) {
     ensureDirectoryExistence(dirname);
     fs.mkdirSync(dirname);
   }
+
+function fetchUrlText(url) {
+    return new Promise((resolve, reject) => {
+        const request = https.get(url, (res) => {
+            if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
+                return resolve(fetchUrlText(new URL(res.headers.location, url).href));
+            }
+            if (res.statusCode < 200 || res.statusCode >= 300) {
+                return reject(new Error(`HTTP ${res.statusCode} fetching ${url}`));
+            }
+            let body = '';
+            res.setEncoding('utf8');
+            res.on('data', (chunk) => body += chunk);
+            res.on('end', () => resolve(body));
+        });
+        request.on('error', reject);
+    });
+}
+
+function stripHtml(html) {
+    return html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+}
+
+function parseNewsItems(html, source, pathPrefix) {
+    const regex = new RegExp(`<a[^>]+href="/${pathPrefix}/[^"]+"[^>]*>[\\s\\S]*?</a>`, 'gi');
+    const items = [];
+    let match;
+    let matchCount = 0;
+
+    while ((match = regex.exec(html))) {
+        matchCount++;
+        if (matchCount > 50) break; // safety limit
+        
+        const block = match[0];
+        const hrefMatch = block.match(/href="(\/[^\"]+)"/);
+        const titleMatch = block.match(/<h2[^>]*>([\s\S]*?)<\/h2>/i);
+        const summaryMatch = block.match(/<p[^>]*>([\s\S]*?)<\/p>/i);
+        const dateMatch = block.match(/([A-Z][a-z]{2,8}\s+\d{1,2},\s+\d{4})/);
+
+        const url = hrefMatch ? `https://wljs.io${hrefMatch[1]}` : 'https://wljs.io';
+        const title = titleMatch ? stripHtml(titleMatch[1]) : url;
+        const summary = summaryMatch ? stripHtml(summaryMatch[1]) : '';
+        const dateText = dateMatch ? dateMatch[1] : '';
+        const date = dateText ? new Date(dateText) : new Date(0);
+
+        if (title && title !== url && dateText) {
+            items.push({ source, title, url, summary, date, dateText });
+        }
+    }
+
+    console.log(`Parsed ${matchCount} matches for ${source}, extracted ${items.length} items`);
+    return items;
+}
+
+async function getLatestNews() {
+    try {
+        console.log('Fetching WLJS blog and releases...');
+        const [blogHtml, releasesHtml] = await Promise.all([
+            fetchUrlText('https://wljs.io/blog'),
+            fetchUrlText('https://wljs.io/releases')
+        ]);
+
+        console.log(`Blog HTML length: ${blogHtml.length}, Releases HTML length: ${releasesHtml.length}`);
+
+        const items = [
+            ...parseNewsItems(blogHtml, 'Blog', 'blog'),
+            ...parseNewsItems(releasesHtml, 'Releases', 'releases')
+        ];
+
+        console.log(`Total items collected: ${items.length}`);
+        items.sort((a, b) => b.date - a.date);
+        const result = items.slice(0, 8);
+        console.log(`Final result: ${result.length} items`);
+        result.forEach(item => console.log(`  - ${item.source}: ${item.title} (${item.dateText})`));
+        return result;
+    } catch (error) {
+        console.error('Error in getLatestNews:', error);
+        throw error;
+    }
+}
 
 const dumpLogs = (cbk) => {
     const p = path.join(appDataFolder, 'Debug', 'System.log');
