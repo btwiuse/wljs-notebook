@@ -3,6 +3,8 @@ BeginPackage["CoffeeLiqueur`Notebook`FileFormat`"];
 readNotebook;
 writeNotebook;
 
+endOfLine = If[$OperatingSystem === "Windows", "\r", EndOfLine];
+
 Begin["`Private`"];
 
 takeKeys[nb_, keys_] := Association@Map[(# -> nb[#])&, keys]
@@ -307,7 +309,7 @@ readNotebook[stream_, timeout_:10] := Module[
             ReadString[
                 file
                 ,
-                ___ ~~ "%" ~~ Repeated["-", {17, 100}] ~~ "%Notebook%" ~~ Repeated["-", {17, 100}] ~~ "%" ~~ EndOfLine
+                ___ ~~ "%" ~~ Repeated["-", {17, 100}] ~~ "%Notebook%" ~~ Repeated["-", {17, 100}] ~~ "%" ~~ endOfLine
                 ,
                 TimeConstraint -> timeout
             ]
@@ -321,7 +323,7 @@ readNotebook[stream_, timeout_:10] := Module[
             ReadString[
                 file
                 ,
-                StartOfLine ~~ "%" ~~ Repeated["-", {17, 100}] ~~ Repeated["-", {17, 100}] ~~ "%" ~~ EndOfLine
+                StartOfLine ~~ "%" ~~ Repeated["-", {17, 100}] ~~ Repeated["-", {17, 100}] ~~ "%" ~~ endOfLine
                 ,
                 TimeConstraint -> timeout
             ]
@@ -339,7 +341,7 @@ readNotebook[stream_, timeout_:10] := Module[
             ReadString[
                 file
                 ,
-                StartOfLine ~~ "%" ~~ Repeated["-", {17, 100}] ~~ "%" ~~ "Cells" ~~ "%" ~~ Repeated["-", {17, 100}] ~~ "%" ~~ EndOfLine ~~ "\n"..
+                StartOfLine ~~ "%" ~~ Repeated["-", {17, 100}] ~~ "%" ~~ "Cells" ~~ "%" ~~ Repeated["-", {17, 100}] ~~ "%" ~~ endOfLine ~~ "\n"..
                 ,
                 TimeConstraint -> timeout
             ]
@@ -353,7 +355,7 @@ readNotebook[stream_, timeout_:10] := Module[
             ReadString[
                 file
                 ,
-                StartOfLine ~~ "%" ~~ Repeated["-", {17, 100}] ~~ Repeated["-", {17, 100}] ~~ "%" ~~ EndOfLine ~~ "\n"
+                StartOfLine ~~ "%" ~~ Repeated["-", {17, 100}] ~~ Repeated["-", {17, 100}] ~~ "%" ~~ endOfLine ~~ "\n"
                 ,
                 TimeConstraint -> timeout
             ]
@@ -376,7 +378,7 @@ readNotebook[stream_, timeout_:10] := Module[
                 ReadString[
                     file
                     ,
-                    StartOfLine ~~ "%" ~~ Repeated["-", {17, 100}] ~~ Repeated["-", {17, 100}] ~~ "%" ~~ EndOfLine ~~ "\n"
+                    StartOfLine ~~ "%" ~~ Repeated["-", {17, 100}] ~~ Repeated["-", {17, 100}] ~~ "%" ~~ endOfLine ~~ "\n"
                     ,
                     TimeConstraint -> timeout
                 ]
@@ -406,7 +408,7 @@ readNotebook[stream_, timeout_:10] := Module[
                     ReadString[
                         file
                         ,
-                        StartOfLine ~~ "%" ~~ Repeated["-", {17, 100}] ~~ "%" ~~ field ~~ "%" ~~ Repeated["-", {17, 100}] ~~ "%" ~~ EndOfLine ~~ "\n"..
+                        StartOfLine ~~ "%" ~~ Repeated["-", {17, 100}] ~~ "%" ~~ field ~~ "%" ~~ Repeated["-", {17, 100}] ~~ "%" ~~ endOfLine ~~ "\n"..
                         ,
                         TimeConstraint -> timeout
                     ]
@@ -420,7 +422,7 @@ readNotebook[stream_, timeout_:10] := Module[
                     ReadString[
                         file
                         ,
-                        (StartOfLine ~~ "%" ~~ Repeated["-", {17, 100}] ~~ Repeated["-", {17, 100}] ~~ "%" ~~ EndOfLine ~~ "\n") | (StartOfLine ~~ "%" ~~ Repeated["-", {17, 100}] ~~ "%EndOf" ~~ field ~~ "%" ~~ Repeated["-", {17, 100}] ~~ "%" ~~ EndOfLine ~~ "\n")
+                        (StartOfLine ~~ "%" ~~ Repeated["-", {17, 100}] ~~ Repeated["-", {17, 100}] ~~ "%" ~~ endOfLine ~~ "\n") | (StartOfLine ~~ "%" ~~ Repeated["-", {17, 100}] ~~ "%EndOf" ~~ field ~~ "%" ~~ Repeated["-", {17, 100}] ~~ "%" ~~ endOfLine ~~ "\n")
                         ,
                         TimeConstraint -> timeout
                     ]
@@ -446,7 +448,7 @@ readNotebook[stream_, timeout_:10] := Module[
                         ReadString[
                             file
                             ,
-                            StartOfLine ~~ "%" ~~ Repeated["-", {17, 100}] ~~ Repeated["-", {17, 100}] ~~ "%" ~~ EndOfLine ~~ "\n"
+                            StartOfLine ~~ "%" ~~ Repeated["-", {17, 100}] ~~ Repeated["-", {17, 100}] ~~ "%" ~~ endOfLine ~~ "\n"
                             ,
                             TimeConstraint -> timeout
                         ]
