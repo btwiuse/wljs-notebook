@@ -82,7 +82,7 @@ WLN`WLNImport[filename_String, options___] :=
  Module[{assoc, opts = Association[List[options] ], hash = CreateUUID[], fileHash = FileHash[filename]},
     If[KeyExistsQ[cache, fileHash], Return[cache[fileHash] ] ];
 
-    assoc = Import[filename, "Text"];
+    assoc = Import[filename, "Text", DOSTextFormat->False];
     If[FailureQ[assoc], Return[$Failed] ];
 
     EventFire[Internal`Kernel`CommunicationChannel, "ImportNotebook", <|"Data"->assoc, "Hash"->hash, "FullPath"->FileNameJoin[{DirectoryName[filename], FileNameTake[filename]}], "Path"->DirectoryName[filename],  "Kernel"->Internal`Kernel`Hash|>];

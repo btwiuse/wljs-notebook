@@ -62,7 +62,7 @@ LoadCellFromFile[path_, notebook_] := Module[{stream, result, legacyQ},
 
     Echo["Loading cells from file"];
 
-    stream = OpenRead[path, BinaryFormat->True];
+    stream = OpenRead[path, DOSTextFormat->False];
     result = readNotebook[stream, 10];
     Close[stream];
 
@@ -73,7 +73,7 @@ LoadCellFromFile[path_, notebook_] := Module[{stream, result, legacyQ},
     ,
         Echo["Loading failed. Retrying with a legacy .wln parser..."];
         
-        stream = OpenRead[path, BinaryFormat->True];
+        stream = OpenRead[path, DOSTextFormat->False];
         legacyQ = StringMatchQ[ReadLine[stream, TimeConstraint->10], ___~~"<|"~~__];
         Close[stream];
 
@@ -98,7 +98,7 @@ LoadFromFile[path_String | File[path_], opts: OptionsPattern[] ] := Module[{stre
 
     Echo["Loading from file"];
 
-    stream = OpenRead[path, BinaryFormat->True];
+    stream = OpenRead[path, DOSTextFormat->False];
     notebook = DeserializeFromStream[stream, opts];
     Close[stream];
 
@@ -108,7 +108,7 @@ LoadFromFile[path_String | File[path_], opts: OptionsPattern[] ] := Module[{stre
     ,
         Echo["Loading failed. Retrying with a legacy .wln parser..."];
         
-        stream = OpenRead[path, BinaryFormat->True];
+        stream = OpenRead[path, DOSTextFormat->False];
         legacyQ = StringMatchQ[ReadLine[stream, TimeConstraint->10], ___~~"<|"~~__];
         Close[stream];
 
@@ -153,7 +153,7 @@ LoadFromString[string_String, opts: OptionsPattern[] ] := Module[{stream, notebo
 
             (* legacy format. Keep it for backward compatibillity! *)
             (* it does not take that much space! *)
-            With[{n = Deserialize[ ImportString[string, "WL"], NotebookObj[opts] ]},
+            With[{n = Deserialize[ ImportString[string, "WL", DOSTextFormat->False], NotebookObj[opts] ]},
                 If[!MatchQ[n, _NotebookObj], Return[$Failed]; ];
                 notebook = n;
             ];

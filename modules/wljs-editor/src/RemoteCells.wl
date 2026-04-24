@@ -57,7 +57,7 @@ exportNotebook[notebook_, savingPath_, ext: ("md" | "mdx" | "html" | "nb")] := W
     |>];
 ]
 
-exportNotebook[notebook_, savingPath_, "wln"] := With[{stream = OpenWrite[savingPath, BinaryFormat->True]},
+exportNotebook[notebook_, savingPath_, "wln"] := With[{stream = OpenWrite[savingPath, DOSTextFormat->False]},
     notebook["Path"] = savingPath;
     notebook["Directory"] = DirectoryName[savingPath];
 

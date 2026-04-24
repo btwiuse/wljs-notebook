@@ -77,7 +77,7 @@ BeginPackage["CoffeeLiqueur`Notebook`Loader`", {
         If[OptionValue["Temporal"],
             Module[{r, stream},
 
-                stream = OpenWrite[makeHashPath[dir], BinaryFormat->True];
+                stream = OpenWrite[makeHashPath[dir], DOSTextFormat->False];
                 nb`SerializeToStream[stream, notebook];
                 r = Close[stream];
 
@@ -93,7 +93,7 @@ BeginPackage["CoffeeLiqueur`Notebook`Loader`", {
             With[{h = checkbackups[notebook]}, If[h =!= False, moveBackupSomewhere[h] ] ];
 
             Module[{r, stream},
-                stream = OpenWrite[dir, BinaryFormat->True];
+                stream = OpenWrite[dir, DOSTextFormat->False];
                 nb`SerializeToStream[stream, notebook];
                 r = Close[stream];
                 notebook["FileHash"] = FileHash[dir];

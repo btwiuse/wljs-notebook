@@ -3,7 +3,7 @@ BeginPackage["CoffeeLiqueur`Notebook`FileFormat`"];
 readNotebook;
 writeNotebook;
 
-endOfLine = If[$OperatingSystem === "Windows", "\r", EndOfLine];
+endOfLine = EndOfLine;
 
 Begin["`Private`"];
 
