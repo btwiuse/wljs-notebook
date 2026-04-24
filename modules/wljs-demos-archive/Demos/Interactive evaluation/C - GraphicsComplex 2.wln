@@ -1,0 +1,460 @@
+<|"Notebook" -> <|"Controller" -> "3a125f44-e5fc-474e-9283-7e5f168e64ae", 
+   "FocusedCell" -> CoffeeLiqueur`Notebook`Cells`CellObj[
+     CoffeeLiqueur`Notebook`Cells`CellObj`$12803], "HaveToSaveAs" -> True, 
+   "MessangerChannel" -> Messanger, "ModalsChannel" -> 
+    "98a89acd-f2ad-4ca5-a9ad-f3d4462502ca", "Objects" -> <||>, 
+   "Path" -> "/users/kirill/Github/wolfram-js-frontend/modules/wljs-demos-arc\
+hive/Demos/Interactive evaluation/C - GraphicsComplex 2.wln", 
+   "PublicFields" -> {"Properties"}, "Quick" -> True, "Symbols" -> <||>, 
+   "TOC" -> {CoffeeLiqueur`Extensions`TOC`Private`heading[2, "Going 3D", 
+      CoffeeLiqueur`Notebook`Cells`CellObj[
+       CoffeeLiqueur`Notebook`Cells`CellObj`$12804]], 
+     CoffeeLiqueur`Extensions`TOC`Private`heading[3, "Vertex colors in 3D", 
+      CoffeeLiqueur`Notebook`Cells`CellObj[
+       CoffeeLiqueur`Notebook`Cells`CellObj`$12813]], 
+     CoffeeLiqueur`Extensions`TOC`Private`heading[3, "Normals and lighting", 
+      CoffeeLiqueur`Notebook`Cells`CellObj[
+       CoffeeLiqueur`Notebook`Cells`CellObj`$12816]], 
+     CoffeeLiqueur`Extensions`TOC`Private`heading[3, "Texture mapping in 3D", 
+      CoffeeLiqueur`Notebook`Cells`CellObj[
+       CoffeeLiqueur`Notebook`Cells`CellObj`$12822]], 
+     CoffeeLiqueur`Extensions`TOC`Private`heading[2, "Animating 3D meshes", 
+      CoffeeLiqueur`Notebook`Cells`CellObj[
+       CoffeeLiqueur`Notebook`Cells`CellObj`$12825]], 
+     CoffeeLiqueur`Extensions`TOC`Private`heading[3, 
+      "10,000 vertices at 30 fps", CoffeeLiqueur`Notebook`Cells`CellObj[
+       CoffeeLiqueur`Notebook`Cells`CellObj`$12825]], 
+     CoffeeLiqueur`Extensions`TOC`Private`heading[3, "Adding dynamic color", 
+      CoffeeLiqueur`Notebook`Cells`CellObj[
+       CoffeeLiqueur`Notebook`Cells`CellObj`$12831]], 
+     CoffeeLiqueur`Extensions`TOC`Private`heading[3, 
+      "Animated surface with `AnimationFrameListener`", 
+      CoffeeLiqueur`Notebook`Cells`CellObj[
+       CoffeeLiqueur`Notebook`Cells`CellObj`$12834]], 
+     CoffeeLiqueur`Extensions`TOC`Private`heading[3, 
+      "Dynamic topology in 3D", CoffeeLiqueur`Notebook`Cells`CellObj[
+       CoffeeLiqueur`Notebook`Cells`CellObj`$12837]], 
+     CoffeeLiqueur`Extensions`TOC`Private`heading[2, 
+      "Hijacking plot functions as geometry generators", 
+      CoffeeLiqueur`Notebook`Cells`CellObj[
+       CoffeeLiqueur`Notebook`Cells`CellObj`$12840]], 
+     CoffeeLiqueur`Extensions`TOC`Private`heading[2, 
+      "Tips for smooth animations", CoffeeLiqueur`Notebook`Cells`CellObj[
+       CoffeeLiqueur`Notebook`Cells`CellObj`$12846]]}, 
+   "WorkingDirectory" -> "/Users/kirill/Github/wolfram-js-frontend/modules/wl\
+js-demos-archive/Demos/Interactive evaluation/"|>, 
+ "Cells" -> {<|"Data" -> ".md\n<Callout type=\"tip\">\nPack vertices and \
+colors into a single symbol (like `complex2D` above). `\"VertexFence\"` \
+prevents races between the index and vertex buffers, but it can't protect \
+against partial updates to separate attributes.\n</Callout>\n\n## Going \
+3D\n\nThe 3D story is the same \[LongDash] `GraphicsComplex` maps directly to \
+THREE.js `BufferAttribute` objects written into GPU memory. The only \
+difference is you now also have `VertexNormals` for lighting.\n\nLet's start \
+with a dodecahedron:", "Display" -> "codemirror", 
+    "Hash" -> "2ca4f094-608d-4a8a-ac8f-f3aec985fd14", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "00e43f81-6b05-4ced-9e91-d681ba3cd82f"|>, 
+   <|"Data" -> "<Callout type=\"tip\">\nPack vertices and colors into a \
+single symbol (like `complex2D` above). `\"VertexFence\"` prevents races \
+between the index and vertex buffers, but it can't protect against partial \
+updates to separate attributes.\n</Callout>\n\n## Going 3D\n\nThe 3D story is \
+the same \[LongDash] `GraphicsComplex` maps directly to THREE.js \
+`BufferAttribute` objects written into GPU memory. The only difference is you \
+now also have `VertexNormals` for lighting.\n\nLet's start with a \
+dodecahedron:", "Display" -> "markdown", 
+    "Hash" -> "f4290229-589d-4edc-9d0b-68032fdb2025", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "00e43f81-6b05-4ced-9e91-d681ba3cd82f"|>, 
+   <|"Data" -> "v = PolyhedronData[\"Dodecahedron\", \"Vertices\"] // N;\ni = \
+PolyhedronData[\"Dodecahedron\", \"FaceIndices\"];", 
+    "Display" -> "codemirror", "Hash" -> 
+     "28579aea-c396-4355-85ef-3c24b4e34d0f", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
+    "Notebook" -> "00e43f81-6b05-4ced-9e91-d681ba3cd82f"|>, 
+   <|"Data" -> ".md\nWireframe:", "Display" -> "codemirror", 
+    "Hash" -> "6fc13102-4a83-4426-8901-e19bc13c21ae", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "00e43f81-6b05-4ced-9e91-d681ba3cd82f"|>, 
+   <|"Data" -> "Wireframe:", "Display" -> "markdown", 
+    "Hash" -> "26b14a25-b8ee-45b7-8c06-f6be38d9b4b6", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "00e43f81-6b05-4ced-9e91-d681ba3cd82f"|>, 
+   <|"Data" -> "GraphicsComplex[v, {Black, Line[i]}] // Graphics3D", 
+    "Display" -> "codemirror", "Hash" -> 
+     "e70888c6-a2ef-445a-9175-1dafd623d0f8", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
+    "Notebook" -> "00e43f81-6b05-4ced-9e91-d681ba3cd82f"|>, 
+   <|"Data" -> ".md\nSolid:", "Display" -> "codemirror", 
+    "Hash" -> "ebdb6fc3-0088-4b49-95c0-484e4aa2c23c", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "00e43f81-6b05-4ced-9e91-d681ba3cd82f"|>, 
+   <|"Data" -> "Solid:", "Display" -> "markdown", 
+    "Hash" -> "1a5fc7c5-d6a1-4b58-a437-626d84364a84", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "00e43f81-6b05-4ced-9e91-d681ba3cd82f"|>, 
+   <|"Data" -> "GraphicsComplex[v, Polygon[i]] // Graphics3D", 
+    "Display" -> "codemirror", "Hash" -> 
+     "2b9f5252-cd50-4b8a-902f-4fe982cf5dde", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
+    "Notebook" -> "00e43f81-6b05-4ced-9e91-d681ba3cd82f"|>, 
+   <|"Data" -> ".md\n### Vertex colors in 3D\n\nSame idea as 2D \[LongDash] \
+per-vertex colors get interpolated by the GPU rasterizer:", 
+    "Display" -> "codemirror", "Hash" -> 
+     "295647b1-a40e-4a72-9964-2818135c9d7e", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "00e43f81-6b05-4ced-9e91-d681ba3cd82f"|>, 
+   <|"Data" -> "### Vertex colors in 3D\n\nSame idea as 2D \[LongDash] \
+per-vertex colors get interpolated by the GPU rasterizer:", 
+    "Display" -> "markdown", "Hash" -> 
+     "8763160c-3dcb-45ed-9e35-e0b7f297b239", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "00e43f81-6b05-4ced-9e91-d681ba3cd82f"|>, 
+   <|"Data" -> "v = {{1, 0, 0}, {1, 1, 1}, {0, 0, 1}};\nGraphics3D[{Yellow, \
+GraphicsComplex[v, Polygon[{1,2,3}], VertexColors -> {Red, Blue, Green}]}, \
+ViewPoint->{1,1,1}]", "Display" -> "codemirror", 
+    "Hash" -> "a395b4d3-52fe-4980-a243-d1aad4a8c15b", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
+    "Notebook" -> "00e43f81-6b05-4ced-9e91-d681ba3cd82f"|>, 
+   <|"Data" -> ".md\n### Normals and lighting\n\nWithout explicit normals, \
+the renderer computes flat normals from polygon faces \[LongDash] resulting \
+in flat shading:", "Display" -> "codemirror", 
+    "Hash" -> "281a0708-233d-4e09-a32f-73c3a19ccfdf", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "00e43f81-6b05-4ced-9e91-d681ba3cd82f"|>, 
+   <|"Data" -> "### Normals and lighting\n\nWithout explicit normals, the \
+renderer computes flat normals from polygon faces \[LongDash] resulting in \
+flat shading:", "Display" -> "markdown", 
+    "Hash" -> "7c32a5b9-fb98-4b85-98ae-03225887be18", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "00e43f81-6b05-4ced-9e91-d681ba3cd82f"|>, 
+   <|"Data" -> "v = {{1, 0, 0}, {1, 1, 1}, {0, 0, 1}};\nGraphics3D[{Yellow, \
+GraphicsComplex[v, Polygon[{1,2,3}]]}, ViewPoint->{1,1,1}]", 
+    "Display" -> "codemirror", "Hash" -> 
+     "c15d6578-aac5-4650-b49b-d18e61a9445a", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
+    "Notebook" -> "00e43f81-6b05-4ced-9e91-d681ba3cd82f"|>, 
+   <|"Data" -> ".md\nSupply your own `VertexNormals` and you control exactly \
+how light bounces off the surface:", "Display" -> "codemirror", 
+    "Hash" -> "f5364f19-457d-453b-aaab-ef7f416913a1", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "00e43f81-6b05-4ced-9e91-d681ba3cd82f"|>, 
+   <|"Data" -> "Supply your own `VertexNormals` and you control exactly how \
+light bounces off the surface:", "Display" -> "markdown", 
+    "Hash" -> "e0eaf4c3-e6b1-4968-9f50-397de856ee34", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "00e43f81-6b05-4ced-9e91-d681ba3cd82f"|>, 
+   <|"Data" -> "v = {{1, 0, 0}, {1, 1, 1}, {0, 0, 1}};\nn = {1, -1, 1};\nn2 = \
+{-1, 0, -1};\nGraphics3D[{Yellow, GraphicsComplex[v, Polygon[{1,2,3}], \
+VertexNormals -> {n2, n, n}]}, ViewPoint->{1,1,1}]", 
+    "Display" -> "codemirror", "Hash" -> 
+     "5cc37e59-71b8-4ea5-8925-3ea7e73ffbca", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
+    "Notebook" -> "00e43f81-6b05-4ced-9e91-d681ba3cd82f"|>, 
+   <|"Data" -> ".md\n### Texture mapping in 3D\n\nUV coordinates work \
+identically to the 2D case:", "Display" -> "codemirror", 
+    "Hash" -> "a93674e6-5574-423b-9b38-ba2e4787f4c6", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "00e43f81-6b05-4ced-9e91-d681ba3cd82f"|>, 
+   <|"Data" -> "### Texture mapping in 3D\n\nUV coordinates work identically \
+to the 2D case:", "Display" -> "markdown", 
+    "Hash" -> "274170c0-a445-4824-b18e-6d5270855f7a", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "00e43f81-6b05-4ced-9e91-d681ba3cd82f"|>, 
+   <|"Data" -> "img = ExampleData[{\"TestImage\", \"Lena\"}];\nGraphics3D[{\n \
+ Texture[img],\n  GraphicsComplex[\n    {{-1, -1, 0}, {1, -1, 0}, {1, 1, 0}, \
+{-1, 1, 0}},\n    Polygon[{1, 2, 3, 4}],\n    VertexTextureCoordinates -> \
+{{0, 1}, {0, 0}, {1, 0}, {1, 1}}\n  ]\n}]", "Display" -> "codemirror", 
+    "Hash" -> "7cfbabc5-61fe-4653-b4ac-39913c4fc7ca", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
+    "Notebook" -> "00e43f81-6b05-4ced-9e91-d681ba3cd82f"|>, 
+   <|"Data" -> ".md\n## Animating 3D meshes\n\n### 10,000 vertices at 30 \
+fps\n\nHere's a 100\[Times]100 grid \[LongDash] that's 10,000 vertices and \
+~20,000 triangles \[LongDash] animated in real time:", 
+    "Display" -> "codemirror", "Hash" -> 
+     "8f33e650-58c4-4526-9a3d-12fcc1a3a6eb", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "00e43f81-6b05-4ced-9e91-d681ba3cd82f"|>, 
+   <|"Data" -> "## Animating 3D meshes\n\n### 10,000 vertices at 30 \
+fps\n\nHere's a 100\[Times]100 grid \[LongDash] that's 10,000 vertices and \
+~20,000 triangles \[LongDash] animated in real time:", 
+    "Display" -> "markdown", "Hash" -> 
+     "5f0c5707-fa8d-4312-99c7-7bc903f50401", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "00e43f81-6b05-4ced-9e91-d681ba3cd82f"|>, 
+   <|"Data" -> "vertices = Flatten[Table[{i,j, 0}, {i,1.0,100.0,1.0}, {j, \
+1.0,100.0,1.0}],1];\nidx[i_, j_] := (i - 1) 100 + j;\ntris = Flatten[\n  \
+Table[\n    {\n      {idx[i, j],     idx[i + 1, j], idx[i, j + 1]},\n      \
+{idx[i + 1, j], idx[i + 1, j + 1], idx[i, j + 1]}\n    },\n    {i, 1, 100 - \
+1},\n    {j, 1, 100 - 1}\n  ],\n  2\n];\n\nGraphicsComplex[vertices//Offload, \
+Polygon[tris]]//Graphics3D", "Display" -> "codemirror", 
+    "Hash" -> "44acd233-ed7b-4d85-be7a-a4a2c1a422fd", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
+    "Notebook" -> "00e43f81-6b05-4ced-9e91-d681ba3cd82f"|>, 
+   <|"Data" -> ".md\nThe triangle indices are computed once and stay fixed. \
+Only the vertex positions change each frame \[LongDash] which means only the \
+position buffer gets updated on the GPU:", "Display" -> "codemirror", 
+    "Hash" -> "9c9558c8-8e9e-4d22-98d6-077b3d636666", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "00e43f81-6b05-4ced-9e91-d681ba3cd82f"|>, 
+   <|"Data" -> "The triangle indices are computed once and stay fixed. Only \
+the vertex positions change each frame \[LongDash] which means only the \
+position buffer gets updated on the GPU:", "Display" -> "markdown", 
+    "Hash" -> "a237669f-2d8e-4116-9e3c-2a2e04946592", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "00e43f81-6b05-4ced-9e91-d681ba3cd82f"|>, 
+   <|"Data" -> "gen := Module[\n  {t = AbsoluteTime[], s = 0.13, cx, cy},\n  \
+cx = 50 + 20 Cos[0.5 t];\n  cy = 50 + 20 Sin[0.7 t];\n  vertices = Flatten[\n \
+   Table[\n      {\n        i, j,\n         5 Sin[s i + t] +\n         5 \
+Sin[s j - 1.3 t] +\n        3 12 Exp[-((i - cx)^2 + (j - cy)^2)/120.]\n      \
+},\n      {i, 1., 100.}, {j, 1., 100.}\n    ],\n    1\n  ]\n];\n\nDo[gen; \
+Pause[1/30.0], {500}];", "Display" -> "codemirror", 
+    "Hash" -> "50af590d-3147-4e9c-ae2d-d8db50709ce2", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
+    "Notebook" -> "00e43f81-6b05-4ced-9e91-d681ba3cd82f"|>, 
+   <|"Data" -> ".md\n### Adding dynamic color\n\nSame grid, but now we also \
+update a color buffer each frame. Two GPU buffers updated per frame \
+\[LongDash] positions and colors \[LongDash] still smooth:", 
+    "Display" -> "codemirror", "Hash" -> 
+     "bd72f83e-41e2-489d-aa0e-55c751dfda8e", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "00e43f81-6b05-4ced-9e91-d681ba3cd82f"|>, 
+   <|"Data" -> "### Adding dynamic color\n\nSame grid, but now we also update \
+a color buffer each frame. Two GPU buffers updated per frame \[LongDash] \
+positions and colors \[LongDash] still smooth:", "Display" -> "markdown", 
+    "Hash" -> "92724129-1671-4907-a259-78c02ddaa45d", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "00e43f81-6b05-4ced-9e91-d681ba3cd82f"|>, 
+   <|"Data" -> "idx[i_, j_] := (i - 1) 100 + j;\ntris = Flatten[\n  Table[\n  \
+  {\n      {idx[i, j],     idx[i + 1, j], idx[i, j + 1]},\n      {idx[i + 1, \
+j], idx[i + 1, j + 1], idx[i, j + 1]}\n    },\n    {i, 1, 100 - 1},\n    {j, \
+1, 100 - 1}\n  ],\n  2\n];\n\ncf = ColorData[\"DarkRainbow\"];\n\ngenData := \
+Module[\n  {t = AbsoluteTime[], s = 0.12, verts, z, cols},\n\n  verts = \
+Flatten[\n    Table[\n      {\n        i, j,\n        6 Sin[s i + 1.4 t] +\n  \
+      5 Sin[s j - 1.1 t] +\n        3 Sin[s (i + j) + 0.6 t] +\n        8 \
+Cos[0.5 s Sqrt[(i - 50.)^2 + (j - 50.)^2] - 1.8 t]\n      },\n      {i, 1., \
+100.}, {j, 1., 100.}\n    ],\n    1\n  ];\n\n  z = verts[[All, 3]];\n\n  (* \
+fixed range avoids color flicker *)\n  cols = (List@@cf[#]) &/@ Rescale[z, \
+{-18, 18}];\n\n  data = {verts, \
+cols};\n];\n\ngenData;\n\nGraphicsComplex[data[[1]]//Offload, Polygon[tris], \
+VertexColors->Offload[data[[2]]]]//Graphics3D \n\nDo[genData; Pause[1/30.0];, \
+{500}];", "Display" -> "codemirror", 
+    "Hash" -> "3b3f99b7-e1b2-4593-9f12-820cedeca811", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
+    "Notebook" -> "00e43f81-6b05-4ced-9e91-d681ba3cd82f"|>, 
+   <|"Data" -> ".md\n### Animated surface with \
+`AnimationFrameListener`\n\nFor a cleaner animation loop, use \
+`AnimationFrameListener` instead of `Do` + `Pause`. This ties the computation \
+to the browser's refresh cycle:", "Display" -> "codemirror", 
+    "Hash" -> "605cb3f9-b548-4b37-bf6e-ab30a31e5397", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "00e43f81-6b05-4ced-9e91-d681ba3cd82f"|>, 
+   <|"Data" -> "### Animated surface with `AnimationFrameListener`\n\nFor a \
+cleaner animation loop, use `AnimationFrameListener` instead of `Do` + \
+`Pause`. This ties the computation to the browser's refresh cycle:", 
+    "Display" -> "markdown", "Hash" -> 
+     "9565bce0-904a-4302-85d0-e0fe98e9fcfe", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "00e43f81-6b05-4ced-9e91-d681ba3cd82f"|>, 
+   <|"Data" -> "(* Grid dimensions *)\nnx = 50; ny = 50;\n\n(* Triangle \
+indices \[LongDash] generated once *)\nindices = Flatten[Table[\n  With[{v = \
+(i - 1) ny + j},\n    {{v, v + 1, v + ny + 1}, {v, v + ny + 1, v + ny}}\n  \
+],\n  {i, nx - 1}, {j, ny - 1}\n], 2];\n\n(* Generates {vertices, \
+vertexColors} at time t *)\ngenerateFrame[t_] := Module[{verts, zVals, mn, \
+mx},\n  verts = Flatten[Table[\n    With[{r = Sqrt[x^2 + y^2]},\n      {x, \
+y,\n        Sin[4 r - 2 t] Exp[-0.3 r] +\n        0.3 Sin[2 x - t] Cos[2 y + \
+0.5 t]}\n    ],\n    {x, Subdivide[-2., 2., nx - 1]},\n    {y, Subdivide[-2., \
+2., ny - 1]}\n  ], 1];\n\n  zVals = verts[[All, 3]];\n  {mn, mx} = \
+MinMax[zVals];\n\n  {verts, Map[\n    With[{s = Rescale[#[[3]], {mn, mx}]},\n \
+     List@@RGBColor[s, 0.15 + 0.35 s, 1. - 0.8 s]\n    ]&, verts\n  \
+]}\n];\n\n(* Initialize *)\ncomplex = generateFrame[0.];\n\n(* Display \
+*)\nGraphics3D[{GraphicsComplex[\n  Offload[complex[[1]]],\n  \
+{Polygon[indices]},\n  VertexColors -> Offload[complex[[2]]]\n], \
+EventHandler[AnimationFrameListener[complex//Offload], Function[Null,\n  \
+complex = generateFrame[AbsoluteTime[]];\n]]}]", "Display" -> "codemirror", 
+    "Hash" -> "846000ef-2aa2-48b8-86d1-e544207f2f40", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
+    "Notebook" -> "00e43f81-6b05-4ced-9e91-d681ba3cd82f"|>, 
+   <|"Data" -> ".md\n### Dynamic topology in 3D\n\nThe most demanding case: \
+vertices, colors, __and__ triangle indices all changing every frame. Two \
+orbiting holes punch through the mesh in real time:", 
+    "Display" -> "codemirror", "Hash" -> 
+     "195a6370-69d0-4262-b145-3d1a0705a39a", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "00e43f81-6b05-4ced-9e91-d681ba3cd82f"|>, 
+   <|"Data" -> "### Dynamic topology in 3D\n\nThe most demanding case: \
+vertices, colors, __and__ triangle indices all changing every frame. Two \
+orbiting holes punch through the mesh in real time:", 
+    "Display" -> "markdown", "Hash" -> 
+     "b7c20354-77ca-42a3-8b0d-513bc030289d", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "00e43f81-6b05-4ced-9e91-d681ba3cd82f"|>, 
+   <|"Data" -> "(* Grid dimensions *)\nnx = 50; ny = 50;\n\n(* All triangle \
+indices *)\nallIndices = Flatten[Table[\n  With[{v = (i - 1) ny + j},\n    \
+{{v, v + 1, v + ny + 1}, {v, v + ny + 1, v + ny}}\n  ],\n  {i, nx - 1}, {j, \
+ny - 1}\n], 2];\n\nxs = Subdivide[-2., 2., nx - 1];\nys = Subdivide[-2., 2., \
+ny - 1];\n\n(* Precompute centroid XY of each triangle for fast filtering \
+*)\ngridXY = Flatten[Table[{x, y}, {x, xs}, {y, ys}], 1];\ntriCX = \
+(gridXY[[#[[1]], 1]] + gridXY[[#[[2]], 1]] + gridXY[[#[[3]], 1]]) / 3. & /@ \
+allIndices;\ntriCY = (gridXY[[#[[1]], 2]] + gridXY[[#[[2]], 2]] + \
+gridXY[[#[[3]], 2]]) / 3. & /@ allIndices;\n\ngenerateFrame[t_] := \
+Module[{verts, zVals, mn, mx, h1, h2, d1, d2, mask},\n  verts = \
+Flatten[Table[\n    With[{r = Sqrt[x^2 + y^2]},\n      {x, y,\n        Sin[4 \
+r - 2 t] Exp[-0.3 r] +\n        0.3 Sin[2 x - t] Cos[2 y + 0.5 t]}\n    ],\n  \
+  {x, xs}, {y, ys}\n  ], 1];\n\n  zVals = verts[[All, 3]];\n  {mn, mx} = \
+MinMax[zVals];\n\n  (* Two holes orbiting the center *)\n  h1 = {1.3 Cos[0.8 \
+t], 1.3 Sin[0.8 t]};\n  h2 = {1.3 Cos[0.8 t + Pi], 1.3 Sin[0.8 t + Pi]};\n\n  \
+(* Vectorized distance computation *)\n  d1 = Sqrt[(triCX - h1[[1]])^2 + \
+(triCY - h1[[2]])^2];\n  d2 = Sqrt[(triCX - h2[[1]])^2 + (triCY - \
+h2[[2]])^2];\n\n  (* Keep triangles outside both holes *)\n  mask = \
+UnitStep[d1 - 0.55] UnitStep[d2 - 0.55];\n\n  {Pick[allIndices, mask, 1], \
+{verts,\n   Map[With[{s = Rescale[#[[3]], {mn, mx}]},\n     List @@ \
+RGBColor[s, 0.15 + 0.35 s, 1. - 0.8 s]] &, verts]}}\n];\n\n(* Initialize \
+*)\n{indices, complex} = generateFrame[0.];\n\n(* Display \[LongDash] note \
+Offload on indices for dynamic topology *)\nGraphics3D[{GraphicsComplex[\n  \
+Offload[complex[[1]]],\n  {Polygon[Offload[indices]]},\n  VertexColors -> \
+Offload[complex[[2]]],\n  \"VertexFence\" -> True\n], \
+EventHandler[AnimationFrameListener[complex // Offload], Function[Null,\n  \
+{indices, complex} = generateFrame[AbsoluteTime[]];\n]]}]", 
+    "Display" -> "codemirror", "Hash" -> 
+     "fd72ca52-0e38-4997-a7d2-e8807ca6a748", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
+    "Notebook" -> "00e43f81-6b05-4ced-9e91-d681ba3cd82f"|>, 
+   <|"Data" -> ".md\n## Hijacking plot functions as geometry \
+generators\n\nHere's a fun trick: you can use standard plotting functions \
+like `ParametricPlot3D` as mesh generators, then feed their output into a \
+`GraphicsComplex` that you control. This gives you the best of both worlds \
+\[LongDash] automatic tessellation from the plotter, and full GPU-level \
+control over the result.\n\nDefine a function that interpolates between a \
+torus and a seashell:", "Display" -> "codemirror", 
+    "Hash" -> "b00954bc-fd10-427c-af14-f97f1d6f4f95", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "00e43f81-6b05-4ced-9e91-d681ba3cd82f"|>, 
+   <|"Data" -> "## Hijacking plot functions as geometry generators\n\nHere's \
+a fun trick: you can use standard plotting functions like `ParametricPlot3D` \
+as mesh generators, then feed their output into a `GraphicsComplex` that you \
+control. This gives you the best of both worlds \[LongDash] automatic \
+tessellation from the plotter, and full GPU-level control over the \
+result.\n\nDefine a function that interpolates between a torus and a \
+seashell:", "Display" -> "markdown", 
+    "Hash" -> "9b145005-0a8e-4213-9265-793ac9e4a43d", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "00e43f81-6b05-4ced-9e91-d681ba3cd82f"|>, 
+   <|"Data" -> ".\nwolfram title=\"cell 1\"\nsample[t_] := With[{\n   complex \
+= ParametricPlot3D[\n     (1 - t) * {\n       (2 + Cos[v]) * Cos[u],\n       \
+(2 + Cos[v]) * Sin[u],\n       Sin[v]\n     } + t * {\n       1.16^v * Cos[v] \
+* (1 + Cos[u]),\n       -1.16^v * Sin[v] * (1 + Cos[u]),\n       -2 * 1.16^v \
+* (1 + Sin[u]) + 1.0\n     },\n     {u, 0, 2\\[Pi]},\n     {v, -\\[Pi], \
+\\[Pi]},\n     MaxRecursion -> 2,\n     Mesh -> None\n   ][[1, 1]]\n   },\n  \
+{\n   complex[[1]],\n   Cases[complex[[2]], _Polygon, 6] // First // First,\n \
+  complex[[3, 2]]\n  }\n]", "Display" -> "codemirror", 
+    "Hash" -> "a530056e-51ff-483a-98e6-c3e686a1f7bf", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
+    "Notebook" -> "00e43f81-6b05-4ced-9e91-d681ba3cd82f"|>, 
+   <|"Data" -> ".md\nNow wire it up with a slider \[LongDash] the plotter \
+generates new geometry, and `GraphicsComplex` pushes it to the GPU:", 
+    "Display" -> "codemirror", "Hash" -> 
+     "b1fa924f-fc94-49a7-8f19-579627a0a236", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "00e43f81-6b05-4ced-9e91-d681ba3cd82f"|>, 
+   <|"Data" -> "Now wire it up with a slider \[LongDash] the plotter \
+generates new geometry, and `GraphicsComplex` pushes it to the GPU:", 
+    "Display" -> "markdown", "Hash" -> 
+     "068e1a08-f7f4-4285-ae14-174095deec37", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "00e43f81-6b05-4ced-9e91-d681ba3cd82f"|>, 
+   <|"Data" -> "Module[{\n    VerticesAndNormals = {{}, {}}, indices = {}\n  \
+},\n    {\n      EventHandler[InputRange[0,1,0.1,0], Function[value,\n        \
+With[{res  = sample[value]},\n          indices = res[[2]];\n          \
+VerticesAndNormals = {res[[1]], res[[3]]};\n        ];\n      ]],\n\n      \
+With[{res  = sample[0.0]},\n          indices = res[[2]];\n          \
+VerticesAndNormals = {res[[1]], res[[3]]};\n      ];\n      \n      \
+Graphics3D[{\n        SpotLight[Red, 5 {1,1,1}], SpotLight[Blue, 5 \
+{-1,-1,1}], \n        SpotLight[Green, 5 {1,-1,1}], \n        \
+PointLight[Magenta, {10,10,10}],\n        \n        \
+GraphicsComplex[Offload[VerticesAndNormals[[1]]], {\n          \
+Polygon[Offload[indices]]\n        }, \
+VertexNormals->Offload[VerticesAndNormals[[2]]], \"VertexFence\"->True]\n     \
+   \n      }, Lighting->None]\n    } // Column // Panel \n]", 
+    "Display" -> "codemirror", "Hash" -> 
+     "5fe5998a-c2f3-4204-abcb-4cf24b883cc9", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
+    "Notebook" -> "00e43f81-6b05-4ced-9e91-d681ba3cd82f"|>, 
+   <|"Data" -> ".md\n## Tips for smooth animations\n\nA few things to keep in \
+mind when pushing `GraphicsComplex` to its limits:\n\n- __Use raw RGB lists__ \
+for `VertexColors` \[LongDash] avoid symbolic colors like `Red` or `Hue[...]` \
+in the hot path\n- __Pack related data__ into a single symbol (e.g. `data = \
+{vertices, colors}`) to avoid partial-update races\n- __Enable \
+`\"VertexFence\"`__ when updating both indices and vertex data \[LongDash] it \
+ensures the GPU reads consistent state\n- __Prefer `AnimationFrameListener`__ \
+over `Do[...; Pause[...]]` for browser-synced animation\n- __Triangles are \
+fastest__ in 3D \[LongDash] quads and pentagons get tessellated \
+anyway\n\n`GraphicsComplex` won't write your shaders for you, but it does \
+give you a remarkably direct line from Wolfram Language arrays to GPU memory. \
+For real-time visualization of simulations, generative art, or anything with \
+thousands of moving parts \[LongDash] it's the right tool.", 
+    "Display" -> "codemirror", "Hash" -> 
+     "23ded51f-1ab3-41c6-a9e9-4c13ac7d94c5", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "00e43f81-6b05-4ced-9e91-d681ba3cd82f"|>, 
+   <|"Data" -> "## Tips for smooth animations\n\nA few things to keep in mind \
+when pushing `GraphicsComplex` to its limits:\n\n- __Use raw RGB lists__ for \
+`VertexColors` \[LongDash] avoid symbolic colors like `Red` or `Hue[...]` in \
+the hot path\n- __Pack related data__ into a single symbol (e.g. `data = \
+{vertices, colors}`) to avoid partial-update races\n- __Enable \
+`\"VertexFence\"`__ when updating both indices and vertex data \[LongDash] it \
+ensures the GPU reads consistent state\n- __Prefer `AnimationFrameListener`__ \
+over `Do[...; Pause[...]]` for browser-synced animation\n- __Triangles are \
+fastest__ in 3D \[LongDash] quads and pentagons get tessellated \
+anyway\n\n`GraphicsComplex` won't write your shaders for you, but it does \
+give you a remarkably direct line from Wolfram Language arrays to GPU memory. \
+For real-time visualization of simulations, generative art, or anything with \
+thousands of moving parts \[LongDash] it's the right tool.", 
+    "Display" -> "markdown", "Hash" -> 
+     "24d3ee9c-9869-4463-9371-ba09fdd0e805", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "00e43f81-6b05-4ced-9e91-d681ba3cd82f"|>}, 
+ "serializer" -> "jsfn4"|>

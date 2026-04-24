@@ -1,0 +1,211 @@
+%-------------------------------%Notebook%--------------------------------%
+HaveToSaveAs: false
+ObjectFields:
+  - Objects
+  - Symbols
+  - Storage
+  - ExcalidrawImages
+  - RuntimeCache
+Quick: true
+%-------------------------------------------------------------------------%
+
+
+%---------------------------------%Cells%---------------------------------%
+Props:
+  Hidden: true
+Type: Input
+%-------------------------------------------------------------------------%
+.md
+# Release notes *3.0.5*
+
+<Now/>
+
+
+%-------------------------------------------------------------------------%
+Display: markdown
+Type: Output
+%-------------------------------------------------------------------------%
+# Release notes *3.0.5*
+
+Fri 24 Apr 2026 17:54:13
+
+%-------------------------------------------------------------------------%
+Props:
+  Hidden: true
+Type: Input
+%-------------------------------------------------------------------------%
+.md
+## Human-, LLM- and GIT-fiendly Notebook Format
+We silently introduced a new version of `.wln` notebook format. The structure is minimal, and easy to read and parse by people and machines, but most importantly, it solves issue with versioning systems being unable to correctly identify the diferences
+
+%-------------------------------------------------------------------------%
+Display: markdown
+Type: Output
+%-------------------------------------------------------------------------%
+## Human-, LLM- and GIT-fiendly Notebook Format
+We silently introduced a new version of `.wln` notebook format. The structure is minimal, and easy to read and parse by people and machines, but most importantly, it solves issue with versioning systems being unable to correctly identify the diferences 
+
+%-------------------------------------------------------------------------%
+Type: Input
+%-------------------------------------------------------------------------%
+.md
+
+:----:Notebook:---:
+Quick: true
+:-----------------:
+
+:-----:Cells:-----:
+Type: Input
+:-----------------:
+1+1
+
+:-----------------:
+Type: Output
+:-----------------:
+2
+
+:---:EndOfCells:--:
+
+:-:EndOfNotebook:-:
+
+%-------------------------------------------------------------------------%
+Props:
+  Hidden: true
+Type: Input
+%-------------------------------------------------------------------------%
+.md
+It looks like YAML in headers and was definitely inspired by it. After the coresponding separators the data can be any valid Wolfram Language expression.
+
+:::note
+We will never drop the support of the older version of `.wln` format. It costs 0 efforts to maintain the backward compatibillity, since it is just input form of `Association` data structure.
+:::
+
+%-------------------------------------------------------------------------%
+Display: markdown
+Type: Output
+%-------------------------------------------------------------------------%
+It looks like YAML in headers and was definitely inspired by it. After the coresponding separators the data can be any valid Wolfram Language expression.
+
+:::note
+We will never drop the support of the older version of `.wln` format. It costs 0 efforts to maintain the backward compatibillity, since it is just input form of `Association` data structure.
+:::
+
+%-------------------------------------------------------------------------%
+Props:
+  Hidden: true
+Type: Input
+%-------------------------------------------------------------------------%
+.md
+## Content hot-reloading support
+In addition to a new format we enabled hot-reloading of a notebook content if it was modified outside WLJS Notebook. You will be prompted to approve changes or decline them.
+
+:::warning
+Due to performance reasons only input/output cells can be reloaded, any internal fields of the notebook such as `NotebookStore` will stay intact.
+:::
+
+%-------------------------------------------------------------------------%
+Display: markdown
+Type: Output
+%-------------------------------------------------------------------------%
+## Content hot-reloading support
+In addition to a new format we enabled hot-reloading of a notebook content if it was modified outside WLJS Notebook. You will be prompted to approve changes or decline them.
+
+:::warning
+Due to performance reasons only input/output cells can be reloaded, any internal fields of the notebook such as `NotebookStore` will stay intact.
+:::
+
+%-------------------------------------------------------------------------%
+Props:
+  Hidden: true
+Type: Input
+%-------------------------------------------------------------------------%
+.md
+## InputColor element
+We added new input element to the standard library:
+
+%-------------------------------------------------------------------------%
+Display: markdown
+Type: Output
+%-------------------------------------------------------------------------%
+## InputColor element
+We added new input element to the standard library:
+
+%-------------------------------------------------------------------------%
+Type: Input
+%-------------------------------------------------------------------------%
+Module[{col = {1,0,0}},
+  {
+    EventHandler[InputColor[col], (col=#)&],
+    Graphics[{
+      RGBColor[col//Offload], 
+      Triangle[],
+      RGBColor[({1,1,1}-col)//Offload],
+      Disk[{0,0},0.2]
+    }]
+  } // Column 
+]
+
+%-------------------------------------------------------------------------%
+Props:
+  Hidden: true
+Type: Input
+%-------------------------------------------------------------------------%
+.md
+## Colon element
+Standard WL's element is supported
+
+%-------------------------------------------------------------------------%
+Display: markdown
+Type: Output
+%-------------------------------------------------------------------------%
+## Colon element
+Standard WL's element is supported
+
+%-------------------------------------------------------------------------%
+Props:
+  Hidden: true
+Type: Input
+%-------------------------------------------------------------------------%
+.md
+## Codebase Refactor
+Another refactoring sweep has happen unifying the architecture and modules structure.
+
+%-------------------------------------------------------------------------%
+Display: markdown
+Type: Output
+%-------------------------------------------------------------------------%
+## Codebase Refactor
+Another refactoring sweep has happen unifying the architecture and modules structure.
+
+%------------------------------%EndOfCells%-------------------------------%
+
+
+
+%--------------------------------%Objects%--------------------------------%
+%-----------------------------%EndOfObjects%------------------------------%
+
+
+
+%--------------------------------%Symbols%--------------------------------%
+%-----------------------------%EndOfSymbols%------------------------------%
+
+
+
+%--------------------------------%Storage%--------------------------------%
+%-----------------------------%EndOfStorage%------------------------------%
+
+
+
+%---------------------------%ExcalidrawImages%----------------------------%
+%-------------------------%EndOfExcalidrawImages%-------------------------%
+
+
+
+%-----------------------------%RuntimeCache%------------------------------%
+%---------------------------%EndOfRuntimeCache%---------------------------%
+
+
+
+
+
+%-----------------------------%EndOfNotebook%-----------------------------%
