@@ -5329,9 +5329,7 @@ if ('RTX' in options) {
   }
 }
 
-if (!GUI && PathRendering) {
-  GUI           = (await import('dat.gui')).GUI;  
-}
+
 
 
 
@@ -5451,15 +5449,8 @@ if (options.SleepAfter) {
   params.sleepAfter = await interpretate(options.SleepAfter, env);
 }
 //Setting GUI
-let gui;
-let guiContainer;
 
 if (PathRendering) {
-  gui = new GUI({ autoPlace: false, name: '...', closed:true });
-
-  guiContainer = document.createElement('div');
-  guiContainer.classList.add('graphics3d-controller');
-  guiContainer.appendChild(gui.domElement);
 
   env.local.animateOnce = animateOnce;
 
@@ -5474,8 +5465,7 @@ if (PathRendering) {
     }, 'image/png', 1.0);
   }
 
-  const button = { Save:function(){ takeScheenshot() }};
-  gui.add(button, 'Save');
+
 }
 
 
@@ -5538,8 +5528,7 @@ if (env.element.classList.contains('slide-frontend-object')) {
 
 
 if (ImageSize[0] > 250 && ImageSize[1] > 150 && PathRendering) {
-  env.local.guiContainer = guiContainer;
-  container.appendChild( guiContainer );
+
 }
 
 const aspect = ImageSize[0]/ImageSize[1];
@@ -6482,30 +6471,12 @@ function hideShowOverlapping(arr, onlyHide = false) {
       //if (azimuth < 0.78 - 2*1.57  && azimuth > - 0.78 + 2*1.57 ) orthoCamera.layers.enable(13);
     };
 
-    if (!noGrid) setTimeout(calcGrid, 100);
+    if (!noGrid) setTimeout(calcGrid, 300);
 
     controls.addEventListener('end', calcGrid);
 
     //if (!noGrid) {
-      gui?.add({'Grid': !noGrid}, 'Grid').name('Grid').listen().onChange( (value) => {
-        if (!value) { 
-          orthoCamera.layers.disable(10);
-          orthoCamera.layers.disable(11);
-          orthoCamera.layers.disable(12);
-          orthoCamera.layers.disable(13);
-          orthoCamera.layers.disable(14);
-          orthoCamera.layers.disable(15);
-
-          //ticksLabels.x.forEach((el) => el.element.classList.add('opacity-0'));
-          //ticksLabels.y.forEach((el) => el.element.classList.add('opacity-0'));
-          //ticksLabels.z.forEach((el) => el.element.classList.add('opacity-0'));
-
-          noGrid = true;
-        } else {
-          noGrid = false;
-          calcGrid();
-        }
-      })
+    
     //}
   }
 }
@@ -6931,39 +6902,6 @@ updateCamera( params.cameraProjection );
 if (PathRendering) {
   scene.backgroundAlpha = params.backgroundAlpha;
 
-  const ptFolder = gui?.addFolder( 'Path Tracing' );
-
-ptFolder?.add( params, 'runInfinitely');  
-
-
-ptFolder?.add( params, 'samplesPerFrame', 1, 50, 1 );
-
-ptFolder?.add( params, 'multipleImportanceSampling').onChange(() => {
-
-  ptRenderer.multipleImportanceSampling = params.multipleImportanceSampling;
-  ptRenderer.updateLights();
-  ptRenderer.updateMaterials();
-
-}); 
-
-
-//const evFolder = gui.addFolder( 'Environment' );
-
-ptFolder?.add( params, 'environmentIntensity', 0, 3, 0.1).onChange( () => {
-
-  ptRenderer.reset();
-  updateSettings();
-  ptRenderer.updateEnvironment();
-
-} ); 
-
-ptFolder?.add( params, 'backgroundAlpha', 0, 1, 0.1).onChange( () => {
-
-  ptRenderer.reset();
-  updateSettings();
-  ptRenderer.updateEnvironment();
-
-} ); 
 
 
 
@@ -6992,34 +6930,7 @@ evFolder.addColor( params, 'bottomColor').onChange( () => {
 } );*/
 
 //evFolder.close();  
-
-
-ptFolder?.add( params, 'bounces', 1, 30, 1 ).onChange( () => {
-
-  ptRenderer.reset();
-  updateSettings();
-
-} );
-
 }
-
-const cameraFolder = gui?.addFolder( 'Camera' );
-cameraFolder?.add( params, 'sleepAfter', 1000, 30000, 10 );
-cameraFolder?.add( params, 'cameraProjection', [ 'Perspective', 'Orthographic' ] ).onChange( v => {
-
-  updateCamera( v );
-  updateSettings();
-
-} );
-
-cameraFolder?.add( params, 'acesToneMapping' ).onChange( value => {
-
-  renderer.toneMapping = value ? THREE.ACESFilmicToneMapping : THREE.NoToneMapping;
-  updateSettings();
-
-} );
-
-cameraFolder?.close();  
 
 animate();
 
@@ -7035,7 +6946,6 @@ core.Graphics3D.destroy = (args, env) => {
   env.local.renderer.forceContextLoss()
 
   if (env.local.labelContainer) env.local.labelContainer.remove();
-  if (env.local.guiContainer) env.local.guiContainer.remove();
   env.local.rendererContainer.remove();
   env.local.element.remove();
 }
