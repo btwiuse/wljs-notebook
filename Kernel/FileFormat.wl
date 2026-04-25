@@ -3,7 +3,9 @@ BeginPackage["CoffeeLiqueur`Notebook`FileFormat`"];
 readNotebook;
 writeNotebook;
 
-endOfLine = EndOfLine;
+endOfLine = EndOfLine | "\r";
+newLine[1] = "\n" | "\r\n";
+newLine[2] = "\n\n" | "\r\n\r\n";
 
 Begin["`Private`"];
 
@@ -301,7 +303,7 @@ readNotebook[stream_, timeout_:10] := Module[
     With[
         {
             testIfEnd = Function[p,
-                StringMatchQ[ReadString[file, "\n", TimeConstraint -> timeout], StartOfString ~~ p ~~ "%" ~~ ___]
+                StringMatchQ[ReadString[file, newLine[1], TimeConstraint -> timeout], StartOfString ~~ p ~~ "%" ~~ ___]
             ]
         }
         ,
@@ -341,7 +343,7 @@ readNotebook[stream_, timeout_:10] := Module[
             ReadString[
                 file
                 ,
-                StartOfLine ~~ "%" ~~ Repeated["-", {17, 100}] ~~ "%" ~~ "Cells" ~~ "%" ~~ Repeated["-", {17, 100}] ~~ "%" ~~ endOfLine ~~ "\n"..
+                StartOfLine ~~ "%" ~~ Repeated["-", {17, 100}] ~~ "%" ~~ "Cells" ~~ "%" ~~ Repeated["-", {17, 100}] ~~ "%" ~~ endOfLine ~~ newLine[1]..
                 ,
                 TimeConstraint -> timeout
             ]
@@ -355,7 +357,7 @@ readNotebook[stream_, timeout_:10] := Module[
             ReadString[
                 file
                 ,
-                StartOfLine ~~ "%" ~~ Repeated["-", {17, 100}] ~~ Repeated["-", {17, 100}] ~~ "%" ~~ endOfLine ~~ "\n"
+                StartOfLine ~~ "%" ~~ Repeated["-", {17, 100}] ~~ Repeated["-", {17, 100}] ~~ "%" ~~ endOfLine ~~ newLine[1]
                 ,
                 TimeConstraint -> timeout
             ]
@@ -366,7 +368,7 @@ readNotebook[stream_, timeout_:10] := Module[
              Return[$Failed]
         ];
         temp = parseMiniYAML[StringTrim[temp]];
-        buffer = ReadString[file, "\n\n" ~~ StartOfLine ~~ "%" ~~ Repeated["-", {16, 100}] ~~ "%", TimeConstraint -> timeout];
+        buffer = ReadString[file, newLine[2] ~~ StartOfLine ~~ "%" ~~ Repeated["-", {16, 100}] ~~ "%", TimeConstraint -> timeout];
         If[FailureQ[buffer],
              Return[$Failed]
         ];
@@ -378,7 +380,7 @@ readNotebook[stream_, timeout_:10] := Module[
                 ReadString[
                     file
                     ,
-                    StartOfLine ~~ "%" ~~ Repeated["-", {17, 100}] ~~ Repeated["-", {17, 100}] ~~ "%" ~~ endOfLine ~~ "\n"
+                    StartOfLine ~~ "%" ~~ Repeated["-", {17, 100}] ~~ Repeated["-", {17, 100}] ~~ "%" ~~ endOfLine ~~ newLine[1]
                     ,
                     TimeConstraint -> timeout
                 ]
@@ -389,7 +391,7 @@ readNotebook[stream_, timeout_:10] := Module[
                  Return[$Failed]
             ];
             temp = parseMiniYAML[StringTrim[temp]];
-            buffer = ReadString[file, "\n\n" ~~ StartOfLine ~~ "%" ~~ Repeated["-", {16, 100}] ~~ "%", TimeConstraint -> timeout];
+            buffer = ReadString[file, newLine[2] ~~ StartOfLine ~~ "%" ~~ Repeated["-", {16, 100}] ~~ "%", TimeConstraint -> timeout];
             If[FailureQ[buffer],
                  Return[$Failed]
             ];
@@ -408,7 +410,7 @@ readNotebook[stream_, timeout_:10] := Module[
                     ReadString[
                         file
                         ,
-                        StartOfLine ~~ "%" ~~ Repeated["-", {17, 100}] ~~ "%" ~~ field ~~ "%" ~~ Repeated["-", {17, 100}] ~~ "%" ~~ endOfLine ~~ "\n"..
+                        StartOfLine ~~ "%" ~~ Repeated["-", {17, 100}] ~~ "%" ~~ field ~~ "%" ~~ Repeated["-", {17, 100}] ~~ "%" ~~ endOfLine ~~ newLine[1]..
                         ,
                         TimeConstraint -> timeout
                     ]
@@ -422,7 +424,7 @@ readNotebook[stream_, timeout_:10] := Module[
                     ReadString[
                         file
                         ,
-                        (StartOfLine ~~ "%" ~~ Repeated["-", {17, 100}] ~~ Repeated["-", {17, 100}] ~~ "%" ~~ endOfLine ~~ "\n") | (StartOfLine ~~ "%" ~~ Repeated["-", {17, 100}] ~~ "%EndOf" ~~ field ~~ "%" ~~ Repeated["-", {17, 100}] ~~ "%" ~~ endOfLine ~~ "\n")
+                        (StartOfLine ~~ "%" ~~ Repeated["-", {17, 100}] ~~ Repeated["-", {17, 100}] ~~ "%" ~~ endOfLine ~~ newLine[1]) | (StartOfLine ~~ "%" ~~ Repeated["-", {17, 100}] ~~ "%EndOf" ~~ field ~~ "%" ~~ Repeated["-", {17, 100}] ~~ "%" ~~ endOfLine ~~ newLine[1])
                         ,
                         TimeConstraint -> timeout
                     ]
@@ -436,7 +438,7 @@ readNotebook[stream_, timeout_:10] := Module[
                     keys[field] = Association[]; Continue[];
                 ];
                 temp = parseMiniYAML[StringTrim[temp]];
-                buffer = ReadString[file, "\n\n" ~~ StartOfLine ~~ "%" ~~ Repeated["-", {16, 100}] ~~ "%", TimeConstraint -> timeout];
+                buffer = ReadString[file, newLine[2] ~~ StartOfLine ~~ "%" ~~ Repeated["-", {16, 100}] ~~ "%", TimeConstraint -> timeout];
                 If[FailureQ[buffer],
                      Return[$Failed]
                 ];
@@ -448,7 +450,7 @@ readNotebook[stream_, timeout_:10] := Module[
                         ReadString[
                             file
                             ,
-                            StartOfLine ~~ "%" ~~ Repeated["-", {17, 100}] ~~ Repeated["-", {17, 100}] ~~ "%" ~~ endOfLine ~~ "\n"
+                            StartOfLine ~~ "%" ~~ Repeated["-", {17, 100}] ~~ Repeated["-", {17, 100}] ~~ "%" ~~ endOfLine ~~ newLine[1]
                             ,
                             TimeConstraint -> timeout
                         ]
@@ -459,7 +461,7 @@ readNotebook[stream_, timeout_:10] := Module[
                          Return[$Failed]
                     ];
                     temp = parseMiniYAML[StringTrim[temp]];
-                    buffer = ReadString[file, "\n\n" ~~ StartOfLine ~~ "%" ~~ Repeated["-", {16, 100}] ~~ "%", TimeConstraint -> timeout];
+                    buffer = ReadString[file, newLine[2] ~~ StartOfLine ~~ "%" ~~ Repeated["-", {16, 100}] ~~ "%", TimeConstraint -> timeout];
                     If[FailureQ[buffer],
                          Return[$Failed]
                     ];

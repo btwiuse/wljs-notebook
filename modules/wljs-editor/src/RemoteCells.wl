@@ -27,7 +27,7 @@ createNotebook[uid_] := With[{notebook = nb`NotebookObj["Hash" -> uid]},
 ]
 
 createNotebook[uid_, kernel_] := With[{notebook = nb`NotebookObj["Hash" -> uid]},
-    notebook["Evaluator"] = kernel["Container"];
+    notebook["AutoconnectKernel"] = kernel["Hash"];
     saveNotebook[Null, uid]
 ]
 
@@ -64,6 +64,28 @@ exportNotebook[notebook_, savingPath_, "wln"] := With[{stream = OpenWrite[saving
     nb`SerializeToStream[stream, notebook];
     Close[stream];
 ]
+
+saveNotebook[path_, uid_, kernelDir_] := With[{
+    notebook = nb`HashMap[uid]
+},
+{
+    savingPath = If[path === Null,
+            If[StringQ[notebook["Path"] ], 
+                notebook["Path"], 
+                FileNameJoin[{$TemporaryDirectory, ((Internal`NoWR`RandomWord[])<>(Internal`NoWR`RandomWord[]))<>".wln"}]
+            ]
+        ,
+            path
+    ]
+},
+    SetDirectory[kernelDir];
+    With[{res = exportNotebook[notebook, savingPath, FileExtension[savingPath] ] },
+        ResetDirectory[];
+        res
+    ]
+]
+
+saveNotebook[path_, uid_, Null] := saveNotebook[path, uid]
 
 saveNotebook[path_, uid_] := With[{
     notebook = nb`HashMap[uid]
@@ -293,10 +315,10 @@ EventHandler[NotebookEditorChannel // EventClone,
         ],
 
         "CreateNotebook" -> Function[assoc,
-           With[{  uid = assoc["Hash"]},
+           With[{  uid = assoc["Hash"], kernel = GenericKernel`HashMap[assoc["Kernel"] ]},
             Echo["Creating notebook..."];
                 With[{},
-                    createNotebook[uid];
+                    createNotebook[uid, kernel];
                     saveNotebook[Null, uid];
                 ]
  
@@ -327,10 +349,10 @@ EventHandler[NotebookEditorChannel // EventClone,
         ],
 
         "SaveNotebook" -> Function[assoc,
-           With[{  uid = assoc["Hash"], path = assoc["Path"]},
+           With[{  uid = assoc["Hash"], path = assoc["Path"], kernelDir = Lookup[assoc, "KernelDirectory", Null]},
             Echo["Saving notebook..."];
                 With[{},
-                    saveNotebook[path, uid];
+                    saveNotebook[path, uid, kernelDir];
                 ]
  
             ];      

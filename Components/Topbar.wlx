@@ -48,7 +48,7 @@ timedSaveButton[client_, localController_, controls_, parameters_] := With[{clon
 
     taskFile = SetInterval[(
       EventFire[controls, "CheckFileHash", <|"Client"->client|>];
-    ), 3000];
+    ), 4000];
 
     reset;
 

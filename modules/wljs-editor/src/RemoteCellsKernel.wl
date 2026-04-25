@@ -232,19 +232,19 @@ NotebookOpen[path_ | File[path_], opts: OptionsPattern[] ] := With[{notebook = W
 Options[NotebookOpen] = {"Window" :> CurrentWindow[], Visible->True}
 
 NotebookSave[RemoteNotebook[uid_] ] := (
-    EventFire[Internal`Kernel`CommunicationChannel, "SaveNotebook", <|"Hash"->uid, "Path"->Null|>];
+    EventFire[Internal`Kernel`CommunicationChannel, "SaveNotebook", <|"Hash"->uid, "Path"->Null, "KernelDirectory"->Directory[]|>];
     RemoteNotebook[uid]
 )
 
 CreateNotebook[_] := CreateNotebook[]
 
 CreateNotebook[] := With[{uid = CreateUUID[]},
-    EventFire[Internal`Kernel`CommunicationChannel, "CreateNotebook", <|"Hash"->uid, "Path"->Null|>];
+    EventFire[Internal`Kernel`CommunicationChannel, "CreateNotebook", <|"Hash"->uid, "Path"->Null, "Kernel"->Internal`Kernel`Hash|>];
     RemoteNotebook[uid]
 ]
 
 NotebookSave[RemoteNotebook[uid_], path_String | File[path_String] ] := (
-    EventFire[Internal`Kernel`CommunicationChannel, "SaveNotebook", <|"Hash"->uid, "Path"->path|>];
+    EventFire[Internal`Kernel`CommunicationChannel, "SaveNotebook", <|"Hash"->uid, "Path"->path, "KernelDirectory"->Directory[]|>];
     RemoteNotebook[uid]
 )
 
