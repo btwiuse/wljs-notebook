@@ -3,7 +3,6 @@ BeginPackage["CoffeeLiqueur`Extensions`EditorView`", {"CoffeeLiqueur`Misc`Events
 System`EditorView; (*make it available everywhere*)
 System`CellView;
 
-
 FrontEditorSelected::usage = "FrontEditorSelected[\"Get\"] gets the selected content.\nFrontEditorSelected[\"Set\", value] inserts or replaces content"
 EditorView::usage = "EditorView[string] represents a virtual editor, that renders string expression as in input cell"
 
@@ -16,8 +15,6 @@ MMAView::usage = "MMAView[expr] returns a rasterized version of expr using Wolfr
 MMAViewAsync::usage = "Async version of MMAView"
 
 FrontTextSelected::usage = "FrontTextSelected[\"Get\"] gets the selected text (anywhere)"
-
-TeXView::usage = "TeXView[expr_] renders expr as LaTeX equation"
 
 Begin["`Private`"]
 
@@ -61,10 +58,6 @@ EditorView /: MakeBoxes[e_EditorView, StandardForm] := With[{o = CreateFrontEndO
 CellView /: MakeBoxes[e_CellView, StandardForm] := With[{o = CreateFrontEndObject[e]}, MakeBoxes[o, StandardForm] ]
 
 Options[CellView] = {"Display" -> "codemirror", "Class" -> "", "Style"->""}
-
-TeXView[expr_] := CellView[ Cell[TeXForm[expr], "Output", "katex"] ]
-TeXView[expr_String] := CellView[ Cell[expr, "Output", "katex"] ]
-
 
 End[]
 EndPackage[]

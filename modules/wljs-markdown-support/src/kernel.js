@@ -538,3 +538,44 @@ class MarkdownCell {
   window.SupportedCells['katex'] = {
     view: LaTeXCell
   };  
+
+
+const tex = async (args, env) => {
+  const data = await interpretate(args[0], env);
+  const opts = await core._getRules(args, env);
+
+  env.local.el = document.createElement('div');
+  env.local.el.style.display = 'flex';
+  env.local.el.style.justifyContent = 'space-evenly';
+  env.local.el.style.alignItems = 'center';
+
+  if (opts.ImageSize) {
+    let size = opts.ImageSize;
+    if (!Array.isArray(size)) size = [size, size*0.76];
+    if (typeof size[0] == 'number') {
+      if (size[0] < 3.0) {
+        size[0] *= 800.0;
+        size[1] *= 800.0;
+      }
+      env.local.el.style.width = size[0]+'px';
+      env.local.el.style.height = size[1]+'px';
+    }
+  }
+
+  env.local.el.innerHTML = katex.renderToString(unicodeToChar(data.replaceAll('\\\\', '\\')), {displayMode: true});
+  env.element.appendChild(env.local.el);
+}
+
+tex.update = async (args, env) => {
+  const data = await interpretate(args[0], env);
+  env.local.el.innerHTML = katex.renderToString(unicodeToChar(data.replaceAll('\\\\', '\\')), {displayMode: true});
+}
+
+tex.virtual = true;
+tex.destroy = (args, env) => {
+    env.local.el.remove();
+}
+
+/* it is anyway meant to be global, so we define it in all contexts */
+core.TeXView = tex;
+core['CoffeeLiqueur`Extensions`MarkdownCells`Private`TeXView'] = tex;

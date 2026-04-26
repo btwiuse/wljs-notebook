@@ -5,9 +5,13 @@ BeginPackage["CoffeeLiqueur`Extensions`MarkdownCells`", {
     "CoffeeLiqueur`WLX`",
     "CoffeeLiqueur`WLX`Importer`",
     "CoffeeLiqueur`Extensions`FrontendObject`",
-    "CoffeeLiqueur`Extensions`Communication`"
+    "CoffeeLiqueur`Extensions`Communication`",
+    "CoffeeLiqueur`Extensions`Boxes`",
+    "CoffeeLiqueur`Misc`Parallel`"
 }];
 
+TeXView::usage = "TeXView[expr_] renders expr as LaTeX equation"
+TeXFormAsync::usage = "TeXFormAsync[expr_] converts expr to LaTeX string expression asynchronously"
 
 Begin["`Private`"]
 
@@ -59,6 +63,22 @@ Internal`Kernel`MarkdownEvaluator = Function[t, With[{hash = CreateUUID[]},
 ] ];
 
 
+
+TeXView;
+
+TeXView /: MakeBoxes[TeXView[expr_, opts___], WLXForm] := With[{o = CreateFrontEndObject[ TeXView[expr, opts] ]}, MakeBoxes[o, WLXForm] ]
+TeXView /: MakeBoxes[TeXView[expr_, opts___], StandardForm] := With[{o = ViewBox[Null, TeXView[expr, opts] ]}, o ]
+
+Options[TeXView] = {ImageSize->Automatic};
+
+
+TeXFormAsync[all__] := (
+  If[Length[Kernels[] ] == 0, LaunchKernels[1] ];
+
+  ParallelSubmitFunctionAsync[Function[{args, cbk},
+    cbk @ ToString[TeXForm @@ args, InputForm]
+  ], {all}]
+)
 
 End[]
 
