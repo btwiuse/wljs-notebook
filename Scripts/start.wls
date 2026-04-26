@@ -345,13 +345,6 @@ http["MessageHandler", "File"]  = GetFileURequestQ[AppExtensions`HTTPFileExtensi
 
 SocketListen[USocketOpen[$Env["host"], $Env["http"]], tcp@#&]
 
-
-(* Start evaluation kernel a bit earlier *)
-Needs["CoffeeLiqueur`Notebook`KernelAutolaunch`"->"kaf`", FileNameJoin[{Directory[], "Frontend", "Autolaunch.wl"}] ];
-kaf`autostart[LocalKernel`LocalKernel[ "Name"->Internal`NoWR`RandomWord[] ], Hold[AppExtensions`KernelList], kernelUtils`initializeKernel[<|"env" -> $Env|>], kernelUtils`deinitializeKernel];
-
-
-
 Print["Staring WS/HTTP server..."];
 
 wcp = TCPUServer[]
@@ -383,11 +376,16 @@ SetAttributes[Offload, HoldFirst];
 middleware[app_][request_] := app[request]
 
 
+Downloader["HTTPUHandler"->http];
+
+(* Start evaluation kernel a bit earlier *)
+Needs["CoffeeLiqueur`Notebook`KernelAutolaunch`"->"kaf`", FileNameJoin[{Directory[], "Frontend", "Autolaunch.wl"}] ];
+kaf`autostart[LocalKernel`LocalKernel[ "Name"->Internal`NoWR`RandomWord[] ], Hold[AppExtensions`KernelList], kernelUtils`initializeKernel[<|"env" -> $Env|>], kernelUtils`deinitializeKernel];
+
+
 
 (* hook all routes handlers *)
 
-AutoTest["HTTPUHandler"->http];
-Downloader["HTTPUHandler"->http];
 Protocol["HTTPUHandler"->http, "AppProtocol" -> AppExtensions`AppProtocol, "Middleware"->Identity, "AppEvent"->AppExtensions`AppEvents, "ExtensionTemplates"->AppExtensions`Templates, "ExtensionSidebarIcons"->AppExtensions`SidebarIcons, "Env"->$Env];
 Settings["HTTPUHandler"->http, "AppEvent"->AppExtensions`AppEvents, "ExtensionTemplates"->AppExtensions`Templates]
 Window["HTTPUHandler"->http, "AppEvent"->AppExtensions`AppEvents, "ExtensionTemplates"->AppExtensions`Templates];
