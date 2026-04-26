@@ -4077,144 +4077,265 @@ g3dComplex.Arrow = async (args, env) => {
   }
 }
 
+const normalizeComplexLineIndices = (raw) => {
+  if (raw instanceof NumericArrayObject) {
+    raw = raw.buffer;
+  }
 
+  // Multiple lines: [[1,2,3], [4,5,6]]
+  if (
+    Array.isArray(raw) &&
+    raw.length > 0 &&
+    (Array.isArray(raw[0]) || raw[0] instanceof NumericArrayObject)
+  ) {
+    return raw.map(part => {
+      if (part instanceof NumericArrayObject) part = part.buffer;
+      return Array.from(part, i => i - 1);
+    });
+  }
+
+  // Single line: [1,2,3]
+  return [Array.from(raw, i => i - 1)];
+};
+
+const maxOfArray = (arr) => {
+  let m = 0;
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] > m) m = arr[i];
+  }
+  return m;
+};
+
+const makeComplexLineIndexAttribute = (indices, env) => {
+  const vertexCount =
+    env.vertices.position.count ??
+    env.vertices.position.array.length / 3;
+
+  const use32 = vertexCount > 65535 || maxOfArray(indices) > 65535;
+
+  const array = use32
+    ? new Uint32Array(indices)
+    : new Uint16Array(indices);
+
+  const attr = use32
+    ? new THREE.Uint32BufferAttribute(array, 1)
+    : new THREE.Uint16BufferAttribute(array, 1);
+
+  attr.setUsage(THREE.StreamDrawUsage);
+  return attr;
+};
+
+const applyComplexLineVertexAttributes = (geometry, vertices) => {
+  geometry.setAttribute('position', vertices.position);
+
+  if (vertices.colored) {
+    geometry.setAttribute('color', vertices.colors);
+  } else {
+    geometry.deleteAttribute('color');
+  }
+};
+
+const makeComplexLineMaterial = (env) => {
+  return new THREE.LineBasicMaterial({
+    linewidth: env.thickness,
+    color: env.color,
+    opacity: env.opacity,
+    vertexColors: !!env?.vertices?.colored,
+    transparent: env.opacity < 1.0
+  });
+};
 
 g3dComplex.Line = async (args, env) => {
-    
+  const raw = await interpretate(args[0], env);
+  const indexParts = normalizeComplexLineIndices(raw);
 
-    //vertices = env.vertices;
-    let geometry = new THREE.BufferGeometry();
-    geometry.setAttribute('position', env.vertices.position);
-    env.local.geometry = geometry;
+  const material = makeComplexLineMaterial(env);
 
-    env.vertices.onResize.push((v) => g3dComplex.Line.reassign(v, env.local));
+  env.local.parts = [];
+  env.local.material = material;
 
-    let a = await interpretate(args[0], env);
+  for (const indices of indexParts) {
+    const geometry = new THREE.BufferGeometry();
 
-    if (a instanceof NumericArrayObject) {
-      a = a.buffer;
-    }
+    applyComplexLineVertexAttributes(geometry, env.vertices);
 
-    let indexes;
+    const indexAttr = makeComplexLineIndexAttribute(indices, env);
 
-    if (env.vertices.position.array.length > 65535) {
-      indexes = new THREE.Uint32BufferAttribute( new Uint32Array(a.map((e)=>e-1)), 1 );
-    } else {
-      indexes = new THREE.BufferAttribute( new Uint16Array(a.map((e)=>e-1)), 1 );
-    }
+    geometry.setIndex(indexAttr);
+    geometry.setDrawRange(0, indices.length);
 
-    env.local.indexes = indexes;    
-
-
-    geometry.setIndex(indexes);
-    env.local.range = a.length;
-
-    //geometry.setAttribute( 'position', new THREE.BufferAttribute( vertices, 3 ) );
-
-    let material;
-    
-    if (env?.vertices?.colored) {
-      geometry.setAttribute( 'color', env.vertices.colors );
-      material = new THREE.LineBasicMaterial({
-        linewidth: env.thickness,
-        color: env.color,
-        opacity: env.opacity,
-        vertexColors:true,
-        transparent: env.opacity < 1.0 ? true : false
-      });
-    } else {
-      material = new THREE.LineBasicMaterial({
-        linewidth: env.thickness,
-        color: env.color,
-        opacity: env.opacity,
-        transparent: env.opacity < 1.0 ? true : false
-      });
-    }
     const line = new THREE.Line(geometry, material);
 
-    env.local.line = line;
-
     env.mesh.add(line);
-    env.local.material = material;
 
-    return line;
-}
+    env.local.parts.push({
+      line,
+      geometry,
+      indexes: indexAttr,
+      range: indices.length
+    });
+  }
 
-g3dComplex.Line.virtual = true
+  // Backwards compatibility for code that expects env.local.line / geometry / indexes.
+  if (env.local.parts.length === 1) {
+    const only = env.local.parts[0];
+
+    env.local.line = only.line;
+    env.local.geometry = only.geometry;
+    env.local.indexes = only.indexes;
+    env.local.range = only.range;
+  } else {
+    env.local.lines = env.local.parts.map(p => p.line);
+  }
+
+  env.vertices.onResize.push((v) => g3dComplex.Line.reassign(v, env.local));
+
+  return env.local.parts.length === 1
+    ? env.local.parts[0].line
+    : env.local.parts.map(p => p.line);
+};
+
+g3dComplex.Line.virtual = true;
 
 g3dComplex.Line.update = async (args, env) => {
-  // 1) get new index data (zero‑based)
   if (env.fence) await env.fence();
 
-  let newBuffer = await interpretate(args[0], env);
-  if (newBuffer instanceof NumericArrayObject) {
-    newBuffer = newBuffer.buffer;
+  const raw = await interpretate(args[0], env);
+  const indexParts = normalizeComplexLineIndices(raw);
+
+  if (!env.local.parts) {
+    env.local.parts = [{
+      line: env.local.line,
+      geometry: env.local.geometry,
+      indexes: env.local.indexes,
+      range: env.local.range
+    }];
   }
-  newBuffer = newBuffer.map(el => el - 1);
-  env.local.range = newBuffer.length;
 
-  const geom = env.local.geometry;
-  const oldIdx = env.local.indexes;
+  // Remove extra old lines if the new input has fewer parts.
+  while (env.local.parts.length > indexParts.length) {
+    const part = env.local.parts.pop();
 
-  // 2) do we need to grow the attribute?
-  if (oldIdx.count < newBuffer.length) {
-    console.warn("Resizing index buffer for Line…");
+    env.mesh.remove(part.line);
+    part.geometry.dispose();
+  }
 
-    // decide between 16‑bit and 32‑bit
-    const use32 = newBuffer.length > 30000;
-    const ArrayCtor  = use32 ? Uint32Array  : Uint16Array;
-    const AttrCtor   = use32 ? THREE.Uint32BufferAttribute : THREE.Uint16BufferAttribute;
+  // Add missing lines if the new input has more parts.
+  while (env.local.parts.length < indexParts.length) {
+    const geometry = new THREE.BufferGeometry();
 
-    // allocate double the length
-    const newCount = newBuffer.length * 2;
-    const newArr   = new ArrayCtor(newCount);
-    const newIdx   = new AttrCtor(newArr, 1);
+    applyComplexLineVertexAttributes(geometry, env.vertices);
 
-    newIdx.setUsage(THREE.StreamDrawUsage);
-    newIdx.set(newBuffer);      // copy your data in
-    newIdx.needsUpdate = true;
+    const line = new THREE.Line(geometry, env.local.material);
 
-    // swap it onto the geometry
-    geom.setIndex(newIdx);
+    env.mesh.add(line);
 
-    // remember for next time
-    env.local.indexes = newIdx;
+    env.local.parts.push({
+      line,
+      geometry,
+      indexes: null,
+      range: 0
+    });
+  }
 
+  for (let i = 0; i < indexParts.length; i++) {
+    const indices = indexParts[i];
+    const part = env.local.parts[i];
+
+    const oldIdx = part.indexes;
+    const vertexCount =
+      env.vertices.position.count ??
+      env.vertices.position.array.length / 3;
+
+    const needs32 = vertexCount > 65535 || maxOfArray(indices) > 65535;
+    const oldIs32 = oldIdx?.array instanceof Uint32Array;
+
+    const needsNewBuffer =
+      !oldIdx ||
+      oldIdx.count < indices.length ||
+      oldIs32 !== needs32;
+
+    if (needsNewBuffer) {
+      const newCapacity = oldIdx
+        ? Math.max(indices.length, oldIdx.count * 2)
+        : indices.length;
+
+      const array = needs32
+        ? new Uint32Array(newCapacity)
+        : new Uint16Array(newCapacity);
+
+      array.set(indices);
+
+      const newIdx = needs32
+        ? new THREE.Uint32BufferAttribute(array, 1)
+        : new THREE.Uint16BufferAttribute(array, 1);
+
+      newIdx.setUsage(THREE.StreamDrawUsage);
+      newIdx.needsUpdate = true;
+
+      part.geometry.setIndex(newIdx);
+
+      part.indexes = newIdx;
+    } else {
+      oldIdx.array.set(indices, 0);
+      oldIdx.needsUpdate = true;
+    }
+
+    part.range = indices.length;
+    part.geometry.setDrawRange(0, indices.length);
+  }
+
+  // Keep old single-line fields valid.
+  if (env.local.parts.length === 1) {
+    const only = env.local.parts[0];
+
+    env.local.line = only.line;
+    env.local.geometry = only.geometry;
+    env.local.indexes = only.indexes;
+    env.local.range = only.range;
+
+    delete env.local.lines;
   } else {
-    // 3) no resize needed, just overwrite existing buffer
-    oldIdx.set(newBuffer);
-    oldIdx.needsUpdate = true;
+    env.local.lines = env.local.parts.map(p => p.line);
   }
 
-  // 4) always update draw range
-  geom.setDrawRange(0, env.local.range);
-
-  // 5) trigger a render
   env.wake(true);
 };
 
 g3dComplex.Line.destroy = (args, env) => {
-  env.local.geometry.dispose();
-  env.local.material.dispose();
-}
+  if (env.local.parts) {
+    env.local.parts.forEach(part => {
+      part.geometry.dispose();
+    });
+  } else if (env.local.geometry) {
+    env.local.geometry.dispose();
+  }
+
+  if (env.local.material) {
+    env.local.material.dispose();
+  }
+};
 
 g3dComplex.Line.reassign = (v, local) => {
-      console.warn('Reassign geometry of Line');
-      //
-      const g = local.geometry;
+  console.warn('Reassign geometry of Line');
 
-      g.setAttribute('position', v.position);
-      if (v.colored)
-        g.setAttribute( 'color', v.colors );
+  if (local.parts) {
+    for (const part of local.parts) {
+      applyComplexLineVertexAttributes(part.geometry, v);
+      part.geometry.setIndex(part.indexes);
+      part.geometry.setDrawRange(0, part.range);
+    }
+    return;
+  }
 
-      g.setIndex(local.indexes);
-      g.setDrawRange(0, local.range);
+  // Fallback for old single-line state.
+  const g = local.geometry;
 
-      
-      //if (local.geometry) local.geometry.dispose();
-      //local.geometry = g;
-      //local.line.geometry = g;
-}
+  applyComplexLineVertexAttributes(g, v);
+
+  g.setIndex(local.indexes);
+  g.setDrawRange(0, local.range);
+};
 
 g3d.Line = async (args, env) => {
   
