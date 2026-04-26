@@ -270,6 +270,7 @@ CoffeeLiqueur`WLX`Importer`Private`CacheControl["Hour"];
 AppExtensions`KernelList = {};
 
 
+
 (* Entrypoint of an app *)
 ServerError       := ImportComponent["Frontend/ServerError.wlx"];
 Protocol          := ImportComponent["Frontend/Protocol.wlx"];
@@ -345,6 +346,12 @@ http["MessageHandler", "File"]  = GetFileURequestQ[AppExtensions`HTTPFileExtensi
 SocketListen[USocketOpen[$Env["host"], $Env["http"]], tcp@#&]
 
 
+(* Start evaluation kernel a bit earlier *)
+Needs["CoffeeLiqueur`Notebook`KernelAutolaunch`"->"kaf`", FileNameJoin[{Directory[], "Frontend", "Autolaunch.wl"}] ];
+kaf`autostart[LocalKernel`LocalKernel[ "Name"->Internal`NoWR`RandomWord[] ], Hold[AppExtensions`KernelList], kernelUtils`initializeKernel[<|"env" -> $Env|>], kernelUtils`deinitializeKernel];
+
+
+
 Print["Staring WS/HTTP server..."];
 
 wcp = TCPUServer[]
@@ -388,9 +395,6 @@ PromptWindow["HTTPUHandler"->http, "AppEvent"->AppExtensions`AppEvents, "Extensi
 ExtendedApp["HTTPUHandler"->http, "Middleware"->middleware, "AppEvent"->AppExtensions`AppEvents, "ExtensionTemplates"->AppExtensions`Templates, "ExtensionSidebarIcons"->AppExtensions`SidebarIcons, "Env"->$Env];
 IframeApp["HTTPUHandler"->http, "Middleware"->middleware, "AppEvent"->AppExtensions`AppEvents, "ExtensionTemplates"->AppExtensions`Templates, "ExtensionSidebarIcons"->AppExtensions`SidebarIcons, "Env"->$Env];
 App["HTTPUHandler"->http, "Middleware"->middleware, "AppEvent"->AppExtensions`AppEvents, "ExtensionTemplates"->AppExtensions`Templates, "ExtensionSidebarIcons"->AppExtensions`SidebarIcons, "Env"->$Env];
-
-Needs["CoffeeLiqueur`Notebook`KernelAutolaunch`"->"kaf`", FileNameJoin[{Directory[], "Frontend", "Autolaunch.wl"}] ];
-kaf`autostart[LocalKernel`LocalKernel[ "Name"->Internal`NoWR`RandomWord[] ], Hold[AppExtensions`KernelList], kernelUtils`initializeKernel[<|"env" -> $Env|>], kernelUtils`deinitializeKernel];
 
 SetTimeout[
   StringTemplate["Open http://``:`` in your browser"][$Env["host"], $Env["http"]] // Print;
