@@ -162,10 +162,21 @@ Options[HTMLView] = {Epilog->Null, Prolog->Identity, "Style"->"", "Class"->""}
 
 HTMLView /: MakeBoxes[w_HTMLView, frmt_] := With[{o = CreateFrontEndObject[w]}, MakeBoxes[o, frmt] ]
 
+iHTML /: MakeBoxes[iHTML[code_], StandardForm] := With[{o = HTMLView[code]}, MakeBoxes[o, StandardForm] ]
+iHTML /: MakeBoxes[iHTML[code_], WLXForm] := code
+
+HTMLView[i_Image, OptionsPattern[] ] := With[{
+	name = FileNameJoin[{"attachments", ToString[Hash[i] ]<>".jpg"}],
+	dims = ImageDimensions[i]
+},
+	Export[name, i,	"JPEG", "CompressionLevel"->0.1];
+	iHTML[StringTemplate["<img src=\"/``\" width=\"``\" height=\"``\"/>"][name, Round[dims[[1]]], Round[dims[[2]]] ] ]
+]
 
 
 notString[_String] := False
 notString[_List] := False
+notString[_Image] := False
 notString[_] := True
 
 HTMLView[value_?notString, opts: OptionsPattern[] ] := With[{},

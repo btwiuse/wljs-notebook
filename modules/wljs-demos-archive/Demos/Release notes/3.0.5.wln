@@ -167,6 +167,46 @@ Props:
 Type: Input
 %-------------------------------------------------------------------------%
 .md
+Cross product was refined as well:
+
+%-------------------------------------------------------------------------%
+Display: markdown
+Type: Output
+%-------------------------------------------------------------------------%
+Cross product was refined as well:
+
+%-------------------------------------------------------------------------%
+Props:
+  Hidden: true
+Type: Input
+%-------------------------------------------------------------------------%
+.md
+## Image with HTMLView
+If you wrap any `Image` with `HTMLView`, it will be automatically serialized to a file and embedded as native `img` element. This helps if you have many rasterized images in the notebook
+
+%-------------------------------------------------------------------------%
+Display: markdown
+Type: Output
+%-------------------------------------------------------------------------%
+## Image with HTMLView
+If you wrap any `Image` with `HTMLView`, it will be automatically serialized to a file and embedded as native `img` element. This helps if you have many rasterized images in the notebook
+
+%-------------------------------------------------------------------------%
+Type: Input
+%-------------------------------------------------------------------------%
+ExampleData[{"TestImage", "Lena"}] // HTMLView 
+
+%-------------------------------------------------------------------------%
+Type: Output
+%-------------------------------------------------------------------------%
+(*VB[*)(FrontEndRef["96e29225-d4cc-4803-9f76-fee6ec1be429"])(*,*)(*"1:eJxTTMoPSmNkYGAoZgESHvk5KRCeEJBwK8rPK3HNS3GtSE0uLUlMykkNVgEKW5qlGlkaGZnqppgkJ+uaWBgY61qmmZvppqWmmqUmGyalmhhZAgB/YBW5"*)(*]VB*)
+
+%-------------------------------------------------------------------------%
+Props:
+  Hidden: true
+Type: Input
+%-------------------------------------------------------------------------%
+.md
 ## Codebase Refactor
 Another refactoring sweep has happen unifying the architecture and modules structure.
 
@@ -182,6 +222,10 @@ Another refactoring sweep has happen unifying the architecture and modules struc
 
 
 %--------------------------------%Objects%--------------------------------%
+Key: 96e29225-d4cc-4803-9f76-fee6ec1be429
+%-------------------------------------------------------------------------%
+<|"Public" -> Hold[HTMLView["<img src=\"/attachments/9203220223944420879.jpg\" width=\"512\" height=\"512\"/>"]]|>
+
 %-----------------------------%EndOfObjects%------------------------------%
 
 
