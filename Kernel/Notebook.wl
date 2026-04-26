@@ -42,7 +42,7 @@ NotebookObj /: EventRemove[n_NotebookObj, opts__] := EventRemove[n["Hash"], opts
 
 SerializeToStream[stream_OutputStream, n_NotebookObj] := writeNotebook[stream, n]
 DeserializeFromStream[stream_InputStream, opts: OptionsPattern[] ] := With[{a = readNotebook[stream, 10]},
-    If[FailureQ[a], $Failed,
+    If[FailureQ[a], a,
         With[{n = NotebookObj[opts]},
             n[#] = a[#]; &/@ Complement[Keys[a], {"PublicFields", "Cells"}];
             n["PublicFields"] = Join[n["PublicFields"], a["PublicFields"] ] // DeleteDuplicates;
@@ -124,7 +124,7 @@ LoadFromFile[path_String | File[path_], opts: OptionsPattern[] ] := Module[{stre
                 n["Path"] = path;
             ];
         ,
-            Return[$Failed];
+            Return[notebook];
         ];
     ];
     notebook  
