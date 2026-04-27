@@ -111,7 +111,8 @@ Graphics /: MakeBoxes[System`Dump`g_Graphics?System`Dump`vizGraphicsQ,System`Dum
     ViewBox[System`Dump`g, System`Dump`g]
 ,
     With[{fe = CreateFrontEndObject[System`Dump`g]},
-        MakeBoxes[fe, System`Dump`fmt]
+        {out = MakeBoxes[fe, StandardForm]},
+        ViewBox[out, fe]
     ]
 ]
 
@@ -119,7 +120,8 @@ Graphics /: MakeBoxes[System`Dump`g_Graphics,System`Dump`fmt:StandardForm|Tradit
     ViewBox[System`Dump`g, System`Dump`g]
 ,
     With[{fe = CreateFrontEndObject[System`Dump`g]},
-        MakeBoxes[fe, System`Dump`fmt]
+        {out = MakeBoxes[fe, StandardForm]},
+        ViewBox[out, fe]
     ]
 ]
 
@@ -150,11 +152,28 @@ Image /: MakeBoxes[Image`ImageDump`img:Image[_,Image`ImageDump`type_,Image`Image
     ,
         If[dataType === "Bit16",
             With[{fe = CreateFrontEndObject[Image[Image`ImageDump`img, "Byte", Interleaving->True, ImageResolution->Automatic] ]},
-                MakeBoxes[fe, Image`ImageDump`fmt]
+                If[Image`ImageDump`fmt === WLXForm,
+                    MakeBoxes[fe, Image`ImageDump`fmt]
+                ,
+                    With[{
+                        out = MakeBoxes[fe, StandardForm]
+                    },
+                        ViewBox[out, fe]
+                    ]                
+                ]
+                
             ]        
         ,
             With[{fe = CreateFrontEndObject[Image[Image`ImageDump`img, Interleaving->True, ImageResolution->Automatic] ]},
-                MakeBoxes[fe, Image`ImageDump`fmt]
+                If[Image`ImageDump`fmt === WLXForm,
+                    MakeBoxes[fe, Image`ImageDump`fmt]
+                ,
+                    With[{
+                        out = MakeBoxes[fe, StandardForm]
+                    },
+                        ViewBox[out, fe]
+                    ]                
+                ]
             ]        
         ]
     ]
@@ -162,7 +181,15 @@ Image /: MakeBoxes[Image`ImageDump`img:Image[_,Image`ImageDump`type_,Image`Image
 
 Image /: MakeBoxes[Image`ImageDump`img:Image[_Offload, Image`ImageDump`type_, Image`ImageDump`info___], Image`ImageDump`fmt_] := With[{fe = CreateFrontEndObject[Image`ImageDump`img]},
 
-    MakeBoxes[fe, Image`ImageDump`fmt]
+                If[Image`ImageDump`fmt === WLXForm,
+                    MakeBoxes[fe, Image`ImageDump`fmt]
+                ,
+                    With[{
+                        out = MakeBoxes[fe, StandardForm]
+                    },
+                        ViewBox[out, fe]
+                    ]
+                ]
 
 ]
 

@@ -102,7 +102,8 @@ Graphics3D /: MakeBoxes[System`Dump`g_Graphics3D,System`Dump`fmt:StandardForm|Tr
     ViewBox[System`Dump`g, System`Dump`g]
 ,
     With[{fe = CreateFrontEndObject[System`Dump`g]},
-        MakeBoxes[fe, System`Dump`fmt]
+        {out = MakeBoxes[fe, StandardForm]},
+          ViewBox[out, fe]
     ]
 ]
 
@@ -139,7 +140,14 @@ If[ByteCount[Image`ImageDump`img] > Internal`Kernel`$FrontEndObjectSizeLimit 102
         ]
       ]
     },
-      MakeBoxes[object, Image`ImageDump`fmt]
+      If[Image`ImageDump`fmt === WLXForm,
+        MakeBoxes[object, Image`ImageDump`fmt]
+      , 
+        With[{out = MakeBoxes[object, StandardForm]},
+          ViewBox[out, object]
+        ]
+      ]
+      
     ]
   ]
 ]

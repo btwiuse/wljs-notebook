@@ -160,7 +160,8 @@ HTMLX = ImportComponent[FileNameJoin[{$troot, "HTML.wlx"}] ];
 HTMLView[expr_List, opts: OptionsPattern[] ] := HTMLView[StringRiffle[expr, "\n"], opts]
 Options[HTMLView] = {Epilog->Null, Prolog->Identity, "Style"->"", "Class"->""}
 
-HTMLView /: MakeBoxes[w_HTMLView, frmt_] := With[{o = CreateFrontEndObject[w]}, MakeBoxes[o, frmt] ]
+HTMLView /: MakeBoxes[w_HTMLView, WLXForm] := With[{o = CreateFrontEndObject[w]}, MakeBoxes[o, WLXForm] ]
+HTMLView /: MakeBoxes[w_HTMLView, StandardForm] := With[{o = CreateFrontEndObject[w]}, {out = MakeBoxes[o, StandardForm]}, ViewBox[out, o] ]
 
 iHTML /: MakeBoxes[iHTML[code_], StandardForm] := With[{o = HTMLView[code]}, MakeBoxes[o, StandardForm] ]
 iHTML /: MakeBoxes[iHTML[code_], WLXForm] := code
@@ -395,8 +396,13 @@ InputJoystick[EventObject[a_Association] ] := InputJoystick["Event" -> a["Id"] ]
 Options[InputJoystick] = {"Topic"->"Default", "Event":>CreateUUID[]}
 
 
-TextView /: MakeBoxes[t_TextView, frmt_] := With[{o = CreateFrontEndObject[t]},
+TextView /: MakeBoxes[t_TextView, WLXForm] := With[{o = CreateFrontEndObject[t]},
 	MakeBoxes[o, frmt]
+]
+
+TextView /: MakeBoxes[t_TextView, StandardForm] := With[{o = CreateFrontEndObject[t]},
+	{out = MakeBoxes[o, StandardForm]},
+	ViewBox[out, o]
 ]
 
 Options[TextView] = {"CSS"->"", "Class"->"", "Style"->"", "Label"->"", "Description"->"", "Placeholder"->"", "Event"->Null, ImageSize->Automatic, Appearance->Automatic, "LabelClass"->"", "LabelStyle"->""}
@@ -597,8 +603,8 @@ applyPatch := (
 		DatasetWrapperBox[d   // Normal, StandardForm] (*FIXME do not use Normal*)
 	,
 
-		With[{o = CreateFrontEndObject[d   ]},
-			MakeBoxes[o, StandardForm]
+		With[{o = CreateFrontEndObject[d   ]}, {out = MakeBoxes[o, StandardForm]},
+			ViewBox[out, o]
 		]
 	] ];
 
@@ -744,12 +750,21 @@ DatasetWrapperBox[ l: List[__List], form_ ] := With[{
 					]
 				} ];
 
-				With[{view = MakeBoxes[o, form]},
-					AppendTo[garbage, Hold[store ] ];
-					store = parts;
+				If[form === WLXForm,
+					With[{view, MakeBoxes[o, StandardForm]},
+						AppendTo[garbage, Hold[store ] ];
+						store = parts;
+						view	
+					]			
+				,
+					With[{out = MakeBoxes[o, StandardForm]}, {view = ViewBox[out, o]},
+						AppendTo[garbage, Hold[store ] ];
+						store = parts;
 					
-					view
+						view
+					]				
 				]
+
 		]	
 	]
 ]
@@ -813,10 +828,18 @@ DatasetWrapperBox[ l_List , form_ ] := With[{
 		With[{
 				o = CreateFrontEndObject[ProvidedOptions[parts // First // Dataset, "RequestEvent" -> event, "RequestCallback" -> ToString[req, InputForm], "Total"->Length[l], "Parts"->Length[parts], "HashFunction"->"V2" ] ]
 			},
-				With[{view = MakeBoxes[o, form]},
-					AppendTo[garbage, Hold[store ] ];
-					store = parts;
-					view
+				If[form === WLXForm,
+					With[{view = MakeBoxes[o, form]},
+						AppendTo[garbage, Hold[store ] ];
+						store = parts;
+						view
+					]				
+				,
+					With[{out = MakeBoxes[o, StandardForm]}, {view = ViewBox[out, o]},
+						AppendTo[garbage, Hold[store ] ];
+						store = parts;
+						view
+					]				
 				]
 		]	
 	]
@@ -858,13 +881,26 @@ DatasetWrapperBox[ l_List , StandardForm] := With[{
 
 DatasetWrapperBox[ a: Association[r: Rule[_, _List]..] , form_ ] := With[{d = Dataset[a]},
 	With[{o = CreateFrontEndObject[d]},
-		MakeBoxes[o, form]
+		If[form === WLXForm,
+			MakeBoxes[o, form]
+		,
+			With[{out = MakeBoxes[o, StandardForm]},
+				ViewBox[out, o]
+			]
+		]
+		
 	]
 ];
 
 DatasetWrapperBox[ a: Association[r: Rule[_, _Association]..] , form_ ] := With[{d = Dataset[a]},
 	With[{o = CreateFrontEndObject[d]},
-		MakeBoxes[o, form]
+		If[form === WLXForm,
+			MakeBoxes[o, form]
+		,
+			With[{out = MakeBoxes[o, StandardForm]},
+				ViewBox[out, o]
+			]
+		]
 	]
 ];
 
@@ -894,10 +930,18 @@ DatasetWrapperBox[ l : List[__Association] , form_] := With[{
 		With[{
 				o = CreateFrontEndObject[ProvidedOptions[parts // First // Dataset, "RequestEvent" -> event, "RequestCallback" -> ToString[req, InputForm], "Total"->Length[l], "Parts"->Length[parts], "HashFunction"->"V2" ] ]
 			},
-				With[{view = MakeBoxes[o, form]},
-					AppendTo[garbage, Hold[store ] ];
-					store = parts;
-					view
+				If[form === WLXForm,
+					With[{view = MakeBoxes[o, form]},
+						AppendTo[garbage, Hold[store ] ];
+						store = parts;
+						view
+					]				
+				,
+					With[{out = MakeBoxes[o, StandardForm]}, {view = ViewBox[out, o]},
+						AppendTo[garbage, Hold[store ] ];
+						store = parts;
+						view
+					]				
 				]
 		]	
 	]
@@ -1082,7 +1126,12 @@ WindowEventListener /: MakeBoxes[WindowEventListener[event_EventObject | event_S
 	] ]}];
 
 	With[{c = CreateFrontEndObject[ winScript[Id] ]},
-		MakeBoxes[c, form]
+		If[form === WLXForm,
+			MakeBoxes[c, form]
+		,
+			ViewBox[Null, c]
+		]
+		
 	]
 ] 
 

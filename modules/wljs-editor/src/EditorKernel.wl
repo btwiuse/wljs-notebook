@@ -50,12 +50,18 @@ InputEditor[str_] := With[{id = CreateUUID[]},
 ]
 
 System`WLXForm;
+System`ViewBox;
 
 EditorView /: MakeBoxes[e_EditorView, WLXForm] := With[{o = CreateFrontEndObject[e]}, MakeBoxes[o, WLXForm] ]
 CellView /: MakeBoxes[e_CellView, WLXForm] := With[{o = CreateFrontEndObject[e]}, MakeBoxes[o, WLXForm] ]
 
-EditorView /: MakeBoxes[e_EditorView, StandardForm] := With[{o = CreateFrontEndObject[e]}, MakeBoxes[o, StandardForm] ]
-CellView /: MakeBoxes[e_CellView, StandardForm] := With[{o = CreateFrontEndObject[e]}, MakeBoxes[o, StandardForm] ]
+EditorView /: MakeBoxes[e_EditorView, StandardForm] := With[{o = CreateFrontEndObject[e]}, {out = MakeBoxes[o, StandardForm]}, 
+  ViewBox[out, o]
+]
+
+CellView /: MakeBoxes[e_CellView, StandardForm] := With[{o = CreateFrontEndObject[e]}, {out = MakeBoxes[o, StandardForm]}, 
+  ViewBox[out, o]
+]
 
 Options[CellView] = {"Display" -> "codemirror", "Class" -> "", "Style"->""}
 

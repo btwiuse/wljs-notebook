@@ -64,12 +64,18 @@ Sound`soundDisplay[s_] := $Failed
 Unprotect[Sound]
 
 Sound /: MakeBoxes[s_Sound, form: StandardForm] := With[{
-  o = CreateFrontEndObject[s]
+
 },
   If[ByteCount[s] < 1024,
-    ViewBox[s, o]
+    ViewBox[s, s]
   ,
-    MakeBoxes[o, form]
+    With[{
+        o = CreateFrontEndObject[s]
+    },{
+        out = MakeBoxes[o, StandardForm]
+    },
+        ViewBox[out,o]
+    ]
   ]
   
 ]
@@ -113,8 +119,8 @@ PCMPlayer[a_Audio, opts:OptionsPattern[] ] := With[{info = Information[a]},
     ]
 ]
 
-PCMPlayer /: MakeBoxes[p_PCMPlayer, StandardForm] := With[{o = CreateFrontEndObject[p]},
-    MakeBoxes[o, StandardForm]
+PCMPlayer /: MakeBoxes[p_PCMPlayer, StandardForm] := With[{o = CreateFrontEndObject[p]}, {out = MakeBoxes[o, StandardForm]},
+    ViewBox[out, o]
 ]
 
 PCMPlayer /: MakeBoxes[p_PCMPlayer, WLXForm] := With[{o = CreateFrontEndObject[p]},

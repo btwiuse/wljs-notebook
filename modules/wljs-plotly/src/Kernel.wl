@@ -51,7 +51,8 @@ Plotly[a_List, layout_Association, opts: OptionsPattern[] ] := With[{uid = Creat
 Options[Plotly] = {"margin"->"autoexpand", ImageSize->500};
 
 PlotlyInstance /: MakeBoxes[PlotlyInstance[uid_String, data_, _] , StandardForm] := With[{o = CreateFrontEndObject[{PlotlyNewPlot[data["Data"], data["Layout"], "SystemEvent"->uid], FrontInstanceReference[uid]}]},
-    MakeBoxes[o, StandardForm]
+    {out = MakeBoxes[o, StandardForm]},
+    ViewBox[out, o]
 ]
 
 conditionalSend[option_, uid_, function_, args__] := If[option === Inherited, With[{state = windows["Lookup", uid]},
@@ -90,8 +91,8 @@ PlotlyInstance /: PlotlyRelayout[ PlotlyInstance[uid_, _, win_], data_, opts: Op
 
 PlotlyInstance /: Delete[ PlotlyInstance[uid_, _, win_] ] := windows["KeyDrop", uid]
 
-ListLinePlotly /: MakeBoxes[ListLinePlotly[args__], StandardForm] := With[{o = CreateFrontEndObject[ListLinePlotly[args]]}, MakeBoxes[o, StandardForm]]
-ListPlotly /: MakeBoxes[ListPlotly[args__], StandardForm] := With[{o = CreateFrontEndObject[ListPlotly[args]]}, MakeBoxes[o, StandardForm]]
+ListLinePlotly /: MakeBoxes[ListLinePlotly[args__], StandardForm] := With[{o = CreateFrontEndObject[ListLinePlotly[args]]}, {out = MakeBoxes[o, StandardForm]}, ViewBox[out, o] ]
+ListPlotly /: MakeBoxes[ListPlotly[args__], StandardForm] := With[{o = CreateFrontEndObject[ListPlotly[args]]}, {out = MakeBoxes[o, StandardForm]}, ViewBox[out, o] ]
 
 
 Options[PlotlyAddTraces] = {"Window" -> Inherited}

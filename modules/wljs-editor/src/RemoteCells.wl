@@ -342,7 +342,6 @@ EventHandler[NotebookEditorChannel // EventClone,
             Echo["writting notebook.with data .."];
                 With[{},
                     writeNotebook[uid, #[[1]], #[[2]]]& /@ Transpose[{list, uids}];
-                    saveNotebook[Null, uid];
                 ]
  
             ];             
