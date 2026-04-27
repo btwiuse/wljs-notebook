@@ -539,6 +539,43 @@ class MarkdownCell {
     view: LaTeXCell
   };  
 
+const applyAnchorPoint = (el, anchor = 'Center') => {
+  let x = 'Center';
+  let y = 'Center';
+
+  if (Array.isArray(anchor)) {
+    const [horizontal, vertical] = anchor;
+
+    if (horizontal === 'Left' || horizontal === 'Right') x = horizontal;
+    if (vertical === 'Top' || vertical === 'Bottom') y = vertical;
+  } else {
+    switch (anchor) {
+      case 'Top':
+      case 'Bottom':
+        y = anchor;
+        break;
+
+      case 'Left':
+      case 'Right':
+        x = anchor;
+        break;
+
+      case 'Center':
+      default:
+        break;
+    }
+  }
+
+  el.style.justifyContent =
+    x === 'Left' ? 'flex-start' :
+    x === 'Right' ? 'flex-end' :
+    'center';
+
+  el.style.alignItems =
+    y === 'Top' ? 'flex-start' :
+    y === 'Bottom' ? 'flex-end' :
+    'center';
+};
 
 const tex = async (args, env) => {
   const data = await interpretate(args[0], env);
@@ -546,35 +583,46 @@ const tex = async (args, env) => {
 
   env.local.el = document.createElement('div');
   env.local.el.style.display = 'flex';
-  env.local.el.style.justifyContent = 'space-evenly';
-  env.local.el.style.alignItems = 'center';
+
+  applyAnchorPoint(env.local.el, opts.AnchorPoint);
 
   if (opts.ImageSize) {
     let size = opts.ImageSize;
-    if (!Array.isArray(size)) size = [size, size*0.76];
+    if (!Array.isArray(size)) size = [size, size * 0.76];
+
     if (typeof size[0] == 'number') {
       if (size[0] < 3.0) {
         size[0] *= 800.0;
         size[1] *= 800.0;
       }
-      env.local.el.style.width = size[0]+'px';
-      env.local.el.style.height = size[1]+'px';
+
+      env.local.el.style.width = size[0] + 'px';
+      env.local.el.style.height = size[1] + 'px';
     }
   }
 
-  env.local.el.innerHTML = katex.renderToString(unicodeToChar(data.replaceAll('\\\\', '\\')), {displayMode: true});
+  env.local.el.innerHTML = katex.renderToString(
+    unicodeToChar(data.replaceAll('\\\\', '\\')),
+    { displayMode: true }
+  );
+
   env.element.appendChild(env.local.el);
-}
+};
 
 tex.update = async (args, env) => {
   const data = await interpretate(args[0], env);
-  env.local.el.innerHTML = katex.renderToString(unicodeToChar(data.replaceAll('\\\\', '\\')), {displayMode: true});
-}
+
+  env.local.el.innerHTML = katex.renderToString(
+    unicodeToChar(data.replaceAll('\\\\', '\\')),
+    { displayMode: true }
+  );
+};
 
 tex.virtual = true;
+
 tex.destroy = (args, env) => {
-    env.local.el.remove();
-}
+  env.local.el.remove();
+};
 
 /* it is anyway meant to be global, so we define it in all contexts */
 core.TeXView = tex;

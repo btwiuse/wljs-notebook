@@ -69,7 +69,7 @@ TeXView;
 TeXView /: MakeBoxes[TeXView[expr_, opts___], WLXForm] := With[{o = CreateFrontEndObject[ TeXView[expr, opts] ]}, MakeBoxes[o, WLXForm] ]
 TeXView /: MakeBoxes[TeXView[expr_, opts___], StandardForm] := With[{o = ViewBox[Null, TeXView[expr, opts] ]}, o ]
 
-Options[TeXView] = {ImageSize->Automatic};
+Options[TeXView] = {ImageSize->Automatic, "AnchorPoint"->"Center"};
 
 
 TeXFormAsync[all__] := (
