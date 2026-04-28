@@ -312,6 +312,77 @@ Type: Output
 ## Codebase Refactor
 Another refactoring sweep has happen unifying the architecture and modules structure.
 
+%-------------------------------------------------------------------------%
+Props:
+  Hidden: true
+Type: Input
+%-------------------------------------------------------------------------%
+.md
+## Breaking changes
+`CreateFrontEndObject` does not run automatically in the output cells, i.e.
+
+%-------------------------------------------------------------------------%
+Display: markdown
+Type: Output
+%-------------------------------------------------------------------------%
+## Breaking changes
+`CreateFrontEndObject` does not run automatically in the output cells, i.e.
+
+%-------------------------------------------------------------------------%
+Type: Input
+%-------------------------------------------------------------------------%
+CreateFrontEndObject[1+1]
+
+%-------------------------------------------------------------------------%
+Type: Output
+%-------------------------------------------------------------------------%
+FrontEndRef["cc7d56fc-6559-4a1c-bd5b-a2b6182a2a51"]
+
+%-------------------------------------------------------------------------%
+Props:
+  Hidden: true
+Type: Input
+%-------------------------------------------------------------------------%
+.md
+We removed it to dedicate this task solely to `ViewBox` avoiding any implicit conventions. In this sense frontend objects serve only the purpose of storing things. For an average user this does not mean anything, since it only affects custom written Javascript symbols. Here is an example:
+
+%-------------------------------------------------------------------------%
+Display: markdown
+Type: Output
+%-------------------------------------------------------------------------%
+We removed it to dedicate this task solely to `ViewBox` avoiding any implicit conventions. In this sense frontend objects serve only the purpose of storing things. For an average user this does not mean anything, since it only affects custom written Javascript symbols. Here is an example:
+
+%-------------------------------------------------------------------------%
+Type: Input
+%-------------------------------------------------------------------------%
+.js
+core.Deco = async (args, env) => {
+  env.element.innerText = "Hey there!";
+}
+
+%-------------------------------------------------------------------------%
+Display: js
+Type: Output
+%-------------------------------------------------------------------------%
+core.Deco = async (args, env) => {
+  env.element.innerText = "Hey there!";
+}
+
+%-------------------------------------------------------------------------%
+Type: Input
+%-------------------------------------------------------------------------%
+Deco /: MakeBoxes[d_Deco, StandardForm] := ViewBox[d,d]
+
+%-------------------------------------------------------------------------%
+Type: Input
+%-------------------------------------------------------------------------%
+Deco[] + 1
+
+%-------------------------------------------------------------------------%
+Type: Output
+%-------------------------------------------------------------------------%
+1+(*VB[*)(Deco[])(*,*)(*"1:eJxTTMoPSmNkYGAoZgESHvk5KWkMMJ5LanI+AGKYBgI="*)(*]VB*)
+
 %------------------------------%EndOfCells%-------------------------------%
 
 
