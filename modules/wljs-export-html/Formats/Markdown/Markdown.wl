@@ -161,7 +161,7 @@ fixImages[s_String, r_] := With[{},
 
 decode[path_String, OptionsPattern[] ] := Module[{str, cells, objects, notebook, store, root},
 With[{
-    dir = AppExtensions`QuickNotesDir,
+    dir = DirectoryName[path],
     name = FileBaseName[path],
     promise = Promise[],
     query = OptionValue["Query"],
@@ -193,7 +193,7 @@ With[{
     With[{n = notebook},
         n["Quick"] = True;
         n["HaveToSaveAs"] = True;
-        n["Path"] = FileNameJoin[{dir, name<>StringTake[CreateUUID[], 3]<>".wln"}];
+        n["Path"] = FileNameJoin[{dir, name<>".wln"}];
     ];
 
 

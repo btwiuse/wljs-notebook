@@ -477,7 +477,7 @@ decode[opts__][path_String, secondaryOpts___] := Module[{
   str, cells, objects, notebook, nb, store, options
 },
 With[{
-    dir = AppExtensions`QuickNotesDir,
+    dir = DirectoryName[path],
     name = FileBaseName[path],
     promise = Promise[],
     spinner = Notifications`Spinner["Topic"->"Converting to notebook", "Body"->"Please, wait"](*`*)
@@ -490,7 +490,7 @@ With[{
     With[{n = notebook},
         n["Quick"] = True;
         n["HaveToSaveAs"] = True;    
-        n["Path"] = FileNameJoin[{dir, name<>"-"<>StringTake[CreateUUID[], 3]<>".wln"}];
+        n["Path"] = FileNameJoin[{dir, name<>".wln"}];
     ];
 
     
