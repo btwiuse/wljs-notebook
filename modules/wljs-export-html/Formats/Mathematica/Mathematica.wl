@@ -490,7 +490,6 @@ With[{
     With[{n = notebook},
         n["Quick"] = True;
         n["HaveToSaveAs"] = True;    
-        n["WorkingDirectory"] = DirectoryName[path];
         n["Path"] = FileNameJoin[{dir, name<>"-"<>StringTake[CreateUUID[], 3]<>".wln"}];
     ];
 
@@ -536,7 +535,7 @@ With[{
 
                                     n["Quick"] = True;
                                     n["HaveToSaveAs"] = True;    
-                                    n["WorkingDirectory"] = DirectoryName[path];
+                              
                                     n["Path"] = FileNameJoin[{dir, name<>"-"<>ToString[prtCount]<>".wln"}];
                                     n["Evaluator"] = data["Container"];
                                     EventFire[n, "AquairedKernel", True];
