@@ -85,7 +85,7 @@ WLN`WLNImport[filename_String, options___] :=
     assoc = Import[filename, "Text", DOSTextFormat->False];
     If[FailureQ[assoc], Return[$Failed] ];
 
-    EventFire[Internal`Kernel`CommunicationChannel, "ImportNotebook", <|"Data"->assoc, "Hash"->hash, "FullPath"->FileNameJoin[{DirectoryName[filename], FileNameTake[filename]}], "Path"->DirectoryName[filename],  "Kernel"->Internal`Kernel`Hash|>];
+    EventFire[Internal`Kernel`CommunicationChannel, "ImportNotebook", <|"Data"->assoc, "Hash"->hash, "FullPath"->AbsoluteFileName[filename], "Path"->DirectoryName[filename],  "Kernel"->Internal`Kernel`Hash|>];
     cache[fileHash] = hash // RemoteNotebook;
     hash // RemoteNotebook
 ]
