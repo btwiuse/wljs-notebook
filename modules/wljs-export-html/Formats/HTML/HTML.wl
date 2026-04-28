@@ -153,6 +153,8 @@ With[{
         Map[(
             n[#] = compressedFields[#]
         )&, Keys[compressedFields] ];
+
+        n["ObjectFields"] = {"Objects", "Symbols", "Storage", "ExcalidrawImages", "RuntimeCache", "ZIPArchive"};
     ];
 
     place = FileNameJoin[{dir, name<>StringTake[CreateUUID[], 3]<>".wln"}];

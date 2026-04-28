@@ -197,7 +197,7 @@ Deserialize["jsfn4", n_Association, notebook_NotebookObj] := With[{pf = notebook
     
     (* it should not be here. violation of SOLID. Keep it for backward compatibillity! *)
     notebook["PublicFields"] = Join[notebook["PublicFields"], pf];
-    notebook["ObjectFields"] = {"Objects", "Symbols", "Storage", "ExcalidrawImages", "RuntimeCache"};
+    notebook["ObjectFields"] = {"Objects", "Symbols", "Storage", "ExcalidrawImages", "RuntimeCache", "ZIPArchive"};
 
     notebook
 ]

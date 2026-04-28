@@ -194,6 +194,7 @@ With[{
         n["Quick"] = True;
         n["HaveToSaveAs"] = True;
         n["Path"] = FileNameJoin[{dir, name<>".wln"}];
+        n["ObjectFields"] = {"Objects", "Symbols", "Storage", "ExcalidrawImages", "RuntimeCache", "ZIPArchive"};
     ];
 
 
