@@ -180,6 +180,63 @@ Integrate /: MakeBoxes[Integrate[f_, bond__List], s: StandardForm ] := With[{lis
 ]
 
 
+Unprotect[Cross]
+FormatValues[Cross] = {};
+
+Cross /: MakeBoxes[Cross[a_,b_], StandardForm] := With[{
+  y1 = MakeBoxes[a, StandardForm],
+  y2 = MakeBoxes[b, StandardForm]
+},
+  RowBox[{"Cross[", y1, ",", y2, "]"}]
+]
+
+Cross /: MakeBoxes[Cross[x1_,x2_,x3_], StandardForm] := With[{
+  y1 = MakeBoxes[x1, StandardForm],
+  y2 = MakeBoxes[x2, StandardForm],
+  y3 = MakeBoxes[x3, StandardForm]
+},
+  RowBox[{"Cross[", y1,",",y2,",",y3, "]"}]
+]
+
+Cross /: MakeBoxes[Cross[x1_,x2_,x3_,x4_], StandardForm] := With[{
+  y1 = MakeBoxes[x1, StandardForm],
+  y2 = MakeBoxes[x2, StandardForm],
+  y3 = MakeBoxes[x3, StandardForm],
+  y4 = MakeBoxes[x4, StandardForm]
+},
+  RowBox[{"Cross[", y1,",",y2,",",y3, ",", y4"]"}]
+]
+
+(*[TODO] make it look like : and x using TB boxes construct *)
+
+Unprotect[Colon]
+FormatValues[Colon] = {};
+
+Colon /: MakeBoxes[Colon[a_,b_], StandardForm] := With[{
+  y1 = MakeBoxes[a, StandardForm],
+  y2 = MakeBoxes[b, StandardForm]
+},
+  RowBox[{"Colon[", y1, ",", y2, "]"}]
+]
+
+Colon /: MakeBoxes[Colon[x1_,x2_,x3_], StandardForm] := With[{
+  y1 = MakeBoxes[x1, StandardForm],
+  y2 = MakeBoxes[x2, StandardForm],
+  y3 = MakeBoxes[x3, StandardForm]
+},
+  RowBox[{"Colon[", y1,",",y2,",",y3, "]"}]
+]
+
+Colon /: MakeBoxes[Colon[x1_,x2_,x3_,x4_], StandardForm] := With[{
+  y1 = MakeBoxes[x1, StandardForm],
+  y2 = MakeBoxes[x2, StandardForm],
+  y3 = MakeBoxes[x3, StandardForm],
+  y4 = MakeBoxes[x4, StandardForm]
+},
+  RowBox[{"Colon[", y1,",",y2,",",y3, ",", y4"]"}]
+]
+
+
 (* ::: Some convertions to simplify the output form ::: *)
 
 SuperscriptBox[a_, "\[Transpose]"] := RowBox[{"Transpose[", a, "]"}]
