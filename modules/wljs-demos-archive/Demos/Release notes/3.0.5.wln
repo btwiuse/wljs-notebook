@@ -35,15 +35,15 @@ Props:
 Type: Input
 %-------------------------------------------------------------------------%
 .md
-## Human-, LLM- and GIT-fiendly Notebook Format
-We silently introduced a new version of `.wln` notebook format. The structure is minimal, and easy to read and parse by people and machines, but most importantly, it solves issue with versioning systems being unable to correctly identify the diferences
+## Human-, LLM- and GIT-friendly Notebook Format
+We silently introduced a new version of `.wln` notebook format. The structure is minimal, and easy to read and parse by people and machines, but most importantly, it solves issues with versioning systems being unable to correctly identify the differences
 
 %-------------------------------------------------------------------------%
 Display: markdown
 Type: Output
 %-------------------------------------------------------------------------%
-## Human-, LLM- and GIT-fiendly Notebook Format
-We silently introduced a new version of `.wln` notebook format. The structure is minimal, and easy to read and parse by people and machines, but most importantly, it solves issue with versioning systems being unable to correctly identify the diferences 
+## Human-, LLM- and GIT-friendly Notebook Format
+We silently introduced a new version of `.wln` notebook format. The structure is minimal, and easy to read and parse by people and machines, but most importantly, it solves issues with versioning systems being unable to correctly identify the differences
 
 %-------------------------------------------------------------------------%
 Type: Input
@@ -74,20 +74,20 @@ Props:
 Type: Input
 %-------------------------------------------------------------------------%
 .md
-It looks like YAML in headers and was definitely inspired by it. After the coresponding separators the data can be any valid Wolfram Language expression.
+It looks like YAML in headers and was definitely inspired by it. After the corresponding separators the data can be any valid Wolfram Language expression.
 
 :::note
-We will never drop the support of the older version of `.wln` format. It costs 0 efforts to maintain the backward compatibillity, since it is just input form of `Association` data structure.
+We will never drop the support of the older version of `.wln` format. It costs 0 efforts to maintain the backward compatibility, since it is just input form of `Association` data structure.
 :::
 
 %-------------------------------------------------------------------------%
 Display: markdown
 Type: Output
 %-------------------------------------------------------------------------%
-It looks like YAML in headers and was definitely inspired by it. After the coresponding separators the data can be any valid Wolfram Language expression.
+It looks like YAML in headers and was definitely inspired by it. After the corresponding separators the data can be any valid Wolfram Language expression.
 
 :::note
-We will never drop the support of the older version of `.wln` format. It costs 0 efforts to maintain the backward compatibillity, since it is just input form of `Association` data structure.
+We will never drop the support of the older version of `.wln` format. It costs 0 efforts to maintain the backward compatibility, since it is just input form of `Association` data structure.
 :::
 
 %-------------------------------------------------------------------------%
@@ -144,36 +144,6 @@ Module[{col = {1,0,0}},
     }]
   } // Column 
 ]
-
-%-------------------------------------------------------------------------%
-Props:
-  Hidden: true
-Type: Input
-%-------------------------------------------------------------------------%
-.md
-## Colon element
-Standard WL's element is supported
-
-%-------------------------------------------------------------------------%
-Display: markdown
-Type: Output
-%-------------------------------------------------------------------------%
-## Colon element
-Standard WL's element is supported
-
-%-------------------------------------------------------------------------%
-Props:
-  Hidden: true
-Type: Input
-%-------------------------------------------------------------------------%
-.md
-Cross product was refined as well:
-
-%-------------------------------------------------------------------------%
-Display: markdown
-Type: Output
-%-------------------------------------------------------------------------%
-Cross product was refined as well:
 
 %-------------------------------------------------------------------------%
 Props:
@@ -303,14 +273,14 @@ Type: Input
 %-------------------------------------------------------------------------%
 .md
 ## Codebase Refactor
-Another refactoring sweep has happen unifying the architecture and modules structure.
+Another refactoring sweep has happened, unifying the architecture and modules structure.
 
 %-------------------------------------------------------------------------%
 Display: markdown
 Type: Output
 %-------------------------------------------------------------------------%
 ## Codebase Refactor
-Another refactoring sweep has happen unifying the architecture and modules structure.
+Another refactoring sweep has happened, unifying the architecture and modules structure.
 
 %-------------------------------------------------------------------------%
 Props:
@@ -357,7 +327,9 @@ Type: Input
 %-------------------------------------------------------------------------%
 .js
 core.Deco = async (args, env) => {
-  env.element.innerText = "Hey there!";
+  env.element.style.background = 'red';
+  env.element.style.height = '1rem';
+  env.element.style.width = '1rem';
 }
 
 %-------------------------------------------------------------------------%
@@ -365,7 +337,9 @@ Display: js
 Type: Output
 %-------------------------------------------------------------------------%
 core.Deco = async (args, env) => {
-  env.element.innerText = "Hey there!";
+  env.element.style.background = 'red';
+  env.element.style.height = '1rem';
+  env.element.style.width = '1rem';
 }
 
 %-------------------------------------------------------------------------%
@@ -376,7 +350,7 @@ Deco /: MakeBoxes[d_Deco, StandardForm] := ViewBox[d,d]
 %-------------------------------------------------------------------------%
 Type: Input
 %-------------------------------------------------------------------------%
-Deco[] + 1
+Deco[] + 1(*BB[*)(**)(*,*)(*"1:eJxTTMoPSmNhYGAo5gcSAUX5ZZkpqSn+BSWZ+XnFaYwgCS4g4Zyfm5uaV+KUXxEMUqxsbm6exgSSBPGCSnNSg9mAjOCSosy8dLBYSFFpKpoKkDkeqYkpEFXBILO1sCgJSczMQVYCAOFrJEU="*)(*]BB*)
 
 %-------------------------------------------------------------------------%
 Type: Output
