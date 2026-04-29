@@ -112,5 +112,5 @@ chown -R wljs:wljs /home/wljs
 # bind mount contents aren't affected by chown on parent; fix directly
 chmod -R u+rwX "/home/wljs/WLJS Notebooks" 2>/dev/null || true
 
-nginx
-su - wljs -c "wolframscript -f /wljs/Scripts/start.wls host 0.0.0.0 http 4000 ws 4001 ws2 4002 wsprefix ws ws2prefix ws2 store_config_in_docs true"
+/usr/local/bin/wljs-gateway -port 3000 -host 127.0.0.1 -http 4000 -ws 4001 -ws2 4002 -wsprefix ws -ws2prefix ws2 &
+su - wljs -c "wolframscript -f /wljs/Scripts/start.wls host 127.0.0.1 http 4000 ws 4001 ws2 4002 wsprefix ws ws2prefix ws2 store_config_in_docs true"

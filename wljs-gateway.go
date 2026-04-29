@@ -7,9 +7,15 @@ import (
 	"net/http"
 	"net/http/httputil"
 	"net/url"
+	"time"
 
 	"github.com/koding/websocketproxy"
 )
+
+var transport = &http.Transport{
+	ResponseHeaderTimeout: 360 * time.Second,
+	IdleConnTimeout:       90 * time.Second,
+}
 
 func httpReverseProxy(target string) http.Handler {
 	u, err := url.Parse(target)
@@ -18,6 +24,7 @@ func httpReverseProxy(target string) http.Handler {
 	}
 
 	proxy := &httputil.ReverseProxy{
+		Transport: transport,
 		Rewrite: func(r *httputil.ProxyRequest) {
 			r.SetURL(u)
 			r.SetXForwarded()
@@ -25,7 +32,7 @@ func httpReverseProxy(target string) http.Handler {
 			r.Out.Host = u.Host
 
 			// must set keep-alive otherwise wljs home page won't load
-		        r.Out.Header.Set("Connection", "keep-alive, upgrade")
+			r.Out.Header.Set("Connection", "keep-alive, upgrade")
 		},
 
 		ModifyResponse: func(resp *http.Response) error {
@@ -41,13 +48,14 @@ func httpReverseProxy(target string) http.Handler {
 	return proxy
 }
 
-
 type Config struct {
 	Host       string
 	HTTPPort   int
 	WSPort     int
 	WS2Port    int
 	ListenPort int
+	WSPrefix   string
+	WS2Prefix  string
 }
 
 func (c *Config) HTTPUpstream() string {
@@ -69,6 +77,16 @@ func (c *Config) ListenAddr() string {
 	return fmt.Sprintf(":%d", c.ListenPort)
 }
 
+func wsPath(prefix string) string {
+	if len(prefix) > 0 && prefix[0] == '/' {
+		return prefix
+	}
+	return "/" + prefix
+}
+
+func (c *Config) WSPath() string  { return wsPath(c.WSPrefix) }
+func (c *Config) WS2Path() string { return wsPath(c.WS2Prefix) }
+
 func ParseConfig() *Config {
 	cfg := &Config{}
 
@@ -77,6 +95,8 @@ func ParseConfig() *Config {
 	flag.IntVar(&cfg.WSPort, "ws", 4001, "websocket upstream port")
 	flag.IntVar(&cfg.WS2Port, "ws2", 4002, "websocket2 upstream port")
 	flag.IntVar(&cfg.ListenPort, "port", 3000, "listen port")
+	flag.StringVar(&cfg.WSPrefix, "wsprefix", "ws", "websocket path prefix (without leading slash)")
+	flag.StringVar(&cfg.WS2Prefix, "ws2prefix", "ws2", "websocket2 path prefix (without leading slash)")
 
 	flag.Parse()
 	return cfg
@@ -89,10 +109,17 @@ func main() {
 		return true
 	}
 
-	http.Handle("/ws", websocketproxy.NewProxy(cfg.WSUpstream()))
-	http.Handle("/ws2", websocketproxy.NewProxy(cfg.WS2Upstream()))
-	http.Handle("/", httpReverseProxy(cfg.HTTPUpstream()))
+	mux := http.NewServeMux()
+	mux.Handle(cfg.WSPath(), websocketproxy.NewProxy(cfg.WSUpstream()))
+	mux.Handle(cfg.WS2Path(), websocketproxy.NewProxy(cfg.WS2Upstream()))
+	mux.Handle("/", httpReverseProxy(cfg.HTTPUpstream()))
+
+	server := &http.Server{
+		Addr:              cfg.ListenAddr(),
+		Handler:           mux,
+		ReadHeaderTimeout: 30 * time.Second,
+	}
 
 	log.Println("listening on", cfg.ListenAddr())
-	log.Fatal(http.ListenAndServe(cfg.ListenAddr(), nil))
+	log.Fatal(server.ListenAndServe())
 }

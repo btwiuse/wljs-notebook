@@ -11,6 +11,15 @@ WORKDIR /workspace
 RUN --mount=type=secret,id=wolfram_license,env=WOLFRAMSCRIPT_ENTITLEMENTID,required=true wolframscript -script Scripts/update.wls
 
 
+FROM golang:alpine AS gateway-builder
+
+WORKDIR /build
+COPY go.mod go.sum ./
+RUN go mod download
+COPY wljs-gateway.go ./
+RUN go build -o wljs-gateway .
+
+
 FROM wolframresearch/wolframengine:14.3.0 AS final
 
 USER root
@@ -22,7 +31,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN set -eux; \
     apt-get update; \
     apt-get install -y --no-install-recommends \
-      ffmpeg ca-certificates gnupg curl git nginx expect \
+      ffmpeg ca-certificates gnupg curl git expect \
       build-essential cmake ninja-build pkg-config clang lld lldb; \
     rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
 
@@ -33,8 +42,7 @@ RUN set -eux; \
     apt-get install -y --no-install-recommends -o APT::Keep-Downloaded-Packages=false nodejs; \
     rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
 
-COPY container/wljs-routes /etc/nginx/sites-available/default
-COPY container/proxy-snippet.conf /etc/nginx/snippets/proxy.conf
+COPY --from=gateway-builder /build/wljs-gateway /usr/local/bin/wljs-gateway
 
 RUN mkdir -p /wljs
 COPY ./ /wljs/

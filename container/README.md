@@ -64,7 +64,7 @@ And clear browser's cache as well.
 
 The container is capable of following features:
 
-- The container aggreggates the http and 2 websockets ports into one port
+- The container aggregates the http and 2 websockets ports into one port via `wljs-gateway`
 - An external working directory `~wljs` will be mounted inside the container default wljs notebooks directory.
 - The container allows specifying the `PUID` and `PGID` environment variables to set the user id and group id of the user accessing the `/workspace` directory. Both default to 1000.
 - A volume or bind mount can be used at `~/wljs/Licensing` inside the container to persist licensing information and `~/wljs/` as a user's default directory.
@@ -82,17 +82,20 @@ docker run -it \
   ghcr.io/wljsteam/wljs-notebook:main
 ```
 
-## NGINX Proxy
-The container also includes a nginx proxy running by default. This aggreggates the http and websockets ports into one port at 3000 (inside the container). It also makes it possible to further reverse proxy the application and add TLS encryption.
+## Gateway
 
-**Encrypted connection is mandatory** if WLJS Notebook is hosted on a remote server, otherwise some features will not work due to the restrictions of the unsequred context such as:
+The container uses `wljs-gateway` (a lightweight Go reverse proxy) to aggregate the HTTP and WebSocket ports into a single port at 3000. This is the same binary used in the desktop deployment, giving both environments a unified gateway.
+
+**Encrypted connection is mandatory** if WLJS Notebook is hosted on a remote server, otherwise some features will not work due to the restrictions of the unsecured context such as:
 - Export to interactive HTML
 - Audio/Video input
 - Clipboard access
 
+An external nginx (or any other) reverse proxy can be placed in front of `wljs-gateway` to add TLS encryption and/or basic authentication.
+
 ### TLS proxy config
 
-To run the container behind a reverse proxy to add TLS support, a minimal nginx configuration similiar to this one could be used:
+To run the container behind a reverse proxy to add TLS support, a minimal nginx configuration similar to this one could be used:
 
 ```
 server {
@@ -124,10 +127,11 @@ server {
 
 ```
 
-Make sure to change port mapping from `80:3000` to `3000:3000` in the starting sequence if you start nginx TLS proxy outside the container
+Make sure to change port mapping from `80:3000` to `3000:3000` in the starting sequence if you start the TLS proxy outside the container.
 
-#### Note: if you do not have SSL certificate
-It is still worth to use HTTPS with invalid certificate since you can always bypass all checks in any web browser. Here is an example of NGINX configuration:
+#### Note: if you do not have an SSL certificate
+
+It is still worth using HTTPS with an invalid certificate since you can always bypass all checks in any web browser. Here is an example of an nginx configuration:
 
 */etc/nginx/sites-enabled/default*
 ```                              
@@ -179,11 +183,7 @@ then generate user and password
 sudo htpasswd -c /etc/apache2/.htpasswd user1
 ```
 
-2. Now set up NGIX proxy
-
-```bash
-nano /etc/nginx/sites-available/default
-```
+2. Now set up an nginx reverse proxy in front of the container:
 
 ```nginx
 server {
@@ -219,4 +219,3 @@ docker run -it \
   --name wljs \
   ghcr.io/wljsteam/wljs-notebook:main
 ```
-
