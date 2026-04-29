@@ -336,15 +336,51 @@ let tray;
 /* extesions for contex menu */
 const pluginsMenu = {};
 
+const loadedElectronExtensions = new Set();
+
 pluginsMenu.items = {};
 pluginsMenu.fetch = () => {
     pluginsMenu.items = {kernel: [], edit: [], view: [], file: [], misc: []}
 
-    
+    const loadElectronExtension = (electronEntry, packageJsonPath) => {
+        if (!electronEntry) return;
+
+        const packageDir = path.dirname(packageJsonPath);
+        const entries = Array.isArray(electronEntry) ? electronEntry : [electronEntry];
+
+        entries.forEach(entry => {
+            if (!entry || typeof entry !== 'string') return;
+
+            const entryPath = path.isAbsolute(entry)
+                ? entry
+                : path.join(packageDir, entry);
+
+            let resolvedPath;
+
+            try {
+                resolvedPath = require.resolve(entryPath);
+            } catch (err) {
+                console.error(`Failed to resolve electron extension "${entry}" from "${packageDir}"`, err);
+                return;
+            }
+
+            if (loadedElectronExtensions.has(resolvedPath)) {
+                return;
+            }
+
+            try {
+                require(resolvedPath);
+                loadedElectronExtensions.add(resolvedPath);
+            } catch (err) {
+                console.error(`Failed to load electron extension "${resolvedPath}"`, err);
+            }
+        });
+    };
 
     const appendItem = (item, p) => {
         if (fs.existsSync(p)) {
             const package = JSON.parse(fs.readFileSync(p, 'utf8'));
+
             if (package["wljs-meta"]["menu"]) {
                 package["wljs-meta"]["menu"].forEach(mi => {
                     const mitem = {
@@ -358,6 +394,7 @@ pluginsMenu.fetch = () => {
                     if (mi["accelerator"]) {
                         mitem.accelerator = isMac ? mi["accelerator"][0] : mi["accelerator"][1];
                     }
+
                     if (package["wljs-meta"]["priority"]) {
                         mitem.priority = package["wljs-meta"]["priority"];
                     } else {
@@ -365,9 +402,9 @@ pluginsMenu.fetch = () => {
                     }
 
                     let section = mi["section"];
-                    if (!section) section =  "misc";
+                    if (!section) section = "misc";
 
-                    if (!(pluginsMenu.items[section].find((el) => {return el.label == mitem.label})))
+                    if (!(pluginsMenu.items[section].find((el) => { return el.label == mitem.label })))
                         pluginsMenu.items[section].push(mitem);
                 });
             }
@@ -384,12 +421,17 @@ pluginsMenu.fetch = () => {
                         mitem.visible = mi["visible"];
                     }
 
-                    if (!(contextMenuExtensions.find((el) => {return el.label == mitem.label})))
+                    if (!(contextMenuExtensions.find((el) => { return el.label == mitem.label })))
                         contextMenuExtensions.push(mitem);
                 });
             }
-        }    
-    }    
+
+            if (package["wljs-meta"]["electron"]) {
+                loadElectronExtension(package["wljs-meta"]["electron"], p);
+            }
+        }
+    }
+
     const defaultPath = path.join(rootAppFolder, 'modules');
 
     if (!fs.existsSync(defaultPath)) return;
@@ -404,7 +446,7 @@ pluginsMenu.fetch = () => {
     fs.readdirSync(userExtensions, { withFileTypes: true }).filter(item => item.isDirectory()).map(item => {
         const p = path.join(userExtensions, item.name, 'package.json');
         appendItem(item, p);
-    });    
+    });
 }
 
 
