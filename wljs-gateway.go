@@ -78,7 +78,10 @@ func (c *Config) ListenAddr() string {
 }
 
 func wsPath(prefix string) string {
-	if len(prefix) > 0 && prefix[0] == '/' {
+	if prefix == "" {
+		log.Fatal("websocket path prefix must not be empty")
+	}
+	if prefix[0] == '/' {
 		return prefix
 	}
 	return "/" + prefix
@@ -95,8 +98,8 @@ func ParseConfig() *Config {
 	flag.IntVar(&cfg.WSPort, "ws", 4001, "websocket upstream port")
 	flag.IntVar(&cfg.WS2Port, "ws2", 4002, "websocket2 upstream port")
 	flag.IntVar(&cfg.ListenPort, "port", 3000, "listen port")
-	flag.StringVar(&cfg.WSPrefix, "wsprefix", "ws", "websocket path prefix (without leading slash)")
-	flag.StringVar(&cfg.WS2Prefix, "ws2prefix", "ws2", "websocket2 path prefix (without leading slash)")
+	flag.StringVar(&cfg.WSPrefix, "wsprefix", "ws", "websocket path prefix (leading slash is optional)")
+	flag.StringVar(&cfg.WS2Prefix, "ws2prefix", "ws2", "websocket2 path prefix (leading slash is optional)")
 
 	flag.Parse()
 	return cfg
