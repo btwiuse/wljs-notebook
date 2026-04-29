@@ -1,0 +1,76 @@
+#!/usr/bin/env bash
+
+install_go_if_missing() {
+  set -euo pipefail
+
+  # 1. 检查是否已存在 go
+  if command -v go >/dev/null 2>&1; then
+    echo "[skip] go already installed: $(go version)"
+    return 0
+  fi
+
+  echo "[info] go not found, installing..."
+
+  # 2. 获取最新版本号
+  VERSION="$(curl -fsSL https://go.dev/VERSION?m=text | head -n1)"
+  echo "[info] latest version: $VERSION"
+
+  # 3. 平台检测（仅处理常见 linux/mac）
+  OS="$(uname | tr '[:upper:]' '[:lower:]')"
+  ARCH="$(uname -m)"
+
+  case "$ARCH" in
+    x86_64) ARCH=amd64 ;;
+    aarch64|arm64) ARCH=arm64 ;;
+    *) echo "[error] unsupported arch: $ARCH"; return 1 ;;
+  esac
+
+  TARBALL="${VERSION}.${OS}-${ARCH}.tar.gz"
+  URL="https://go.dev/dl/${TARBALL}"
+
+  echo "[info] downloading $URL"
+
+  # 4. 清理并安装到 /tmp/go
+  rm -rf /tmp/go
+  mkdir -p /tmp/go
+
+  curl -fsSL "$URL" | tar -C /tmp -xz
+
+  # 解压后路径是 /tmp/go
+  if [ ! -x /tmp/go/bin/go ]; then
+    echo "[error] installation failed"
+    return 1
+  fi
+
+  # 5. 配置 PATH（幂等追加）
+  SHELL_RC=""
+  if [ -n "${ZSH_VERSION:-}" ]; then
+    SHELL_RC="$HOME/.zshrc"
+  else
+    SHELL_RC="$HOME/.bashrc"
+  fi
+
+  if ! grep -q '/tmp/go/bin' "$SHELL_RC" 2>/dev/null; then
+    echo 'export PATH=/tmp/go/bin:$PATH' >> "$SHELL_RC"
+    echo "[info] PATH updated in $SHELL_RC"
+  else
+    echo "[skip] PATH already configured"
+  fi
+
+  # 当前 session 生效
+  export PATH="/tmp/go/bin:$PATH"
+
+  echo "[done] $(/tmp/go/bin/go version)"
+}
+
+cd "$(dirname "$0")"
+
+[[ -f ./wljs-gateway ]] || {
+  install_go_if_missing
+  go mod tidy
+  go build -o wljs-gateway .
+}
+
+./wljs-gateway &
+
+./Scripts/start.wls host 127.0.0.1 http 4000 ws 4001 ws2 4002 wsprefix ws ws2prefix ws2 store_config_in_docs true
