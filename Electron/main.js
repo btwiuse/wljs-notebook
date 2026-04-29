@@ -305,15 +305,7 @@ function check_cli_installed(log_window) {
             return;
         }
 
-        new promt('binary', 'Do you want to install CLI (wljs) as well?', (answer) => {
-            if (answer) {
-                install()
-            } else {
-                fs.writeFile(path.join(appDataFolder, '.nocli_i'), 'Nothing to see here', function(err) {
-                    if (err) throw err;
-                });
-            }
-        }, log_window);
+        install();
 
         
 
