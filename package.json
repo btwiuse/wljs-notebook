@@ -148,6 +148,7 @@
       "./Electron/bundle/log.js",
       "./Electron/electron.css",
       "./Electron/log.html",
+      "./Electron/sudo.js",
       "./Electron/device.html",
       "./Electron/log_padded.html",
       "./Electron/tailwind.css",
@@ -224,7 +225,6 @@
     "postcss-cli": "^11.0.0",
     "postcss-nested": "^6.0.1",
     "random-words": "^2.0.0",
-    "sudo-prompt": "^9.2.1",
     "tailwindcss": "^3.4.1",
     "xterm": "^5.3.0"
   },

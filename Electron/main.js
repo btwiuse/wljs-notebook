@@ -223,7 +223,7 @@ const cli_info = {
 }
 
 
-var sudo = require('sudo-prompt');
+var sudo = require('./sudo');
 
 function cli_uninstall() {
     if (!app.isPackaged) return;
