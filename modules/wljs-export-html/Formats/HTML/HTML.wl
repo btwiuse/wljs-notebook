@@ -155,6 +155,7 @@ With[{
         )&, Keys[compressedFields] ];
 
         n["ObjectFields"] = {"Objects", "Symbols", "Storage", "ExcalidrawImages", "RuntimeCache", "ZIPArchive"};
+        n["PublicFields"] = {"HaveToSaveAs", "WorkingDirectory", "Quick", "AutoconnectKernel", "ObjectFields"};
     ];
 
     place = FileNameJoin[{dir, name<>StringTake[CreateUUID[], 3]<>".wln"}];
