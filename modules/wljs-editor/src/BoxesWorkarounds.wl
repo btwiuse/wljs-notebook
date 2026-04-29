@@ -187,53 +187,51 @@ Cross /: MakeBoxes[Cross[a_,b_], StandardForm] := With[{
   y1 = MakeBoxes[a, StandardForm],
   y2 = MakeBoxes[b, StandardForm]
 },
-  RowBox[{"Cross[", y1, ",", y2, "]"}]
+  RowBox[{"(*TB[*)Cross[(*|*)", y1, "(*|*),(*|*)", y2, "(*|*)](*|*)(*", Compress[ ViewDecorator["Cross"] ], "*)(*]TB*)"}]
 ]
 
-Cross /: MakeBoxes[Cross[x1_,x2_,x3_], StandardForm] := With[{
+Cross /: MakeBoxes[Cross[x1_, x2_, x3_], StandardForm] := With[{
   y1 = MakeBoxes[x1, StandardForm],
   y2 = MakeBoxes[x2, StandardForm],
   y3 = MakeBoxes[x3, StandardForm]
 },
-  RowBox[{"Cross[", y1,",",y2,",",y3, "]"}]
+  RowBox[{"(*TB[*)Cross[(*|*)", y1, "(*|*),(*|*)", y2, "(*|*),(*|*)", y3, "(*|*)](*|*)(*", Compress[ViewDecorator["Cross"]], "*)(*]TB*)"}]
 ]
 
-Cross /: MakeBoxes[Cross[x1_,x2_,x3_,x4_], StandardForm] := With[{
+Cross /: MakeBoxes[Cross[x1_, x2_, x3_, x4_], StandardForm] := With[{
   y1 = MakeBoxes[x1, StandardForm],
   y2 = MakeBoxes[x2, StandardForm],
   y3 = MakeBoxes[x3, StandardForm],
   y4 = MakeBoxes[x4, StandardForm]
 },
-  RowBox[{"Cross[", y1,",",y2,",",y3, ",", y4"]"}]
+  RowBox[{"(*TB[*)Cross[(*|*)", y1, "(*|*),(*|*)", y2, "(*|*),(*|*)", y3, "(*|*),(*|*)", y4, "(*|*)](*|*)(*", Compress[ViewDecorator["Cross"]], "*)(*]TB*)"}]
 ]
-
-(*[TODO] make it look like : and x using TB boxes construct *)
 
 Unprotect[Colon]
 FormatValues[Colon] = {};
 
-Colon /: MakeBoxes[Colon[a_,b_], StandardForm] := With[{
+Colon /: MakeBoxes[Colon[a_, b_], StandardForm] := With[{
   y1 = MakeBoxes[a, StandardForm],
   y2 = MakeBoxes[b, StandardForm]
 },
-  RowBox[{"Colon[", y1, ",", y2, "]"}]
+  RowBox[{"(*TB[*)Colon[(*|*)", y1, "(*|*),(*|*)", y2, "(*|*)](*|*)(*", Compress[ViewDecorator["Colon"]], "*)(*]TB*)"}]
 ]
 
-Colon /: MakeBoxes[Colon[x1_,x2_,x3_], StandardForm] := With[{
+Colon /: MakeBoxes[Colon[x1_, x2_, x3_], StandardForm] := With[{
   y1 = MakeBoxes[x1, StandardForm],
   y2 = MakeBoxes[x2, StandardForm],
   y3 = MakeBoxes[x3, StandardForm]
 },
-  RowBox[{"Colon[", y1,",",y2,",",y3, "]"}]
+  RowBox[{"(*TB[*)Colon[(*|*)", y1, "(*|*),(*|*)", y2, "(*|*),(*|*)", y3, "(*|*)](*|*)(*", Compress[ViewDecorator["Colon"]], "*)(*]TB*)"}]
 ]
 
-Colon /: MakeBoxes[Colon[x1_,x2_,x3_,x4_], StandardForm] := With[{
+Colon /: MakeBoxes[Colon[x1_, x2_, x3_, x4_], StandardForm] := With[{
   y1 = MakeBoxes[x1, StandardForm],
   y2 = MakeBoxes[x2, StandardForm],
   y3 = MakeBoxes[x3, StandardForm],
   y4 = MakeBoxes[x4, StandardForm]
 },
-  RowBox[{"Colon[", y1,",",y2,",",y3, ",", y4"]"}]
+  RowBox[{"(*TB[*)Colon[(*|*)", y1, "(*|*),(*|*)", y2, "(*|*),(*|*)", y3, "(*|*),(*|*)", y4, "(*|*)](*|*)(*", Compress[ViewDecorator["Colon"]], "*)(*]TB*)"}]
 ]
 
 

@@ -356,7 +356,7 @@ Array.prototype.max = function() {
         env.local.element = env.element;
     };   
 
-    plotly.ListLinePlotly.update = async (args, env) => {
+    iListLinePlotly.update = async (args, env) => {
       env.numerical = true;
       console.log('listlineplot: update: ');
       console.log(args);
