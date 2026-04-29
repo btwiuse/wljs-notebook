@@ -716,6 +716,8 @@ Component[OptionsPattern[]] := With[{
 
     appEvents = OptionValue["AppEvents"],
 
+    appGlobals = OptionValue["AppGlobals"],
+
     ExtensionTemplateWrapper = OptionValue["ExtensionTemplateWrapper"],  
     ExtensionTemplateInjection = OptionValue["ExtensionTemplateInjection"], 
     ExternalEventHandlers = OptionValue["ExternalEventHandlers"],
@@ -799,7 +801,11 @@ Component[OptionsPattern[]] := With[{
                     EventFire[controller, "DumpSaveTemporal", notebook];
                 ]];
             ];            
-        ]]],        
+        ]]],   
+        
+        "WindowFocus" -> Function[Null,
+            appGlobals["CurrentNotebook"] = notebook;
+        ],
 
         "ChangeKernel" -> Function[p, Module[{kernel, client, payload = <||>},
             If[AssociationQ[p], payload = p];
@@ -942,6 +948,8 @@ Component[OptionsPattern[]] := With[{
             notebook["ModalsChannel"] = modals;
             notebook["MessangerChannel"] = Messanger;
             notebook["Controller"] = controller;
+
+            appGlobals["CurrentNotebook"] = notebook;
 
             (* /* Destructor */ *)
             With[{socket = EventClone[Global`$Client(*`*)]},
@@ -1160,7 +1168,7 @@ Component[OptionsPattern[]] := With[{
     ]
 ]
 
-Options[Component] = {"Parameters"->Null, "ElectronQ" -> False, "IframeQ"->False, "AppEvents"->"blacksheep", "Kernels"->{}, "Modals"->"", "Controls" ->"", "ControlsPort"->"", "Notebook"->Null, "Event"->"blackhole", "Messager"->"blackout", "Secret" :> CreateUUID[], "ExtensionTemplateWrapper"-> sequenceIdentity, "ExtensionTemplateInjection" -> emptyStringFunction, "ExternalEventHandlers" -> Null}
+Options[Component] = {"AppGlobals"->Null, "Parameters"->Null, "ElectronQ" -> False, "IframeQ"->False, "AppEvents"->"blacksheep", "Kernels"->{}, "Modals"->"", "Controls" ->"", "ControlsPort"->"", "Notebook"->Null, "Event"->"blackhole", "Messager"->"blackout", "Secret" :> CreateUUID[], "ExtensionTemplateWrapper"-> sequenceIdentity, "ExtensionTemplateInjection" -> emptyStringFunction, "ExternalEventHandlers" -> Null}
 Options[Script] = {"Parameters"->Null, "ExtensionTemplateInjection" -> emptyStringFunction}
 
 emptyStringFunction[x__] := ""
